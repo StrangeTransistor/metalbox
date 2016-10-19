@@ -1,0 +1,19 @@
+{
+     "name": "metalbox",
+  "version": "0.0.0",
+  "private":  true,
+
+  "scripts":
+  {
+    "st": "eslint src/"
+  },
+
+  "devDependencies":
+  {
+    "eslint":
+      "3",
+
+    "js-outlander":
+      "StrangeTransistor/js-outlander#2.0.8"
+  }
+}
