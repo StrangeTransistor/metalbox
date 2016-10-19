@@ -5,7 +5,8 @@
 
   "scripts":
   {
-    "st": "eslint src/"
+      "st": "eslint src/",
+    "flow": "flow"
   },
 
   "devDependencies":
@@ -14,6 +15,9 @@
       "3",
 
     "js-outlander":
-      "StrangeTransistor/js-outlander#2.0.8"
+      "StrangeTransistor/js-outlander#2.0.8",
+
+    "flow-bin":
+      "0.33"
   }
 }
