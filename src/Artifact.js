@@ -9,7 +9,18 @@ module.exports
 {
 	var artifact = {}
 
-	artifact.construct = do_construct
+	artifact.construct = resolver(do_construct)
 
 	return artifact
+}
+
+function resolver (fn)
+{
+	return function ()
+	{
+		return new Promise(rs =>
+		{
+			rs(fn.apply(this, arguments))
+		})
+	}
 }
