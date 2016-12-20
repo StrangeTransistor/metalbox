@@ -1,2 +1,4 @@
 
-type Resolution = Promise<void>;
+// type Resolution = Promise<void>;
+// type Resolution = Bluebird$Promise<void>; // TODO
+type Resolution = Bluebird$Promise<*>;
