@@ -5,8 +5,14 @@
 
   "scripts":
   {
-      "st": "eslint src/",
-    "flow": "flow"
+    "st":
+      "eslint src/",
+
+    "flow":
+      "flow",
+
+    "postinstall":
+      "flow-typed install"
   },
 
   "main": "src/",
@@ -29,6 +35,9 @@
       "StrangeTransistor/js-outlander#2.0.8",
 
     "flow-bin":
-      "0.37"
+      "0.37",
+
+    "flow-typed":
+      "2"
   }
 }
