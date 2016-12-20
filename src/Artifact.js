@@ -1,5 +1,7 @@
 /* @flow */
 
+var resolver = require('bluebird').method
+
 module.exports
 = function Artifact
 (
@@ -12,15 +14,4 @@ module.exports
 	artifact.construct = resolver(do_construct)
 
 	return artifact
-}
-
-function resolver (fn)
-{
-	return function ()
-	{
-		return new Promise(rs =>
-		{
-			rs(fn.apply(this, arguments))
-		})
-	}
 }
