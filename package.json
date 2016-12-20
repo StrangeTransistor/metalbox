@@ -11,6 +11,11 @@
 
   "main": "src/",
 
+  "dependencies":
+  {
+    "mkdirp": "0.5"
+  },
+
   "devDependencies":
   {
     "eslint":

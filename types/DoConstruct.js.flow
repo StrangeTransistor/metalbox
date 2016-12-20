@@ -1,2 +1,2 @@
 
-type DoConstruct = (env: any) => Resolution;
+type DoConstruct = (env: any) => void | Resolution;
