@@ -9,7 +9,7 @@
       "eslint src/",
 
     "flow":
-      "flow",
+      "flow stop; flow",
 
     "postinstall":
       "flow-typed install"
