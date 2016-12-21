@@ -1,2 +1,2 @@
 
-type DoConstruct = (env: any) => void | Resolution;
+type DoConstruct = (env: any) => Bluebird$Promisable<void>;
