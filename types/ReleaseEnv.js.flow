@@ -1,0 +1,5 @@
+
+type ReleaseEnv =
+{
+	rootpath: (...args: any) => string
+}

@@ -1,6 +1,6 @@
 /* @flow */
 
-// TODO rm:
+// TODO rm overlap-artifact:
 var Artifact /* :Function */ = require('./Artifact')
 
 module.exports

@@ -3,9 +3,9 @@
 var resolver = require('bluebird').method
 
 module.exports
-= function Artifact
+= function Artifact /* ::<Env> */
 (
-	do_construct /* :(env: any) => Bluebird$Promisable<void> */
+	do_construct /* :(env: Env) => Bluebird$Promisable<void> */
 )
 	/* :Artifact */
 {
