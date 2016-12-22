@@ -1,5 +1,7 @@
 
+import T_Rootpath from 'rootpath';
+
 type ReleaseEnv =
 {
-	rootpath: (...args: any) => string
+	rootpath: T_Rootpath
 }

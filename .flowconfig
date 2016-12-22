@@ -6,3 +6,4 @@
 types/
 
 [options]
+suppress_comment= \\(.\\|\n\\)*\\@flow-off
