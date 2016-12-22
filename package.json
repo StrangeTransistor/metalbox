@@ -5,14 +5,17 @@
 
   "scripts":
   {
+    "postinstall":
+      "flow-typed install",
+
     "st":
       "eslint src/",
 
     "flow":
       "flow check",
 
-    "postinstall":
-      "flow-typed install"
+    "mocha":
+      "mocha --check-leaks --recursive test/"
   },
 
   "main": "src/",
@@ -41,6 +44,12 @@
       "0.37",
 
     "flow-typed":
-      "2"
+      "2",
+
+    "mocha":
+      "3",
+
+    "chai":
+      "3"
   }
 }
