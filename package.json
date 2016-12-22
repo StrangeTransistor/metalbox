@@ -56,6 +56,9 @@
       "3",
 
     "randomstring":
+      "1",
+
+    "fs-sync":
       "1"
   }
 }
