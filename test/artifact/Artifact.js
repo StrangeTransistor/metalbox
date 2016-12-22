@@ -1,8 +1,8 @@
 /* @flow */
 
-var Artifact = require('../../src/artifact/Artifact')
-
 var expect = require('chai').expect
+
+var Artifact = require('../../src/artifact/Artifact')
 
 describe('Artifact', () =>
 {
