@@ -3,12 +3,12 @@
 var Artifact = require('./Artifact')
 
 module.exports
-= function Requisite
+= function Requisite /* ::<REnv, Env> */
 (
-	requisite /* :Resolver */,
-	target    /* :T_Artifact */
+	requisite /* :Resolver<REnv> */,
+	target    /* :T_Artifact<Env> */
 )
-	/* :T_Artifact */
+	/* :T_Artifact<REnv & Env> */
 {
 	return Artifact(env =>
 	{

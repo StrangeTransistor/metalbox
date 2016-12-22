@@ -1,5 +1,5 @@
 
-type T_Artifact =
+type T_Artifact<Env> =
 {
-	construct: Resolver
+	construct: Resolver<Env>
 }

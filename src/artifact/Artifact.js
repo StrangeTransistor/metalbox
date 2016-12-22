@@ -7,7 +7,7 @@ module.exports
 (
 	do_construct /* :(env: Env) => Bluebird$Promisable<void> */
 )
-	/* :T_Artifact */
+	/* :T_Artifact<Env> */
 {
 	var artifact = {}
 

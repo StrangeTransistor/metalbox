@@ -1,2 +1,2 @@
 
-type Resolver = (env: any) => Resolution;
+type Resolver<Env> = (env: Env) => Resolution;
