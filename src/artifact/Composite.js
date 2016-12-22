@@ -1,12 +1,11 @@
 /* @flow */
 
-// TODO rm overlap-artifact:
-var Artifact /* :Function */ = require('./Artifact')
+var Artifact = require('./Artifact')
 
 var run_seq = require('bluebird').reduce
 
-module.exports = function Composite (targets /* :Array<Artifact> */)
-	/* :Artifact */
+module.exports = function Composite (targets /* :Array<T_Artifact> */)
+	/* :T_Artifact */
 {
 	return Artifact(env =>
 	{

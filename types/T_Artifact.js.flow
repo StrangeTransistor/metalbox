@@ -1,5 +1,5 @@
 
-type Artifact =
+type T_Artifact =
 {
 	construct: Resolver
 }

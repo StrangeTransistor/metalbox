@@ -1,7 +1,6 @@
 /* @flow */
 
-// TODO rm overlap-artifact:
-var Artifact /* :Function */ = require('./Artifact')
+var Artifact = require('./Artifact')
 
 var mkdir = require('mkdirp').sync
 
@@ -9,7 +8,7 @@ module.exports = function Directory
 (
 	dir /* :string */
 )
-	/* :Artifact<void> */
+	/* :T_Artifact */
 {
 	return Artifact(env =>
 	{

@@ -1,15 +1,14 @@
 /* @flow */
 
-// TODO rm overlap-artifact:
-var Artifact /* :Function */ = require('./Artifact')
+var Artifact = require('./Artifact')
 
 module.exports
 = function Requisite
 (
 	requisite /* :Resolver */,
-	target    /* :Artifact */
+	target    /* :T_Artifact */
 )
-	/* :Artifact */
+	/* :T_Artifact */
 {
 	return Artifact(env =>
 	{
