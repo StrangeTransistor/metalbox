@@ -15,7 +15,10 @@
       "flow check",
 
     "mocha":
-      "mocha --check-leaks --recursive test/"
+      "mocha --check-leaks --recursive test/",
+
+    "test":
+      "npm run st; npm run flow; npm run mocha"
   },
 
   "main": "src/",
