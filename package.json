@@ -9,7 +9,7 @@
       "flow-typed install",
 
     "st":
-      "eslint src/",
+      "eslint src/ test/",
 
     "flow":
       "flow check",

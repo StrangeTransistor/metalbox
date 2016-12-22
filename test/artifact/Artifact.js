@@ -29,9 +29,7 @@ describe('Artifact', () =>
 
 	it('throws', () =>
 	{
-		var side = 0
-
-		var a = Artifact(env =>
+		var a = Artifact(() =>
 		{
 			throw new Error
 		})
