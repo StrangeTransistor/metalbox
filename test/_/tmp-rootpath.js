@@ -6,5 +6,5 @@ var Rootpath = require('rootpath')
 
 module.exports = () =>
 {
-	return Rootpath(tmpdir(), randomstring(8))
+	return Rootpath(tmpdir(), 'metalbox-test', randomstring(8))
 }
