@@ -24,4 +24,19 @@ describe('Directory', () =>
 			expect(isDir(tmp_root('test'))).true
 		})
 	})
+
+	it('works if already exists', () =>
+	{
+		var d = Directory('test')
+		return d
+		.construct(tmp_env)
+		.then(() =>
+		{
+			return d.construct(tmp_env)
+		})
+		.then(() =>
+		{
+			expect(isDir(tmp_root('test'))).true
+		})
+	})
 })
