@@ -1,3 +1,6 @@
 
-// type Resolution = Promise<void>;
+type WeakResolution = Bluebird$Promisable<void>;
+type WeakResolver<Env> = (env: Env) => WeakResolution;
+
 type Resolution = Bluebird$Promise<void>;
+type Resolver<Env> = (env: Env) => Resolution;
