@@ -13,7 +13,7 @@ describe('Requisite', () =>
 	var tmp_root = tmp_rootpath()
 	var tmp_env =
 	{
-		rootpath: tmp_root
+		out: tmp_root
 	}
 
 	it('works', () =>

@@ -1,7 +1,13 @@
 
 import T_Rootpath from 'rootpath';
 
-type ReleaseEnv =
+export type T_Env_Out =
 {
-	rootpath: T_Rootpath
-}
+	out: T_Rootpath
+};
+
+export type T_Env_Release = T_Env_Out
+&
+{
+	in: T_Rootpath
+};

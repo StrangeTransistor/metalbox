@@ -8,10 +8,10 @@ module.exports = function Directory
 (
 	dir /* :string */
 )
-	/* :T_Artifact<ReleaseEnv> */
+	/* :T_Artifact<T_Env_Out> */
 {
 	return Artifact(env =>
 	{
-		mkdir(env.rootpath(dir))
+		mkdir(env.out(dir))
 	})
 }
