@@ -1,12 +1,12 @@
 
 import T_Rootpath from 'rootpath';
 
-export type T_Env_Out =
+export type EnvOut =
 {
 	out: T_Rootpath
 };
 
-export type T_Env_Release = T_Env_Out
+export type EnvRelease = EnvOut
 &
 {
 	in: T_Rootpath

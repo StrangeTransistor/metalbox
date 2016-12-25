@@ -8,7 +8,7 @@ module.exports = function Directory
 (
 	dir /* :string */
 )
-	/* :T_Artifact<T_Env_Out> */
+	/* :T_Artifact<EnvOut> */
 {
 	return Artifact(env =>
 	{
