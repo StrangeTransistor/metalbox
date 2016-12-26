@@ -1,3 +1,4 @@
+/* @flow */
 
 var tmpdir = require('os').tmpdir
 var randomstring = require('randomstring').generate
