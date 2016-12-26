@@ -7,7 +7,7 @@ module.exports
 (
 	targets /* :Array<T_Artifact<*>> */
 )
-/* :T_Artifact<Env> */
+/* :T_Release<Env> */
 {
 	return Composite(targets)
 }

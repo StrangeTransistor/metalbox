@@ -1,0 +1,2 @@
+
+type T_Release<Env: EnvRelease> = T_Artifact<Env>;
