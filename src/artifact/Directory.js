@@ -1,8 +1,8 @@
 /* @flow */
 
-var Artifact = require('./Artifact')
-
 var mkdir = require('mkdirp').sync
+
+var Artifact = require('./Artifact')
 
 module.exports = function Directory
 (
