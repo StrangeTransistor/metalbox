@@ -4,6 +4,7 @@ var exists = require('fs-sync').exists
 
 var Requisite = require('../artifact/Requisite')
 var Composite = require('../artifact/Composite')
+var Directory = require('../artifact/Directory')
 
 module.exports
 = function Release /* ::<Env: EnvRelease> */
@@ -19,5 +20,5 @@ module.exports
 			throw new Error('source dir (in) not exists')
 		}
 	}
-	, Composite(targets))
+	, Composite([ Directory('') ].concat(targets)))
 }
