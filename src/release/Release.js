@@ -1,5 +1,8 @@
 /* @flow */
 
+var exists = require('fs-sync').exists
+
+var Requisite = require('../artifact/Requisite')
 var Composite = require('../artifact/Composite')
 
 module.exports
@@ -9,5 +12,12 @@ module.exports
 )
 /* :T_Release<Env> */
 {
-	return Composite(targets)
+	return Requisite(env =>
+	{
+		if (! exists(env.in()))
+		{
+			throw new Error('source dir (in) not exists')
+		}
+	}
+	, Composite(targets))
 }

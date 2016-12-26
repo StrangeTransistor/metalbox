@@ -28,6 +28,9 @@
     "mkdirp":
       "0.5",
 
+    "fs-sync":
+      "1",
+
     "rootpath":
       "StreetStrider/rootpath#v1.7.0",
 
@@ -56,9 +59,6 @@
       "3",
 
     "randomstring":
-      "1",
-
-    "fs-sync":
       "1"
   }
 }
