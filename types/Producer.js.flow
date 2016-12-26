@@ -1,0 +1,2 @@
+
+type Producer<Env, T> = (env: Env) => Bluebird$Promisable<T>;
