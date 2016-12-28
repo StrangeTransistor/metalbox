@@ -35,7 +35,11 @@
       "StreetStrider/rootpath#v1.7.0",
 
     "bluebird":
-      "3"
+      "3",
+
+
+    "less":
+      "2.7"
   },
 
   "devDependencies":

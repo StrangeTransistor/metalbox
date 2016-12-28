@@ -3,6 +3,7 @@
 var Release = require('./Release')
 
 var File = require('../artifact/File')
+var LessCss = require('../artifact/LessCss')
 
 var dump = require('../json/dump')
 
@@ -11,7 +12,7 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 {
 	return Release(
 	[
-		File('release.json', (env) =>
+		File('release.json', env =>
 		{
 			var release = {}
 
@@ -19,6 +20,7 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 			release.timestamp = (new Date).toISOString()
 
 			return dump(release)
-		})
+		}),
+		LessCss('index.css')
 	])
 }
