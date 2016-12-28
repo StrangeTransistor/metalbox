@@ -6,7 +6,7 @@ var run_seq = require('bluebird').reduce
 
 module.exports = function Composite /* ::<T> */
 (
-	targets /* :Array<T_Artifact<T>> */
+	targets /* :Array<T_Artifact<*>> */
 )
 	/* :T_Artifact<T> */
 {
