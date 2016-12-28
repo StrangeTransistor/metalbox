@@ -18,7 +18,7 @@ describe('Frontend', () =>
 	var in_root  = in_rootpath('frontend')
 	var tmp_root = tmp_rootpath()
 
-	console.log(tmp_root)
+	console.log(tmp_root())
 
 	var tmp_env =
 	{

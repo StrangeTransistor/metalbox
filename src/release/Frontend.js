@@ -4,6 +4,8 @@ var Release = require('./Release')
 
 var File = require('../artifact/File')
 
+var dump = require('../json/dump')
+
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 /* :T_Release<Env> */
 {
@@ -15,7 +17,7 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 
 			release.version = env.version
 
-			return String(release)
+			return dump(release)
 		})
 	])
 }
