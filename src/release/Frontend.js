@@ -16,6 +16,7 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 			var release = {}
 
 			release.version = env.version
+			release.timestamp = (new Date).toISOString()
 
 			return dump(release)
 		})
