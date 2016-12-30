@@ -1,2 +1,6 @@
 
-type Producer<Env, T> = (env: Env) => Bluebird$Promisable<T>;
+type WeakProduct<T> = Bluebird$Promisable<T>;
+type WeakProducer<Env, T> = (env: Env) => WeakProduct<T>;
+
+type Product<T> = Bluebird$Promise<T>;
+type Producer<Env, T> = (env: Env) => Product<T>;

@@ -8,7 +8,7 @@ var Artifact = require('./Artifact')
 module.exports = function File /* ::<Env: EnvOut> */
 (
 	filename   /* :string */,
-	do_content /* :Producer<Env, string> */
+	do_content /* :WeakProducer<Env, string> */
 )
 	/* :T_Artifact<Env> */
 {
