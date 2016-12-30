@@ -4,11 +4,11 @@ var Artifact = require('./Artifact')
 
 var run_seq = require('bluebird').reduce
 
-module.exports = function Composite /* ::<T> */
+module.exports = function Composite /* ::<Env> */
 (
 	targets /* :Array<T_Artifact<*>> */
 )
-	/* :T_Artifact<T> */
+	/* :T_Artifact<Env> */
 {
 	return Artifact(env =>
 	{
