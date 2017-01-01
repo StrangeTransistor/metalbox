@@ -26,7 +26,7 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 		File('index.css', (env) =>
 		{
 			return LessCss()(env)
-			.then(Autoprefixer)
+			.then(Autoprefixer())
 		})
 	])
 }
