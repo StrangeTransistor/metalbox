@@ -7,7 +7,8 @@ var reduce = require('bluebird').reduce
 module.exports = function Pipeline /* ::<Env, T> */
 (
 	src /* :WeakProducer<Env, T> */
-	/* ::, ...pipes :Array<any> */
+	/* ::, ...pipes :Array<Function> */
+		/* ^ actual type: :Array<Pipe<*, *, Env>> WAY TOO sophisticated */
 )
 /* :Producer<Env, T> */
 {
