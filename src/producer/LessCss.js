@@ -3,14 +3,10 @@
 var read = require('fs-sync').read
 var less = require('less')
 
-var File = require('./File')
-
-module.exports = function LessCss
-(
-	filename /* :string */
-)
+module.exports = function LessCss ()
+/* :Producer<EnvRelease, string> */
 {
-	return File(filename, env =>
+	return (env) =>
 	{
 		var filename = env.in('buckets/index/index.less')
 		var content  = read(filename)
@@ -23,5 +19,5 @@ module.exports = function LessCss
 
 		return less.render(content, options)
 		.then(it => it.css)
-	})
+	}
 }

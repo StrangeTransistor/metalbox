@@ -1,11 +1,12 @@
 /* @flow */
 
-var Release = require('./Release')
+var dump = require('../json/dump')
 
 var File = require('../artifact/File')
-var LessCss = require('../artifact/LessCss')
 
-var dump = require('../json/dump')
+var LessCss = require('../producer/LessCss')
+
+var Release = require('./Release')
 
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 /* :T_Release<Env> */
@@ -21,6 +22,6 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 
 			return dump(release)
 		}),
-		LessCss('index.css')
+		File('index.css', LessCss())
 	])
 }
