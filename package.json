@@ -45,7 +45,10 @@
       "5",
 
     "autoprefixer":
-      "6"
+      "6",
+
+    "cssnano":
+      "3.4"
   },
 
   "devDependencies":

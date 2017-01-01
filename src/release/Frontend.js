@@ -8,6 +8,7 @@ var Pipeline = require('../producer/Pipeline')
 
 var LessCss = require('../producer/LessCss')
 var Autoprefixer = require('../pipe/Autoprefixer')
+var CssNano = require('../pipe/CssNano')
 
 var Release = require('./Release')
 
@@ -27,7 +28,8 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 		}),
 		File('index.css', Pipeline(
 			LessCss(),
-			Autoprefixer()
+			Autoprefixer(),
+			CssNano()
 		))
 	])
 }
