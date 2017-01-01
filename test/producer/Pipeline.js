@@ -13,12 +13,12 @@ describe('Frontend', () =>
 		return resolve('abc')
 	}
 
-	var upper /* :T_Pipe<string, string, *> */ = (input) =>
+	var upper /* :Pipe<string, string, *> */ = (input) =>
 	{
 		return input.toUpperCase()
 	}
 
-	var split /* :T_Pipe<string, Array<string>, *> */ = (input) =>
+	var split /* :Pipe<string, Array<string>, *> */ = (input) =>
 	{
 		return input.split('')
 	}
