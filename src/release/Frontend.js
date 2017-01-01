@@ -5,6 +5,7 @@ var dump = require('../json/dump')
 var File = require('../artifact/File')
 
 var LessCss = require('../producer/LessCss')
+var Autoprefixer = require('../pipe/Autoprefixer')
 
 var Release = require('./Release')
 
@@ -22,6 +23,10 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 
 			return dump(release)
 		}),
-		File('index.css', LessCss())
+		File('index.css', (env) =>
+		{
+			return LessCss()(env)
+			.then(Autoprefixer)
+		})
 	])
 }

@@ -39,7 +39,13 @@
 
 
     "less":
-      "2.7"
+      "2.7",
+
+    "postcss":
+      "5",
+
+    "autoprefixer":
+      "6"
   },
 
   "devDependencies":
