@@ -33,4 +33,20 @@ describe('Frontend', () =>
 			expect(it).eql([ 'A', 'B', 'C' ])
 		})
 	})
+
+	it('works', () =>
+	{
+		var P = () =>
+		{
+			return 'CdE'
+		}
+
+		var p = Pipeline(P, upper, split)
+
+		return p()
+		.then(it =>
+		{
+			expect(it).eql([ 'C', 'D', 'E' ])
+		})
+	})
 })
