@@ -7,6 +7,8 @@ var Glob = require('../artifact/Glob')
 
 var Pipeline = require('../producer/Pipeline')
 
+var Pug = require('../producer/Pug')
+
 var LessCss = require('../producer/LessCss')
 var Autoprefixer = require('../pipe/Autoprefixer')
 var CssNano = require('../pipe/CssNano')
@@ -27,6 +29,7 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 
 			return dump(release)
 		}),
+		File('index.html', Pug()),
 		File('index.css', Pipeline(
 			LessCss(),
 			Autoprefixer(),
