@@ -48,7 +48,11 @@
       "6",
 
     "cssnano":
-      "3.4"
+      "3.4",
+
+
+    "globule":
+      "1"
   },
 
   "devDependencies":

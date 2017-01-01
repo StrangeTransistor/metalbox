@@ -3,6 +3,7 @@
 var dump = require('../json/dump')
 
 var File = require('../artifact/File')
+var Glob = require('../artifact/Glob')
 
 var Pipeline = require('../producer/Pipeline')
 
@@ -30,6 +31,7 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 			LessCss(),
 			Autoprefixer(),
 			CssNano()
-		))
+		)),
+		Glob('buckets', '**/*.@(jpg|png|gif)', 'assets')
 	])
 }
