@@ -19,7 +19,7 @@ module.exports = function File /* ::<Env: EnvOut> */
 		return produce(env)
 		.then(content =>
 		{
-			write(env.out(filename), content)
+			write(env.dst(filename), content)
 		})
 	})
 }

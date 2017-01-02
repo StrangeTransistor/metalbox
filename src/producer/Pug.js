@@ -7,13 +7,13 @@ module.exports = function Pug ()
 {
 	return (env) =>
 	{
-		var filename = env.in('buckets/index/index.pug')
+		var filename = env.src('buckets/index/index.pug')
 
 		var options =
 		{
 			pretty: false,
 			dev: true,
-			basedir: env.in('buckets')
+			basedir: env.src('buckets')
 		}
 
 		return pug(filename, options)

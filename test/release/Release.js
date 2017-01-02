@@ -20,8 +20,8 @@ describe('Release', () =>
 
 	var tmp_env =
 	{
-		in:  in_root,
-		out: tmp_root
+		src: in_root,
+		dst: tmp_root
 	}
 
 	it('works', () =>

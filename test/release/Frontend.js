@@ -22,8 +22,8 @@ describe('Frontend', () =>
 
 	var tmp_env =
 	{
-		in:  in_root,
-		out: tmp_root,
+		src: in_root,
+		dst: tmp_root,
 
 		version: '1.0.0'
 	}

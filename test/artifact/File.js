@@ -14,7 +14,7 @@ describe('File', () =>
 	var tmp_root = tmp_rootpath()
 	var tmp_env =
 	{
-		out: tmp_root
+		dst: tmp_root
 	}
 
 	it('works', () =>

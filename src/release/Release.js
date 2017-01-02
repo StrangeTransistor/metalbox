@@ -15,9 +15,9 @@ module.exports
 {
 	return Requisite(env =>
 	{
-		if (! exists(env.in()))
+		if (! exists(env.src()))
 		{
-			throw new Error('source dir (in) not exists')
+			throw new Error('source dir (src) not exists')
 		}
 	}
 	, Composite([ Directory('') ].concat(targets)))

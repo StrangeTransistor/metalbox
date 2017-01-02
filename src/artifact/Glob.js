@@ -7,22 +7,22 @@ var Artifact = require('./Artifact')
 
 module.exports = function Glob /* ::<Env: EnvRelease>*/
 (
-	from /* :string */,
+	src  /* :string */,
 	glob /* :string | string[] */,
-	to   /* :string */
+	dst  /* :string */
 )
 	/* :T_Artifact<Env> */
 {
 	return Artifact(env =>
 	{
-		var r_in  = env.in.partial(from)
-		var r_out = env.out.partial(to)
+		var r_src = env.src.partial(src)
+		var r_dst = env.dst.partial(dst)
 
-		find(r_in(glob))
-		.map(path => r_in.relative(path))
+		find(r_src(glob))
+		.map(path => r_src.relative(path))
 		.map(path =>
 		{
-			cp(r_in(path), r_out(path), { force: true })
+			cp(r_src(path), r_dst(path), { force: true })
 		})
 	})
 }

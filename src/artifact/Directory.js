@@ -12,6 +12,6 @@ module.exports = function Directory
 {
 	return Artifact(env =>
 	{
-		mkdir(env.out(dir))
+		mkdir(env.dst(dir))
 	})
 }
