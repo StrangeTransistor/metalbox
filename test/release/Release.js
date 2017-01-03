@@ -10,17 +10,17 @@ var Directory = require('../../src/artifact/Directory')
 
 var Release = require('../../src/release/Release')
 
-var in_rootpath  = require('../_/in-rootpath')
+var src_rootpath = require('../_/src-rootpath')
 var tmp_rootpath = require('../_/tmp-rootpath')
 
 describe('Release', () =>
 {
-	var in_root  = in_rootpath('empty')
+	var src_root = src_rootpath('empty')
 	var tmp_root = tmp_rootpath()
 
 	var tmp_env =
 	{
-		src: in_root,
+		src: src_root,
 		dst: tmp_root
 	}
 
