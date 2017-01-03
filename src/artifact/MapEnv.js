@@ -11,11 +11,11 @@ module.exports = function MapEnv /* ::<InEnv, OutEnv> */
 )
 	/* :T_Artifact<InEnv> */
 {
-	var mapper = resolver(prod_env)
+	var $prod_env = resolver(prod_env)
 
 	return Artifact(env =>
 	{
-		return mapper(env)
+		return $prod_env(env)
 		.then(env =>
 		{
 			return target.construct(env)

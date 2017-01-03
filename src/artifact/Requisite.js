@@ -12,11 +12,11 @@ module.exports
 )
 	/* :T_Artifact<REnv & Env> */
 {
-	var requisite = resolver(check_requisite)
+	var $check_requisite = resolver(check_requisite)
 
 	return Artifact(env =>
 	{
-		return requisite(env)
+		return $check_requisite(env)
 		.then(() =>
 		{
 			return target.construct(env)

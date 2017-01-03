@@ -12,11 +12,11 @@ module.exports = function File /* ::<Env: EnvOut> */
 )
 	/* :T_Artifact<Env> */
 {
-	var produce = resolver(prod_content)
+	var $prod_content = resolver(prod_content)
 
 	return Artifact(env =>
 	{
-		return produce(env)
+		return $prod_content(env)
 		.then(content =>
 		{
 			write(env.dst(filename), content)
