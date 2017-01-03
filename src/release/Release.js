@@ -11,7 +11,7 @@ module.exports
 (
 	targets /* :Array<T_Artifact<*>> */
 )
-/* :T_Release<Env> */
+	/* :T_Release<Env> */
 {
 	return Requisite(env =>
 	{

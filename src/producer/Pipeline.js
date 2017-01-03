@@ -10,7 +10,7 @@ module.exports = function Pipeline /* ::<Env, T> */
 	/* ::, ...pipes :Array<Function> */
 		/* ^ actual type: :Array<Pipe<*, *, Env>> WAY TOO sophisticated */
 )
-/* :Producer<Env, T> */
+	/* :Producer<Env, T> */
 {
 	var pipes = slice.call(arguments, 1)
 

@@ -17,7 +17,7 @@ var MapEnv = require('../artifact/MapEnv')
 var Release = require('./Release')
 
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
-/* :T_Release<Env> */
+	/* :T_Release<Env> */
 {
 	return MapEnv(env =>
 	{

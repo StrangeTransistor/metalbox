@@ -4,7 +4,7 @@ var postcss = require('postcss')
 var cssnano = require('cssnano')
 
 module.exports = function CssNano ()
-/* :Pipe<string, string, any> */
+	/* :Pipe<string, string, any> */
 {
 	return (input) =>
 	{
