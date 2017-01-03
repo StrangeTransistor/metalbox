@@ -6,12 +6,12 @@ var Artifact = require('./Artifact')
 
 module.exports = function MapEnv /* ::<InEnv, OutEnv> */
 (
-	map_env /* :WeakProducer<InEnv, OutEnv> */,
-	target  /* :T_Artifact<OutEnv> */
+	prod_env /* :WeakProducer<InEnv, OutEnv> */,
+	target   /* :T_Artifact<OutEnv> */
 )
 	/* :T_Artifact<InEnv> */
 {
-	var mapper = resolver(map_env)
+	var mapper = resolver(prod_env)
 
 	return Artifact(env =>
 	{
