@@ -1,8 +1,5 @@
 /* @flow */
 
-// TODO any
-var assign /* :any */ = Object.assign
-
 var dump = require('../json/dump')
 
 var File = require('../artifact/File')
@@ -24,11 +21,18 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 {
 	return MapEnv(env =>
 	{
-		return assign({}, defaults, env)
+		var env_out = {}
+
+		env_out.src = env.src
+		env_out.dst = env.dst
+
+		env_out.buckets_path = (env.buckets_path || 'buckets')
+
+		return env_out
 	},
 	Release(
 	[
-		File('release.json', env =>
+		File('release.json', (env /* :Env */) =>
 		{
 			var release = {}
 
@@ -45,9 +49,4 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 		)),
 		Glob('buckets', '**/*.@(jpg|png|gif)', 'assets')
 	]))
-}
-
-var defaults =
-{
-	buckets_path: 'buckets'
 }
