@@ -1,6 +1,18 @@
 
+/* weak (allow sync function or type) */
 type WeakProduct<T> = Bluebird$Promisable<T>;
 type WeakProducer<Env, T> = (env: Env) => WeakProduct<T>;
 
+type _WeakProductable<
+	Env,
+	T,
+	TF: WeakProducer<Env, T>,
+	TP: WeakProduct<T>
+>
+	= TF | TP;
+
+type WeakProductable<Env, T> = _WeakProductable<Env, T, *, *>;
+
+/* strict, always promise or async(promise) function */
 type Product<T> = Bluebird$Promise<T>;
 type Producer<Env, T> = (env: Env) => Product<T>;

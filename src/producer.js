@@ -1,18 +1,9 @@
 /* @flow */
-/* ::
-	type ProductOrProducer<
-		Env,
-		T,
-		TF: WeakProducer<Env, T>,
-		TP: WeakProduct<T>
-		>
-			= TF | TP;
-*/
 
 var method = require('bluebird').method
 
 module.exports = function producer /* ::<Env, T> */
-(prod /* :ProductOrProducer<Env, T, *, *> */)
+(prod /* :WeakProductable<Env, T> */)
 	/* :Producer<Env, T> */
 {
 	if (typeof prod === 'function')
