@@ -11,7 +11,7 @@
 
 var method = require('bluebird').method
 
-module.exports = function invoker /* ::<Env, T> */
+module.exports = function producer /* ::<Env, T> */
 (prod /* :ProductOrProducer<Env, T, *, *> */)
 	/* :Producer<Env, T> */
 {
