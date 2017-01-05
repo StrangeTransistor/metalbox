@@ -18,7 +18,13 @@
       "mocha --recursive test/",
 
     "test":
-      "npm run st && npm run flow && npm run mocha"
+      "npm run st && npm run flow && npm run mocha",
+
+    "infer":
+      "flow type-at-pos",
+
+    "suggest":
+      "flow suggest"
   },
 
   "main": "src/",
