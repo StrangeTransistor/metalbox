@@ -47,6 +47,6 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 			Autoprefixer(),
 			CssNano()
 		)),
-		Glob('buckets', '**/*.@(jpg|png|gif)', 'assets')
+		Glob(env => env.src(env.buckets_path), '**/*.@(jpg|png|gif)', 'assets')
 	]))
 }
