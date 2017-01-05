@@ -8,7 +8,25 @@ var src_rootpath = require('../_/src-rootpath')
 var dst_rootpath = require('../_/dst-rootpath')
 var tmp_rootpath = require('../_/tmp-rootpath')
 
-var compare = require('dir-compare').compareSync
+var compare = (v1, v2) =>
+{
+	var r = require('dir-compare').compareSync(v1, v2,
+	{
+		compareSize: true,
+		compareContent: true,
+		excludeFilter: 'release.json'
+	})
+
+	if (r.same)
+	{
+		return true
+	}
+	else
+	{
+		console.warn(r)
+		return false
+	}
+}
 
 describe('Frontend', () =>
 {
@@ -33,7 +51,7 @@ describe('Frontend', () =>
 		{
 			console.log('   ', tmp_root())
 
-			expect(compare(dst_root(), tmp_root()).same).ok
+			expect(compare(dst_root(), tmp_root())).ok
 		})
 	})
 })
