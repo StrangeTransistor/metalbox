@@ -15,7 +15,7 @@
       "flow check",
 
     "mocha":
-      "mocha --recursive test/",
+      "mocha --recursive test/artifact/ test/producer/ test/release/",
 
     "test":
       "npm run st && npm run flow && npm run mocha",
