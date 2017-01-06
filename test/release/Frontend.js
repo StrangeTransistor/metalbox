@@ -2,6 +2,8 @@
 
 var expect = require('chai').expect
 
+var read = require('fs-sync').readJSON
+
 var Frontend = require('../../src/release/Frontend')
 
 var src_rootpath = require('../_/src-rootpath')
@@ -52,6 +54,12 @@ describe('Frontend', () =>
 			console.log('   ', tmp_root())
 
 			expect(compare(dst_root(), tmp_root())).ok
+		})
+		.then(() =>
+		{
+			var release = read(tmp_root('release.json'))
+
+			expect(release.version).eq('1.0.0')
 		})
 	})
 })

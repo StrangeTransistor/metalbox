@@ -19,16 +19,9 @@ var Release = require('./Release')
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
 {
-	return MapEnv(env =>
+	return MapEnv((env) /* :Env */ =>
 	{
-		var env_out = {}
-
-		env_out.src = env.src
-		env_out.dst = env.dst
-
-		env_out.buckets_path = (env.buckets_path || 'buckets')
-
-		return env_out
+		return Object.assign({}, { buckets_path: 'buckets' }, env)
 	},
 	Release(
 	[
