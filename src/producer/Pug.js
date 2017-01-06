@@ -13,7 +13,7 @@ module.exports = function Pug ()
 		{
 			pretty: false,
 			dev: true,
-			basedir: env.src('buckets')
+			basedir: env.src(env.buckets_path)
 		}
 
 		return pug(filename, options)
