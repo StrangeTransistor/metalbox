@@ -82,6 +82,12 @@
     "rollup-plugin-json":
       "2",
 
+    "babel-core":
+      "^6.19",
+
+    "babel-preset-babili":
+      "0.0.9",
+
 
     "globule":
       "1"

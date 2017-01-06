@@ -14,6 +14,7 @@ var Autoprefixer = require('../pipe/Autoprefixer')
 var CssNano = require('../pipe/CssNano')
 
 var Rollup = require('../producer/Rollup')
+var Babili = require('../pipe/Babili')
 
 var MapEnv = require('../artifact/MapEnv')
 var Release = require('./Release')
@@ -42,7 +43,10 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 			Autoprefixer(),
 			CssNano()
 		)),
-		File('index.js', Rollup()),
+		File('index.js', Pipeline(
+			Rollup(),
+			Babili()
+		)),
 		Glob(env => env.src(env.buckets_path), '**/*.@(jpg|png|gif)', 'assets')
 	]))
 }
