@@ -4,9 +4,9 @@ var defaults = require('./defaults')
 var Manifest = require('./Manifest')
 
 var pug = require('./pug')
+var Assets = require('./Assets')
 
 var File = require('../../artifact/File')
-var Glob = require('../../artifact/Glob')
 
 var Pipeline = require('../../producer/Pipeline')
 
@@ -35,6 +35,6 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 			Rollup(),
 			Babili()
 		)),
-		Glob(env => env.src(env.buckets_path), '**/*.@(jpg|png|gif)', 'assets')
+		Assets()
 	]))
 }
