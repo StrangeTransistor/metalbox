@@ -1,6 +1,7 @@
 /* @flow */
 
-var dump = require('../../json/dump')
+var defaults = require('./defaults')
+var Manifest = require('./Manifest')
 
 var File = require('../../artifact/File')
 var Glob = require('../../artifact/Glob')
@@ -16,27 +17,14 @@ var CssNano = require('../../pipe/CssNano')
 var Rollup = require('../../producer/Rollup')
 var Babili = require('../../pipe/Babili')
 
-var MapEnv = require('../../artifact/MapEnv')
 var Release = require('../Release')
 
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
 {
-	return MapEnv((env) /* :Env */ =>
-	{
-		return Object.assign({}, { buckets_path: 'buckets' }, env)
-	},
-	Release(
+	return defaults(Release(
 	[
-		File('release.json', (env /* :Env */) =>
-		{
-			var release = {}
-
-			release.version = env.version
-			release.timestamp = (new Date).toISOString()
-
-			return dump(release)
-		}),
+		Manifest(),
 		File('index.html', Pug()),
 		File('index.css', Pipeline(
 			LessCss(),
