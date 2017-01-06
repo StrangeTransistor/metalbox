@@ -16,4 +16,7 @@ import { arrow3 } from './mod'
 import other_json from 'other-bucket/other.json'
 import other_mod from 'other-bucket/other-mod'
 
+import throttle from 'es6y-throttle'
+
+var other_mod = throttle(other_mod)
 0 && other_mod(other_json)

@@ -111,6 +111,9 @@
       "1.3",
 
     "randomstring":
-      "1"
+      "1",
+
+    "es6y-throttle":
+      "=1.0.1"
   }
 }
