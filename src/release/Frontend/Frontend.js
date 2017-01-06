@@ -3,12 +3,12 @@
 var defaults = require('./defaults')
 var Manifest = require('./Manifest')
 
+var pug = require('./pug')
+
 var File = require('../../artifact/File')
 var Glob = require('../../artifact/Glob')
 
 var Pipeline = require('../../producer/Pipeline')
-
-var Pug = require('../../producer/Pug')
 
 var LessCss = require('../../producer/LessCss')
 var Autoprefixer = require('../../pipe/Autoprefixer')
@@ -25,7 +25,7 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	return defaults(Release(
 	[
 		Manifest(),
-		File('index.html', Pug()),
+		pug.Standard(),
 		File('index.css', Pipeline(
 			LessCss(),
 			Autoprefixer(),
