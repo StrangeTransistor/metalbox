@@ -61,6 +61,28 @@
       "3.4",
 
 
+    "rollup":
+      "0.40",
+
+    "rollup-plugin-includepaths":
+      "0.1",
+
+    "rollup-plugin-node-globals":
+      "1",
+
+    "rollup-plugin-node-builtins":
+      "2",
+
+    "rollup-plugin-node-resolve":
+      "2",
+
+    "rollup-plugin-commonjs":
+      "7",
+
+    "rollup-plugin-json":
+      "2",
+
+
     "globule":
       "1"
   },
