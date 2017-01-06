@@ -1,23 +1,23 @@
 /* @flow */
 
-var dump = require('../json/dump')
+var dump = require('../../json/dump')
 
-var File = require('../artifact/File')
-var Glob = require('../artifact/Glob')
+var File = require('../../artifact/File')
+var Glob = require('../../artifact/Glob')
 
-var Pipeline = require('../producer/Pipeline')
+var Pipeline = require('../../producer/Pipeline')
 
-var Pug = require('../producer/Pug')
+var Pug = require('../../producer/Pug')
 
-var LessCss = require('../producer/LessCss')
-var Autoprefixer = require('../pipe/Autoprefixer')
-var CssNano = require('../pipe/CssNano')
+var LessCss = require('../../producer/LessCss')
+var Autoprefixer = require('../../pipe/Autoprefixer')
+var CssNano = require('../../pipe/CssNano')
 
-var Rollup = require('../producer/Rollup')
-var Babili = require('../pipe/Babili')
+var Rollup = require('../../producer/Rollup')
+var Babili = require('../../pipe/Babili')
 
-var MapEnv = require('../artifact/MapEnv')
-var Release = require('./Release')
+var MapEnv = require('../../artifact/MapEnv')
+var Release = require('../Release')
 
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
