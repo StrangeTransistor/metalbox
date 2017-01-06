@@ -3,10 +3,10 @@
 
 // bucket:index
 
-console.log('index');
+0 && console.log('index');
 
 var arrow1 = () => 1;
 
-console.log([ 1, 2, 3 ].map(arrow1));
+0 && console.log([ 1, 2, 3 ].map(arrow1));
 
 }());
