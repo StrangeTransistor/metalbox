@@ -25,7 +25,12 @@ var compare = (v1, v2) =>
 	}
 	else
 	{
-		console.warn(r)
+		var distinct = r.distinct
+		var diff = r.diffSet.filter(it => it.state !== 'equal')
+
+		console.warn('build differs: %s files distinct', distinct)
+		console.warn(diff)
+
 		return false
 	}
 }
