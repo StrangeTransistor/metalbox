@@ -15,9 +15,9 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	return defaults(Release(
 	[
 		Manifest(),
-		pug.Standard(),
-		less.Standard(),
-		rollup.Standard(),
+		pug.Min(),
+		less.Min(),
+		rollup.Min(),
 		Assets()
 	]))
 }

@@ -12,8 +12,7 @@ module.exports.Standard = function ()
 {
 	return File('index.css', Pipeline(
 		LessCss(),
-		Autoprefixer(),
-		CssNano() // TODO rm
+		Autoprefixer()
 	))
 }
 

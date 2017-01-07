@@ -10,8 +10,7 @@ var Babili = require('../../pipe/Babili')
 module.exports.Standard = function ()
 {
 	return File('index.js', Pipeline(
-		Rollup(),
-		Babili() // TODO rm
+		Rollup()
 	))
 }
 

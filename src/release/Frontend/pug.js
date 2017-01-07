@@ -12,3 +12,8 @@ module.exports.Live = function ()
 {
 	//return File('index.html', Pug()) // TODO +Watch
 }
+
+module.exports.Min = function ()
+{
+	return File('index.html', Pug())
+}
