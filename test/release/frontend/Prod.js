@@ -12,7 +12,7 @@ var tmp_rootpath = require('../../_/tmp-rootpath')
 
 var compare = require('../../_/compare-release')
 
-describe('Frontend', () =>
+describe('Frontend (Prod)', () =>
 {
 	var src_root = src_rootpath('frontend')
 	var dst_root = dst_rootpath('frontend')
