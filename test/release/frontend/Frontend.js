@@ -4,13 +4,13 @@ var expect = require('chai').expect
 
 var read = require('fs-sync').readJSON
 
-var Frontend = require('../../src/release/Frontend')
+var Frontend = require('../../../src/release/Frontend')
 
-var src_rootpath = require('../_/src-rootpath')
-var dst_rootpath = require('../_/dst-rootpath')
-var tmp_rootpath = require('../_/tmp-rootpath')
+var src_rootpath = require('../../_/src-rootpath')
+var dst_rootpath = require('../../_/dst-rootpath')
+var tmp_rootpath = require('../../_/tmp-rootpath')
 
-var compare = require('../_/compare-release')
+var compare = require('../../_/compare-release')
 
 describe('Frontend', () =>
 {
