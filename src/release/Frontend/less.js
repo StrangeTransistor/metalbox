@@ -1,6 +1,8 @@
 /* @flow */
 
-var File = require('../../artifact/File')
+var File  = require('../../artifact/File')
+var Watch = require('../../artifact/Watch')
+var Artifact = require('../../artifact/Artifact')
 
 var Pipeline = require('../../producer/Pipeline')
 
@@ -18,7 +20,17 @@ module.exports.Standard = function ()
 
 module.exports.Live = function ()
 {
-	// return Standard
+	return Watch('.', Artifact(env =>
+	{
+		console.log('artifact start')
+
+		return module.exports.Standard()
+		.construct(env)
+		.then(() =>
+		{
+			console.log('artifact stop')
+		})
+	}))
 }
 
 module.exports.Min = function ()

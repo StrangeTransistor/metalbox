@@ -90,6 +90,9 @@
 
 
     "globule":
+      "1",
+
+    "chokidar":
       "1"
   },
 
