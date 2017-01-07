@@ -14,10 +14,10 @@ module.exports = (v1, v2) =>
 	}
 	else
 	{
-		var distinct = r.distinct
+		var differences = r.differences
 		var diff = r.diffSet.filter(it => it.state !== 'equal')
 
-		console.warn('build differs: %s files distinct', distinct)
+		console.warn('release differs: %s files differences', differences)
 		console.warn(diff)
 
 		return false
