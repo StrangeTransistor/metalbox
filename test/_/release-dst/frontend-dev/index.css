@@ -1,0 +1,9 @@
+.class {
+  color: Black;
+  background: White;
+}
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
