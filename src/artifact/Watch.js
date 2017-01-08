@@ -25,15 +25,11 @@ module.exports = function Watch /* ::<WEnv: EnvRelease, Env> */
 	var $watch    = null
 	var $deferred = noop
 
-	console.log('init')
-
 	var art = Artifact(env =>
 	{
 		$src(env)
 		.then(watch_src =>
 		{
-			console.log(env.src(watch_src))
-
 			release()
 			$watch = watch(env.src(watch_src))
 
@@ -63,18 +59,12 @@ module.exports = function Watch /* ::<WEnv: EnvRelease, Env> */
 	{
 		if ($watch)
 		{
-			console.log('release')
-
 			$watch.unwatch()
 			$watch.close()
-			$deferred()
 
-			$watch    = null
+			$deferred()
 			$deferred = noop
-		}
-		else
-		{
-			console.log('release null')
+			$watch    = null
 		}
 	}
 

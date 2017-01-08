@@ -50,7 +50,6 @@ describe('Frontend (Dev)', () =>
 		var p_delay = delay(1000)
 		.then(() =>
 		{
-			console.log('!!!')
 			return f.disengage()
 		})
 
