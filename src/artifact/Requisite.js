@@ -14,7 +14,7 @@ module.exports
 {
 	var $check_requisite = resolver(check_requisite)
 
-	return Artifact(env =>
+	var art = Artifact(env =>
 	{
 		return $check_requisite(env)
 		.then(() =>
@@ -22,4 +22,11 @@ module.exports
 			return target.construct(env)
 		})
 	})
+
+	art.disengage = () =>
+	{
+		return target.disengage()
+	}
+
+	return art
 }
