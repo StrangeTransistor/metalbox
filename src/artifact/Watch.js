@@ -3,10 +3,12 @@
 var noop = () => {}
 
 var Promise = require('bluebird')
-var Never = () => new Promise(noop)
+var Never   = () => new Promise(noop)
 
 var watch = require('chokidar').watch
-// var debounce = require('debounce')
+
+var debounce  = require('debounce')
+var debounced = (fn) => debounce(fn, 250)
 
 var producer = require('../producer')
 
@@ -31,13 +33,13 @@ module.exports = function Watch /* ::<WEnv: EnvRelease, Env> */
 			console.log(env.src(watch_src))
 
 			watch(env.src(watch_src))
-			.on('all', () =>
+			.on('all', debounced(() =>
 			{
 				console.info('~')
 
 				target.construct(env)
 				.then(noop, noop)
-			})
+			}))
 		})
 
 		return Never()

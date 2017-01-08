@@ -43,6 +43,15 @@
     "bluebird":
       "3",
 
+    "globule":
+      "1",
+
+    "chokidar":
+      "1",
+
+    "debounce":
+      "1",
+
 
     "pug":
       "2.0.0-beta6",
@@ -86,14 +95,7 @@
       "^6.19",
 
     "babel-preset-babili":
-      "0.0.9",
-
-
-    "globule":
-      "1",
-
-    "chokidar":
-      "1"
+      "0.0.9"
   },
 
   "devDependencies":
