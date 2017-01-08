@@ -1,7 +1,10 @@
 /* @flow */
 
+var noop = () => {}
+
 var Artifact = require('./Artifact')
 
+var all = require('bluebird').all
 var run_seq = require('bluebird').reduce
 
 module.exports = function Composite /* ::<Env> */
@@ -10,13 +13,21 @@ module.exports = function Composite /* ::<Env> */
 )
 	/* :T_Artifact<Env> */
 {
-	return Artifact(env =>
+	var art = Artifact(env =>
 	{
 		return run_seq(targets, (_, next) =>
 		{
 			return next.construct(env)
 		}
 		, null)
-		.then(() => {})
+		.then(noop)
 	})
+
+	art.disengage = () =>
+	{
+		return all(targets.map(target => target.disengage()))
+		.then(noop)
+	}
+
+	return art
 }
