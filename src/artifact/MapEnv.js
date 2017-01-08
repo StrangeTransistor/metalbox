@@ -13,7 +13,7 @@ module.exports = function MapEnv /* ::<InEnv, OutEnv> */
 {
 	var $prod_env = resolver(prod_env)
 
-	return Artifact(env =>
+	var art = Artifact(env =>
 	{
 		return $prod_env(env)
 		.then(env =>
@@ -21,4 +21,11 @@ module.exports = function MapEnv /* ::<InEnv, OutEnv> */
 			return target.construct(env)
 		})
 	})
+
+	art.disengage = () =>
+	{
+		return target.disengage()
+	}
+
+	return art
 }
