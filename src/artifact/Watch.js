@@ -3,7 +3,6 @@
 var noop = () => {}
 
 var Promise = require('bluebird')
-var Never   = () => new Promise(noop)
 
 var watch = require('chokidar').watch
 
@@ -23,17 +22,22 @@ module.exports = function Watch /* ::<WEnv: EnvRelease, Env> */
 {
 	var $src = producer(prod_watch_src)
 
+	var $watch    = null
+	var $deferred = noop
+
 	console.log('init')
 
-	return Artifact(env =>
+	var art = Artifact(env =>
 	{
 		$src(env)
 		.then(watch_src =>
 		{
 			console.log(env.src(watch_src))
 
-			watch(env.src(watch_src))
-			.on('all', debounced(() =>
+			release()
+			$watch = watch(env.src(watch_src))
+
+			$watch.on('all', debounced(() =>
 			{
 				console.info('~')
 
@@ -42,6 +46,37 @@ module.exports = function Watch /* ::<WEnv: EnvRelease, Env> */
 			}))
 		})
 
-		return Never()
+		return new Promise(rs =>
+		{
+			$deferred = rs
+		})
 	})
+
+	art.disengage = () =>
+	{
+		release()
+
+		return target.disengage()
+	}
+
+	function release ()
+	{
+		if ($watch)
+		{
+			console.log('release')
+
+			$watch.unwatch()
+			$watch.close()
+			$deferred()
+
+			$watch    = null
+			$deferred = noop
+		}
+		else
+		{
+			console.log('release null')
+		}
+	}
+
+	return art
 }

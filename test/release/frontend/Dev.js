@@ -2,6 +2,9 @@
 
 var expect = require('chai').expect
 
+var all   = require('bluebird').all
+var delay = require('bluebird').delay
+
 var read = require('fs-sync').readJSON
 
 var Frontend = require('../../../src/release/Frontend/Dev')
@@ -30,7 +33,7 @@ describe('Frontend (Dev)', () =>
 
 	it('works', () =>
 	{
-		return f.construct(tmp_env)
+		var p_construct = f.construct(tmp_env)
 		.then(() =>
 		{
 			console.log('   ', tmp_root())
@@ -43,5 +46,14 @@ describe('Frontend (Dev)', () =>
 
 			expect(release.version).eq('1.0.0')
 		})
+
+		var p_delay = delay(1000)
+		.then(() =>
+		{
+			console.log('!!!')
+			return f.disengage()
+		})
+
+		return all([ p_construct, p_delay ])
 	})
 })
