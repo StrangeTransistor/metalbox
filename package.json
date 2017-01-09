@@ -95,7 +95,11 @@
       "^6.19",
 
     "babel-preset-babili":
-      "0.0.9"
+      "0.0.9",
+
+
+    "node-notifier":
+      "4"
   },
 
   "devDependencies":
