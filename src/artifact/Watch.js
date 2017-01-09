@@ -38,7 +38,11 @@ module.exports = function Watch /* ::<WEnv: EnvRelease, Env> */
 				console.info('~')
 
 				target.construct(env)
-				.then(noop, noop)
+				.then(noop)
+				.catch(error =>
+				{
+					console.warn('watch throws', error)
+				})
 			}))
 		})
 

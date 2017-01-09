@@ -28,7 +28,8 @@ module.exports.Live = function ()
 		.construct(env)
 		.then(() =>
 		{
-			console.log('artifact stop')
+			throw new Error('less_error')
+			// console.log('artifact stop')
 		})
 	}))
 }
