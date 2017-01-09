@@ -27,7 +27,7 @@ module.exports = function ReleaseNotify ()
 
 	notifier.nag = function nag (subsystem, error)
 	{
-		return notifier.notify(error, subsystem)
+		return notifier.notify(subsystem + ': ' + error, 'Error')
 	}
 
 	return notifier

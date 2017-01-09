@@ -20,18 +20,24 @@ module.exports.Standard = function ()
 
 module.exports.Live = function ()
 {
-	return Watch('.', Artifact(env =>
+	var less = module.exports.Standard()
+
+	var art = Artifact(env =>
 	{
 		console.log('artifact start')
 
-		return module.exports.Standard()
+		return less
 		.construct(env)
 		.then(() =>
 		{
 			throw new Error('less_error')
 			// console.log('artifact stop')
 		})
-	}))
+	})
+
+	art.describe = less.describe
+
+	return Watch('.', art)
 }
 
 module.exports.Min = function ()

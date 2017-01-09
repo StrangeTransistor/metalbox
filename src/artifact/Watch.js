@@ -45,7 +45,7 @@ module.exports = function Watch /* ::<WEnv: EnvRelease, Env: EnvNotify> */
 		function nag (error)
 		{
 			console.warn('watch throws', error)
-			env.notifier.nag('watch', error)
+			env.notifier.nag(target.describe(), error)
 		}
 
 		return new Promise(rs =>
