@@ -38,14 +38,15 @@ module.exports = function Watch /* ::<WEnv: EnvRelease, Env: EnvNotify> */
 				console.info('~')
 
 				target.construct(env)
-				.then(noop)
-				.catch(error =>
-				{
-					console.warn('watch throws', error)
-					env.notifier.notify({ title: 'watch throws', message: error.message })
-				})
+				.then(noop, nag)
 			}))
 		})
+
+		function nag (error)
+		{
+			console.warn('watch throws', error)
+			env.notifier.nag('watch', error)
+		}
 
 		return new Promise(rs =>
 		{

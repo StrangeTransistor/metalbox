@@ -1,13 +1,34 @@
 /* @flow */
 
-var notify = require('./notify')
+var $notify = require('./notify')
 
 module.exports = function ReleaseNotify ()
 	/* :T_ReleaseNotify */
 {
 	var notifier = {}
 
-	notifier.notify = notify
+	notifier.notify = function notify
+	(
+		message /* : string */,
+		title   /* :?string */
+	)
+	{
+		if (title)
+		{
+			title = 'metalbox — ' + title
+		}
+		else
+		{
+			title = 'metalbox'
+		}
+
+		return $notify({ title: title, message: message })
+	}
+
+	notifier.nag = function nag (subsystem, error)
+	{
+		return notifier.notify(error, subsystem)
+	}
 
 	return notifier
 }
