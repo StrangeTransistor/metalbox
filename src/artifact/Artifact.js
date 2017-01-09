@@ -16,5 +16,7 @@ module.exports
 
 	artifact.disengage = () => resolve()
 
+	artifact.describe  = () => '[Artifact]'
+
 	return artifact
 }

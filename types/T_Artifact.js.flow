@@ -2,5 +2,6 @@
 type T_Artifact<Env> =
 {
 	construct: Resolver<Env>,
-	disengage: Resolver<void>
+	disengage: Resolver<void>,
+	describe:  () => string
 }

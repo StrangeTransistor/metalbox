@@ -14,7 +14,7 @@ module.exports = function File /* ::<Env: EnvOut> */
 {
 	var $prod_content = resolver(prod_content)
 
-	return Artifact(env =>
+	var art = Artifact(env =>
 	{
 		return $prod_content(env)
 		.then(content =>
@@ -22,4 +22,11 @@ module.exports = function File /* ::<Env: EnvOut> */
 			write(env.dst(filename), content)
 		})
 	})
+
+	art.describe = () =>
+	{
+		return `[File ${filename}]`
+	}
+
+	return art
 }
