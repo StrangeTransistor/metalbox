@@ -1,7 +1,7 @@
 /* @flow */
 
 var defaults = require('./defaults')
-var Release  = require('../Release')
+var Release  = require('../../artifact/Release')
 
 var Manifest = require('./Manifest')
 var pug  = require('./pug')

@@ -2,9 +2,9 @@
 
 var exists = require('fs-sync').exists
 
-var Requisite = require('../artifact/Requisite')
-var Composite = require('../artifact/Composite')
-var Directory = require('../artifact/Directory')
+var Requisite = require('./Requisite')
+var Composite = require('./Composite')
+var Directory = require('./Directory')
 
 module.exports
 = function Release /* ::<Env: EnvRelease> */

@@ -8,7 +8,7 @@ var read   = require('fs-sync').read
 var File = require('../../src/artifact/File')
 var Directory = require('../../src/artifact/Directory')
 
-var Release = require('../../src/release/Release')
+var Release = require('../../src/artifact/Release')
 
 var src_rootpath = require('../_/src-rootpath')
 var tmp_rootpath = require('../_/tmp-rootpath')
