@@ -1,22 +1,22 @@
 /* @flow */
 
-var File = require('../../artifact/File')
+var File  = require('../../artifact/File')
+var Watch = require('../../artifact/Watch')
+
 
 var Pipeline = require('../../producer/Pipeline')
 
 var Rollup = require('../../producer/Rollup')
 var Babili = require('../../pipe/Babili')
 
-module.exports.Standard = function ()
+var Standard = module.exports.Standard = function ()
 {
-	return File('index.js', Pipeline(
-		Rollup()
-	))
+	return File('index.js', Rollup())
 }
 
-module.exports.Live = function ()
+module.exports.Watch = function ()
 {
-	// return Standard
+	return Watch(env => env.src(env.buckets_path, '*/*.js'), Standard())
 }
 
 module.exports.Min = function ()

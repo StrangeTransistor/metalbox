@@ -20,9 +20,9 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 		Manifest(),
 		Esc(Composite(
 		[
-			pug.Standard(),
+			pug.Watch(),
 			less.Watch(),
-			rollup.Standard(),
+			rollup.Watch(),
 			Assets()
 		]))
 	]))

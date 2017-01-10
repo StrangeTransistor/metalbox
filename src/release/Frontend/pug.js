@@ -1,16 +1,18 @@
 /* @flow */
 
-var File = require('../../artifact/File')
+var File  = require('../../artifact/File')
+var Watch = require('../../artifact/Watch')
+
 var Pug  = require('../../producer/Pug')
 
-module.exports.Standard = function ()
+var Standard = module.exports.Standard = function ()
 {
 	return File('index.html', Pug())
 }
 
-module.exports.Live = function ()
+module.exports.Watch = function ()
 {
-	//return File('index.html', Pug()) // TODO +Watch
+	return Watch(env => env.src(env.buckets_path, '*/*.pug'), Standard())
 }
 
 module.exports.Min = function ()

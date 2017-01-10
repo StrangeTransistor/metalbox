@@ -35,7 +35,7 @@ module.exports = function Watch /* ::<WEnv: EnvRelease, Env: EnvNotify> */
 
 			$watch.on('all', debounced(() =>
 			{
-				console.info('~')
+				console.info('~', target.describe())
 
 				target.construct(env)
 				.then(noop, nag)
