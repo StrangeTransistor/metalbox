@@ -7,7 +7,7 @@ var Manifest = require('./Manifest')
 var pug  = require('./pug')
 var less = require('./less')
 var rollup = require('./rollup')
-var Assets = require('./Assets')
+var assets = require('./assets')
 
 var Esc = require('../../artifact/Esc')
 var Parallel = require('../../artifact/Parallel')
@@ -23,7 +23,7 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 			pug.Watch(),
 			less.Watch(),
 			rollup.Watch(),
-			Assets()
+			assets.Watch()
 		]))
 	]))
 }

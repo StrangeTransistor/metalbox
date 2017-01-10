@@ -7,7 +7,7 @@ var Manifest = require('./Manifest')
 var pug  = require('./pug')
 var less = require('./less')
 var rollup = require('./rollup')
-var Assets = require('./Assets')
+var assets = require('./assets')
 
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
@@ -18,6 +18,6 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 		pug.Min(),
 		less.Min(),
 		rollup.Min(),
-		Assets()
+		assets.Standard()
 	]))
 }
