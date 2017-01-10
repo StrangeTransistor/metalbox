@@ -9,6 +9,9 @@ module.exports = function Pug ()
 	{
 		var filename = env.src(env.buckets_path, 'index/index.pug')
 
+		// TODO metalbox.dev
+		// TODO metalbox.resource
+
 		var options =
 		{
 			pretty: false,

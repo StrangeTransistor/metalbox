@@ -8,6 +8,7 @@ var builtins = require('rollup-plugin-node-builtins')
 var resolve  = require('rollup-plugin-node-resolve')
 var commonjs = require('rollup-plugin-commonjs')
 var json     = require('rollup-plugin-json')
+// TODO +pug
 
 module.exports = function Rollup ()
 	/* :Producer<EnvFrontend, string> */
