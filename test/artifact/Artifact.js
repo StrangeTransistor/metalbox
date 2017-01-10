@@ -10,16 +10,20 @@ describe('Artifact', () =>
 	{
 		var side = 0
 
-		var a = Artifact(env =>
+		var art = Artifact(env =>
 		{
 			side = side + env.inc
 		})
 
-		expect(a).an('object')
-		expect(a).property('construct')
-		expect(a.construct).a('function')
+		expect(art).an('object')
+		expect(art).property('construct')
+		expect(art.construct).a('function')
+		expect(art.disengage).a('function')
+		expect(art.describe).a('function')
 
-		return a.construct({ inc: 1 })
+		expect(art.describe()).eq('[Artifact]')
+
+		return art.construct({ inc: 1 })
 		.then(r =>
 		{
 			expect(r).an('undefined')
@@ -29,16 +33,20 @@ describe('Artifact', () =>
 
 	it('throws', () =>
 	{
-		var a = Artifact(() =>
+		var art = Artifact(() =>
 		{
 			throw new Error
 		})
 
-		expect(a).an('object')
-		expect(a).property('construct')
-		expect(a.construct).a('function')
+		expect(art).an('object')
+		expect(art).property('construct')
+		expect(art.construct).a('function')
+		expect(art.disengage).a('function')
+		expect(art.describe).a('function')
 
-		return a.construct({ inc: 1 })
+		expect(art.describe()).eq('[Artifact]')
+
+		return art.construct({ inc: 1 })
 		.then(() =>
 		{
 			expect(0, 'must throw').eq(1)
