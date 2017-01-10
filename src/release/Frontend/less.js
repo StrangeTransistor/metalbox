@@ -2,6 +2,7 @@
 
 var File  = require('../../artifact/File')
 var Watch = require('../../artifact/Watch')
+var Esc   = require('../../artifact/Esc')
 var Artifact = require('../../artifact/Artifact')
 
 var Pipeline = require('../../producer/Pipeline')
@@ -18,7 +19,7 @@ module.exports.Standard = function ()
 	))
 }
 
-module.exports.Live = function ()
+module.exports.Live = function (is_watch /* :any */)
 {
 	var less = module.exports.Standard()
 
@@ -37,7 +38,7 @@ module.exports.Live = function ()
 
 	art.describe = less.describe
 
-	return Watch('.', art)
+	return Esc(is_watch, Watch('.', art))
 }
 
 module.exports.Min = function ()
