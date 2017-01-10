@@ -2,7 +2,7 @@
 
 var resolver = require('bluebird').method
 
-var Artifact = require('./Artifact')
+var Proxy = require('./Proxy')
 
 module.exports
 = function Requisite /* ::<REnv, Env> */
@@ -14,19 +14,15 @@ module.exports
 {
 	var $check_requisite = resolver(check_requisite)
 
-	var art = Artifact(env =>
+	return Proxy(target, construct =>
 	{
-		return $check_requisite(env)
-		.then(() =>
+		return (env) =>
 		{
-			return target.construct(env)
-		})
+			return $check_requisite(env)
+			.then(() =>
+			{
+				return construct(env)
+			})
+		}
 	})
-
-	art.disengage = () =>
-	{
-		return target.disengage()
-	}
-
-	return art
 }
