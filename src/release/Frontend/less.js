@@ -20,7 +20,9 @@ var Standard = module.exports.Standard = function ()
 
 module.exports.Live = function ()
 {
-	return Esc(Watch('.', Standard()))
+	return Esc(Watch(env => env.src(env.buckets_path, '*/*.less'),
+		Standard()
+	))
 }
 
 module.exports.Min = function ()
