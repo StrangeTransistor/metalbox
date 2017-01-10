@@ -10,7 +10,7 @@ var rollup = require('./rollup')
 var Assets = require('./Assets')
 
 var Esc = require('../../artifact/Esc')
-var Composite = require('../../artifact/Composite')
+var Parallel = require('../../artifact/Parallel')
 
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
@@ -18,7 +18,7 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	return defaults(Release(
 	[
 		Manifest(),
-		Esc(Composite(
+		Esc(Parallel(
 		[
 			pug.Watch(),
 			less.Watch(),
