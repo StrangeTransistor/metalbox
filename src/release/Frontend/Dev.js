@@ -9,17 +9,14 @@ var less = require('./less')
 var rollup = require('./rollup')
 var Assets = require('./Assets')
 
-module.exports = function Frontend /* ::<Env: EnvFrontend> */
-(
-	is_watch /* :?bool */
-)
+module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
 {
 	return defaults(Release(
 	[
 		Manifest(),
 		pug.Standard(),
-		less.Live(is_watch),
+		less.Live(),
 		rollup.Standard(),
 		Assets()
 	]))

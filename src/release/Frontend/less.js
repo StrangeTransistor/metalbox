@@ -18,14 +18,9 @@ var Standard = module.exports.Standard = function ()
 	))
 }
 
-module.exports.Live = function (is_watch /* :any */)
+module.exports.Live = function ()
 {
-	return Esc(
-		is_watch,
-		Watch(
-			'.',
-			Standard()
-		))
+	return Esc(Watch('.', Standard()))
 }
 
 module.exports.Min = function ()

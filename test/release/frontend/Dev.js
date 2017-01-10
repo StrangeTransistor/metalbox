@@ -23,10 +23,13 @@ describe('Frontend (Dev)', () =>
 
 	var tmp_env =
 	{
+		version: '1.0.0',
+
+
 		src: src_root,
 		dst: tmp_root,
 
-		version: '1.0.0'
+		is_watch: false
 	}
 
 	var f = Frontend()

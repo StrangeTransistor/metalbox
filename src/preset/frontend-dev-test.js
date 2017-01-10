@@ -16,7 +16,9 @@ var preset = Preset(() =>
 		version: '1.0.0',
 
 		src: src_root,
-		dst: tmp_root
+		dst: tmp_root,
+
+		is_watch: true
 	}
 
 	return env
