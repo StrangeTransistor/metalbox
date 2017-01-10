@@ -15,7 +15,9 @@
       "flow check",
 
     "mocha":
-      "mocha --recursive test/artifact/ test/producer/ test/release/",
+                      "mocha    --recursive test/artifact/ test/producer/ test/release/",
+    "cover":
+      "istanbul cover _mocha -- --recursive test/artifact/ test/producer/ test/release/",
 
     "test":
       "npm run st && npm run flow && npm run mocha",
