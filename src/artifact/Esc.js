@@ -8,6 +8,8 @@ type EnvWatch =
 
 */
 
+var Promise = require('bluebird')
+
 var Artifact = require('./Artifact')
 
 module.exports = function Esc /* ::<Env> */
@@ -29,25 +31,39 @@ module.exports = function Esc /* ::<Env> */
 
 		if (is_esc)
 		{
+			target.construct(env)
+
 			console.info('esc watch mode')
 
 			; (process.stdin/* :any */).setRawMode(true)
 
 			process.stdin.resume()
 
-			process.stdin.on('data', (data) =>
+			return new Promise(rs =>
 			{
-				var code = data.toJSON().data[0]
-
-				if (code === 27)
+				var filter_esc = (data) =>
 				{
-					console.info('EXIT')
-					process.exit() // TODO
+					var code = data.toJSON().data[0]
+
+					if (code === 27)
+					{
+						console.info('EXIT')
+
+						process.stdin.removeListener('data', filter_esc)
+						; (process.stdin/* :any */).setRawMode(false)
+						process.stdin.pause()
+
+						return rs(target.disengage())
+					}
 				}
+
+				process.stdin.on('data', filter_esc)
 			})
 		}
-
-		return target.construct(env)
+		else
+		{
+			return target.construct(env)
+		}
 	})
 
 	art.disengage = () =>
