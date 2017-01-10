@@ -4,7 +4,7 @@ var noop = () => {}
 
 var Artifact = require('./Artifact')
 
-var map = require('bluebird').mapSeries
+var map = require('bluebird').map
 
 module.exports = function Composite /* ::<Env> */
 (
