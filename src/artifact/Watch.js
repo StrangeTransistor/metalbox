@@ -13,7 +13,13 @@ var producer = require('../producer')
 
 var Artifact = require('./Artifact')
 
-module.exports = function Watch /* ::<WEnv: EnvRelease, Env: EnvNotify> */
+module.exports = function Watch
+/* ::
+<
+	WEnv: EnvRelease,
+	Env:  EnvPrinter & EnvNotify
+>
+*/
 (
 	prod_watch_src /* :WeakProductable<Env, string> */,
 	target         /* :T_Artifact<Env> */
@@ -35,7 +41,7 @@ module.exports = function Watch /* ::<WEnv: EnvRelease, Env: EnvNotify> */
 
 			$watch.on('all', debounced(() =>
 			{
-				console.info('~', target.describe())
+				env.printer.write('~ ' + target.describe())
 
 				target.construct(env)
 				.then(noop, nag)
@@ -44,7 +50,7 @@ module.exports = function Watch /* ::<WEnv: EnvRelease, Env: EnvNotify> */
 
 		function nag (error)
 		{
-			console.warn('watch throws', error)
+			env.printer.write('watch throws' + error)
 			env.notifier.nag(target.describe(), error)
 		}
 
