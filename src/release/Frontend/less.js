@@ -2,7 +2,6 @@
 
 var File  = require('../../artifact/File')
 var Watch = require('../../artifact/Watch')
-var Esc   = require('../../artifact/Esc')
 
 var Pipeline = require('../../producer/Pipeline')
 
@@ -18,11 +17,9 @@ var Standard = module.exports.Standard = function ()
 	))
 }
 
-module.exports.Live = function ()
+module.exports.Watch = function ()
 {
-	return Esc(Watch(env => env.src(env.buckets_path, '*/*.less'),
-		Standard()
-	))
+	return Watch(env => env.src(env.buckets_path, '*/*.less'), Standard())
 }
 
 module.exports.Min = function ()

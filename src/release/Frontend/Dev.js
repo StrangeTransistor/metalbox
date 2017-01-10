@@ -9,15 +9,21 @@ var less = require('./less')
 var rollup = require('./rollup')
 var Assets = require('./Assets')
 
+var Esc = require('../../artifact/Esc')
+var Composite = require('../../artifact/Composite')
+
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
 {
 	return defaults(Release(
 	[
 		Manifest(),
-		pug.Standard(),
-		less.Live(),
-		rollup.Standard(),
-		Assets()
+		Esc(Composite(
+		[
+			pug.Standard(),
+			less.Watch(),
+			rollup.Standard(),
+			Assets()
+		]))
 	]))
 }
