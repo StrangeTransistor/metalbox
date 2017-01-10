@@ -12,7 +12,7 @@ var Promise = require('bluebird')
 
 var Artifact = require('./Artifact')
 
-module.exports = function Esc /* ::<Env> */
+module.exports = function Esc /* ::<Env: EnvPrinter> */
 (
 	target /* :T_Artifact<Env> */
 )
@@ -33,7 +33,7 @@ module.exports = function Esc /* ::<Env> */
 		{
 			target.construct(env)
 
-			console.info('esc watch mode')
+			env.printer.write('esc watch mode')
 
 			; (process.stdin/* :any */).setRawMode(true)
 
@@ -47,7 +47,7 @@ module.exports = function Esc /* ::<Env> */
 
 					if (code === 27)
 					{
-						console.info('EXIT')
+						env.printer.write('EXIT')
 
 						process.stdin.removeListener('data', filter_esc)
 						; (process.stdin/* :any */).setRawMode(false)
