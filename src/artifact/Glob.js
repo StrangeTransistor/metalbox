@@ -20,7 +20,7 @@ module.exports = function Glob /* ::<Env: EnvRelease>*/
 	var $src = producer(prod_src)
 	var $dst = producer(prod_dst)
 
-	return Artifact(env =>
+	var art = Artifact(env =>
 	{
 		return join($src(env), $dst(env), (src, dst) =>
 		{
@@ -35,4 +35,11 @@ module.exports = function Glob /* ::<Env: EnvRelease>*/
 			})
 		})
 	})
+
+	art.describe = () =>
+	{
+		return `[Glob ${String(glob)}]`
+	}
+
+	return art
 }
