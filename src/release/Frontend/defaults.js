@@ -1,18 +1,20 @@
 /* @flow */
 
-var MapEnv = require('../../artifact/MapEnv')
+var Proxy = require('../../artifact/Proxy')
 
 var ReleaseNotify = require('../../notify/release-notify')
 
 module.exports = function defaults (release /* :T_Release<*> */)
 {
-	return MapEnv((env) /* :EnvFrontend */ =>
+	return Proxy(release, construct =>
 	{
-		var $env = Object.assign({}, { buckets_path: 'buckets' }, env)
+		return (env) =>
+		{
+			var $env = Object.assign({}, { buckets_path: 'buckets' }, env)
 
-		$env.notifier = ReleaseNotify($env)
+			$env.notifier = ReleaseNotify($env)
 
-		return $env
-	}
-	, release)
+			return construct(($env /* :EnvFrontend */))
+		}
+	})
 }
