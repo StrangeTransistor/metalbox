@@ -3,7 +3,7 @@
 
 type EnvWatch =
 {
-	is_watch?: boolean
+	is_esc?: boolean
 };
 
 */
@@ -18,16 +18,16 @@ module.exports = function Esc /* ::<Env> */
 {
 	var art = Artifact(env =>
 	{
-		var is_watch = env.is_watch
+		var is_esc = env.is_esc
 
-		is_watch = (is_watch == null || Boolean(is_watch))
+		is_esc = (is_esc == null || Boolean(is_esc))
 
 		if (! process.stdin.isTTY)
 		{
-			is_watch = false
+			is_esc = false
 		}
 
-		if (is_watch)
+		if (is_esc)
 		{
 			console.info('esc watch mode')
 

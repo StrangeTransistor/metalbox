@@ -29,7 +29,7 @@ describe('Frontend (Dev)', () =>
 		src: src_root,
 		dst: tmp_root,
 
-		is_watch: false
+		is_esc: false
 	}
 
 	var f = Frontend()

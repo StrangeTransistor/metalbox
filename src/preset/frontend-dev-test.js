@@ -18,7 +18,7 @@ var preset = Preset(() =>
 		src: src_root,
 		dst: tmp_root,
 
-		is_watch: true
+		is_esc: true
 	}
 
 	return env
