@@ -1,3 +1,4 @@
+/* @flow */
 
 var Preset = require('../artifact/Preset')
 
@@ -25,7 +26,7 @@ var preset = Preset(() =>
 }
 , Frontend())
 
-preset
+preset(process)
 .then(release =>
 {
 	return release.construct()

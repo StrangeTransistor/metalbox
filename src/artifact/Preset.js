@@ -1,23 +1,37 @@
 /* @flow */
 
-var attempt = require('bluebird').try
+var method = require('bluebird').method
 
-var Artifact = require('./Artifact')
+var Proxy = require('./Proxy')
 
 module.exports = function Preset /* ::<Env: EnvRelease> */
 (
 	prod_env       /* :WeakProducer<Process, Env> */,
 	target_release /* :T_Release<Env> */
 )
-	/* :Product<T_Preset> */
+	/* :Producer<Process, T_Preset> */
 {
-	return attempt(() => prod_env(process))
-	.then(env =>
+	var $prod_env = method(prod_env)
+
+	return (process) =>
 	{
-		return Artifact(() =>
+		return $prod_env(process)
+		.then(env =>
 		{
-			return target_release.construct(env)
-			// TODO generic Proxy required
+			var art = Proxy(target_release, construct =>
+			{
+				return () =>
+				{
+					return construct(env)
+				}
+			})
+
+			art.describe = () =>
+			{
+				return `[Preset of ${target_release.describe()}]`
+			}
+
+			return art
 		})
-	})
+	}
 }
