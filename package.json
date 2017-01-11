@@ -29,8 +29,6 @@
       "flow suggest"
   },
 
-  "main": "src/",
-
   "dependencies":
   {
     "mkdirp":
