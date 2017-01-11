@@ -10,6 +10,9 @@ var src_rootpath = require('../../_/src-rootpath')
 var dst_rootpath = require('../../_/dst-rootpath')
 var tmp_rootpath = require('../../_/tmp-rootpath')
 
+var Printer = require('../../../src/printer')
+var ReleaseNotify = require('../../../src/notify/release-notify')
+
 var compare = require('../../_/compare-release')
 
 describe('Frontend (Prod)', () =>
@@ -20,10 +23,13 @@ describe('Frontend (Prod)', () =>
 
 	var tmp_env =
 	{
+		version: '1.0.0',
+
 		src: src_root,
 		dst: tmp_root,
 
-		version: '1.0.0'
+		printer: Printer(process.stdout),
+		notifier: ReleaseNotify(tmp_env),
 	}
 
 	var f = Frontend()
