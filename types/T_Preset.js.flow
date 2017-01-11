@@ -1,2 +1,0 @@
-
-type T_Preset = T_Artifact<void>;
