@@ -8,6 +8,8 @@ type EnvWatch =
 
 */
 
+var bold = require('cli-color').bold
+
 var Promise = require('bluebird')
 
 var Artifact = require('./Artifact')
@@ -33,7 +35,7 @@ module.exports = function Esc /* ::<Env: EnvPrinter> */
 		{
 			target.construct(env)
 
-			env.printer.write('esc watch mode')
+			env.printer.write(`Use ${bold('ESC')} to stop recurrying Artifact`)
 
 			; (process.stdin/* :any */).setRawMode(true)
 
@@ -47,7 +49,7 @@ module.exports = function Esc /* ::<Env: EnvPrinter> */
 
 					if (code === 27)
 					{
-						env.printer.write('EXIT')
+						env.printer.write(bold('ESC'))
 
 						process.stdin.removeListener('data', filter_esc)
 						; (process.stdin/* :any */).setRawMode(false)

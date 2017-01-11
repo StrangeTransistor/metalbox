@@ -8,7 +8,7 @@ module.exports = function Printer (output /* :stream$Writable */)
 
 	printer.write = function write (line /* :string */)
 	{
-		output.write('> ' + line + NL)
+		output.write(line + NL)
 	}
 
 	return printer

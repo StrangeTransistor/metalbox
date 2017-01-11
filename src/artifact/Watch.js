@@ -2,6 +2,8 @@
 
 var noop = () => {}
 
+var bold = require('cli-color').bold
+
 var Promise = require('bluebird')
 
 var watch = require('chokidar').watch
@@ -41,17 +43,23 @@ module.exports = function Watch
 
 			$watch.on('all', debounced(() =>
 			{
-				env.printer.write('~ ' + target.describe())
-
 				target.construct(env)
-				.then(noop, nag)
+				.then(ok, nag)
 			}))
 		})
 
+		function ok ()
+		{
+			env.printer.write(` ${bold('~')} ${target.describe()}`)
+		}
+
 		function nag (error)
 		{
-			env.printer.write('watch throws' + error)
-			env.notifier.nag(target.describe(), error)
+			env.printer.write(
+				` ${bold('~')} ${target.describe()}` +
+				` ${bold.red('ERROR:')} ${error.message}`
+			)
+			env.notifier.nag(target.describe(), error.message)
 		}
 
 		return new Promise(rs =>

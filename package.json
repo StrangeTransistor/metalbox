@@ -101,7 +101,10 @@
 
 
     "node-notifier":
-      "4"
+      "4",
+
+    "cli-color":
+      "1"
   },
 
   "devDependencies":
