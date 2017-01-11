@@ -6,8 +6,8 @@ var Proxy = require('./Proxy')
 
 module.exports = function Preset /* ::<Env: EnvRelease> */
 (
-	prod_env       /* :WeakProducer<Process, Env> */,
-	target_release /* :T_Release<Env> */
+	target_release /* :T_Release<Env> */,
+	prod_env       /* :WeakProducer<Process, Env> */
 )
 	/* :Producer<Process, T_Preset> */
 {

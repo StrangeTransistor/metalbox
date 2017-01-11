@@ -7,7 +7,8 @@ var Frontend = require('../release/Frontend/Dev')
 var src_rootpath = require('../../test/_/src-rootpath')
 var tmp_rootpath = require('../../test/_/tmp-rootpath')
 
-var preset = Preset(() =>
+var preset = Preset(Frontend(),
+() =>
 {
 	var src_root = src_rootpath('frontend')
 	var tmp_root = tmp_rootpath()
@@ -23,8 +24,7 @@ var preset = Preset(() =>
 	}
 
 	return env
-}
-, Frontend())
+})
 
 preset(process)
 .then(release =>
