@@ -60,6 +60,9 @@ module.exports = function Watch
 				` ${bold('~')} ${target.describe()}` +
 				` ${bold.red('ERROR:')} ${error.message}`
 			)
+
+			env.printer.detail(error)
+
 			env.notifier.obstacle(target.describe(), error.message)
 		}
 

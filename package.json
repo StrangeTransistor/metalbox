@@ -57,6 +57,9 @@
     "is-empty":
       "1",
 
+    "indent-string":
+      "3",
+
 
     "pug":
       "2.0.0-beta6",
