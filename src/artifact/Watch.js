@@ -51,6 +51,7 @@ module.exports = function Watch
 		function ok ()
 		{
 			env.printer.write(` ${bold('~')} ${target.describe()}`)
+			env.notifier.obstacle(target.describe(), null)
 		}
 
 		function nag (error)
@@ -59,7 +60,7 @@ module.exports = function Watch
 				` ${bold('~')} ${target.describe()}` +
 				` ${bold.red('ERROR:')} ${error.message}`
 			)
-			env.notifier.nag(target.describe(), error.message)
+			env.notifier.obstacle(target.describe(), error.message)
 		}
 
 		return new Promise(rs =>

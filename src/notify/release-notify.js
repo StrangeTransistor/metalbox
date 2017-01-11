@@ -1,5 +1,8 @@
 /* @flow */
 
+var empty = require('is-empty')
+var resolve = require('bluebird').resolve
+
 var $notify = require('./notify')
 
 module.exports = function ReleaseNotify ()
@@ -28,6 +31,37 @@ module.exports = function ReleaseNotify ()
 	notifier.nag = function nag (subsystem, error)
 	{
 		return notifier.notify(subsystem + ': ' + error, 'Error')
+	}
+
+
+	var obstacles = {}
+
+	notifier.obstacle = function obstacle (subsystem, error)
+	{
+		if (error)
+		{
+			obstacles[subsystem] = true
+
+			return notifier.nag(subsystem, error)
+		}
+		else
+		{
+			if (empty(obstacles))
+			{
+				return resolve()
+			}
+
+			delete obstacles[subsystem]
+
+			if (empty(obstacles))
+			{
+				return notifier.notify('OK')
+			}
+			else
+			{
+				return resolve()
+			}
+		}
 	}
 
 	return notifier
