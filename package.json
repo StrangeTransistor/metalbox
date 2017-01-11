@@ -124,6 +124,9 @@
     "chai":
       "3",
 
+    "istanbul":
+      "0.4",
+
     "dir-compare":
       "1.3",
 
