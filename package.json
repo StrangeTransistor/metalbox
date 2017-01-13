@@ -13,6 +13,13 @@
         {
           "src": "test/_/release-src/frontend"
         }
+      ],
+      "frontend-dev":
+      [
+        "Frontend/Dev",
+        {
+          "src": "test/_/release-src/frontend"
+        }
       ]
     }
   },
