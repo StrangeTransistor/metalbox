@@ -19,7 +19,7 @@ var ReleaseNotify = require('../notify/release-notify')
 
 /* eslint-disable complexity */
 program
-.command('run <preset>').action(preset_name =>
+.arguments('<preset>').action(preset_name =>
 {
 	var rootpath = Rootpath(findRoot(process.cwd()))
 
