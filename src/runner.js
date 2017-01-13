@@ -17,7 +17,7 @@ var Printer = require('./printer')
 var ReleaseNotify = require('./notify/release-notify')
 
 
-module.exports = () =>
+module.exports = (argv /* :Array<string> */) =>
 {
 	/* eslint-disable complexity */
 	program
@@ -136,5 +136,5 @@ module.exports = () =>
 	})
 	/* eslint-enable complexity */
 
-	program.parse(process.argv)
+	program.parse(argv)
 }

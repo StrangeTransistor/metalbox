@@ -24,6 +24,8 @@
     }
   },
 
+  "bin": "run/metalbox",
+
   "scripts":
   {
     "postinstall":
