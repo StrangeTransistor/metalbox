@@ -5,15 +5,17 @@ var Rootpath = require('rootpath')
 
 var load = require('fs-sync').readJSON
 
-// var Proxy = require('../artifact/Proxy')
-
-// var Printer = require('../printer')
-// var ReleaseNotify = require('../notify/release-notify')
-
 var clc = require('cli-color')
 var bold = clc.bold
 
 var program = require('commander')
+
+
+var With = require('../artifact/With')
+
+var Printer = require('../printer')
+var ReleaseNotify = require('../notify/release-notify')
+
 
 /* eslint-disable complexity */
 program
@@ -57,6 +59,8 @@ program
 
 	var preset = presets[preset_name]
 
+	var Artifact /* :() => T_Artifact<any> */
+
 	try
 	{
 		if (! Array.isArray(preset)) throw new Error('must be array')
@@ -73,34 +77,62 @@ program
 
 	try
 	{
-		var dynamic_require = (require /* : Function*/)
-		var Artifact = dynamic_require(rootpath(preset_name))
+		var dynamic_require = (require /* :(string) => () => T_Artifact<any> */)
+
+		/* @flow-off */
+		var Artifact = dynamic_require(rootpath(release_name))
 	}
 	catch (e)
 	{
-		console.log(e)
+
+	try
+	{
+		/* @flow-off */
+		var local_release = rootpath('src/release/', release_name)
+
+		/* @flow-off */
+		var Artifact = dynamic_require(rootpath(local_release))
+	}
+	catch (e)
+	{
+		console.error(`could not resolve Release ${bold(release_name)}`)
+
+		process.exit(-1)
+	}
 	}
 
-	/*var release_art = Proxy(artifact, construct =>
+	var printer = Printer(process.stdout)
+
+	/* @flow-off */
+	var sealed_artifact = With(Artifact(), () =>
 	{
-		return (env) =>
-		{
-			env = Object.assign({}, env)
+		var env = Object.assign({}, options)
 
-			env.version = manifest.version
+		env.version = manifest.version
 
-			env.src = Rootpath(rootpath())
-			env.dst = Rootpath(rootpath('release/dev'))
+		env.src = Rootpath(rootpath(env.src || ''))
+		env.dst = Rootpath(rootpath(env.dst || [ 'release', preset_name]))
 
-			env.printer  = Printer(process.stdout)
-			env.notifier = ReleaseNotify(env)
+		env.printer  = printer
+		env.notifier = ReleaseNotify(env)
 
-			// env.is_esc = false
-			env.src = Rootpath(rootpath('test/_/release-src/frontend')) // TODO
+		// env.is_esc = false
 
-			return construct(env)
-		}
-	})*/
+		printer.detail(env)
+
+		return env
+	})
+
+	return sealed_artifact.construct()
+	.then(() =>
+	{
+		printer.write(bold('OK'))
+	},
+	error =>
+	{
+		// TODO dry
+		printer.write(`${bold.red('ERROR:')} ${error.message}`)
+	})
 })
 /* eslint-enable complexity */
 
