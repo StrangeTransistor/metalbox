@@ -3,6 +3,20 @@
   "version": "0.0.0",
   "private":  true,
 
+  "metalbox":
+  {
+    "presets":
+    {
+      "frontend":
+      [
+        "Frontend",
+        {
+          "src": "test/_/release-src/frontend"
+        }
+      ]
+    }
+  },
+
   "scripts":
   {
     "postinstall":
@@ -39,6 +53,12 @@
 
     "rootpath":
       "StreetStrider/rootpath#v1.7.0",
+
+    "find-root":
+      "1",
+
+    "commander":
+      "2.9",
 
     "bluebird":
       "3",
