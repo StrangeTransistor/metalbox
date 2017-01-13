@@ -17,121 +17,124 @@ var Printer = require('../printer')
 var ReleaseNotify = require('../notify/release-notify')
 
 
-/* eslint-disable complexity */
-program
-.arguments('<preset>').action(preset_name =>
+module.exports = () =>
 {
-	var rootpath = Rootpath(findRoot(process.cwd()))
-
-	var manifest = load(rootpath('package.json'))
-
-	if (! manifest.metalbox)
+	/* eslint-disable complexity */
+	program
+	.arguments('<preset>').action(preset_name =>
 	{
-		console.error(
-			`${bold('metalbox')} not found in ${bold('package.json')}` +
-			` at ${clc.italic.cyan(rootpath())}`
-		)
-		process.exit(-1)
-	}
+		var rootpath = Rootpath(findRoot(process.cwd()))
 
-	var metalbox = manifest.metalbox
+		var manifest = load(rootpath('package.json'))
 
-	if (! metalbox.presets)
-	{
-		console.error(
-			`${bold('metalbox.presets')} not found in ${bold('package.json')}` +
-			` at ${clc.italic.cyan(rootpath())}`
-		)
-		process.exit(-1)
-	}
+		if (! manifest.metalbox)
+		{
+			console.error(
+				`${bold('metalbox')} not found in ${bold('package.json')}` +
+				` at ${clc.italic.cyan(rootpath())}`
+			)
+			process.exit(-1)
+		}
 
-	var presets = metalbox.presets
+		var metalbox = manifest.metalbox
 
-	if (! presets[preset_name])
-	{
-		console.error(
-			`${bold(`metalbox.presets.${preset_name}`)}` +
-			` not found in ${bold('package.json')}` +
-			` at ${clc.italic.cyan(rootpath())}`
-		)
-		process.exit(-1)
-	}
+		if (! metalbox.presets)
+		{
+			console.error(
+				`${bold('metalbox.presets')} not found in ${bold('package.json')}` +
+				` at ${clc.italic.cyan(rootpath())}`
+			)
+			process.exit(-1)
+		}
 
-	var preset = presets[preset_name]
+		var presets = metalbox.presets
 
-	var Artifact /* :() => T_Artifact<any> */
+		if (! presets[preset_name])
+		{
+			console.error(
+				`${bold(`metalbox.presets.${preset_name}`)}` +
+				` not found in ${bold('package.json')}` +
+				` at ${clc.italic.cyan(rootpath())}`
+			)
+			process.exit(-1)
+		}
 
-	try
-	{
-		if (! Array.isArray(preset)) throw new Error('must be array')
-		if (preset.length !== 2) throw new Error('must be (Release, options)')
+		var preset = presets[preset_name]
 
-		var release_name = preset[0]
-		var options = preset[1]
-	}
-	catch (e)
-	{
-		console.error(`preset error: ${clc.red(e.message)}`)
-		process.exit(-1)
-	}
+		var Artifact /* :() => T_Artifact<any> */
 
-	try
-	{
-		var dynamic_require = (require /* :(string) => () => T_Artifact<any> */)
+		try
+		{
+			if (! Array.isArray(preset)) throw new Error('must be array')
+			if (preset.length !== 2) throw new Error('must be (Release, options)')
+
+			var release_name = preset[0]
+			var options = preset[1]
+		}
+		catch (e)
+		{
+			console.error(`preset error: ${clc.red(e.message)}`)
+			process.exit(-1)
+		}
+
+		try
+		{
+			var dynamic_require = (require /* :(string) => () => T_Artifact<any> */)
+
+			/* @flow-off */
+			var Artifact = dynamic_require(rootpath(release_name))
+		}
+		catch (e)
+		{
+
+		try
+		{
+			/* @flow-off */
+			var local_release = rootpath('src/release/', release_name)
+
+			/* @flow-off */
+			var Artifact = dynamic_require(rootpath(local_release))
+		}
+		catch (e)
+		{
+			console.error(`could not resolve Release ${bold(release_name)}`)
+
+			process.exit(-1)
+		}
+		}
+
+		var printer = Printer(process.stdout)
 
 		/* @flow-off */
-		var Artifact = dynamic_require(rootpath(release_name))
-	}
-	catch (e)
-	{
+		var sealed_artifact = With(Artifact(), () =>
+		{
+			var env = Object.assign({}, options)
 
-	try
-	{
-		/* @flow-off */
-		var local_release = rootpath('src/release/', release_name)
+			env.version = manifest.version
 
-		/* @flow-off */
-		var Artifact = dynamic_require(rootpath(local_release))
-	}
-	catch (e)
-	{
-		console.error(`could not resolve Release ${bold(release_name)}`)
+			env.src = Rootpath(rootpath(env.src || ''))
+			env.dst = Rootpath(rootpath(env.dst || [ 'release', preset_name]))
 
-		process.exit(-1)
-	}
-	}
+			env.printer  = printer
+			env.notifier = ReleaseNotify(env)
 
-	var printer = Printer(process.stdout)
+			// printer.detail(env)
 
-	/* @flow-off */
-	var sealed_artifact = With(Artifact(), () =>
-	{
-		var env = Object.assign({}, options)
+			return env
+		})
 
-		env.version = manifest.version
-
-		env.src = Rootpath(rootpath(env.src || ''))
-		env.dst = Rootpath(rootpath(env.dst || [ 'release', preset_name]))
-
-		env.printer  = printer
-		env.notifier = ReleaseNotify(env)
-
-		// printer.detail(env)
-
-		return env
+		return sealed_artifact.construct()
+		.then(() =>
+		{
+			printer.write(`${bold('OK:')} ${preset_name}`)
+		},
+		error =>
+		{
+			// TODO dry
+			printer.write(`${bold.red('ERROR:')} ${error.message}`)
+		})
 	})
+	/* eslint-enable complexity */
 
-	return sealed_artifact.construct()
-	.then(() =>
-	{
-		printer.write(`${bold('OK:')} ${preset_name}`)
-	},
-	error =>
-	{
-		// TODO dry
-		printer.write(`${bold.red('ERROR:')} ${error.message}`)
-	})
-})
-/* eslint-enable complexity */
-
-program.parse(process.argv)
+	program.parse(process.argv)
+}
