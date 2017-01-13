@@ -116,9 +116,7 @@ program
 		env.printer  = printer
 		env.notifier = ReleaseNotify(env)
 
-		// env.is_esc = false
-
-		printer.detail(env)
+		// printer.detail(env)
 
 		return env
 	})
@@ -126,7 +124,7 @@ program
 	return sealed_artifact.construct()
 	.then(() =>
 	{
-		printer.write(bold('OK'))
+		printer.write(`${bold('OK:')} ${preset_name}`)
 	},
 	error =>
 	{
