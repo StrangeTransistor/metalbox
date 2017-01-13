@@ -20,6 +20,7 @@ var ReleaseNotify = require('./notify/release-notify')
 module.exports = (argv /* :Array<string> */) =>
 {
 	/* eslint-disable complexity */
+	/* eslint-disable max-statements */
 	program
 	.arguments('<preset>').action(preset_name =>
 	{
@@ -79,7 +80,8 @@ module.exports = (argv /* :Array<string> */) =>
 
 		try
 		{
-			var dynamic_require = (require /* :(string) => () => T_Artifact<any> */)
+			var dynamic_require
+			= (require /* :(string) => () => T_Artifact<any> */)
 
 			/* @flow-off */
 			var Artifact = dynamic_require(rootpath(release_name))
@@ -134,6 +136,7 @@ module.exports = (argv /* :Array<string> */) =>
 			printer.write(`${bold.red('ERROR:')} ${error.message}`)
 		})
 	})
+	/* eslint-enable max-statements */
 	/* eslint-enable complexity */
 
 	program.parse(argv)
