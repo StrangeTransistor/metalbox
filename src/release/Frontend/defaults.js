@@ -1,16 +1,11 @@
 /* @flow */
 
-var Proxy = require('../../artifact/Proxy')
+var With = require('../../artifact/With')
 
 module.exports = function defaults (release /* :T_Release<*> */)
 {
-	return Proxy(release, construct =>
+	return With(release, env =>
 	{
-		return (env) =>
-		{
-			env = Object.assign({}, { buckets_path: 'buckets' }, env)
-
-			return construct(env)
-		}
+		return Object.assign({}, { buckets_path: 'buckets' }, env)
 	})
 }
