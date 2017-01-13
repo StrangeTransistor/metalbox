@@ -11,10 +11,10 @@ var bold = clc.bold
 var program = require('commander')
 
 
-var With = require('../artifact/With')
+var With = require('./artifact/With')
 
-var Printer = require('../printer')
-var ReleaseNotify = require('../notify/release-notify')
+var Printer = require('./printer')
+var ReleaseNotify = require('./notify/release-notify')
 
 
 module.exports = () =>
