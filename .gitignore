@@ -1,6 +1,6 @@
 
-node_modules/
-flow-typed/
-coverage/
-release/
-npm-debug.log
+/node_modules/
+/flow-typed/
+/coverage/
+/release/
+/npm-debug.log
