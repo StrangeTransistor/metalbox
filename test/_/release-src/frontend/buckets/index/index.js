@@ -26,3 +26,5 @@ function lower (it: string): string
 {
 	return it.toLowerCase()
 }
+
+0 && lower('ABC')

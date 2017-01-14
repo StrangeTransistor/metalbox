@@ -145,6 +145,9 @@
     "eslint":
       "3",
 
+    "babel-eslint":
+      "7",
+
     "js-outlander":
       "StrangeTransistor/js-outlander#2.0.10",
 
