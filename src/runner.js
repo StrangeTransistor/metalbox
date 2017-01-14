@@ -149,6 +149,7 @@ module.exports = (argv /* :Array<string> */) =>
 	{
 		// TODO dry
 		printer.write(`${bold.red('ERROR:')} ${error.message}`)
+		printer.detail(error)
 	})
 	.finally(process.exit)
 }
