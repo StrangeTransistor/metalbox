@@ -8,8 +8,7 @@
 			[
 				".sublime",
 				"node_modules",
-				"coverage",
-				"release"
+				"coverage"
 			]
 		}
 	]
