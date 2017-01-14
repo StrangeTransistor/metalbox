@@ -1,0 +1,6 @@
+[include]
+<PROJECT_ROOT>/../../../../../node_modules
+
+[options]
+module.name_mapper='.+' -> '<PROJECT_ROOT>/buckets/\0'
+suppress_comment= \\(.\\|\n\\)*\\@flow-off

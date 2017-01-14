@@ -8,6 +8,7 @@ var builtins = require('rollup-plugin-node-builtins')
 var resolve  = require('rollup-plugin-node-resolve')
 var commonjs = require('rollup-plugin-commonjs')
 var json     = require('rollup-plugin-json')
+var flow     = require('rollup-plugin-flow')
 // TODO +pug
 
 module.exports = function Rollup ()
@@ -39,7 +40,8 @@ module.exports = function Rollup ()
 				{
 					sourcemap: false
 				}),
-				json()
+				json(),
+				flow()
 			],
 
 			/*

@@ -126,6 +126,9 @@
     "rollup-plugin-json":
       "2",
 
+    "rollup-plugin-flow":
+      "1",
+
     "babel-core":
       "^6.19",
 
@@ -145,8 +148,11 @@
     "eslint":
       "3",
 
+    "babel-eslint":
+      "7",
+
     "js-outlander":
-      "StrangeTransistor/js-outlander#2.0.10",
+      "StrangeTransistor/js-outlander#2.1.0",
 
     "flow-bin":
       "0.37",
