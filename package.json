@@ -126,6 +126,9 @@
     "rollup-plugin-json":
       "2",
 
+    "rollup-plugin-flow":
+      "1",
+
     "babel-core":
       "^6.19",
 
