@@ -1,9 +1,10 @@
 /* @flow */
 
-var Artifact = require('../../artifact/Artifact')
 var File = require('../../artifact/File')
 
 var Release = require('../../artifact/Release')
+
+var Manifest = require('../metalbucket/Manifest')
 
 // ---
 var rollup = require('rollup')
@@ -19,10 +20,7 @@ module.exports = function Backend /* ::<Env: EnvBackend & EnvPrinter> */ ()
 {
 	return Release(
 	[
-		Artifact((env /* :EnvPrinter */) =>
-		{
-			env.printer.detail(env)
-		}),
+		Manifest(),
 		File('index.js', (env /* :EnvIn */) =>
 		{
 			return rollup.rollup(

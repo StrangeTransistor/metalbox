@@ -1,8 +1,8 @@
 /* @flow */
 
-// var expect = require('chai').expect
+var expect = require('chai').expect
 
-// var read = require('fs-sync').readJSON
+var read = require('fs-sync').readJSON
 
 var Backend = require('../../../src/release/Backend')
 
@@ -40,6 +40,12 @@ describe('Backend', () =>
 		.then(() =>
 		{
 			console.log('   ', tmp_root())
+		})
+		.then(() =>
+		{
+			var release = read(tmp_root('release.json'))
+
+			expect(release.version).eq('1.0.0')
 		})
 	})
 })
