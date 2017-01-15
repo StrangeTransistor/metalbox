@@ -7,18 +7,18 @@ var read = require('fs-sync').readJSON
 var Backend = require('../../../src/release/Backend')
 
 var src_rootpath = require('../../_/src-rootpath')
-// var dst_rootpath = require('../../_/dst-rootpath')
+var dst_rootpath = require('../../_/dst-rootpath')
 var tmp_rootpath = require('../../_/tmp-rootpath')
 
 var Printer = require('../../../src/printer')
 // var ReleaseNotify = require('../../../src/notify/release-notify')
 
-// var compare = require('../../_/compare-release')
+var compare = require('../../_/compare-release')
 
 describe('Backend', () =>
 {
 	var src_root = src_rootpath('backend')
-	// var dst_root = dst_rootpath('frontend')
+	var dst_root = dst_rootpath('backend')
 	var tmp_root = tmp_rootpath()
 
 	var tmp_env =
@@ -40,6 +40,8 @@ describe('Backend', () =>
 		.then(() =>
 		{
 			console.log('   ', tmp_root())
+
+			expect(compare(dst_root(), tmp_root())).ok
 		})
 		.then(() =>
 		{
