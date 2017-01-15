@@ -1,9 +1,24 @@
 /* @flow */
+/* ::
 
-var join = require('bluebird').join
+import T_Rootpath from 'rootpath';
+
+type F_Do<Env> =
+(
+	src:  T_Rootpath,
+	path: string,
+	dst:  T_Rootpath,
+	env: Env
+)
+=> WeakResolution;
+
+*/
+
+var method = require('bluebird').method
+var join   = require('bluebird').join
+var map    = require('bluebird').mapSeries
 
 var find = require('globule').find
-var cp = require('fs-sync').copy
 
 var producer = require('../../producer')
 
@@ -13,12 +28,15 @@ module.exports = function Glob /* ::<Env: EnvIn & EnvOut>*/
 (
 	prod_src  /* :WeakProductable<Env, string> */,
 	glob      /* :string | string[] */,
-	prod_dst  /* :WeakProductable<Env, string> */
+	prod_dst  /* :WeakProductable<Env, string> */,
+	do_fn     /* :F_Do<Env> */
 )
 	/* :T_Artifact<Env> */
 {
 	var $src = producer(prod_src)
 	var $dst = producer(prod_dst)
+
+	var $do = method(do_fn)
 
 	var art = Artifact(env =>
 	{
@@ -27,12 +45,14 @@ module.exports = function Glob /* ::<Env: EnvIn & EnvOut>*/
 			var r_src = env.src.partial(src)
 			var r_dst = env.dst.partial(dst)
 
-			find(r_src(glob))
+			var paths = find(r_src(glob))
 			.map(path => r_src.relative(path))
-			.map(path =>
+
+			return map(paths, path =>
 			{
-				cp(r_src(path), r_dst(path), { force: true })
+				return $do(r_src, path, r_dst, env)
 			})
+			.then(() => {})
 		})
 	})
 
