@@ -6,7 +6,7 @@ var File = require('../../artifact/File')
 
 module.exports = function Manifest ()
 {
-	return File('release.json', (env /* :EnvFrontend */) =>
+	return File('release.json', (env /* :EnvVersion */) =>
 	{
 		var release = {}
 
