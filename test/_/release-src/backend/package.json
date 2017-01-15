@@ -1,0 +1,23 @@
+{
+	"name":    "backend",
+	"version": "0.0.0",
+	"private":  true,
+
+	"scripts":
+	{
+		"start": "start-dev"
+	},
+	"scripts:prod":
+	{
+		"start": "start-prod"
+	},
+
+	"dependencies":
+	{
+		"express": "*"
+	},
+	"devDependencies":
+	{
+		"mocha": "*"
+	}
+}
