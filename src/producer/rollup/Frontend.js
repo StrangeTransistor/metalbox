@@ -22,26 +22,24 @@ module.exports = function Rollup ()
 
 			plugins:
 			[
-				// TODO pug
 				include(
 				{
 					paths: [ env.src(), env.src(env.buckets_path) ],
-					// TODO external: []
 				}),
 				globals(),
 				builtins(),
 				resolve(
 				{
-					jsnext: true,
+					jsnext:  true,
 					browser: true,
-					// TODO skip: []
 				}),
 				commonjs(
 				{
 					sourcemap: false
 				}),
 				json(),
-				flow()
+				flow(),
+				// TODO pug
 			],
 
 			/*
@@ -50,16 +48,13 @@ module.exports = function Rollup ()
 				allowReserved: true
 			},
 			*/
-
-			// onwarn: console.warn
 		})
 		.then(bundle =>
 		{
 			return bundle.generate(
 			{
-				format: 'iife',
+				format:  'iife',
 				exports: 'none',
-				// TODO moduleName: 'Name'
 			})
 		})
 		.then(bundle => bundle.code)
