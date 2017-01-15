@@ -3,7 +3,7 @@
 var defaults = require('./defaults')
 var Release  = require('../../artifact/Release')
 
-var Manifest = require('./Manifest')
+var Manifest = require('../metalbucket/Manifest')
 var pug  = require('./pug')
 var less = require('./less')
 var rollup = require('./rollup')
