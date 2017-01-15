@@ -14,11 +14,11 @@ var Promise = require('bluebird')
 
 var Artifact = require('./Artifact')
 
-module.exports = function Esc /* ::<Env: EnvPrinter> */
+module.exports = function Esc /* ::<Env> */
 (
 	target /* :T_Artifact<Env> */
 )
-	/* :T_Artifact<Env & EnvWatch> */
+	/* :T_Artifact<Env & EnvWatch & EnvPrinter> */
 {
 	var art = Artifact(env =>
 	{

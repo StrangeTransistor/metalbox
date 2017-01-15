@@ -15,18 +15,12 @@ var producer = require('../producer')
 
 var Artifact = require('./Artifact')
 
-module.exports = function Watch
-/* ::
-<
-	WEnv: EnvRelease,
-	Env:  EnvPrinter & EnvNotify
->
-*/
+module.exports = function Watch /* ::<Env, WEnv: Env & EnvIn> */
 (
-	prod_watch_src /* :WeakProductable<Env, string> */,
+	prod_watch_src /* :WeakProductable<WEnv, string> */,
 	target         /* :T_Artifact<Env> */
 )
-	/* :T_Artifact<WEnv & Env> */
+	/* :T_Artifact<WEnv & EnvPrinter & EnvNotify> */
 {
 	var $src = producer(prod_watch_src)
 

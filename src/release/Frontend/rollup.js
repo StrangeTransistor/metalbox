@@ -6,7 +6,7 @@ var Watch = require('../../artifact/Watch')
 
 var Pipeline = require('../../producer/Pipeline')
 
-var Rollup = require('../../producer/Rollup')
+var Rollup = require('../../producer/rollup/Frontend')
 var Babili = require('../../pipe/Babili')
 
 var Standard = module.exports.Standard = function ()
