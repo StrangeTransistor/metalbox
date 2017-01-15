@@ -62,8 +62,7 @@ module.exports = function Backend /* ::<Env: EnvBackend & EnvPrinter> */ ()
 				return bundle.generate(
 				{
 					format:  'cjs',
-					exports: 'none',
-					// TODO moduleName: 'Name'
+					exports: 'auto',
 				})
 			})
 			.then(bundle => bundle.code)

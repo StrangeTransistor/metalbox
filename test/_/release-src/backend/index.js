@@ -11,3 +11,8 @@ var rootpath = mod_rootpath()
 import other_dirname from './dir/other-dirname'
 
 0 && console.log(other_dirname)
+
+export default (argv: string[]) =>
+{
+	return argv.join(',')
+}
