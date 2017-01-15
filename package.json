@@ -20,6 +20,13 @@
         {
           "src": "test/_/release-src/frontend"
         }
+      ],
+      "backend":
+      [
+        "Backend",
+        {
+          "src": "test/_/release-src/backend"
+        }
       ]
     }
   },
