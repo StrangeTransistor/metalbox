@@ -37,5 +37,9 @@ describe('Backend', () =>
 	it('works', () =>
 	{
 		return b.construct(tmp_env)
+		.then(() =>
+		{
+			console.log('   ', tmp_root())
+		})
 	})
 })
