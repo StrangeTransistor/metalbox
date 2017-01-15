@@ -5,9 +5,9 @@ var join = require('bluebird').join
 var find = require('globule').find
 var cp = require('fs-sync').copy
 
-var producer = require('../producer')
+var producer = require('../../producer')
 
-var Artifact = require('./Artifact')
+var Artifact = require('../Artifact')
 
 module.exports = function Glob /* ::<Env: EnvIn & EnvOut>*/
 (
