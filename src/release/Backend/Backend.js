@@ -9,11 +9,11 @@ var Manifest = require('../metalbucket/Manifest')
 // ---
 var rollup = require('rollup')
 
-var globals  = require('rollup-plugin-node-globals')
-var resolve  = require('rollup-plugin-node-resolve')
-var commonjs = require('rollup-plugin-commonjs')
-var json     = require('rollup-plugin-json')
-var flow     = require('rollup-plugin-flow')
+// var globals  = require('rollup-plugin-node-globals')
+// var resolve  = require('rollup-plugin-node-resolve')
+// var commonjs = require('rollup-plugin-commonjs')
+// var json     = require('rollup-plugin-json')
+// var flow     = require('rollup-plugin-flow')
 
 module.exports = function Backend /* ::<Env: EnvBackend & EnvPrinter> */ ()
 	/* :T_Release<Env> */
@@ -27,20 +27,23 @@ module.exports = function Backend /* ::<Env: EnvBackend & EnvPrinter> */ ()
 			{
 				entry: env.src('index.js'),
 
+				// external: function () { return true },
+
 				plugins:
 				[
-					globals(),
-					resolve(
+					//globals(),
+					/*resolve(
 					{
 						jsnext:  true,
 						browser: false,
-					}),
-					commonjs(
+					}),*/
+					/*commonjs(
 					{
-						sourcemap: false
-					}),
-					json(),
-					flow()
+						sourcemap: false,
+						exclude: [ '**' ]
+					}),*/
+					// json(),
+					// flow()
 				],
 
 				/*
