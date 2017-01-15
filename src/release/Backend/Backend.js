@@ -23,11 +23,13 @@ module.exports = function Backend /* ::<Env: EnvBackend & EnvPrinter> */ ()
 		Manifest(),
 		File('index.js', (env /* :EnvIn */) =>
 		{
+			var entry = env.src('index.js')
+
 			return rollup.rollup(
 			{
-				entry: env.src('index.js'),
+				entry: entry,
 
-				// external: function () { return true },
+				external: id => id !== entry,
 
 				plugins:
 				[
