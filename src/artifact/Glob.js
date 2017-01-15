@@ -9,7 +9,7 @@ var producer = require('../producer')
 
 var Artifact = require('./Artifact')
 
-module.exports = function Glob /* ::<Env: EnvRelease>*/
+module.exports = function Glob /* ::<Env: EnvIn & EnvOut>*/
 (
 	prod_src  /* :WeakProductable<Env, string> */,
 	glob      /* :string | string[] */,
