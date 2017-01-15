@@ -1,71 +1,31 @@
 /* @flow */
 
-var File = require('../../artifact/File')
+var write = require('fs-sync').write
+
+// var With = require('../../artifact/With')
+var Glob = require('../../artifact/Glob')
 
 var Release = require('../../artifact/Release')
 
 var Manifest = require('../metalbucket/Manifest')
 
-// ---
-var rollup = require('rollup')
-
-// var globals  = require('rollup-plugin-node-globals')
-// var resolve  = require('rollup-plugin-node-resolve')
-// var commonjs = require('rollup-plugin-commonjs')
-// var json     = require('rollup-plugin-json')
-var flow     = require('rollup-plugin-flow')
+var Rollup = require('../../producer/rollup/Backend')
 
 module.exports = function Backend /* ::<Env: EnvBackend & EnvPrinter> */ ()
 	/* :T_Release<Env> */
 {
+	var rollup = Rollup()
+
 	return Release(
 	[
 		Manifest(),
-		File('index.js', (env /* :EnvIn */) =>
+		Glob('', '**/*.js', '', (src, path, dst) =>
 		{
-			var entry = env.src('index.js')
-
-			return rollup.rollup(
+			return rollup({ entry: src(path) })
+			.then(code =>
 			{
-				entry: entry,
-
-				external: id => id !== entry,
-
-				plugins:
-				[
-					flow(),
-					//globals(),
-					/*resolve(
-					{
-						jsnext:  true,
-						browser: false,
-					}),*/
-					/*commonjs(
-					{
-						sourcemap: false,
-						exclude: [ '**' ]
-					}),*/
-					// json(),
-				],
-
-				/*
-				acorn:
-				{
-					allowReserved: true
-				},
-				*/
-
-				// onwarn: console.warn
+				return write(dst(path), code)
 			})
-			.then(bundle =>
-			{
-				return bundle.generate(
-				{
-					format:  'cjs',
-					exports: 'auto',
-				})
-			})
-			.then(bundle => bundle.code)
 		})
 	])
 }
