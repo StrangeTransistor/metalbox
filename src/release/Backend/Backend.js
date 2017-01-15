@@ -13,7 +13,7 @@ var rollup = require('rollup')
 // var resolve  = require('rollup-plugin-node-resolve')
 // var commonjs = require('rollup-plugin-commonjs')
 // var json     = require('rollup-plugin-json')
-// var flow     = require('rollup-plugin-flow')
+var flow     = require('rollup-plugin-flow')
 
 module.exports = function Backend /* ::<Env: EnvBackend & EnvPrinter> */ ()
 	/* :T_Release<Env> */
@@ -33,6 +33,7 @@ module.exports = function Backend /* ::<Env: EnvBackend & EnvPrinter> */ ()
 
 				plugins:
 				[
+					flow(),
 					//globals(),
 					/*resolve(
 					{
@@ -45,7 +46,6 @@ module.exports = function Backend /* ::<Env: EnvBackend & EnvPrinter> */ ()
 						exclude: [ '**' ]
 					}),*/
 					// json(),
-					// flow()
 				],
 
 				/*
