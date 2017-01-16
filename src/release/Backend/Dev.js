@@ -6,6 +6,8 @@ var Manifest = require('../metalbucket/Manifest')
 var Package  = require('./Package')
 var rollup   = require('./rollup')
 
+var Esc = require('../../artifact/Esc')
+
 module.exports = function Backend /* ::<Env: EnvBackend> */ ()
 	/* :T_Release<Env> */
 {
@@ -13,6 +15,6 @@ module.exports = function Backend /* ::<Env: EnvBackend> */ ()
 	[
 		Manifest(),
 		Package(),
-		rollup.Standard(),
+		Esc(rollup.Watch()),
 	])
 }

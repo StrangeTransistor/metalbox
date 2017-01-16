@@ -2,18 +2,22 @@
 
 var expect = require('chai').expect
 
-var Backend = require('../../../src/release/Backend')
+var all   = require('bluebird').all
+var delay = require('bluebird').delay
+
+var Backend = require('../../../src/release/Backend/Dev')
 
 var src_rootpath = require('../../_/src-rootpath')
 var dst_rootpath = require('../../_/dst-rootpath')
 var tmp_rootpath = require('../../_/tmp-rootpath')
 
 var Printer = require('../../../src/printer')
+var ReleaseNotify = require('../../../src/notify/release-notify')
 
 var compare = require('../../_/compare-release')
 var expect_release = require('../../_/expect-release')
 
-describe('Backend (Prod)', () =>
+describe('Backend (Dev)', () =>
 {
 	var src_root = src_rootpath('backend')
 	var dst_root = dst_rootpath('backend')
@@ -27,13 +31,16 @@ describe('Backend (Prod)', () =>
 		dst: tmp_root,
 
 		printer: Printer(process.stdout),
+		notifier: ReleaseNotify(tmp_env),
+
+		is_esc: false,
 	}
 
 	var b = Backend()
 
 	it('works', () =>
 	{
-		return b.construct(tmp_env)
+		var p_construct = b.construct(tmp_env)
 		.then(() =>
 		{
 			console.log('   ', tmp_root())
@@ -44,5 +51,13 @@ describe('Backend (Prod)', () =>
 		{
 			expect_release(tmp_root('release.json'))
 		})
+
+		var p_delay = delay(1000)
+		.then(() =>
+		{
+			return b.disengage()
+		})
+
+		return all([ p_construct, p_delay ])
 	})
 })
