@@ -2,8 +2,6 @@
 
 var expect = require('chai').expect
 
-var read = require('fs-sync').readJSON
-
 var Frontend = require('../../../src/release/Frontend')
 
 var src_rootpath = require('../../_/src-rootpath')
@@ -14,6 +12,7 @@ var Printer = require('../../../src/printer')
 var ReleaseNotify = require('../../../src/notify/release-notify')
 
 var compare = require('../../_/compare-release')
+var expect_release = require('../../_/expect-release')
 
 describe('Frontend (Prod)', () =>
 {
@@ -45,9 +44,7 @@ describe('Frontend (Prod)', () =>
 		})
 		.then(() =>
 		{
-			var release = read(tmp_root('release.json'))
-
-			expect(release.version).eq('1.0.0')
+			expect_release(tmp_root('release.json'))
 		})
 	})
 })
