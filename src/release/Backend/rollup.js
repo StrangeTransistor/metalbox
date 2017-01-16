@@ -2,15 +2,16 @@
 
 var write = require('fs-sync').write
 
-var Artifact = require('../../artifact/Artifact')
-var Glob = require('../../artifact/Glob')
-var Watch = require('../../artifact/Watch')
+var Artifact  = require('../../artifact/Artifact')
+var Composite = require('../../artifact/Composite')
+var Glob      = require('../../artifact/Glob')
+var Watch     = require('../../artifact/Watch')
 
 var Rollup = require('../../producer/rollup/Backend')
 
 var glob = '**/*.js'
 
-module.exports.Standard = () =>
+var Standard = module.exports.Standard = () =>
 {
 	var rollup = Rollup()
 
@@ -44,5 +45,9 @@ module.exports.Watch = () =>
 		return '[Rollup]'
 	}
 
-	return Watch(glob, art)
+	return Composite(
+	[
+		Standard(),
+		Watch(glob, art)
+	])
 }
