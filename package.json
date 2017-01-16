@@ -70,6 +70,9 @@
     "rootpath":
       "StreetStrider/rootpath#v1.7.0",
 
+    "command-promise":
+      "2",
+
     "find-root":
       "1",
 
