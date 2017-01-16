@@ -27,6 +27,13 @@
         {
           "src": "test/_/release-src/backend"
         }
+      ],
+      "backend-dev":
+      [
+        "Backend/Dev",
+        {
+          "src": "test/_/release-src/backend"
+        }
       ]
     }
   },
