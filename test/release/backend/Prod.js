@@ -9,7 +9,6 @@ var dst_rootpath = require('../../_/dst-rootpath')
 var tmp_rootpath = require('../../_/tmp-rootpath')
 
 var Printer = require('../../../src/printer')
-// var ReleaseNotify = require('../../../src/notify/release-notify')
 
 var compare = require('../../_/compare-release')
 var expect_release = require('../../_/expect-release')
@@ -28,7 +27,6 @@ describe('Backend', () =>
 		dst: tmp_root,
 
 		printer: Printer(process.stdout),
-		// notifier: ReleaseNotify(tmp_env),
 	}
 
 	var b = Backend()
