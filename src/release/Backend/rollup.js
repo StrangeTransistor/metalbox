@@ -28,16 +28,21 @@ module.exports.Watch = () =>
 {
 	var rollup = Rollup()
 
-	return Watch(glob, Artifact(env =>
+	var art = Artifact(env =>
 	{
 		var entry = env.entry
-
-		console.log(entry)
 
 		return rollup({ entry: env.src(entry) })
 		.then(code =>
 		{
 			return write(env.dst(entry), code)
 		})
-	}))
+	})
+
+	art.describe = () =>
+	{
+		return '[Rollup]'
+	}
+
+	return Watch(glob, art)
 }
