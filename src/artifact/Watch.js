@@ -15,12 +15,19 @@ var producer = require('../producer')
 
 var Artifact = require('./Artifact')
 
-module.exports = function Watch /* ::<Env, WEnv: Env & EnvIn> */
+module.exports = function Watch
+/* ::
+<
+	Env: { entry?: string },
+	SrcEnv: Env & EnvIn,
+	WatchEnv: SrcEnv & EnvPrinter & EnvNotify
+>
+*/
 (
-	prod_watch_src /* :WeakProductable<WEnv, string> */,
+	prod_watch_src /* :WeakProductable<SrcEnv, string> */,
 	target         /* :T_Artifact<Env> */
 )
-	/* :T_Artifact<WEnv & EnvPrinter & EnvNotify> */
+	/* :T_Artifact<WatchEnv> */
 {
 	var $src = producer(prod_watch_src)
 
@@ -35,9 +42,17 @@ module.exports = function Watch /* ::<Env, WEnv: Env & EnvIn> */
 			release()
 			$watch = watch(env.src(watch_src))
 
-			$watch.on('all', debounced(() =>
+			$watch.on('all', debounced((event, path) =>
 			{
+				path = env.src.relative(path)
+
+				// crazy
+				env.entry = path
+				// TODO:
+				// var $env /* :Env */ = Object.assign({}, env, { entry: path })
+
 				target.construct(env)
+				// target.construct($env)
 				.then(ok, nag)
 			}))
 		})
