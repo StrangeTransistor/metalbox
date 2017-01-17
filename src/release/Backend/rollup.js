@@ -17,6 +17,7 @@ var Standard = module.exports.Standard = () =>
 
 	return Glob('', glob, '', (src, path, dst) =>
 	{
+		// TODO maybe create artifacts on-fly
 		return rollup({ entry: src(path) })
 		.then(code =>
 		{
@@ -33,6 +34,7 @@ module.exports.Watch = () =>
 	{
 		var entry = env.entry
 
+		// TODO maybe create artifacts on-fly
 		return rollup({ entry: env.src(entry) })
 		.then(code =>
 		{
