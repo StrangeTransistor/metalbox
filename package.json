@@ -34,6 +34,13 @@
         {
           "src": "test/_/release-src/backend"
         }
+      ],
+      "library":
+      [
+        "Library",
+        {
+          "src": "test/_/release-src/library"
+        }
       ]
     }
   },
