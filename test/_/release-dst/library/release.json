@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0-pre2",
+  "timestamp": "2017-01-18T22:09:15.818Z",
+  "git": {
+    "rev": "e4c9abf8be497863d5814a453d46848937807c78-dirty",
+    "msg": "workon Library.",
+    "timestamp": "2017-01-18T01:16:00+03:00",
+    "author": "Strider"
+  }
+}
