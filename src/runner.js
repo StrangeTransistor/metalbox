@@ -40,6 +40,7 @@ module.exports = (argv /* :Array<string> */) =>
 	}
 
 	var rootpath = Rootpath(findRoot(process.cwd()))
+	var rootpath_metalbox = Rootpath(__dirname, '..')
 
 	var manifest = load(rootpath('package.json'))
 
@@ -98,6 +99,7 @@ module.exports = (argv /* :Array<string> */) =>
 		var dynamic_require
 		= (require /* :(string) => () => T_Artifact<any> */)
 
+		/* RESOLVE relative to client package.json */
 		/* @flow-off */
 		var Artifact = dynamic_require(rootpath(release_name))
 	}
@@ -106,8 +108,9 @@ module.exports = (argv /* :Array<string> */) =>
 
 	try
 	{
+		/* RESOLVE in metalbox src/releases */
 		/* @flow-off */
-		var local_release = rootpath('src/release/', release_name)
+		var local_release = rootpath_metalbox('src/release/', release_name)
 
 		/* @flow-off */
 		var Artifact = dynamic_require(rootpath(local_release))
