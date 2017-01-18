@@ -83,7 +83,7 @@ module.exports = (argv /* :Array<string> */) =>
 	try
 	{
 		if (! Array.isArray(preset)) throw new Error('must be array')
-		if (preset.length !== 2) throw new Error('must be (Release, options)')
+		if (preset.length > 2) throw new Error('must be (Release, [ options ])')
 
 		var release_name = preset[0]
 		var options = preset[1]
