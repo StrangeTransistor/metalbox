@@ -3,14 +3,7 @@
 	"version": "0.0.0",
 	"private":  true,
 
-	"scripts":
-	{
-		"start": "start-dev"
-	},
-	"scripts:prod":
-	{
-		"start": "start-prod"
-	},
+	"main": "index.js",
 
 	"dependencies":
 	{
