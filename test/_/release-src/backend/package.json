@@ -12,6 +12,21 @@
 		"start": "start-prod"
 	},
 
+	"metalbox":
+	{
+		"presets":
+		{
+			"backend":
+			[
+				"Backend"
+			],
+			"backend-dev":
+			[
+				"Backend/Dev"
+			]
+		}
+	},
+
 	"dependencies":
 	{
 		"express": "*"

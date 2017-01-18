@@ -8,6 +8,7 @@ module.exports = function Package /* ::<Env: EnvRelease>*/ ()
 {
 	return File('package.json', WithPackage(manifest =>
 	{
+		delete manifest.metalbox
 		delete manifest.devDependencies
 
 		manifest.scripts = manifest['scripts:prod']

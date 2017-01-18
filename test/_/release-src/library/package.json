@@ -5,6 +5,17 @@
 
 	"main": "index.js",
 
+	"metalbox":
+	{
+		"presets":
+		{
+			"library":
+			[
+				"Library"
+			]
+		}
+	},
+
 	"dependencies":
 	{
 		"express": "*"

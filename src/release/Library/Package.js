@@ -10,6 +10,8 @@ module.exports = function Package /* ::<Env: EnvRelease>*/ ()
 {
 	return File('package.json', WithPackage(manifest =>
 	{
+		delete manifest.metalbox
+
 		var main = manifest.main || ''
 
 		manifest.main = join('dist', main)
