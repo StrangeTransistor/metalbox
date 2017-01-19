@@ -49,8 +49,8 @@
 
   "scripts":
   {
-    "postinstall":
-      "which flow-typed && flow-typed install || true",
+    "flow-typed":
+      "flow-typed install",
 
     "st":
       "eslint src/ test/",
