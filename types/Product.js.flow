@@ -1,6 +1,6 @@
 
 /* weak (allow sync function or type) */
-type WeakProduct<T> = Bluebird$Promisable<T>;
+type WeakProduct<T> = $Promisable<T>;
 type WeakProducer<Env, T> = (env: Env) => WeakProduct<T>;
 
 type _WeakProductable<
