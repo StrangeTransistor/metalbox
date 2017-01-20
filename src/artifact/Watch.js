@@ -1,4 +1,11 @@
 /* @flow */
+/* ::
+
+type ProdWatch
+= string
+| [ string, Object ];
+
+*/
 
 var noop = () => {}
 
@@ -24,7 +31,7 @@ module.exports = function Watch
 >
 */
 (
-	prod_watch_src /* :WeakProductable<SrcEnv, string> */,
+	prod_watch_src /* :WeakProductable<SrcEnv, ProdWatch> */,
 	target         /* :T_Artifact<Env> */
 )
 	/* :T_Artifact<WatchEnv> */
@@ -39,8 +46,21 @@ module.exports = function Watch
 		$src(env)
 		.then(watch_src =>
 		{
+			var src /* :string */
+			var options /* :?Object */
+
+			if (typeof watch_src === 'string')
+			{
+				src = watch_src
+			}
+			else
+			{
+				src     = watch_src[0]
+				options = watch_src[1]
+			}
+
 			release()
-			$watch = watch(env.src(watch_src))
+			$watch = watch(env.src(src), options)
 
 			$watch.on('all', debounced((event, path) =>
 			{
