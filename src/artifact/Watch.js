@@ -26,7 +26,7 @@ module.exports = function Watch
 /* ::
 <
 	Env: { entry?: string },
-	SrcEnv: EnvIn,
+	SrcEnv: EnvIn & EnvOut,
 	WatchEnv: Env & SrcEnv & EnvPrinter & EnvNotify
 >
 */
@@ -47,7 +47,7 @@ module.exports = function Watch
 		.then(watch_src =>
 		{
 			var src /* :string */
-			var options /* :?Object */
+			var options /* :Object */ = {}
 
 			if (typeof watch_src === 'string')
 			{
@@ -56,8 +56,11 @@ module.exports = function Watch
 			else
 			{
 				src     = watch_src[0]
-				options = watch_src[1]
+				options = Object.assign({}, options, watch_src[1])
 			}
+
+			options.ignored = [].concat(options.ignored, env.dst())
+			options.ignored = options.ignored.filter(Boolean)
 
 			release()
 			$watch = watch(env.src(src), options)
