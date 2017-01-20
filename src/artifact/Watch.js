@@ -3,7 +3,7 @@
 
 type ProdWatch
 = string
-| [ string, Object ];
+| [ string | string[], Object ];
 
 */
 

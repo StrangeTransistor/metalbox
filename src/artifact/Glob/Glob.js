@@ -19,6 +19,7 @@ var join   = require('bluebird').join
 var map    = require('bluebird').mapSeries
 
 var find = require('globule').find
+var glob__join = require('globjoin')
 
 var producer = require('../../producer')
 
@@ -45,7 +46,10 @@ module.exports = function Glob /* ::<Env: EnvIn & EnvOut>*/
 			var r_src = env.src.partial(src)
 			var r_dst = env.dst.partial(dst)
 
-			var paths = find(r_src(glob))
+			var globs = [].concat(glob)
+			globs = globs.map(glob => glob__join(r_src(), glob))
+
+			var paths = find(globs)
 			.map(path => r_src.relative(path))
 
 			return map(paths, path =>

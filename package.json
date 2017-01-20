@@ -99,6 +99,9 @@
     "globule":
       "1",
 
+    "globjoin":
+      "0.1",
+
     "chokidar":
       "1",
 
