@@ -59,7 +59,7 @@ module.exports = function Watch
 				options = Object.assign({}, options, watch_src[1])
 			}
 
-			options.ignored = [].concat(options.ignored, env.dst())
+			options.ignored = [].concat(options.ignored, recursion_indicator(env))
 			options.ignored = options.ignored.filter(Boolean)
 
 			release()
@@ -125,4 +125,9 @@ module.exports = function Watch
 	}
 
 	return art
+}
+
+function recursion_indicator (env /* :EnvInOut */)
+{
+	return env.dst()
 }
