@@ -26,7 +26,7 @@ module.exports = function Watch
 /* ::
 <
 	Env: { entry?: string },
-	SrcEnv: EnvIn & EnvOut,
+	SrcEnv: EnvInOut,
 	WatchEnv: Env & SrcEnv & EnvPrinter & EnvNotify
 >
 */

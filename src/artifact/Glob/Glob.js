@@ -25,7 +25,7 @@ var producer = require('../../producer')
 
 var Artifact = require('../Artifact')
 
-module.exports = function Glob /* ::<Env: EnvIn & EnvOut>*/
+module.exports = function Glob /* ::<Env: EnvInOut>*/
 (
 	prod_src  /* :WeakProductable<Env, string>            */,
 	prod_glob /* :WeakProductable<Env, string | string[]> */,
@@ -75,7 +75,7 @@ module.exports = function Glob /* ::<Env: EnvIn & EnvOut>*/
 	return art
 }
 
-function recursion_indicator (env /* :EnvIn & EnvOut */)
+function recursion_indicator (env /* :EnvInOut */)
 {
 	return '!' + env.dst('**')
 }
