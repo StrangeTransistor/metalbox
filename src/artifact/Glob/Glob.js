@@ -48,6 +48,7 @@ module.exports = function Glob /* ::<Env: EnvIn & EnvOut>*/
 
 			var globs = [].concat(glob)
 			globs = globs.map(glob => glob__join(r_src(), glob))
+			globs = globs.concat(recursion_indicator(env))
 
 			var paths = find(globs)
 			.map(path => r_src.relative(path))
@@ -72,4 +73,9 @@ module.exports = function Glob /* ::<Env: EnvIn & EnvOut>*/
 	}
 
 	return art
+}
+
+function recursion_indicator (env /* :EnvIn & EnvOut */)
+{
+	return '!' + env.dst('**')
 }

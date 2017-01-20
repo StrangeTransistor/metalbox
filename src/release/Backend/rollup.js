@@ -10,10 +10,7 @@ var Watch     = require('../../artifact/Watch')
 var Rollup = require('../../producer/rollup/Backend')
 
 var glob_js = '**/*.js'
-var prod_glob = (env /* :EnvIn & EnvOut */) =>
-{
-	return [ glob_js, '!' + env.src.relative(env.dst('**')) ]
-}
+
 var prod_watch = (env /* :EnvOut */) =>
 {
 	return [ glob_js,
@@ -27,7 +24,7 @@ var Standard = module.exports.Standard = () =>
 {
 	var rollup = Rollup()
 
-	return Glob('', prod_glob, '', (src, path, dst) =>
+	return Glob('', glob_js, '', (src, path, dst) =>
 	{
 		// TODO maybe create artifacts on-fly
 		return rollup({ entry: src(path) })
