@@ -27,21 +27,21 @@ var Artifact = require('../Artifact')
 
 module.exports = function Glob /* ::<Env: EnvIn & EnvOut>*/
 (
-	prod_src  /* :WeakProductable<Env, string> */,
-	glob      /* :string | string[] */,
-	prod_dst  /* :WeakProductable<Env, string> */,
+	prod_src  /* :WeakProductable<Env, string>            */,
+	prod_glob /* :WeakProductable<Env, string | string[]> */,
+	prod_dst  /* :WeakProductable<Env, string>            */,
 	do_fn     /* :F_Do<Env> */
 )
 	/* :T_Artifact<Env> */
 {
-	var $src = producer(prod_src)
-	var $dst = producer(prod_dst)
-
-	var $do = method(do_fn)
+	var $src  = producer(prod_src)
+	var $dst  = producer(prod_dst)
+	var $glob = producer(prod_glob)
+	var $do   = method(do_fn)
 
 	var art = Artifact(env =>
 	{
-		return join($src(env), $dst(env), (src, dst) =>
+		return join($src(env), $glob(env), $dst(env), (src, glob, dst) =>
 		{
 			var r_src = env.src.partial(src)
 			var r_dst = env.dst.partial(dst)
@@ -62,7 +62,13 @@ module.exports = function Glob /* ::<Env: EnvIn & EnvOut>*/
 
 	art.describe = () =>
 	{
-		return `[Glob ${String(glob)}]`
+		var $glob = ''
+		if (typeof prod_glob === 'string')
+		{
+			$glob = ' ' + prod_glob
+		}
+
+		return `[Glob${$glob}]`
 	}
 
 	return art
