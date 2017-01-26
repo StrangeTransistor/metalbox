@@ -11,10 +11,10 @@ var bold = clc.bold
 var program = require('commander')
 
 
-var With = require('./artifact/With')
+var With = require('../artifact/With')
 
-var Printer = require('./printer')
-var ReleaseNotify = require('./notify/release-notify')
+var Printer = require('../printer')
+var ReleaseNotify = require('../notify/release-notify')
 
 
 /* eslint-disable complexity */
@@ -40,7 +40,6 @@ module.exports = (argv /* :Array<string> */) =>
 	}
 
 	var rootpath = Rootpath(findRoot(process.cwd()))
-	var rootpath_metalbox = Rootpath(__dirname, '..')
 
 	var manifest = load(rootpath('package.json'))
 
@@ -108,6 +107,8 @@ module.exports = (argv /* :Array<string> */) =>
 
 	try
 	{
+		var rootpath_metalbox = Rootpath(__dirname, '..', '..')
+
 		/* RESOLVE in metalbox src/releases */
 		/* @flow-off */
 		var local_release = rootpath_metalbox('src/release/', release_name)
