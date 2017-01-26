@@ -41,6 +41,10 @@
         {
           "src": "test/_/release-src/library"
         }
+      ],
+      "frontend-template":
+      [
+        "template/Frontend"
       ]
     }
   },
