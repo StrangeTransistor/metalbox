@@ -8,9 +8,6 @@ var load = require('fs-sync').readJSON
 var clc = require('cli-color')
 var bold = clc.bold
 
-var program = require('commander')
-
-
 var With = require('../artifact/With')
 
 var Printer = require('../printer')
@@ -22,13 +19,21 @@ module.exports = (argv /* :Array<string> */) =>
 {
 	var preset_name = ''
 
-	program
-	.arguments('<preset>').action(it =>
+	require('yargs')
+	.command([ 'run <preset>', 'r' ], 'run preset', {},
+	preset_name =>
 	{
-		preset_name = it
+		console.log('run', preset_name)
 	})
+	.command([ 'template <template>', 't' ], 'generate by template', {},
+	template_name =>
+	{
+		console.log('template', template_name)
+	})
+	.showHelp()
+	.argv
 
-	program.parse(argv)
+	return
 
 	if (! preset_name)
 	{
