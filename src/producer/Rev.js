@@ -32,7 +32,8 @@ module.exports = function Rev ()
 
 			return data
 		})
-	})
+	},
+	() => null) /* no git repo */
 }
 
 function describe ()
