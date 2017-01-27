@@ -13,6 +13,8 @@ var With = require('../artifact/With')
 var Printer = require('../printer')
 var ReleaseNotify = require('../notify/release-notify')
 
+var resolve = require('./_/resolve')
+
 /* eslint-disable complexity */
 module.exports = (preset /* :{ preset: string } */) =>
 {
@@ -63,9 +65,8 @@ module.exports = (preset /* :{ preset: string } */) =>
 		process.exit(-1)
 	}
 
-	var preset = presets[preset_name]
 
-	var Artifact /* :() => T_Artifact<any> */
+	var preset = presets[preset_name]
 
 	try
 	{
@@ -81,28 +82,13 @@ module.exports = (preset /* :{ preset: string } */) =>
 		process.exit(-1)
 	}
 
-	try
-	{
-		var dynamic_require
-		= (require /* :(string) => () => T_Artifact<any> */)
 
-		/* RESOLVE relative to client package.json */
-		/* @flow-off */
-		var Artifact = dynamic_require(rootpath(release_name))
-	}
-	catch (e)
-	{
+	var Artifact /* :() => T_Artifact<any> */
 
 	try
 	{
-		var rootpath_metalbox = Rootpath(__dirname, '..', '..')
-
-		/* RESOLVE in metalbox src/releases */
 		/* @flow-off */
-		var local_release = rootpath_metalbox('src/release/', release_name)
-
-		/* @flow-off */
-		var Artifact = dynamic_require(rootpath(local_release))
+		Artifact = resolve(rootpath, release_name)
 	}
 	catch (e)
 	{
@@ -110,7 +96,7 @@ module.exports = (preset /* :{ preset: string } */) =>
 
 		process.exit(-1)
 	}
-	}
+
 
 	var printer = Printer(process.stdout)
 
