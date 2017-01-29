@@ -4,12 +4,11 @@
 module.exports = (argv /* :Array<string> */) =>
 {
 	require('yargs')
-	.command([ 'run <preset>', 'r' ], 'run preset', {}, require('./preset'))
+	.command([ 'run <preset>', 'r' ], 'run preset', {},
+		require('./preset'))
 	.command([ 'template <template>', 't' ], 'generate by template', {},
-	template_name =>
-	{
-		console.log('template', template_name)
-	})
+		require('./template')
+	)
 	// .showHelp()
 	.help()
 	.version()
