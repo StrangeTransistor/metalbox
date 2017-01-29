@@ -12,6 +12,11 @@ type F_Do<Env> =
 )
 => WeakResolution;
 
+export type Options =
+{
+	exclude_recursive?: boolean
+};
+
 */
 
 var method = require('bluebird').method
@@ -25,19 +30,28 @@ var producer = require('../../producer')
 
 var Artifact = require('../Artifact')
 
+/* eslint-disable max-params */
 module.exports = function Glob /* ::<Env: EnvInOut>*/
 (
 	prod_src  /* :WeakProductable<Env, string>            */,
 	prod_glob /* :WeakProductable<Env, string | string[]> */,
 	prod_dst  /* :WeakProductable<Env, string>            */,
-	do_fn     /* :F_Do<Env> */
+	do_fn     /* :F_Do<Env> */,
+	options   /* :?Options */
 )
 	/* :T_Artifact<Env> */
 {
+	/* eslint-enable max-params */
 	var $src  = producer(prod_src)
 	var $dst  = producer(prod_dst)
 	var $glob = producer(prod_glob)
 	var $do   = method(do_fn)
+
+	var $options = Object.assign(
+	{
+		exclude_recursive: true
+	}
+	, options)
 
 	var art = Artifact(env =>
 	{
@@ -48,7 +62,11 @@ module.exports = function Glob /* ::<Env: EnvInOut>*/
 
 			var globs = [].concat(glob)
 			globs = globs.map(glob => glob__join(r_src(), glob))
-			globs = globs.concat(recursion_indicator(env))
+
+			if ($options.exclude_recursive)
+			{
+				globs = globs.concat(recursion_indicator(env))
+			}
 
 			var paths = find(globs)
 			.map(path => r_src.relative(path))
