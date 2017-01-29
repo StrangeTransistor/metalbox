@@ -26,8 +26,6 @@ module.exports = function /* ::<Env: EnvOut> */ ()
 		var src_root = Rootpath(__dirname, '../../..')
 		.partial('templates/frontend')
 
-		console.log(src_root)
-
 		return Object.assign({}, env, { src: src_root })
 	})
 }
