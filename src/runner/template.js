@@ -15,10 +15,8 @@ var ReleaseNotify = require('../notify/release-notify')
 
 var resolve = require('./_/resolve')
 
-module.exports = (template /* :{ template: string } */) =>
+module.exports = (template_name /* :string */) =>
 {
-	var template_name = template.template
-
 	var rootpath = Rootpath(findRoot(process.cwd()))
 
 	var manifest = load(rootpath('package.json'))

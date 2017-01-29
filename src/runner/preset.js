@@ -16,10 +16,8 @@ var ReleaseNotify = require('../notify/release-notify')
 var resolve = require('./_/resolve')
 
 /* eslint-disable complexity */
-module.exports = (preset /* :{ preset: string } */) =>
+module.exports = (preset_name /* :string */) =>
 {
-	var preset_name = preset.preset
-
 	/*if (! preset_name)
 	{
 		console.log(`pass ${bold('<preset>')},` +
