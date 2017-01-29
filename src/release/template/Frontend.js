@@ -18,7 +18,7 @@ module.exports = function /* ::<Env: EnvOut> */ ()
 	var art = Composite(
 	[
 		Directory(''),
-		Copy('', glob, ''),
+		Copy('', glob, '', { exclude_recursive: false }),
 	])
 
 	return With(art, env =>
