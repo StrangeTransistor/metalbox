@@ -40,7 +40,7 @@ module.exports = function Rollup ()
 					sourcemap: false
 				}),
 				json(),
-				flow(),
+				flow({ pretty: true }),
 				// TODO pug
 			],
 

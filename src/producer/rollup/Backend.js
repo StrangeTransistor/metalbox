@@ -26,7 +26,7 @@ module.exports = function Rollup ()
 
 			plugins:
 			[
-				flow(),
+				flow({ pretty: true }),
 			],
 		})
 		.then(bundle =>
