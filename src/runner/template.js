@@ -5,8 +5,7 @@ var Rootpath = require('rootpath')
 
 var load = require('fs-sync').readJSON
 
-var clc = require('cli-color')
-var bold = clc.bold
+var bold = require('cli-color').bold
 
 var With = require('../artifact/With')
 
@@ -14,6 +13,7 @@ var Printer = require('../printer')
 var ReleaseNotify = require('../notify/release-notify')
 
 var resolve = require('./_/resolve')
+var output  = require('./_/output')
 
 module.exports = (template_name /* :string */) =>
 {
@@ -53,16 +53,6 @@ module.exports = (template_name /* :string */) =>
 		return env
 	})
 
-	/*return*/ sealed_artifact.construct()
-	.then(() =>
-	{
-		printer.write(`${bold('OK:')} ${template_name}`)
-	},
-	error =>
-	{
-		// TODO dry
-		printer.write(`${bold.red('ERROR:')} ${error.message}`)
-		printer.detail(error)
-	})
+	output(printer, template_name, sealed_artifact.construct())
 	.finally(process.exit)
 }

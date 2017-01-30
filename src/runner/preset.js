@@ -14,6 +14,7 @@ var Printer = require('../printer')
 var ReleaseNotify = require('../notify/release-notify')
 
 var resolve = require('./_/resolve')
+var output  = require('./_/output')
 
 /* eslint-disable complexity */
 module.exports = (preset_name /* :string */) =>
@@ -111,22 +112,11 @@ module.exports = (preset_name /* :string */) =>
 		env.printer  = printer
 		env.notifier = ReleaseNotify(env)
 
-		// printer.detail(env)
-
 		return env
 	})
 
-	/*return*/ sealed_artifact.construct()
-	.then(() =>
-	{
-		printer.write(`${bold('OK:')} ${preset_name}`)
-	},
-	error =>
-	{
-		// TODO dry
-		printer.write(`${bold.red('ERROR:')} ${error.message}`)
-		printer.detail(error)
-	})
+	output(printer, preset_name, sealed_artifact.construct())
 	.finally(process.exit)
+
 }
 /* eslint-enable complexity */
