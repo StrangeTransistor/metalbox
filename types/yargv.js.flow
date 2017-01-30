@@ -1,0 +1,7 @@
+
+type yargv =
+{
+	_: Array<mixed>,
+	$0: string,
+	[ key: string ]: mixed
+};

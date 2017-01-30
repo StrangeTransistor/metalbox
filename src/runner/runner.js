@@ -5,21 +5,28 @@ module.exports = (argv /* :Array<string> */) =>
 {
 	require('yargs')
 	.command([ 'run <preset>', 'r' ], 'run preset', {},
-	(argv) =>
+	(yargv) =>
 	{
 		var preset = require('./preset')
 
-		preset(argv.preset)
+		preset(yargv.preset, slice(yargv))
 	})
 	.command([ 'template <template>', 't' ], 'generate by template', {},
-	(argv) =>
+	(yargv) =>
 	{
 		var template = require('./template')
 
-		template(argv.template)
+		template(yargv.template, slice(yargv))
 	})
 	// .showHelp()
 	.help()
 	.version()
 	.parse(argv.slice(2))
+}
+
+function slice (yargv /* :yargv */)
+{
+	var _ = yargv._.slice(1)
+
+	return Object.assign({}, yargv, { _: _ })
 }
