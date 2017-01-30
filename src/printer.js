@@ -5,7 +5,18 @@ var NL = '\n'
 var inspect = require('util').inspect
 var indent  = require('indent-string')
 
+/* ::
+
+export type T_Printer =
+{
+	write:  (line: string) => void,
+	detail: (object: any)  => void
+};
+
+*/
+
 module.exports = function Printer (output /* :stream$Writable */)
+	/* :T_Printer */
 {
 	var printer = {}
 
