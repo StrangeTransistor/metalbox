@@ -14,7 +14,8 @@ type F_Do<Env> =
 
 export type Options =
 {
-	exclude_recursive?: boolean
+	exclude_recursive?: boolean,
+	exclude_node_modules?: boolean
 };
 
 */
@@ -49,7 +50,8 @@ module.exports = function Glob /* ::<Env: EnvInOut>*/
 
 	var $options = Object.assign(
 	{
-		exclude_recursive: true
+		exclude_recursive: true,
+		exclude_node_modules: true,
 	}
 	, options)
 
@@ -61,6 +63,16 @@ module.exports = function Glob /* ::<Env: EnvInOut>*/
 			var r_dst = env.dst.partial(dst)
 
 			var globs = [].concat(glob)
+
+			if ($options.exclude_node_modules)
+			{
+				globs = globs.concat('!**/node_modules/**')
+			}
+			if ($options.exclude_recursive)
+			{
+				globs = globs.concat('!release/**')
+			}
+
 			globs = globs.map(glob => glob__join(r_src(), glob))
 
 			if ($options.exclude_recursive)

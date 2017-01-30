@@ -59,7 +59,12 @@ module.exports = function Watch
 				options = Object.assign({}, options, watch_src[1])
 			}
 
-			options.ignored = [].concat(options.ignored, recursion_indicator(env))
+			options.ignored = [].concat(options.ignored)
+
+			options.ignored = options.ignored.concat(recursion_indicator(env))
+			options.ignored = options.ignored.concat(env.src('release/**'))
+			options.ignored = options.ignored.concat(env.src('node_modules/**'))
+
 			options.ignored = options.ignored.filter(Boolean)
 
 			release()
