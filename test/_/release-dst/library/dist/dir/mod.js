@@ -1,8 +1,8 @@
 'use strict';
 
-/*       */
+/*  */
 
-function sqr (v        )
+function sqr (v)
 {
 	return v * v
 }

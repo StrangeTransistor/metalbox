@@ -4,7 +4,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var Rootpath = _interopDefault(require('rootpath'));
 
-/*       */
+/*  */
 
 var mod_root = () =>
 {

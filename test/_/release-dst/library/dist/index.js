@@ -4,9 +4,9 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var sqr = _interopDefault(require('./dir/mod'));
 
-/*       */
+/*  */
 
-function cube (v        )
+function cube (v)
 {
 	return sqr(v) * v
 }

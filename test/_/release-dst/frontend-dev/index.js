@@ -27,7 +27,7 @@ var throttle = function( fn, timing=200 ) {
 
 };
 
-/*       */
+/*  */
 // bucket:index
 
 0 && console.log('index');
@@ -41,7 +41,7 @@ var arrow1 = () => 1;
 var other_mod_thr = throttle(other_mod);
 0 && other_mod_thr(other_json);
 
-function lower (it        )        
+function lower (it)
 {
 	return it.toLowerCase()
 }
