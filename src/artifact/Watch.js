@@ -85,13 +85,15 @@ module.exports = function Watch
 
 				target.construct(env)
 				.then(ok, nag)
-				.then(() =>
+				.then(once)
+
+				function once ()
 				{
 					if (env.once)
 					{
 						return art.disengage()
 					}
-				})
+				}
 			}))
 		})
 
