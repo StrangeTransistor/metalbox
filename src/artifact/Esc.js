@@ -1,12 +1,4 @@
 /* @flow */
-/* ::
-
-type EnvWatch =
-{
-	is_esc?: boolean
-};
-
-*/
 
 var bold = require('cli-color').bold
 
@@ -14,24 +6,28 @@ var Promise = require('bluebird')
 
 var Artifact = require('./Artifact')
 
+/* ::
+
+import type { EnvOnce } from './Watch';
+
+*/
+
 module.exports = function Esc /* ::<Env> */
 (
 	target /* :T_Artifact<Env> */
 )
-	/* :T_Artifact<Env & EnvWatch & EnvPrinter> */
+	/* :T_Artifact<Env & EnvOnce & EnvPrinter> */
 {
 	var art = Artifact(env =>
 	{
-		var is_esc = env.is_esc
-
-		is_esc = (is_esc == null || Boolean(is_esc))
+		var once = env.once
 
 		if (! process.stdin.isTTY)
 		{
-			is_esc = false
+			once = true
 		}
 
-		if (is_esc)
+		if (! once)
 		{
 			target.construct(env)
 

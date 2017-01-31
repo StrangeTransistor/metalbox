@@ -33,7 +33,7 @@ describe('Backend (Dev)', () =>
 		printer: Printer(process.stdout),
 		notifier: ReleaseNotify(tmp_env),
 
-		is_esc: false,
+		once: true,
 	}
 
 	var b = Backend()

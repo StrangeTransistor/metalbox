@@ -17,7 +17,7 @@ var resolve = require('./_/resolve')
 var output  = require('./_/output')
 
 /* eslint-disable complexity */
-module.exports = (preset_name /* :string */) =>
+module.exports = (preset_name /* :string */, yargv /* :yargv */) =>
 {
 	/*if (! preset_name)
 	{
@@ -111,6 +111,11 @@ module.exports = (preset_name /* :string */) =>
 
 		env.printer  = printer
 		env.notifier = ReleaseNotify(env)
+
+		if (~ yargv._.indexOf(-1))
+		{
+			env.once = true
+		}
 
 		return env
 	})

@@ -5,6 +5,11 @@ type ProdWatch
 = string
 | [ string | string[], Object ];
 
+export type EnvOnce =
+{
+	once?: boolean
+};
+
 */
 
 var noop = () => {}
@@ -27,7 +32,7 @@ module.exports = function Watch
 <
 	Env: { entry?: string },
 	SrcEnv: EnvInOut,
-	WatchEnv: Env & SrcEnv & EnvPrinter & EnvNotify
+	WatchEnv: Env & SrcEnv & EnvOnce & EnvPrinter & EnvNotify
 >
 */
 (
@@ -74,14 +79,19 @@ module.exports = function Watch
 			{
 				path = env.src.relative(path)
 
-				// crazy
-				env.entry = path
-				// TODO:
+				// TODO type loss FIX:
 				// var $env /* :Env */ = Object.assign({}, env, { entry: path })
+				env.entry = path
 
 				target.construct(env)
-				// target.construct($env)
 				.then(ok, nag)
+				.then(() =>
+				{
+					if (env.once)
+					{
+						return art.disengage()
+					}
+				})
 			}))
 		})
 
