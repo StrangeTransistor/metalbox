@@ -50,6 +50,15 @@
 
   "bin": "run/metalbox",
 
+  "files":
+  [
+    "flow-typed/npm/bluebird_v3.x.x.js",
+    "run/",
+    "src/",
+    "templates/",
+    "types/"
+  ],
+
   "scripts":
   {
     "flow-typed":
