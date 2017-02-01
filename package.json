@@ -178,9 +178,6 @@
     "eslint":
       "3",
 
-    "babel-eslint":
-      "7",
-
     "js-outlander":
       "StrangeTransistor/js-outlander#2.1.0",
 
