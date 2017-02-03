@@ -19,7 +19,7 @@ module.exports = function Command /* ::<Env> */
 	var art = Artifact(() =>
 	{
 		release()
-		$spawn = spawn(command, args, { stdio: 'inherit' })
+		$spawn = spawn(command, args, { stdio: 'pipe' })
 
 		return new Promise(rs =>
 		{
@@ -42,7 +42,7 @@ module.exports = function Command /* ::<Env> */
 	{
 		if ($spawn)
 		{
-			$spawn.kill()
+			$spawn.kill('SIGKILL')
 
 			$spawn = null
 		}
