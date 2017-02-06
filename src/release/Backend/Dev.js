@@ -1,6 +1,8 @@
 /* @flow */
 
-var Release = require('../../artifact/Release')
+var Release  = require('../../artifact/Release')
+var Parallel = require('../../artifact/Parallel')
+var Command  = require('../../artifact/Command')
 
 var Manifest = require('../metalbucket/Manifest')
 var Package  = require('./Package')
@@ -15,6 +17,10 @@ module.exports = function Backend /* ::<Env: EnvBackend> */ ()
 	[
 		Manifest(),
 		Package(),
-		Esc(rollup.Watch()),
+		Esc(Parallel(
+		[
+			rollup.Watch(),
+			Command('npm', [ 'run', 'serve' ])
+		])),
 	])
 }

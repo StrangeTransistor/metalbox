@@ -19,7 +19,7 @@ module.exports = function Command /* ::<Env> */
 	var art = Artifact(() =>
 	{
 		release()
-		$spawn = spawn(command, args, { stdio: 'pipe' })
+		$spawn = spawn(command, args, { stdio: [ 'pipe', 'inherit', 'inherit' ] })
 
 		return new Promise(rs =>
 		{
