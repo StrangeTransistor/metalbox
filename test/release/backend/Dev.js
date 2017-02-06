@@ -2,6 +2,8 @@
 
 var expect = require('chai').expect
 
+var load = require('fs-sync').readJSON
+
 var all   = require('bluebird').all
 var delay = require('bluebird').delay
 
@@ -25,7 +27,7 @@ describe('Backend (Dev)', () =>
 
 	var tmp_env =
 	{
-		version: '1.0.0',
+		package: load(src_root('package.json')),
 
 		src: src_root,
 		dst: tmp_root,

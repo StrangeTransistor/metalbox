@@ -9,7 +9,7 @@ module.exports = (path /* :string */) =>
 	var release = read(path)
 
 	expect(release).an('object')
-	expect(release.version).eq('1.0.0')
+	expect(release.version).eq('0.0.0')
 	expect(release.timestamp).a('string')
 
 	expect(release.git).an('object')

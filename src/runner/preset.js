@@ -104,7 +104,7 @@ module.exports = (preset_name /* :string */, yargv /* :yargv */) =>
 	{
 		var env = Object.assign({}, options)
 
-		env.version = manifest.version
+		env.package = manifest
 
 		env.src = Rootpath(rootpath(env.src || ''))
 		env.dst = Rootpath(rootpath(env.dst || [ 'release', preset_name]))

@@ -43,7 +43,7 @@ module.exports = (template_name /* :string */) =>
 	{
 		var env = {}
 
-		env.version = manifest.version
+		env.package = manifest
 
 		env.dst = Rootpath(rootpath(process.cwd()))
 

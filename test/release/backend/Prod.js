@@ -2,6 +2,8 @@
 
 var expect = require('chai').expect
 
+var load = require('fs-sync').readJSON
+
 var Backend = require('../../../src/release/Backend')
 
 var src_rootpath = require('../../_/src-rootpath')
@@ -21,7 +23,7 @@ describe('Backend (Prod)', () =>
 
 	var tmp_env =
 	{
-		version: '1.0.0',
+		package: load(src_root('package.json')),
 
 		src: src_root,
 		dst: tmp_root,

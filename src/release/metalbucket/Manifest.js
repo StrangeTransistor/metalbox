@@ -8,11 +8,11 @@ var Rev = require('../../producer/Rev')
 
 module.exports = function Manifest ()
 {
-	return File('release.json', (env /* :EnvVersion */) =>
+	return File('release.json', (env /* :EnvPackage */) =>
 	{
 		var release = {}
 
-		release.version = env.version
+		release.version = env.package.version
 		release.timestamp = (new Date).toISOString()
 
 		return Rev()
