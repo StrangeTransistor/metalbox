@@ -7,6 +7,8 @@ var resolve = require('bluebird').resolve
 
 var Artifact = require('./Artifact')
 
+var kill = require('bluebird').promisify(require('tree-kill'))
+
 module.exports = function Command /* ::<Env> */
 (
 	command /* :string */,
@@ -24,27 +26,32 @@ module.exports = function Command /* ::<Env> */
 		return new Promise(rs =>
 		{
 			/* @flow-off */
-			$spawn.once('exit', () =>
-			{
-				return rs()
-			})
+			$spawn.once('exit', () => rs())
 		})
 	})
 
 	art.disengage = () =>
 	{
-		release()
-
-		return resolve()
+		return release()
 	}
 
 	function release ()
 	{
 		if ($spawn)
 		{
-			$spawn.kill('SIGKILL')
+			return kill($spawn.pid, 'SIGKILL')
+			.then(() =>
+			{
+				$spawn = null
+			})
 
-			$spawn = null
+			// TODO signals?
+			// 'SIGINT'
+			// 'SIGTERM'
+		}
+		else
+		{
+			return resolve()
 		}
 	}
 

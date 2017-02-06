@@ -117,6 +117,9 @@
     "chokidar":
       "1",
 
+    "tree-kill":
+      "1",
+
     "debounce":
       "1",
 
