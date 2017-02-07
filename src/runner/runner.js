@@ -4,7 +4,15 @@
 module.exports = (argv /* :Array<string> */) =>
 {
 	require('yargs')
-	.command([ 'run <preset>', 'r' ], 'run preset', {},
+	.command([ 'run <preset>', 'r' ], 'run preset',
+	{
+		instance:
+		{
+			alias: 'i',
+			describe: 'instance for what this release is',
+			default: 'battle'
+		}
+	},
 	(yargv) =>
 	{
 		var preset = require('./preset')
