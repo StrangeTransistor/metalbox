@@ -2,16 +2,13 @@
 
 var expect = require('chai').expect
 
-var load = require('fs-sync').readJSON
-
 var Frontend = require('../../../src/release/Frontend')
 
 var src_rootpath = require('../../_/src-rootpath')
 var dst_rootpath = require('../../_/dst-rootpath')
 var tmp_rootpath = require('../../_/tmp-rootpath')
 
-var Printer = require('../../../src/printer')
-var ReleaseNotify = require('../../../src/notify/release-notify')
+var tmp_env = require('../../_/tmp-env')
 
 var compare = require('../../_/compare-release')
 var expect_release = require('../../_/expect-release')
@@ -22,24 +19,13 @@ describe('Frontend (Prod)', () =>
 	var dst_root = dst_rootpath('frontend')
 	var tmp_root = tmp_rootpath()
 
-	var tmp_env =
-	{
-		package: load(src_root('package.json')),
-
-		instance: 'battle',
-
-		src: src_root,
-		dst: tmp_root,
-
-		printer: Printer(process.stdout),
-		notifier: ReleaseNotify(tmp_env),
-	}
+	var env = tmp_env(src_root, tmp_root, { notify: true })
 
 	var f = Frontend()
 
 	it('works', () =>
 	{
-		return f.construct(tmp_env)
+		return f.construct(env)
 		.then(() =>
 		{
 			console.log('   ', tmp_root())
