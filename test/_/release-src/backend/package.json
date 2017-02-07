@@ -7,7 +7,7 @@
 	{
 		"start": "start-dev"
 	},
-	"scripts:prod":
+	"scripts:battle":
 	{
 		"start": "start-prod"
 	},

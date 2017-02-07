@@ -11,8 +11,12 @@ module.exports = function Package /* ::<Env: EnvRelease>*/ ()
 		delete manifest.metalbox
 		delete manifest.devDependencies
 
-		manifest.scripts = manifest['scripts:prod']
-		delete manifest['scripts:prod']
+		delete manifest.scripts
+		if (manifest['scripts:battle'])
+		{
+			manifest.scripts = manifest['scripts:battle']
+			delete manifest['scripts:battle']
+		}
 
 		return manifest
 	}))
