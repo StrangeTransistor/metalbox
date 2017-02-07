@@ -17,7 +17,20 @@ format = format.replace(/\n/g, '')
 format = format.replace(/"/g, '\\"')
 format = `--format="${format}"`
 
+/* ::
+
+type Data =
+{
+	rev: string,
+	msg: string,
+	timestamp: string,
+	author: string
+};
+
+*/
+
 module.exports = function Rev ()
+	/* :Product<Data> */
 {
 	return cmd('git log', '-1', format)
 	.then(cmd.util.stdout)
