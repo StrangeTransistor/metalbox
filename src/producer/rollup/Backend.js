@@ -13,8 +13,9 @@ var rollup = require('rollup')
 var flow = require('rollup-plugin-flow')
 
 module.exports = function Rollup ()
+	/* :Producer<EnvRollupBackend, string> */
 {
-	return (env /* :EnvRollupBackend */) =>
+	return (env) =>
 	{
 		var entry = env.entry
 
