@@ -82,7 +82,10 @@
       "flow type-at-pos",
 
     "suggest":
-      "flow suggest"
+      "flow suggest",
+
+    "serve":
+      "true"
   },
 
   "dependencies":
