@@ -2,7 +2,7 @@
 
 var cmd = require('command-promise')
 
-var load = require('../json/load')
+var load = require('./json/load')
 
 var format =
 `

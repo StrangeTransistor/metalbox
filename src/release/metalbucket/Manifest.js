@@ -4,7 +4,7 @@ var dump = require('../../json/dump')
 
 var File = require('../../artifact/File')
 
-var Rev = require('../../producer/Rev')
+var Rev = require('../../Rev')
 
 module.exports = function Manifest ()
 {
