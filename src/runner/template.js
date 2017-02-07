@@ -19,8 +19,6 @@ module.exports = (template_name /* :string */) =>
 {
 	var rootpath = Rootpath(findRoot(process.cwd()))
 
-	var manifest = load(rootpath('package.json'))
-
 	var Artifact /* :() => T_Artifact<any> */
 
 	try
@@ -43,7 +41,7 @@ module.exports = (template_name /* :string */) =>
 	{
 		var env = {}
 
-		env.package = manifest
+		env.package = load(rootpath('package.json'))
 
 		env.dst = Rootpath(rootpath(process.cwd()))
 
