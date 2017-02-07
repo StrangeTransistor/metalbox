@@ -26,6 +26,8 @@ describe('Frontend (Prod)', () =>
 	{
 		package: load(src_root('package.json')),
 
+		instance: 'battle',
+
 		src: src_root,
 		dst: tmp_root,
 

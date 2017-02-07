@@ -12,6 +12,9 @@ module.exports = (path /* :string */) =>
 	expect(release.version).eq('0.0.0')
 	expect(release.timestamp).a('string')
 
+	expect(release.instance).a('string')
+	expect(release.name).a('string')
+
 	expect(release.git).an('object')
 	expect(release.git.rev).a('string')
 	expect(release.git.msg).a('string')

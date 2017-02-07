@@ -119,8 +119,6 @@ module.exports = (preset_name /* :string */, yargv /* :yargv */) =>
 
 		env.instance = yargv.instance
 
-		console.log('!', env.instance)
-
 		return env
 	})
 
