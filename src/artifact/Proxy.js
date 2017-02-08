@@ -2,7 +2,7 @@
 /* ::
 
 type Proxify<Env, ProxyEnv>
-= (do_construct: Resolver<Env>) => Resolver<ProxyEnv>;
+= (do_construct: Resolver<Env>) => WeakResolver<ProxyEnv>;
 
 */
 
