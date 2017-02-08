@@ -1,7 +1,9 @@
 # metalbox + metalbucket
 
 **metalbox** — set of components for building/releasing stuff.
-**metalbucket** — implementation of frontend builder for ST in metalbox.
+
+**metalbucket** — *Frontend*, *Backend* and *Library* targets
+we use in StrangeTransistor implemented on top of *metalbox*.
 
 > — This… is a bucket.
 >

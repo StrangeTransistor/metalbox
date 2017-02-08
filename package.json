@@ -2,6 +2,8 @@
      "name": "metalbox",
   "version": "1.0.0-pre5",
 
+  "description": "set of components for building/releasing stuff",
+
   "metalbox":
   {
     "presets":
