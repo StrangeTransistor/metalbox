@@ -18,10 +18,10 @@ module.exports = function Backend /* ::<Env: EnvBackend> */ ()
 	[
 		Manifest(),
 		Package(),
-		json.Dev(),
 		Esc(Parallel(
 		[
 			rollup.Watch(),
+			json.Watch(),
 			Serve()
 		])),
 	])

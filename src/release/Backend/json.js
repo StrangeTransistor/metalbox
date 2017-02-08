@@ -10,13 +10,30 @@ var dump = require('../../json/dump')
 
 var Artifact  = require('../../artifact/Artifact')
 var Composite = require('../../artifact/Composite')
+var Watch     = require('../../artifact/Watch')
 var Glob      = require('../../artifact/Glob/Copy')
 
-var glob = [ '**/*.json', '!package.json' ]
+var glob_json = '**/*.json'
+var ignore = 'package.json'
+var glob = [ glob_json, '!' + ignore ]
 
-module.exports.Dev = () =>
+module.exports.Watch = () =>
 {
-	return Glob('', glob, '')
+	var art = Artifact(env =>
+	{
+		return copy(env.src(env.entry), env.dst(env.entry), { force: true })
+	})
+
+	art.describe = () =>
+	{
+		return '[JSON]'
+	}
+
+	return Composite(
+	[
+		Glob('', glob, ''),
+		Watch([ glob_json, { ignored: ignore } ], art)
+	])
 }
 
 module.exports.Prod = () =>
