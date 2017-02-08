@@ -85,7 +85,7 @@
       "flow suggest",
 
     "serve":
-      "true"
+      "sleep 60s"
   },
 
   "dependencies":
