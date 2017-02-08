@@ -13,6 +13,6 @@ module.exports = function Backend /* ::<Env: EnvBackend> */ ()
 	[
 		Manifest(),
 		Package(),
-		rollup.Standard(),
+		rollup.Prod(),
 	])
 }

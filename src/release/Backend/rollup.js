@@ -9,9 +9,20 @@ var Rollup = require('../metalbucket/rollup-transform')
 
 var glob = '**/*.js'
 
-var Standard = module.exports.Standard = () =>
+function Standard (globs /* :?string[] */)
 {
-	return Glob('', glob, '', Rollup())
+	var $globs = [ glob ]
+	if (globs)
+	{
+		$globs = globs
+	}
+
+	return Glob('', $globs, '', Rollup())
+}
+
+module.exports.Prod = () =>
+{
+	return Standard()
 }
 
 module.exports.Watch = () =>
