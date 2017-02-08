@@ -19,7 +19,7 @@ var expect_release = require('../../_/expect-release')
 describe('Backend (Dev)', () =>
 {
 	var src_root = src_rootpath('backend')
-	var dst_root = dst_rootpath('backend')
+	var dst_root = dst_rootpath('backend-dev')
 	var tmp_root = tmp_rootpath()
 
 	var env = tmp_env(src_root, tmp_root, { notify: true })

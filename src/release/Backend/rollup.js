@@ -22,7 +22,7 @@ function Standard (globs /* :?string[] */)
 
 module.exports.Prod = () =>
 {
-	return Standard()
+	return Standard([ glob, '!test/**' ])
 }
 
 module.exports.Watch = () =>
