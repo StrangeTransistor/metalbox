@@ -12,13 +12,13 @@ import type { EnvOnce } from './Watch';
 
 */
 
-module.exports = function Esc /* ::<Env> */
+module.exports = function Esc /* ::<Env: EnvOnce> */
 (
 	target /* :T_Artifact<Env> */
 )
-	/* :T_Artifact<Env & EnvOnce & EnvPrinter> */
+	/* :T_Artifact<Env & EnvPrinter> */
 {
-	var art = Artifact(env =>
+	var art = Artifact((env /* :Env & EnvPrinter */) =>
 	{
 		var once = env.once
 
@@ -60,7 +60,7 @@ module.exports = function Esc /* ::<Env> */
 		}
 		else
 		{
-			return target.construct(env)
+			return target.construct(Object.assign(env, { once: true }))
 		}
 	})
 
