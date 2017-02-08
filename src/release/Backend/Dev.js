@@ -5,6 +5,7 @@ var Parallel = require('../../artifact/Parallel')
 
 var Manifest = require('../metalbucket/Manifest')
 var Package  = require('./Package')
+var json     = require('./json')
 var rollup   = require('./rollup')
 var Serve    = require('./Serve')
 
@@ -17,6 +18,7 @@ module.exports = function Backend /* ::<Env: EnvBackend> */ ()
 	[
 		Manifest(),
 		Package(),
+		json.Dev(),
 		Esc(Parallel(
 		[
 			rollup.Watch(),

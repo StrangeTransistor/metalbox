@@ -132,6 +132,9 @@
     "indent-string":
       "3",
 
+    "lodash":
+      "4",
+
 
     "pug":
       "2.0.0-beta6",
