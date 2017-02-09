@@ -4,7 +4,7 @@ var expect = require('chai').expect
 
 var read = require('fs-sync').readJSON
 
-module.exports = (path /* :string */) =>
+module.exports = (path /* :string */, is_instance /* :?boolean */) =>
 {
 	var release = read(path)
 
@@ -12,8 +12,11 @@ module.exports = (path /* :string */) =>
 	expect(release.version).eq('0.0.0')
 	expect(release.timestamp).a('string')
 
-	expect(release.instance).a('string')
-	expect(release.name).a('string')
+	if (is_instance)
+	{
+		expect(release.instance).a('string')
+		expect(release.name).a('string')
+	}
 
 	expect(release.git).an('object')
 	expect(release.git.rev).a('string')

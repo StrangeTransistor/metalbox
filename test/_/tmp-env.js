@@ -31,8 +31,6 @@ module.exports =
 	{
 		package: load(src('package.json')),
 
-		instance: 'battle',
-
 		src: src,
 		dst: tmp,
 

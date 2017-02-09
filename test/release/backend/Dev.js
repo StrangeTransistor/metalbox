@@ -40,7 +40,7 @@ describe('Backend (Dev)', () =>
 		})
 		.then(() =>
 		{
-			expect_release(tmp_root('release.json'))
+			expect_release(tmp_root('release.json'), true)
 		})
 
 		var p_delay = delay(1000)

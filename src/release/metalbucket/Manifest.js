@@ -8,7 +8,7 @@ var Rev = require('../../Rev')
 
 module.exports = function Manifest ()
 {
-	return File('release.json', (env /* :EnvPackage & EnvInstance */) =>
+	return File('release.json', (env /* :EnvPackage & EnvInstanceOptional */) =>
 	{
 		var release = {}
 
@@ -16,9 +16,14 @@ module.exports = function Manifest ()
 
 		release.version = env.package.version
 
-		release.instance = env.instance
+		var instance = env.instance
 
-		release.name = env.package.name + '-' + env.instance
+		if (instance)
+		{
+			release.instance = instance
+
+			release.name = env.package.name + '-' + instance
+		}
 
 		return Rev()
 		.then(rev =>
