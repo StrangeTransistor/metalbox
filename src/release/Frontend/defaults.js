@@ -1,11 +1,8 @@
 /* @flow */
 
-var With = require('../../artifact/With')
+var Defaults = require('../../artifact/Defaults')
 
 module.exports = function defaults (release /* :T_Release<*> */)
 {
-	return With(release, env =>
-	{
-		return Object.assign({}, { buckets_path: 'buckets' }, env)
-	})
+	return Defaults({ buckets_path: 'buckets' }, release)
 }
