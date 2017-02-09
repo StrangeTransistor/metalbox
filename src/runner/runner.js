@@ -10,7 +10,7 @@ module.exports = (argv /* :Array<string> */) =>
 		{
 			alias: 'i',
 			describe: 'instance for what this release is',
-			default: 'battle'
+			type: 'string'
 		}
 	},
 	(yargv) =>

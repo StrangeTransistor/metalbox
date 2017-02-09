@@ -1,5 +1,6 @@
 /* @flow */
 
+var Defaults = require('../../artifact/Defaults')
 var Release  = require('../../artifact/Release')
 var Parallel = require('../../artifact/Parallel')
 
@@ -11,10 +12,15 @@ var Serve    = require('./Serve')
 
 var Esc = require('../../artifact/Esc')
 
+var defaults =
+{
+	instance: 'dev'
+}
+
 module.exports = function Backend /* ::<Env: EnvBackend> */ ()
 	/* :T_Release<Env> */
 {
-	return Release(
+	return Defaults(defaults, Release(
 	[
 		Manifest(),
 		Package(),
@@ -24,5 +30,5 @@ module.exports = function Backend /* ::<Env: EnvBackend> */ ()
 			json.Watch(),
 			Serve()
 		])),
-	])
+	]))
 }

@@ -117,7 +117,10 @@ module.exports = (preset_name /* :string */, yargv /* :yargv */) =>
 			env.once = true
 		}
 
-		env.instance = yargv.instance
+		if (yargv.instance)
+		{
+			env.instance = yargv.instance
+		}
 
 		return env
 	})
