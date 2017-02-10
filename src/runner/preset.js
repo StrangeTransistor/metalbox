@@ -112,6 +112,11 @@ module.exports = (preset_name /* :string */, yargv /* :yargv */) =>
 		env.printer  = printer
 		env.notifier = ReleaseNotify(env)
 
+		if (yargv.env)
+		{
+			Object.assign(env, yargv.env)
+		}
+
 		if (~ yargv._.indexOf(-1))
 		{
 			env.once = true
