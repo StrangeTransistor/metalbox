@@ -3,18 +3,32 @@
 
 var bold = require('cli-color').bold
 
+var opt_instance =
+	{
+		alias: 'i',
+		describe: 'instance for what this release is',
+		type: 'string'
+	}
+
 module.exports = (argv /* :Array<string> */) =>
 {
 	require('yargs')
-	.command([ 'preset <preset>', 'p' ]
-	, `run preset from ${bold('package.json')}`,
+	.command([ 'run <release>', 'r' ]
+	, `run release taken ${bold('locally')} or from ${bold('metalbox')}`,
 	{
-		instance:
-		{
-			alias: 'i',
-			describe: 'instance for what this release is',
-			type: 'string'
-		}
+		instance: opt_instance
+	},
+	(yargv) =>
+	{
+		var run = require('./run')
+
+		run(yargv.release, slice(yargv))
+	}
+	)
+	.command([ 'preset <preset>', 'p' ]
+	, `run release taken from preset in ${bold('package.json')}`,
+	{
+		instance: opt_instance
 	},
 	(yargv) =>
 	{
