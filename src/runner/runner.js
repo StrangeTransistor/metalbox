@@ -1,10 +1,13 @@
 /* @flow */
 /* eslint-disable no-unused-expressions */
 
+var bold = require('cli-color').bold
+
 module.exports = (argv /* :Array<string> */) =>
 {
 	require('yargs')
-	.command([ 'run <preset>', 'r' ], 'run preset',
+	.command([ 'preset <preset>', 'p' ]
+	, `run preset from ${bold('package.json')}`,
 	{
 		instance:
 		{
@@ -19,7 +22,9 @@ module.exports = (argv /* :Array<string> */) =>
 
 		preset(yargv.preset, slice(yargv))
 	})
-	.command([ 'template <template>', 't' ], 'generate by template', {},
+	.command([ 'template <template>', 't' ]
+	, `generate by template from ${bold('metalbox')} ${bold('templates/')}`
+	, {},
 	(yargv) =>
 	{
 		var template = require('./template')
