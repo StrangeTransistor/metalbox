@@ -13,7 +13,7 @@ var With = require('../artifact/With')
 var Printer = require('../printer')
 var ReleaseNotify = require('../notify/release-notify')
 
-var resolve = require('./_/resolve')
+var resolve = require('./_/resolve-shortcut')
 var output  = require('./_/output')
 
 /* eslint-disable complexity */
@@ -81,25 +81,11 @@ module.exports = (preset_name /* :string */, yargv /* :yargv */) =>
 		process.exit(-1)
 	}
 
-
-	var Artifact /* :() => T_Artifact<any> */
-
-	try
-	{
-		/* @flow-off */
-		Artifact = resolve(rootpath, release_name)
-	}
-	catch (e)
-	{
-		console.error(`could not resolve Release ${bold(release_name)}`)
-
-		process.exit(-1)
-	}
-
+	/* @flow-off */
+	var Artifact /* :() => T_Artifact<any> */ = resolve(rootpath, release_name)
 
 	var printer = Printer(process.stdout)
 
-	/* @flow-off */
 	var sealed_artifact = With(Artifact(), () =>
 	{
 		var env = Object.assign({}, options)
