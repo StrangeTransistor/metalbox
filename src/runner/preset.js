@@ -11,10 +11,10 @@ var bold = clc.bold
 var With = require('../artifact/With')
 
 var Printer = require('../printer')
-var ReleaseNotify = require('../notify/release-notify')
 
-var resolve = require('./_/resolve-shortcut')
-var output  = require('./_/output')
+var resolve  = require('./_/resolve-shortcut')
+var make_env = require('./_/make-env')
+var output   = require('./_/output')
 
 /* eslint-disable complexity */
 module.exports = (preset_name /* :string */, yargv /* :yargv */) =>
@@ -88,32 +88,15 @@ module.exports = (preset_name /* :string */, yargv /* :yargv */) =>
 
 	var sealed_artifact = With(Artifact(), () =>
 	{
-		var env = Object.assign({}, options)
-
-		env.package = manifest
-
-		env.src = Rootpath(rootpath(env.src || ''))
-		env.dst = Rootpath(rootpath(env.dst || [ 'release', preset_name]))
-
-		env.printer  = printer
-		env.notifier = ReleaseNotify(env)
-
-		if (yargv.env)
+		return make_env(
 		{
-			Object.assign(env, yargv.env)
-		}
-
-		if (~ yargv._.indexOf(-1))
-		{
-			env.once = true
-		}
-
-		if (yargv.instance)
-		{
-			env.instance = yargv.instance
-		}
-
-		return env
+			options: options,
+			manifest: manifest,
+			rootpath: rootpath,
+			preset_name: preset_name,
+			printer: printer,
+			yargv: yargv
+		})
 	})
 
 	output(printer, preset_name, sealed_artifact.construct())
