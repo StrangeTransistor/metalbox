@@ -5,14 +5,13 @@ var ReleaseNotify = require('../../notify/release-notify')
 
 /* ::
 
-type PreEnv =
+import type { SealedEnv } from './run-sealed'
+
+export type PreEnv
+= SealedEnv
+&
 {
-	options: Object,
-	manifest: Object,
-	rootpath: T_Rootpath,
-	preset_name: string,
-	printer: T_Printer,
-	yargv: yargv
+	printer: T_Printer
 };
 
 */
@@ -36,7 +35,6 @@ module.exports = (pre_env /* :PreEnv */) =>
 
 	if (yargv.env)
 	{
-		/* @flow-off */
 		Object.assign(env, yargv.env)
 	}
 

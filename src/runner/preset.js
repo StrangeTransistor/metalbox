@@ -8,13 +8,8 @@ var load = require('fs-sync').readJSON
 var clc = require('cli-color')
 var bold = clc.bold
 
-var With = require('../artifact/With')
-
-var Printer = require('../printer')
-
-var resolve  = require('./_/resolve-shortcut')
-var make_env = require('./_/make-env')
-var output   = require('./_/output')
+var resolve = require('./_/resolve-shortcut')
+var run_sealed = require('./_/run-sealed')
 
 /* eslint-disable complexity */
 module.exports = (preset_name /* :string */, yargv /* :yargv */) =>
@@ -84,23 +79,13 @@ module.exports = (preset_name /* :string */, yargv /* :yargv */) =>
 	/* @flow-off */
 	var Artifact /* :() => T_Artifact<any> */ = resolve(rootpath, release_name)
 
-	var printer = Printer(process.stdout)
-
-	var sealed_artifact = With(Artifact(), () =>
+	run_sealed(Artifact,
 	{
-		return make_env(
-		{
-			options: options,
-			manifest: manifest,
-			rootpath: rootpath,
-			preset_name: preset_name,
-			printer: printer,
-			yargv: yargv
-		})
+		options: options,
+		manifest: manifest,
+		rootpath: rootpath,
+		preset_name: preset_name,
+		yargv: yargv
 	})
-
-	output(printer, preset_name, sealed_artifact.construct())
-	.finally(process.exit)
-
 }
 /* eslint-enable complexity */
