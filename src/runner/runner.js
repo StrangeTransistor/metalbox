@@ -4,11 +4,11 @@
 var bold = require('cli-color').bold
 
 var opt_instance =
-	{
-		alias: 'i',
-		describe: 'instance for what this release is',
-		type: 'string'
-	}
+{
+	alias: 'i',
+	describe: 'instance for what this release is',
+	type: 'string'
+}
 
 module.exports = (argv /* :Array<string> */) =>
 {
@@ -45,7 +45,6 @@ module.exports = (argv /* :Array<string> */) =>
 
 		template(yargv.template, slice(yargv))
 	})
-	// .showHelp()
 	.help()
 	.version()
 	.parse(argv.slice(2))
