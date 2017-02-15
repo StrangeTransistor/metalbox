@@ -30,9 +30,9 @@ var Artifact = require('./Artifact')
 module.exports = function Watch
 /* ::
 <
-	Env: EnvEntry,
 	SrcEnv: EnvInOut,
-	WatchEnv: Env & SrcEnv & EnvOnce & EnvPrinter & EnvNotify
+	WatchEnv: SrcEnv & EnvOnce & EnvPrinter & EnvNotify,
+	Env: EnvEntry & WatchEnv
 >
 */
 (
@@ -46,7 +46,7 @@ module.exports = function Watch
 	var $watch    = null
 	var $deferred = noop
 
-	var art = Artifact(env =>
+	var art = Artifact((env /* :WatchEnv */) =>
 	{
 		$src(env)
 		.then(watch_src =>
@@ -79,11 +79,10 @@ module.exports = function Watch
 			{
 				path = env.src.relative(path)
 
-				// TODO type loss FIX:
-				// var $env /* :Env */ = Object.assign({}, env, { entry: path })
-				env.entry = path
+				var $env = Object.assign({}, env, { entry: path })
 
-				target.construct(env)
+				/* @flow-off */
+				target.construct($env)
 				.then(ok, nag)
 				.then(once)
 
