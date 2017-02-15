@@ -1,20 +1,11 @@
 /* @flow */
-/* ::
-
-// TODO EnvEntry
-type EnvRollupBackend =
-{
-	entry: string
-}
-
-*/
 
 var rollup = require('rollup')
 
 var flow = require('rollup-plugin-flow')
 
 module.exports = function Rollup ()
-	/* :Producer<EnvRollupBackend, string> */
+	/* :Producer<EnvEntry, string> */
 {
 	return (env) =>
 	{

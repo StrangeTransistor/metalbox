@@ -30,7 +30,7 @@ var Artifact = require('./Artifact')
 module.exports = function Watch
 /* ::
 <
-	Env: { entry?: string },
+	Env: EnvEntry,
 	SrcEnv: EnvInOut,
 	WatchEnv: Env & SrcEnv & EnvOnce & EnvPrinter & EnvNotify
 >

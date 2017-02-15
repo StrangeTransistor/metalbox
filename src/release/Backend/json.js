@@ -19,7 +19,7 @@ var glob = [ glob_json, '!' + ignore ]
 
 module.exports.Watch = () =>
 {
-	var art = Artifact(env =>
+	var art = Artifact((env /* :EnvInOut & EnvEntry */) =>
 	{
 		return copy(env.src(env.entry), env.dst(env.entry), { force: true })
 	})
