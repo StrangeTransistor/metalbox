@@ -1,6 +1,7 @@
 /* @flow */
 /* ::
 
+// TODO EnvEntry
 type EnvRollupBackend =
 {
 	entry: string
