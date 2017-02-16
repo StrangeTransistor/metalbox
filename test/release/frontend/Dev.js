@@ -34,8 +34,6 @@ describe('Frontend (Dev)', () =>
 		var p_construct = f.construct(env)
 		.then(() =>
 		{
-			console.log('   ', tmp_root())
-
 			expect(compare(dst_root(), tmp_root())).ok
 		})
 		.then(() =>

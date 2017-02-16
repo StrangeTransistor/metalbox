@@ -34,8 +34,6 @@ describe('Backend (Dev)', () =>
 		var p_construct = b.construct(env)
 		.then(() =>
 		{
-			console.log('   ', tmp_root())
-
 			expect(compare(dst_root(), tmp_root())).ok
 		})
 		.then(() =>

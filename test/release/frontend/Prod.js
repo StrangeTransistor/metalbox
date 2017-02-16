@@ -28,8 +28,6 @@ describe('Frontend (Prod)', () =>
 		return f.construct(env)
 		.then(() =>
 		{
-			console.log('   ', tmp_root())
-
 			expect(compare(dst_root(), tmp_root())).ok
 		})
 		.then(() =>

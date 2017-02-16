@@ -1,9 +1,9 @@
 
 var bold = require('cli-color').bold
 
-module.exports = (v1, v2) =>
+module.exports = (dst, tmp) =>
 {
-	var r = require('dir-compare').compareSync(v1, v2,
+	var r = require('dir-compare').compareSync(dst, tmp,
 	{
 		compareSize: true,
 		compareContent: true,
@@ -12,6 +12,8 @@ module.exports = (v1, v2) =>
 
 	if (r.same)
 	{
+		console.log(`   ${bold('tmp:')} ${tmp}`)
+
 		return true
 	}
 	else
@@ -21,7 +23,7 @@ module.exports = (v1, v2) =>
 
 		console.warn('release differs: %s files differences', differences)
 		console.warn(diff)
-		console.log(bold(` $ meld ${v2} ${v1}`))
+		console.log(bold(` $ meld ${tmp} ${dst}`))
 
 		return false
 	}
