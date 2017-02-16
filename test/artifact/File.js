@@ -50,4 +50,23 @@ describe('File', () =>
 			expect(content).eq('DEF')
 		})
 	})
+
+	it('works with prod_ filename and env', () =>
+	{
+		var $tmp_env = Object.assign({}, tmp_env, { entry: 'test_smth' })
+
+		return File((env) => env.entry, () =>
+		{
+			return Promise.resolve('XYZ')
+		})
+		.construct($tmp_env)
+		.then(() =>
+		{
+			expect(isFile(tmp_root('test_smth'))).true
+
+			var content = read(tmp_root('test_smth'))
+
+			expect(content).eq('XYZ')
+		})
+	})
 })
