@@ -1,6 +1,6 @@
 /* @flow */
 
-var resolver = require('bluebird').method
+var method = require('bluebird').method
 
 var Proxy = require('./Proxy')
 
@@ -12,7 +12,7 @@ module.exports
 )
 	/* :T_Artifact<REnv & Env> */
 {
-	var $check_requisite = resolver(check_requisite)
+	var $check_requisite = method(check_requisite)
 
 	return Proxy(target, construct =>
 	{

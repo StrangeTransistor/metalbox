@@ -1,7 +1,7 @@
 /* @flow */
 
-var resolve  = require('bluebird').resolve
-var resolver = require('bluebird').method
+var method  = require('bluebird').method
+var resolve = require('bluebird').resolve
 
 module.exports
 = function Artifact /* ::<Env> */
@@ -12,7 +12,7 @@ module.exports
 {
 	var artifact = {}
 
-	artifact.construct = resolver(do_construct)
+	artifact.construct = method(do_construct)
 
 	artifact.disengage = () => resolve()
 

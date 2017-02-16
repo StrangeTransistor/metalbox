@@ -1,6 +1,6 @@
 /* @flow */
 
-var resolver = require('bluebird').method
+var method = require('bluebird').method
 
 var Proxy = require('./Proxy')
 
@@ -11,7 +11,7 @@ module.exports = function With /* ::<OuterEnv, InnerEnv> */
 )
 	/* :T_Artifact<OuterEnv> */
 {
-	var $prod_env = resolver(prod_env)
+	var $prod_env = method(prod_env)
 
 	return Proxy(target, construct =>
 	{

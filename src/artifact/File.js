@@ -1,7 +1,7 @@
 /* @flow */
 
-var resolver = require('bluebird').method
-var write = require('fs-sync').write
+var method = require('bluebird').method
+var write  = require('fs-sync').write
 
 var Artifact = require('./Artifact')
 
@@ -12,7 +12,7 @@ module.exports = function File /* ::<Env: EnvOut> */
 )
 	/* :T_Artifact<Env> */
 {
-	var $prod_content = resolver(prod_content)
+	var $prod_content = method(prod_content)
 
 	var art = Artifact(env =>
 	{
