@@ -12,7 +12,7 @@ module.exports = function producer /* ::<Env, T> */
 	}
 	else
 	{
-		var prod_atom /* :T */ = prod
-		return method(() => prod_atom)
+		var atom /* :T */ = prod
+		return method(() => atom)
 	}
 }
