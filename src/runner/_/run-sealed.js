@@ -11,11 +11,11 @@ var output   = require('./output')
 
 export type SealedEnv =
 {
-	options: ?Object,
-	manifest: Object,
-	rootpath: T_Rootpath,
+	options:    ?Object,
+	manifest?:   Object,
+	rootpath:    T_Rootpath,
 	preset_name: string,
-	yargv: yargv
+	yargv:       yargv
 };
 
 */
