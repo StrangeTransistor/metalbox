@@ -1,7 +1,7 @@
 /* @flow */
 
-var Glob   = require('../../artifact/Glob/Rule')
-var GlobCp = require('../../artifact/Glob/Copy')
+var Glob = require('../../artifact/Glob')
+var Copy = require('../../artifact/Glob/Copy')
 
 var Rollup = require('../metalbucket/Rollup')
 
@@ -14,5 +14,5 @@ module.exports.Standard = () =>
 
 module.exports.Modern = () =>
 {
-	return GlobCp('', glob, '')
+	return Copy('', glob, '')
 }

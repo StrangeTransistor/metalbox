@@ -1,7 +1,7 @@
 /* @flow */
 
 var Composite = require('../../artifact/Composite')
-var Glob      = require('../../artifact/Glob/Rule')
+var Glob      = require('../../artifact/Glob')
 var Watch     = require('../../artifact/Watch')
 
 var Rollup = require('../metalbucket/Rollup')

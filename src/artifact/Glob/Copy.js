@@ -2,11 +2,11 @@
 
 var cp = require('fs-sync').copy
 
-var Glob = require('./Glob')
+var Glob = require('./Fn')
 
 /* ::
 
-import type { Options } from './Glob';
+import type { Options } from './Fn';
 
 */
 

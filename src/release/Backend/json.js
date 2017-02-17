@@ -11,7 +11,7 @@ var dump = require('../../json/dump')
 var Artifact  = require('../../artifact/Artifact')
 var Composite = require('../../artifact/Composite')
 var Watch     = require('../../artifact/Watch')
-var Glob      = require('../../artifact/Glob/Copy')
+var Copy      = require('../../artifact/Glob/Copy')
 
 var glob_json = '**/*.json'
 var ignore = 'package.json'
@@ -21,6 +21,7 @@ module.exports.Watch = () =>
 {
 	var art = Artifact((env /* :EnvInOut & EnvEntry */) =>
 	{
+		// TODO Artifact Copy
 		return copy(env.src(env.entry), env.dst(env.entry), { force: true })
 	})
 
@@ -31,7 +32,7 @@ module.exports.Watch = () =>
 
 	return Composite(
 	[
-		Glob('', glob, ''),
+		Copy('', glob, ''),
 		Watch([ glob_json, { ignored: ignore } ], art)
 	])
 }
@@ -65,7 +66,7 @@ module.exports.Prod = () =>
 
 	return Composite(
 	[
-		Glob('', glob.concat('!cfg/**'), ''),
+		Copy('', glob.concat('!cfg/**'), ''),
 		assemble
 	])
 }

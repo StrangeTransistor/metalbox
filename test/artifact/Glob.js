@@ -4,9 +4,9 @@ var basename = require('path').basename
 
 var expect = require('chai').expect
 
-var Glob = require('../../src/artifact/Glob')
+var Fn   = require('../../src/artifact/Glob/Fn')
 var Copy = require('../../src/artifact/Glob/Copy')
-var Rule = require('../../src/artifact/Glob/Rule')
+var Glob = require('../../src/artifact/Glob/Glob')
 
 var File = require('../../src/artifact/File')
 
@@ -18,13 +18,13 @@ var compare = require('../_/compare-release')
 
 var src_root = src_rootpath('frontend')
 
-describe('Glob', () =>
+describe('Glob (fn)', () =>
 {
 	it('works', () =>
 	{
 		var r = []
 
-		var g = Glob('', '**/*.@(jpg|png|gif)', '', (src, path, dst, env) =>
+		var g = Fn('', '**/*.@(jpg|png|gif)', '', (src, path, dst, env) =>
 		{
 			expect_rootpath(src)
 			expect_rootpath(dst)
@@ -82,7 +82,7 @@ describe('Glob', () =>
 	})
 })
 
-describe('Rule', () =>
+describe('Glob', () =>
 {
 	it('works', () =>
 	{
@@ -104,7 +104,7 @@ describe('Rule', () =>
 			return basename(env.entry, '.js')
 		})
 
-		var g = Rule('buckets', '**/*.js', '', f)
+		var g = Glob('buckets', '**/*.js', '', f)
 
 		return g.construct(tmp_env)
 		.then(() =>
@@ -133,7 +133,7 @@ describe('Rule', () =>
 			return basename(env.entry, '.js')
 		})
 
-		var g = Rule('buckets', '**/*.js', 'buckets-transformed', f)
+		var g = Glob('buckets', '**/*.js', 'buckets-transformed', f)
 
 		return g.construct(tmp_env)
 		.then(() =>
