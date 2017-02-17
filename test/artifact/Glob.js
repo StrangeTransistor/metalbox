@@ -16,11 +16,10 @@ var tmp_rootpath = require('../_/tmp-rootpath')
 
 var compare = require('../_/compare-release')
 
+var src_root = src_rootpath('frontend')
+
 describe('Glob', () =>
 {
-	var src_root = src_rootpath('frontend')
-
-
 	it('works', () =>
 	{
 		var r = []
@@ -81,8 +80,11 @@ describe('Glob', () =>
 			expect(compare(dst_root(), tmp_root())).ok
 		})
 	})
+})
 
-	it('Rule', () =>
+describe('Rule', () =>
+{
+	it('works', () =>
 	{
 		var dst_root = dst_rootpath('file-regular-content')
 		var tmp_root = tmp_rootpath()
@@ -103,6 +105,35 @@ describe('Glob', () =>
 		})
 
 		var g = Rule('buckets', '**/*.js', '', f)
+
+		return g.construct(tmp_env)
+		.then(() =>
+		{
+			expect(compare(dst_root(), tmp_root())).ok
+		})
+	})
+
+	it('works with alterated src(), dst()', () =>
+	{
+		var dst_root = dst_rootpath('file-regular-content-offset')
+		var tmp_root = tmp_rootpath()
+
+		var tmp_env =
+		{
+			src: src_root,
+			dst: tmp_root
+		}
+
+		var f = File((env /* :EnvInOut & EnvEntry */) =>
+		{
+			return env.dst(env.entry)
+		},
+		(env /* :EnvEntry */) =>
+		{
+			return basename(env.entry, '.js')
+		})
+
+		var g = Rule('buckets', '**/*.js', 'buckets-transformed', f)
 
 		return g.construct(tmp_env)
 		.then(() =>

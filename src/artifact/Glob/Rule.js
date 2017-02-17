@@ -22,7 +22,12 @@ module.exports = function Rule /* ::<Env: EnvInOut> */
 	/* eslint-enable max-params */
 	return Glob(prod_src, prod_glob, prod_dst, (src, entry, dst, env) =>
 	{
-		var $env = Object.assign({}, env, { entry: entry })
+		var $env = Object.assign({}, env,
+		{
+			src: src,
+			dst: dst,
+			entry: entry
+		})
 
 		return target.construct($env)
 	}
