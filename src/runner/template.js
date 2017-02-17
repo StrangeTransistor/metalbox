@@ -3,54 +3,21 @@
 var findRoot = require('find-root')
 var Rootpath = require('rootpath')
 
-var load = require('fs-sync').readJSON
+var resolve = require('./_/resolve-shortcut')
+var run_sealed = require('./_/run-sealed')
 
-var bold = require('cli-color').bold
-
-var With = require('../artifact/With')
-
-var Printer = require('../printer')
-var ReleaseNotify = require('../notify/release-notify')
-
-var resolve = require('./_/resolve')
-var output  = require('./_/output')
-
-module.exports = (template_name /* :string */) =>
+module.exports = (template_name /* :string */, yargv /* :yargv */) =>
 {
 	var rootpath = Rootpath(findRoot(process.cwd()))
 
-	var Artifact /* :() => T_Artifact<any> */
+	var Artifact /* :() => T_Artifact<any> */ = resolve(rootpath, template_name)
 
-	try
+	run_sealed(Artifact,
 	{
-		Artifact = resolve(rootpath, template_name)
-	}
-	catch (e)
-	{
-		console.error(`could not resolve Release ${bold(template_name)}`)
-
-		process.exit(-1)
-	}
-
-
-	var printer = Printer(process.stdout)
-
-
-	/* @flow-off */
-	var sealed_artifact = With(Artifact(), () =>
-	{
-		var env = {}
-
-		env.package = load(rootpath('package.json'))
-
-		env.dst = Rootpath(rootpath(process.cwd()))
-
-		env.printer  = printer
-		env.notifier = ReleaseNotify(env)
-
-		return env
+		options:  {},
+		manifest: {},
+		rootpath: rootpath,
+		preset_name: template_name,
+		yargv: yargv
 	})
-
-	output(printer, template_name, sealed_artifact.construct())
-	.finally(process.exit)
 }
