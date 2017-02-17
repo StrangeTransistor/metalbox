@@ -1,0 +1,30 @@
+/* @flow */
+
+var Glob = require('./Glob')
+
+/* ::
+
+import type { Options } from './Glob'
+
+*/
+
+/* eslint-disable max-params */
+module.exports = function Rule /* ::<Env: EnvInOut> */
+(
+	prod_src  /* :WeakProductable<Env, string>            */,
+	prod_glob /* :WeakProductable<Env, string | string[]> */,
+	prod_dst  /* :WeakProductable<Env, string>            */,
+	target    /* :T_Artifact<Env & EnvEntry> */,
+	options   /* :?Options */
+)
+	/* :T_Artifact<Env> */
+{
+	/* eslint-enable max-params */
+	return Glob(prod_src, prod_glob, prod_dst, (src, entry, dst, env) =>
+	{
+		var $env = Object.assign({}, env, { entry: entry })
+
+		return target.construct($env)
+	}
+	, options)
+}
