@@ -1,9 +1,9 @@
 /* @flow */
 
-var Glob   = require('../../artifact/Glob')
+var Glob   = require('../../artifact/Glob/Rule')
 var GlobCp = require('../../artifact/Glob/Copy')
 
-var Rollup = require('../metalbucket/rollup-transform')
+var Rollup = require('../metalbucket/Rollup')
 
 var glob = '**/*.js'
 
