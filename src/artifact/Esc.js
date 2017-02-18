@@ -6,12 +6,6 @@ var Promise = require('bluebird')
 
 var Artifact = require('./Artifact')
 
-/* ::
-
-import type { EnvOnce } from './Watch';
-
-*/
-
 module.exports = function Esc /* ::<Env: EnvOnce> */
 (
 	target /* :T_Artifact<Env> */

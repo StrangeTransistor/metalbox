@@ -5,11 +5,6 @@ type ProdWatch
 = string
 | [ string | string[], Object ];
 
-export type EnvOnce =
-{
-	once?: boolean
-};
-
 */
 
 var noop = () => {}
