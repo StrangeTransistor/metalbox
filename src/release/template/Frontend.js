@@ -15,7 +15,7 @@ module.exports = function ()
 {
 	return From('frontend', Composite(
 	[
-		Directory(''),
+		Directory(),
 		Copy('', glob, '', { exclude_recursive: false }),
 	]))
 }

@@ -20,5 +20,5 @@ module.exports
 			throw new Error('source dir (src) not exists')
 		}
 	}
-	, Composite([ Directory('') ].concat(targets)))
+	, Composite([ Directory() ].concat(targets)))
 }

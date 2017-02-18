@@ -6,12 +6,12 @@ var Artifact = require('./Artifact')
 
 module.exports = function Directory
 (
-	dir /* :string */
+	dir /* :?string */
 )
 	/* :T_Artifact<EnvOut> */
 {
 	return Artifact(env =>
 	{
-		mkdir(env.dst(dir))
+		mkdir(env.dst(dir || ''))
 	})
 }
