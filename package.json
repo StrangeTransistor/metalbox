@@ -46,6 +46,13 @@
       "frontend-template":
       [
         "template/Frontend"
+      ],
+      "ts":
+      [
+        "Ts/Ts",
+        {
+          "src": "test/_/release-src/ts"
+        }
       ]
     }
   },
@@ -179,11 +186,17 @@
     "rollup-plugin-flow":
       "1",
 
+    "rollup-plugin-typescript":
+      "0.8",
+
     "babel-core":
       "^6.19",
 
     "babel-preset-babili":
       "0.0.9",
+
+    "typescript":
+      "2",
 
 
     "node-notifier":
