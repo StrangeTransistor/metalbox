@@ -1,8 +1,6 @@
 /* @flow */
 /* ::
 
-import T_Rootpath from 'rootpath';
-
 type F_Do<Env> =
 (
 	src:  T_Rootpath,
