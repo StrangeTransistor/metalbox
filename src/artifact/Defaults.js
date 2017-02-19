@@ -18,7 +18,7 @@ module.exports = function Defaults
 {
 	return With(release, (env /* :OuterEnv */) /* :InnerEnv */ =>
 	{
-		/* @flow-off */// TODO
+		/* @flow-off */
 		return Object.assign({}, defaults, env)
 	})
 }
