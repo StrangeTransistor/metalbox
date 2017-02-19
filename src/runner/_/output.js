@@ -1,11 +1,5 @@
 /* @flow */
 
-/* ::
-
-import type { T_Printer } from '../../printer';
-
-*/
-
 var bold = require('cli-color').bold
 
 module.exports =
