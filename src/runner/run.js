@@ -1,18 +1,15 @@
 /* @flow */
 
-var findRoot = require('find-root')
-var Rootpath = require('rootpath')
-
-var load = require('fs-sync').readJSON
-
+var find_package = require('./_/manifest-shortcut')
 var resolve = require('./_/resolve-shortcut')
 var run_sealed = require('./_/run-sealed')
 
 module.exports = (release_name /* :string */, yargv /* :yargv */) =>
 {
-	var rootpath = Rootpath(findRoot(process.cwd()))
+	var f = find_package()
 
-	var manifest = load(rootpath('package.json'))
+	var rootpath = f[0]
+	var manifest = f[1]
 
 	var Artifact /* :() => T_Artifact<any> */ = resolve(rootpath, release_name)
 
