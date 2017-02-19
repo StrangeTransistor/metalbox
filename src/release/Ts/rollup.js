@@ -30,6 +30,10 @@ module.exports = function Rollup ()
 				}),*/
 				globals(),
 				builtins(),
+				ts(
+				{
+					typescript: require('typescript')
+				}),
 				resolve(
 				{
 					jsnext:  true,
@@ -40,10 +44,6 @@ module.exports = function Rollup ()
 					sourcemap: false
 				}),
 				json(),
-				ts(
-				{
-					typescript: require('typescript')
-				})
 				// flow({ pretty: true }),
 			],
 

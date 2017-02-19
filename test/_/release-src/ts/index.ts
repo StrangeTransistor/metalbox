@@ -1,5 +1,5 @@
 
-import bar from './mod.ts'
+import bar from './mod'
 
 function foo (this: void, s: string)
 {
