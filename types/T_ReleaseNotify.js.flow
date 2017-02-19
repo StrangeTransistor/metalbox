@@ -1,7 +1,7 @@
 
-import typeof {default as T_Notify} from '../src/notify/notify';
-
 type T_ReleaseNotify =
 {
-	notify: T_Notify
+	notify: (message: string, title?: string) => Product<void>,
+	nag: (subsystem: string, error: string) => Product<void>,
+	obstacle: (subsystem: string, error: ?string) => Product<void>
 }

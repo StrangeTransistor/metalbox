@@ -12,8 +12,8 @@ module.exports = function ReleaseNotify ()
 
 	notifier.notify = function notify
 	(
-		message /* : string */,
-		title   /* :?string */
+		message /*    : string */,
+		title   /* ::?: string */
 	)
 	{
 		if (title)

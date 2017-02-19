@@ -1,7 +1,7 @@
 /* @flow */
 /* ::
 
-type Notification =
+export type Notification =
 {
 	title:   string,
 	message: string
@@ -14,7 +14,7 @@ var promisify = require('bluebird').promisify
 
 var p_notify = promisify(notifier.notify, { context: notifier })
 
-module.exports = function notify (notification /* :Notification*/)
+module.exports = function notify (notification /* :Notification */)
 	/* :Product<void> */
 {
 	return p_notify(notification)
