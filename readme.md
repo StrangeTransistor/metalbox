@@ -3,7 +3,7 @@
 **metalbox** — set of components for building/releasing stuff.
 
 ```sh
-metalbox run <release>   # from local or `src/release`
+metalbox run <release>   # run Release from local or `src/release`
 metalbox preset <preset> # from package.json `metalbox.presets`
 metalbox template <template> # as `run` but `dst = .`, does not require `package.json`
 ```
@@ -20,6 +20,22 @@ npm run Backend
         template/Frontend
 ```
 
+```json
+  "metalbox":
+  {
+    "presets":
+    {
+      "dev":
+      [
+        "Frontend/Dev",
+        {
+          "dst": "release/dev"
+        }
+      ]
+    }
+  },
+```
+
 > — This… is a bucket.
 >
 > — Dear God!
@@ -30,4 +46,5 @@ npm run Backend
 
 *— [Expiration Date](https://www.youtube.com/watch?v=JmSqorj-EC0)*
 
-© StrangeTransistor, 2016 — 2017.
+## license
+ISC © StrangeTransistor, 2016 — 2017.

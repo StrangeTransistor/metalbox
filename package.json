@@ -1,6 +1,7 @@
 {
      "name": "metalbox",
-  "version": "1.0.0-pre6",
+  "version": "1.0.0",
+  "license": "ISC",
 
   "description": "set of components for building/releasing stuff",
 
