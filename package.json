@@ -80,9 +80,9 @@
       "flow check",
 
     "mocha":
-                      "mocha    --recursive test/artifact/ test/producer/ test/release/",
+                      "mocha    --recursive test/artifact/ test/producer/ test/release/ test/runner/",
     "cover":
-      "istanbul cover _mocha -- --recursive test/artifact/ test/producer/ test/release/",
+      "istanbul cover _mocha -- --recursive test/artifact/ test/producer/ test/release/ test/runner/",
 
     "test":
       "npm run st && npm run flow && npm run mocha",
@@ -228,6 +228,9 @@
 
     "istanbul":
       "0.4",
+
+    "command-promise":
+      "2",
 
     "dir-compare":
       "1.3",
