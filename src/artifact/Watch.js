@@ -17,13 +17,11 @@ var Promise = require('bluebird')
 var watch = require('chokidar').watch
 var match = require('anymatch')
 
-var is_abs = require('path').isAbsolute
-var join   = require('globjoin')
-
 var debounce  = require('debounce')
 var debounced = (fn) => debounce(fn, 250)
 
 var producer = require('../producer')
+var glob_resolve = require('../glob-resolve')
 
 var Artifact = require('./Artifact')
 
@@ -64,17 +62,7 @@ module.exports = function Watch
 				options = Object.assign({}, options, src_gen[1])
 			}
 
-			src = src.map(src =>
-			{
-				if (! is_abs(src))
-				{
-					return join(env.src(), src)
-				}
-				else
-				{
-					return src
-				}
-			})
+			src = glob_resolve(env.src(), src)
 
 			options.ignored = [].concat(options.ignored)
 

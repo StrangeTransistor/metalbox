@@ -23,9 +23,9 @@ var join   = require('bluebird').join
 var map    = require('bluebird').mapSeries
 
 var find = require('globule').find
-var glob__join = require('globjoin')
 
 var producer = require('../../producer')
+var glob_resolve = require('../../glob-resolve')
 
 var Artifact = require('../Artifact')
 
@@ -71,7 +71,7 @@ module.exports = function Glob /* ::<Env: EnvInOut>*/
 				globs = globs.concat('!release/**')
 			}
 
-			globs = globs.map(glob => glob__join(r_src(), glob))
+			globs = glob_resolve(r_src(), globs)
 
 			if ($options.exclude_recursive)
 			{
