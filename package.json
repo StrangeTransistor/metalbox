@@ -62,7 +62,7 @@
 
   "files":
   [
-    "flow-typed/npm/bluebird_v3.x.x.js",
+    "flow-typed/",
     "run/",
     "src/",
     "templates/",
