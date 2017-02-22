@@ -2,7 +2,8 @@
 /* ::
 
 type ProdWatch
-= string
+=   string
+| [ string | string[] ]
 | [ string | string[], Object ];
 
 */
@@ -38,7 +39,6 @@ module.exports = function Watch
 	/* :T_Artifact<WatchEnv> */
 {
 	var $src = producer(prod_watch_src)
-	var src /* :string */
 
 	var $watch    = null
 	var $deferred = noop
@@ -46,19 +46,20 @@ module.exports = function Watch
 	var art = Artifact((env /* :WatchEnv */) =>
 	{
 		$src(env)
-		.then(watch_src =>
+		.then(src_gen =>
 		{
 			var options /* :Object */ = {}
+			var src /* :string */
 			var src_first /* :string */
 
-			if (typeof watch_src === 'string')
+			if (typeof src_gen === 'string')
 			{
-				src = watch_src
+				src = src_gen
 				src_first = src
 			}
 			else
 			{
-				src = watch_src[0]
+				src = src_gen[0]
 				src_first = src
 
 				if (Array.isArray(src))
@@ -66,7 +67,7 @@ module.exports = function Watch
 					src_first = src[0]
 				}
 
-				options = Object.assign({}, options, watch_src[1])
+				options = Object.assign({}, options, src_gen[1])
 			}
 
 			options.ignored = [].concat(options.ignored)
@@ -81,24 +82,18 @@ module.exports = function Watch
 			$watch = watch(env.src(src_first), options)
 
 			$watch.on('all', debounced(not_ignored(next)))
-		})
 
-		function not_ignored (fn)
-		{
-			return (event, path) =>
+			function not_ignored (fn)
 			{
-				console.log(path, src)
-				if (match(src, path))
+				return (event, path) =>
 				{
-					console.log('YE')
-					return fn(event, path)
-				}
-				else
-				{
-					console.log('NO')
+					if (match(src, path))
+					{
+						return fn(event, path)
+					}
 				}
 			}
-		}
+		})
 
 		function next (event, path)
 		{

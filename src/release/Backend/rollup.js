@@ -10,11 +10,13 @@ var glob = [ '**/*.js', '!**/flow-typed/**' ]
 
 function Standard (globs /* :?string[] */)
 {
-	var $globs = glob.slice()
-
 	if (globs)
 	{
-		$globs = globs
+		var $globs = globs
+	}
+	else
+	{
+		var $globs = glob.slice()
 	}
 
 	return Glob('', $globs, '', Rollup())
@@ -30,6 +32,6 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Standard(),
-		Watch([ glob, {} ], Rollup())
+		Watch([ glob ], Rollup())
 	])
 }
