@@ -6,11 +6,12 @@ var Watch     = require('../../artifact/Watch')
 
 var Rollup = require('../metalbucket/Rollup')
 
-var glob = '**/*.js'
+var glob = [ '**/*.js', '!**/flow-typed/**' ]
 
 function Standard (globs /* :?string[] */)
 {
-	var $globs = [ glob ]
+	var $globs = glob.slice()
+
 	if (globs)
 	{
 		$globs = globs
@@ -21,7 +22,7 @@ function Standard (globs /* :?string[] */)
 
 module.exports.Prod = () =>
 {
-	return Standard([ glob, '!test/**', '!tests/**' ])
+	return Standard(glob.concat([ '!test/**', '!tests/**' ]))
 }
 
 module.exports.Watch = () =>
@@ -29,6 +30,6 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Standard(),
-		Watch(glob, Rollup())
+		Watch([ glob, {} ], Rollup())
 	])
 }

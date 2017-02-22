@@ -130,6 +130,9 @@
     "chokidar":
       "1",
 
+    "anymatch":
+      "1",
+
     "tree-kill":
       "1",
 

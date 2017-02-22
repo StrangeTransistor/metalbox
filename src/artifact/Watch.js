@@ -14,6 +14,7 @@ var bold = require('cli-color').bold
 var Promise = require('bluebird')
 
 var watch = require('chokidar').watch
+var match = require('anymatch')
 
 var debounce  = require('debounce')
 var debounced = (fn) => debounce(fn, 250)
@@ -37,6 +38,7 @@ module.exports = function Watch
 	/* :T_Artifact<WatchEnv> */
 {
 	var $src = producer(prod_watch_src)
+	var src /* :string */
 
 	var $watch    = null
 	var $deferred = noop
@@ -46,16 +48,24 @@ module.exports = function Watch
 		$src(env)
 		.then(watch_src =>
 		{
-			var src /* :string */
 			var options /* :Object */ = {}
+			var src_first /* :string */
 
 			if (typeof watch_src === 'string')
 			{
 				src = watch_src
+				src_first = src
 			}
 			else
 			{
-				src     = watch_src[0]
+				src = watch_src[0]
+				src_first = src
+
+				if (Array.isArray(src))
+				{
+					src_first = src[0]
+				}
+
 				options = Object.assign({}, options, watch_src[1])
 			}
 
@@ -68,10 +78,27 @@ module.exports = function Watch
 			options.ignored = options.ignored.filter(Boolean)
 
 			release()
-			$watch = watch(env.src(src), options)
+			$watch = watch(env.src(src_first), options)
 
-			$watch.on('all', debounced(next))
+			$watch.on('all', debounced(not_ignored(next)))
 		})
+
+		function not_ignored (fn)
+		{
+			return (event, path) =>
+			{
+				console.log(path, src)
+				if (match(src, path))
+				{
+					console.log('YE')
+					return fn(event, path)
+				}
+				else
+				{
+					console.log('NO')
+				}
+			}
+		}
 
 		function next (event, path)
 		{
