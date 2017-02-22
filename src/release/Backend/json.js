@@ -13,9 +13,7 @@ var Composite = require('../../artifact/Composite')
 var Watch     = require('../../artifact/Watch')
 var Copy      = require('../../artifact/Glob/Copy')
 
-var glob_json = '**/*.json'
-var ignore = 'package.json'
-var glob = [ glob_json, '!' + ignore ]
+var glob = [ '**/*.json', '!package.json' ]
 
 module.exports.Watch = () =>
 {
@@ -33,7 +31,7 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Copy('', glob, ''),
-		Watch([ glob_json, { ignored: ignore } ], art)
+		Watch([ glob ], art)
 	])
 }
 
