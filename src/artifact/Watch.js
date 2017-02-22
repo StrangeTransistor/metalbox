@@ -17,6 +17,9 @@ var Promise = require('bluebird')
 var watch = require('chokidar').watch
 var match = require('anymatch')
 
+var is_abs = require('path').isAbsolute
+var join   = require('globjoin')
+
 var debounce  = require('debounce')
 var debounced = (fn) => debounce(fn, 250)
 
@@ -48,27 +51,30 @@ module.exports = function Watch
 		$src(env)
 		.then(src_gen =>
 		{
+			var src /* :string[] */
 			var options /* :Object */ = {}
-			var src /* :string */
-			var src_first /* :string */
 
 			if (typeof src_gen === 'string')
 			{
-				src = src_gen
-				src_first = src
+				src = [ src_gen ]
 			}
 			else
 			{
-				src = src_gen[0]
-				src_first = src
-
-				if (Array.isArray(src))
-				{
-					src_first = src[0]
-				}
-
+				src = [].concat(src_gen[0])
 				options = Object.assign({}, options, src_gen[1])
 			}
+
+			src = src.map(src =>
+			{
+				if (! is_abs(src))
+				{
+					return join(env.src(), src)
+				}
+				else
+				{
+					return src
+				}
+			})
 
 			options.ignored = [].concat(options.ignored)
 
@@ -79,7 +85,7 @@ module.exports = function Watch
 			options.ignored = options.ignored.filter(Boolean)
 
 			release()
-			$watch = watch(env.src(src_first), options)
+			$watch = watch(env.src(src[0]), options)
 
 			$watch.on('all', debounced(not_ignored(next)))
 
