@@ -70,26 +70,20 @@ module.exports = function Watch
 			release()
 			$watch = watch(env.src(src), options)
 
-			$watch.on('all', debounced((event, path) =>
-			{
-				path = env.src.relative(path)
-
-				var $env = Object.assign({}, env, { entry: path })
-
-				/* @flow-off */
-				target.construct($env)
-				.then(ok, nag)
-				.then(once)
-
-				function once ()
-				{
-					if (env.once)
-					{
-						return art.disengage()
-					}
-				}
-			}))
+			$watch.on('all', debounced(next))
 		})
+
+		function next (event, path)
+		{
+			path = env.src.relative(path)
+
+			var $env = Object.assign({}, env, { entry: path })
+
+			/* @flow-off */
+			target.construct($env)
+			.then(ok, nag)
+			.then(once)
+		}
 
 		function ok ()
 		{
@@ -107,6 +101,14 @@ module.exports = function Watch
 			env.printer.detail(error)
 
 			env.notifier.obstacle(target.describe(), error.message)
+		}
+
+		function once ()
+		{
+			if (env.once)
+			{
+				return art.disengage()
+			}
 		}
 
 		return new Promise(rs =>
