@@ -6,7 +6,7 @@ var Watch     = require('../../artifact/Watch')
 
 var Rollup = require('../metalbucket/Rollup')
 
-var glob = [ '**/*.js', '!flow-typed/**' ]
+var glob = [ '**/*.js', '!flow-typed/**', '!coverage/**' ]
 
 function Standard (globs /* :?string[] */)
 {

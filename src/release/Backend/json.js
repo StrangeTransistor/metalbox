@@ -13,7 +13,7 @@ var Composite = require('../../artifact/Composite')
 var Watch     = require('../../artifact/Watch')
 var Copy      = require('../../artifact/Glob/Copy')
 
-var glob = [ '**/*.json', '!package.json' ]
+var glob = [ '**/*.json', '!package.json', '!coverage/**' ]
 
 module.exports.Watch = () =>
 {
