@@ -5,7 +5,7 @@ var Copy = require('../../artifact/Glob/Copy')
 
 var Rollup = require('../metalbucket/Rollup')
 
-var glob = [ '**/*.js', '!**/flow-typed/**' ]
+var glob = [ '**/*.js', '!flow-typed/**' ]
 
 module.exports.Standard = () =>
 {
