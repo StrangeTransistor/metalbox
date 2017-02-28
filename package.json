@@ -1,8 +1,9 @@
 {
      "name": "metalbox",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "ISC",
 
+  "author": "StrangeTransistor <strange.transistor@gmail.com>",
   "description": "set of components for building/releasing stuff",
 
   "metalbox":
