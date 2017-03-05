@@ -15,7 +15,8 @@ var Parallel = require('../../artifact/Parallel')
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
 {
-	return defaults(Release(
+	return defaults({ dev: true },
+	Release(
 	[
 		Manifest(),
 		Esc(Parallel(

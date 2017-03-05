@@ -1,8 +1,16 @@
 /* @flow */
 
+var assign = Object.assign
+
 var Defaults = require('../../artifact/Defaults')
 
-module.exports = function defaults (release /* :T_Release<*> */)
+module.exports = function defaults
+(
+	aux /* :Object */,
+	release /* :T_Release<*> */
+)
 {
-	return Defaults({ buckets_path: 'buckets' }, release)
+	var defaults = assign({ buckets_path: 'buckets' }, aux)
+
+	return Defaults(defaults, release)
 }

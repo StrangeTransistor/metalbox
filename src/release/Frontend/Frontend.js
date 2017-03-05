@@ -12,7 +12,8 @@ var assets = require('./assets')
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
 {
-	return defaults(Release(
+	return defaults({},
+	Release(
 	[
 		Manifest(),
 		pug.Min(),
