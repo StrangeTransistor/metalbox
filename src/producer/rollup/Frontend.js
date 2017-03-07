@@ -9,7 +9,7 @@ var resolve  = require('rollup-plugin-node-resolve')
 var commonjs = require('rollup-plugin-commonjs')
 var json     = require('rollup-plugin-json')
 var flow     = require('rollup-plugin-flow')
-// TODO +pug
+var pug      = require('rollup-plugin-pug')
 
 // TODO pass options from env to plugins, use `object-path`
 
@@ -41,7 +41,7 @@ module.exports = function Rollup ()
 				}),
 				json(),
 				flow({ pretty: true }),
-				// TODO pug
+				pug()
 			],
 
 			/*

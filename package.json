@@ -194,6 +194,9 @@
     "rollup-plugin-typescript":
       "0.8",
 
+    "rollup-plugin-pug":
+      "0.1.2",
+
     "babel-core":
       "^6.19",
 
