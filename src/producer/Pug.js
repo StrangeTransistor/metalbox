@@ -1,7 +1,7 @@
 /* @flow */
 
 var pug = require('pug').renderFile
-var pug_options = require('./options/pug')
+var pug_options = require('../release/metalbucket/options/pug')
 
 module.exports = function Pug ()
 	/* :Producer<EnvFrontend, string> */

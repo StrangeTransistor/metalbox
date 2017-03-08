@@ -11,7 +11,7 @@ var json     = require('rollup-plugin-json')
 var flow     = require('rollup-plugin-flow')
 var pug      = require('rollup-plugin-pug')
 
-var pug_options = require('../options/pug')
+var pug_options = require('../../release/metalbucket/options/pug')
 
 // TODO pass options from env to plugins, use `object-path`
 
