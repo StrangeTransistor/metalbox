@@ -43,7 +43,7 @@ module.exports = function Rollup ()
 				}),
 				json(),
 				flow({ pretty: true }),
-				pug(pug_options(env))
+				pug(pug_options(env)) // TODO dev is not passed to templates
 			],
 
 			/*
