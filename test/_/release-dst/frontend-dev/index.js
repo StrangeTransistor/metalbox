@@ -287,12 +287,18 @@ var pug = ((function(exports){
 }))({});
 
 var template = function(locals) {var pug_html = "", pug_mixins = {}, pug_interp;var pug_debug_filename, pug_debug_line;try {var pug_debug_sources = {};
-var locals_for_with = (locals || {});(function (message) {
+var locals_for_with = (locals || {});(function (data) {
+pug_mixins["Mixin"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"mixin\"\u003E";
+pug_html = pug_html + "mixin\u003C\u002Fspan\u003E";
+};
 pug_html = pug_html + "\u003Cp\u003E";
 pug_html = pug_html + "Pug template\u003C\u002Fp\u003E";
 pug_html = pug_html + "\u003Ca\u003E";
-pug_html = pug_html + (pug.escape(null == (pug_interp = message) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
-}.call(this,"message" in locals_for_with?locals_for_with.message:typeof message!=="undefined"?message:undefined));} catch (err) {pug.rethrow(err, pug_debug_filename, pug_debug_line, pug_debug_sources[pug_debug_filename]);}return pug_html;};
+pug_html = pug_html + (pug.escape(null == (pug_interp = data) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+pug_mixins["Mixin"]();
+}.call(this,"data" in locals_for_with?locals_for_with.data:typeof data!=="undefined"?data:undefined));} catch (err) {pug.rethrow(err, pug_debug_filename, pug_debug_line, pug_debug_sources[pug_debug_filename]);}return pug_html;};
 
 /*  */
 // bucket:index
@@ -315,11 +321,9 @@ function lower (it)
 
 0 && lower('ABC');
 
-var temp_context =
+0 && console.log(template(
 {
-	message: 'Template message'
-};
-
-0 && console.log(template(temp_context));
+	data: 'data'
+}));
 
 }());

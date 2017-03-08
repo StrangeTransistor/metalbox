@@ -30,9 +30,8 @@ function lower (it: string): string
 0 && lower('ABC')
 
 import template from 'templates/template.pug'
-var temp_context =
-{
-	message: 'Template message'
-}
 
-0 && console.log(template(temp_context))
+0 && console.log(template(
+{
+	data: 'data'
+}))
