@@ -1,6 +1,7 @@
 /* @flow */
 
 var pug = require('pug').renderFile
+var pug_options = require('./options/pug')
 
 module.exports = function Pug ()
 	/* :Producer<EnvFrontend, string> */
@@ -11,13 +12,6 @@ module.exports = function Pug ()
 
 		// TODO metalbox.resource
 
-		var options =
-		{
-			pretty: false,
-			dev: env.dev || false,
-			basedir: env.src(env.buckets_path)
-		}
-
-		return pug(filename, options)
+		return pug(filename, pug_options(env))
 	}
 }
