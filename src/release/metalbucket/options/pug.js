@@ -1,6 +1,6 @@
 /* @flow */
 
-module.exports = function Pug (env /* :EnvFrontend */)
+module.exports = function (env /* :EnvFrontend */)
 {
 	return {
 		pretty: false,
