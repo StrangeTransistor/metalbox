@@ -12,7 +12,8 @@ module.exports = function Babili ()
 			presets:
 			[
 				require.resolve('babel-preset-babili')
-			]
+			],
+			comments: false
 		})
 
 		return it.code
