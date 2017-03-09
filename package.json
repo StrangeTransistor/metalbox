@@ -6,6 +6,10 @@
   "author": "StrangeTransistor <strange.transistor@gmail.com>",
   "description": "set of components for building/releasing stuff",
 
+  "homepage":            "https://github.com/StrangeTransistor/metalbox",
+  "repository": { "url": "https://github.com/StrangeTransistor/metalbox.git", "type": "git" },
+  "bugs":       { "url": "https://github.com/StrangeTransistor/metalbox/issues" },
+
   "metalbox":
   {
     "presets":
