@@ -1,8 +1,8 @@
 /* @flow */
+/* deprecated, use Glob(…, Copy()) */
 
-var cp = require('fs-sync').copy
-
-var Glob = require('./Fn')
+var Copy = require('../Copy')
+var Glob = require('./Glob')
 
 /* ::
 
@@ -10,7 +10,7 @@ import type { Options } from './Fn';
 
 */
 
-module.exports = function Copy /* ::<Env> */
+module.exports = function GlobCopy /* ::<Env> */
 (
 	prod_src  /* :WeakProductable<Env, string>            */,
 	prod_glob /* :WeakProductable<Env, string | string[]> */,
@@ -19,9 +19,5 @@ module.exports = function Copy /* ::<Env> */
 )
 	/* T_Artifact<Env> */
 {
-	return Glob(prod_src, prod_glob, prod_dst, (src, path, dst) =>
-	{
-		return cp(src(path), dst(path), { force: true })
-	}
-	, options)
+	return Glob(prod_src, prod_glob, prod_dst, Copy(), options)
 }
