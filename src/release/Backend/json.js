@@ -4,34 +4,31 @@ var fs = require('fs-sync')
 var exists = fs.exists
 var load   = fs.readJSON
 var write  = fs.write
-var copy   = fs.copy
+var cp     = fs.copy
 
 var dump = require('../../json/dump')
 
 var Artifact  = require('../../artifact/Artifact')
 var Composite = require('../../artifact/Composite')
 var Watch     = require('../../artifact/Watch')
-var Copy      = require('../../artifact/Glob/Copy')
+var Glob      = require('../../artifact/Glob')
+var Copy      = require('../../artifact/Copy')
 
 var glob = [ '**/*.json', '!package.json', '!coverage/**' ]
 
 module.exports.Watch = () =>
 {
-	var art = Artifact((env /* :EnvInOut & EnvEntry */) =>
-	{
-		// TODO Artifact Copy
-		return copy(env.src(env.entry), env.dst(env.entry), { force: true })
-	})
+	var copy = Copy()
 
-	art.describe = () =>
+	copy.describe = () =>
 	{
 		return '[JSON]'
 	}
 
 	return Composite(
 	[
-		Copy('', glob, ''),
-		Watch([ glob ], art)
+		Glob('', glob, '', copy),
+		Watch([ glob ], copy)
 	])
 }
 
@@ -57,14 +54,14 @@ module.exports.Prod = () =>
 			}
 			else
 			{
-				return copy(base, to, { force: true })
+				return cp(base, to, { force: true })
 			}
 		}
 	})
 
 	return Composite(
 	[
-		Copy('', glob.concat('!cfg/**'), ''),
+		Glob('', glob.concat('!cfg/**'), '', Copy()),
 		assemble
 	])
 }
