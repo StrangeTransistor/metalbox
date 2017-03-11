@@ -19,7 +19,7 @@ var expect_release = require('../../_/expect-release')
 describe('Library (Dev)', () =>
 {
 	var src_root = src_rootpath('library')
-	var dst_root = dst_rootpath('library')
+	var dst_root = dst_rootpath('library-dev')
 	var tmp_root = tmp_rootpath()
 
 	var env = tmp_env(src_root, tmp_root)

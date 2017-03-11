@@ -13,14 +13,27 @@ var Rollup = require('../metalbucket/Rollup')
 
 var glob = require('../metalbucket/smart-js-glob')
 
-// TODO glob !test see backend
-var Standard = module.exports.Standard = () =>
+function Standard (globs /* :?string[] */)
 {
+	if (globs)
+	{
+		var $globs = globs
+	}
+	else
+	{
+		var $globs = glob.slice()
+	}
+
 	return Composite(
 	[
-		Glob('', glob, '', Copy()),
-		Glob('', glob, 'dist', Rollup())
+		Glob('', $globs, '', Copy()),
+		Glob('', $globs, 'dist', Rollup())
 	])
+}
+
+module.exports.Prod = () =>
+{
+	return Standard(glob.concat([ '!test/**', '!tests/**' ]))
 }
 
 module.exports.Watch = () =>
