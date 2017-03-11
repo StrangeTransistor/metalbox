@@ -1,6 +1,7 @@
 /* @flow */
 
-var Copy = require('../../artifact/Glob/Copy')
+var Glob = require('../../artifact/Glob')
+var Copy = require('../../artifact/Copy')
 
 var glob =
 [
@@ -15,5 +16,5 @@ var glob =
 
 module.exports = () =>
 {
-	return Copy('', glob, '')
+	return Glob('', glob, '', Copy())
 }

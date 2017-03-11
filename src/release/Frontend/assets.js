@@ -1,6 +1,6 @@
 /* @flow */
 
-var Copy  = require('../../artifact/Glob/Copy')
+var Copy  = require('../../artifact/Glob/Copy') // TODO Glob(Copy())
 var Watch = require('../../artifact/Watch')
 
 var glob = '**/*.@(jpg|png|gif)'

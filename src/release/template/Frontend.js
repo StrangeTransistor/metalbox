@@ -6,7 +6,7 @@ var With = require('../../artifact/With')
 var Composite = require('../../artifact/Composite')
 
 var Directory = require('../../artifact/Directory')
-var Copy = require('../../artifact/Glob/Copy')
+var Copy = require('../../artifact/Glob/Copy') // TODO Glob(Copy())
 
 var glob = '**/*.@(pug|less|css|js)'
 
