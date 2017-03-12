@@ -248,9 +248,6 @@
     "istanbul":
       "0.4",
 
-    "command-promise":
-      "2",
-
     "dir-compare":
       "1.3",
 
