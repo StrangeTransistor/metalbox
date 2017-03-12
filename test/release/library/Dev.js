@@ -22,7 +22,7 @@ describe('Library (Dev)', () =>
 	var dst_root = dst_rootpath('library-dev')
 	var tmp_root = tmp_rootpath()
 
-	var env = tmp_env(src_root, tmp_root)
+	var env = tmp_env(src_root, tmp_root, { notify: true })
 
 	/* @flow-off */
 	env.once = true
