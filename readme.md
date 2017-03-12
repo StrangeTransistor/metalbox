@@ -17,6 +17,7 @@ npm run Backend
         Frontend
         Frontend/Dev
         Library
+        Library/Dev
         template/Frontend
 ```
 
