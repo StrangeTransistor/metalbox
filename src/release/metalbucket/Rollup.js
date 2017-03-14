@@ -5,5 +5,12 @@ var Rollup = require('../../producer/rollup/Backend')
 
 module.exports = () =>
 {
-	return File(env => env.entry, Rollup())
+	var art = File(env => env.entry, Rollup())
+
+	art.describe = () =>
+	{
+		return '[Rollup]'
+	}
+
+	return art
 }
