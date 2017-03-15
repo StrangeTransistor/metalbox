@@ -1,9 +1,11 @@
 /* @flow */
 
-var Copy  = require('../../artifact/Glob/Copy') // TODO Glob(Copy())
-var Watch = require('../../artifact/Watch')
+var Copy = require('../../artifact/Glob/Copy') // TODO Glob(Copy())
+var Heat = require('../../artifact/Watch/Heat')
 
 var glob = '**/*.@(jpg|png|gif)'
+
+// TODO per-file emit
 
 var Standard = module.exports.Standard = () =>
 {
@@ -12,5 +14,5 @@ var Standard = module.exports.Standard = () =>
 
 module.exports.Watch = () =>
 {
-	return Watch(env => env.src(env.buckets_path, glob), Standard())
+	return Heat(env => env.src(env.buckets_path, glob), Standard())
 }

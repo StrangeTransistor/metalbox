@@ -1,8 +1,7 @@
 /* @flow */
 
-var File  = require('../../artifact/File')
-var Watch = require('../../artifact/Watch')
-
+var File = require('../../artifact/File')
+var Heat = require('../../artifact/Watch/Heat')
 
 var Pipeline = require('../../producer/Pipeline')
 
@@ -18,7 +17,7 @@ var Standard = module.exports.Standard = function ()
 
 module.exports.Watch = function ()
 {
-	return Watch(env => env.src(env.buckets_path, '*/*.js'), Standard())
+	return Heat(env => env.src(env.buckets_path, '*/*.js'), Standard())
 }
 
 module.exports.Min = function ()
