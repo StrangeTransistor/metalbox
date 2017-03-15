@@ -13,6 +13,7 @@ var noop = () => {}
 var bold = require('cli-color').bold
 
 var Promise = require('bluebird')
+var resolve = Promise.resolve
 
 var watch = require('chokidar').watch
 var match = require('anymatch')
@@ -46,6 +47,11 @@ module.exports = function Watch
 
 	var art = Artifact((env /* :WatchEnv */) =>
 	{
+		if (env.once)
+		{
+			return resolve()
+		}
+
 		$src(env)
 		.then(src_gen =>
 		{
