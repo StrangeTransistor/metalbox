@@ -6,7 +6,8 @@ var With = require('../../artifact/With')
 var Composite = require('../../artifact/Composite')
 
 var Directory = require('../../artifact/Directory')
-var Copy = require('../../artifact/Glob/Copy') // TODO Glob(Copy())
+var Glob = require('../../artifact/Glob')
+var Copy = require('../../artifact/Copy')
 
 var glob = '**/*.@(pug|less|css|js)'
 
@@ -16,7 +17,7 @@ module.exports = function ()
 	return From('frontend', Composite(
 	[
 		Directory(),
-		Copy('', glob, '', { exclude_recursive: false }),
+		Glob('', glob, '', Copy(), { exclude_recursive: false }),
 	]))
 }
 
