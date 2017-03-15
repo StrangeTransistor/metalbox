@@ -21,10 +21,10 @@ var match = require('anymatch')
 var debounce  = require('debounce')
 var debounced = (fn) => debounce(fn, 250)
 
-var producer = require('../producer')
-var glob_resolve = require('../glob-resolve')
+var producer = require('../../producer')
+var glob_resolve = require('../../glob-resolve')
 
-var Artifact = require('./Artifact')
+var Artifact = require('../Artifact')
 
 module.exports = function Watch
 /* ::
