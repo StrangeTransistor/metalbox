@@ -1,10 +1,12 @@
 /* @flow */
 /* ::
 
-type ProdWatch
+export type ProdWatch
 =   string
 | [ string | string[] ]
 | [ string | string[], Object ];
+
+export type WatchEnv = EnvInOut & EnvOnce & EnvPrinter & EnvNotify;
 
 */
 
@@ -29,23 +31,22 @@ var Artifact = require('../Artifact')
 module.exports = function Watch
 /* ::
 <
-	SrcEnv: EnvInOut,
-	WatchEnv: SrcEnv & EnvOnce & EnvPrinter & EnvNotify,
-	Env: EnvEntry & WatchEnv
+	Env: Object,
+	REnv: Env & WatchEnv
 >
 */
 (
-	prod_watch_src /* :WeakProductable<SrcEnv, ProdWatch> */,
-	target         /* :T_Artifact<Env> */
+	prod_watch_src /* :WeakProductable<Env & EnvInOut, ProdWatch> */,
+	target         /* :T_Artifact<Env & EnvEntry> */
 )
-	/* :T_Artifact<WatchEnv> */
+	/* :T_Artifact<REnv> */
 {
 	var $src = producer(prod_watch_src)
 
 	var $watch    = null
 	var $deferred = noop
 
-	var art = Artifact((env /* :WatchEnv */) =>
+	var art = Artifact((env /* :REnv */) =>
 	{
 		if (env.once)
 		{
