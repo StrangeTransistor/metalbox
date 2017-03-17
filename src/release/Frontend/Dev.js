@@ -8,6 +8,7 @@ var pug  = require('./pug')
 var less = require('./less')
 var rollup = require('./rollup')
 var assets = require('./assets')
+var Serve  = require('../metalbucket/Serve')
 
 var Esc = require('../../artifact/Esc')
 var Parallel = require('../../artifact/Parallel')
@@ -24,7 +25,8 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 			pug.Watch(),
 			less.Watch(),
 			rollup.Watch(),
-			assets.Watch()
+			assets.Watch(),
+			Serve()
 		]))
 	]))
 }

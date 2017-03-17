@@ -8,7 +8,7 @@ var Manifest = require('../metalbucket/Manifest')
 var Package  = require('./Package')
 var json     = require('./json')
 var rollup   = require('./rollup')
-var Serve    = require('./Serve')
+var Serve    = require('../metalbucket/Serve')
 
 var Esc = require('../../artifact/Esc')
 
