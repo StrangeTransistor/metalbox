@@ -1,0 +1,90 @@
+{
+     "name": "",
+  "version": "0.0.0",
+  "license": "UNLICENSED|ISC",
+
+  "private":  true,
+
+  "author": "Strider <strange.transistor@gmail.com>",
+  "description": "",
+
+  "homepage":            "https://github.com/StrangeTransistor/metalbox",
+  "repository": { "url": "https://github.com/StrangeTransistor/metalbox.git", "type": "git" },
+  "bugs":       { "url": "https://github.com/StrangeTransistor/metalbox/issues" },
+
+  "engines":
+  {
+    "node": ">=4"
+  },
+
+   "bin": "",
+  "main": "",
+
+  "metalbox":
+  {
+    "presets":
+    {
+      "npm": [ "Library" ],
+      "dev": [ "Library/Dev" ]
+    }
+  },
+
+  "files":
+  [
+  ],
+
+  "scripts":
+  {
+    "flow-typed":
+      "flow-typed install",
+
+    "st":
+      "eslint src/ test/",
+
+    "flow":
+      "flow check",
+
+    "mocha":
+                      "mocha    --recursive test/case/",
+    "cover":
+      "istanbul cover _mocha -- --recursive test/case/",
+
+    "test":
+      "npm run st && npm run flow && npm run mocha",
+  },
+
+  "peerDependencies":
+  {
+  },
+
+  "dependencies":
+  {
+  },
+
+  "devDependencies":
+  {
+    "eslint":
+      "3",
+
+    "js-outlander":
+      "StrangeTransistor/js-outlander#2.1.0",
+
+    "flow-bin":
+      "0.41",
+
+    "flow-typed":
+      "2",
+
+    "mocha":
+      "3",
+
+    "chai":
+      "3",
+
+    "istanbul":
+      "0.4",
+
+    "metalbox":
+      "*"
+  }
+}
