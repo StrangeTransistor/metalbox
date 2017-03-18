@@ -1,8 +1,6 @@
 /* @flow */
 
-var Rootpath = require('rootpath')
-
-var With = require('../../artifact/With')
+var From = require('../../artifact/From')
 var Composite = require('../../artifact/Composite')
 
 var Directory = require('../../artifact/Directory')
@@ -20,16 +18,4 @@ module.exports = function ()
 		(Directory() /* :T_Artifact<EnvOut> */),
 		Glob('', glob, '', Copy(), { exclude_recursive: false }),
 	]))
-}
-
-function From (template_dir /* :string */, target /* :T_Artifact<EnvInOut> */)
-	/* :T_Artifact<EnvOut> */
-{
-	return With(target, (env /* :EnvOut */) =>
-	{
-		return Object.assign({}, env,
-		{
-			src: Rootpath(__dirname, '../../../templates/', template_dir)
-		})
-	})
 }
