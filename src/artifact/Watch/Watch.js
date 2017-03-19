@@ -61,16 +61,7 @@ module.exports = function Watch
 		$src(env)
 		.then(src_gen =>
 		{
-			var src /* :string[] */
-
-			if (typeof src_gen === 'string')
-			{
-				src = [ src_gen ]
-			}
-			else
-			{
-				src = [].concat(src_gen[0])
-			}
+			var src /* :string[] */ = [].concat(src_gen)
 
 			src = glob_resolve(env.src(), src)
 
