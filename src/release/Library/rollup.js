@@ -13,6 +13,8 @@ var Rollup = require('../metalbucket/Rollup')
 
 var glob = require('../metalbucket/smart-js-glob')
 
+var label = require('../../label')
+
 function Standard (globs /* :?string[] */)
 {
 	if (globs)
@@ -41,11 +43,11 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Standard(),
-		Watch([ glob ], Composite(
+		Watch([ glob ], label('Rollup/Dist', Composite(
 		[
 			Copy(),
 			With(Rollup(), dist)
-		]))
+		])))
 	])
 }
 
