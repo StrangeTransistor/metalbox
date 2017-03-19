@@ -6,6 +6,7 @@ var Watch = require('../../artifact/Watch')
 
 var Composite = require('../../artifact/Composite')
 
+var label = require('../../label')
 
 var glob = '**/*.@(jpg|png|gif)'
 
@@ -19,6 +20,6 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Standard(),
-		Watch(env => env.src(env.buckets_path, glob), Copy())
+		Watch(env => env.src(env.buckets_path, glob), label('Assets', Copy()))
 	])
 }
