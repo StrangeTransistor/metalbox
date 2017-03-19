@@ -5,6 +5,11 @@ export type ProdWatch<Env> = WeakProductable<Env & EnvInOut, string | string[]>;
 
 export type WatchEnv = EnvInOut & EnvOnce & EnvPrinter & EnvNotify;
 
+export type Options =
+{
+	debounce?: boolean
+};
+
 */
 
 var noop = () => {}
@@ -34,7 +39,8 @@ module.exports = function Watch
 */
 (
 	prod_watch_src /* :ProdWatch<Env> */,
-	target         /* :T_Artifact<Env & EnvEntry> */
+	target         /* :T_Artifact<Env & EnvEntry> */,
+	options        /* ::?: Options */
 )
 	/* :T_Artifact<REnv> */
 {
@@ -42,6 +48,8 @@ module.exports = function Watch
 
 	var $watch    = null
 	var $deferred = noop
+
+	var $options = Object.assign({ debounce: false }, options)
 
 	var art = Artifact((env /* :REnv */) =>
 	{
@@ -77,7 +85,14 @@ module.exports = function Watch
 
 			$watch = watch(env.src(src[0]), { ignored: ignored })
 
-			$watch.on('all', debounced(not_ignored(next)))
+			var $next = not_ignored(next)
+
+			if ($options.debounce)
+			{
+				$next = debounced($next)
+			}
+
+			$watch.on('all', $next)
 
 			function not_ignored (fn)
 			{
