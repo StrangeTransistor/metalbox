@@ -43,7 +43,7 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Standard(),
-		Watch([ glob ], label('Rollup/Dist', Composite(
+		Watch(glob, label('Rollup/Dist', Composite(
 		[
 			Copy(),
 			With(Rollup(), dist)

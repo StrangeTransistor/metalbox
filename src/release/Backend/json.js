@@ -28,7 +28,7 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Glob('', glob, '', copy),
-		Watch([ glob ], copy)
+		Watch(glob, copy)
 	])
 }
 

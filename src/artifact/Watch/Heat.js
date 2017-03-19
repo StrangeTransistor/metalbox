@@ -11,7 +11,7 @@ var Watch = require('./Watch')
 
 module.exports = function Heat /* ::<Env: Object> */
 (
-	prod_watch_src /* :WeakProductable<Env & EnvInOut, ProdWatch> */,
+	prod_watch_src /* :ProdWatch<Env> */,
 	target         /* :T_Artifact<Env> */
 )
 	/* :T_Artifact<Env & WatchEnv> */

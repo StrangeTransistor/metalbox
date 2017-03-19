@@ -1,10 +1,7 @@
 /* @flow */
 /* ::
 
-export type ProdWatch
-=   string
-| [ string | string[] ]
-| [ string | string[], Object ];
+export type ProdWatch<Env> = WeakProductable<Env & EnvInOut, string | string[]>;
 
 export type WatchEnv = EnvInOut & EnvOnce & EnvPrinter & EnvNotify;
 
@@ -36,7 +33,7 @@ module.exports = function Watch
 >
 */
 (
-	prod_watch_src /* :WeakProductable<Env & EnvInOut, ProdWatch> */,
+	prod_watch_src /* :ProdWatch<Env> */,
 	target         /* :T_Artifact<Env & EnvEntry> */
 )
 	/* :T_Artifact<REnv> */
@@ -57,7 +54,6 @@ module.exports = function Watch
 		.then(src_gen =>
 		{
 			var src /* :string[] */
-			var options /* :Object */ = {}
 
 			if (typeof src_gen === 'string')
 			{
@@ -66,21 +62,20 @@ module.exports = function Watch
 			else
 			{
 				src = [].concat(src_gen[0])
-				options = Object.assign({}, options, src_gen[1])
 			}
 
 			src = glob_resolve(env.src(), src)
 
-			options.ignored = [].concat(options.ignored)
-
-			options.ignored = options.ignored.concat(recursion_indicator(env))
-			options.ignored = options.ignored.concat(env.src('release/**'))
-			options.ignored = options.ignored.concat(env.src('node_modules/**'))
-
-			options.ignored = options.ignored.filter(Boolean)
+			var ignored =
+			[
+				env.dst(),
+				env.src('release/**'),
+				env.src('node_modules/**'),
+			]
 
 			release()
-			$watch = watch(env.src(src[0]), options)
+
+			$watch = watch(env.src(src[0]), { ignored: ignored })
 
 			$watch.on('all', debounced(not_ignored(next)))
 
@@ -161,9 +156,4 @@ module.exports = function Watch
 	}
 
 	return art
-}
-
-function recursion_indicator (env /* :EnvInOut */)
-{
-	return env.dst()
 }

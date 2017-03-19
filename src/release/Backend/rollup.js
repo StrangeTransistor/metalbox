@@ -32,6 +32,6 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Standard(),
-		Watch([ glob ], Rollup())
+		Watch(glob, Rollup())
 	])
 }
