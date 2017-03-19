@@ -3,14 +3,9 @@
 var File = require('../../artifact/File')
 var Rollup = require('../../producer/rollup/Backend')
 
+var label = require('../../label')
+
 module.exports = () =>
 {
-	var art = File(env => env.entry, Rollup())
-
-	art.describe = () =>
-	{
-		return '[Rollup]'
-	}
-
-	return art
+	return label('Rollup', File(env => env.entry, Rollup()))
 }

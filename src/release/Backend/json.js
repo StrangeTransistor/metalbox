@@ -14,16 +14,14 @@ var Watch     = require('../../artifact/Watch')
 var Glob      = require('../../artifact/Glob')
 var Copy      = require('../../artifact/Copy')
 
+var label = require('../../label')
+
+
 var glob = [ '**/*.json', '!package.json', '!coverage/**' ]
 
 module.exports.Watch = () =>
 {
-	var copy = Copy()
-
-	copy.describe = () =>
-	{
-		return '[JSON]'
-	}
+	var copy = label('JSON', Copy())
 
 	return Composite(
 	[
