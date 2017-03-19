@@ -19,6 +19,6 @@ module.exports = function Heat /* ::<Env: Object> */
 	return Composite(
 	[
 		target,
-		Watch(prod_watch_src, target)
+		Watch(prod_watch_src, target, { debounce: true })
 	])
 }
