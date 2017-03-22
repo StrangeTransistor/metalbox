@@ -4,21 +4,27 @@
 
 ```sh
 metalbox run <release>   # run Release from local or `src/release`
-metalbox preset <preset> # from package.json `metalbox.presets`
+metalbox preset <preset> # run from package.json `metalbox.presets`
 metalbox template <template> # as `run` but `dst = .`, does not require `package.json`
 ```
 
 **metalbucket** — *Frontend*, *Backend* and *Library* targets
 we use in StrangeTransistor implemented on top of *metalbox*.
 
-```
-npm run Backend
-        Backend/Dev
-        Frontend
-        Frontend/Dev
-        Library
-        Library/Dev
-        template/Frontend
+Run Releases & templates:
+```sh
+metalbox run
+# or
+metalbox r Backend
+           Backend/Dev
+           Frontend
+           Frontend/Dev
+           Library
+           Library/Dev
+
+metalbox template
+# or
+metalbox t template/Frontend
 ```
 
 ```json
@@ -35,6 +41,13 @@ npm run Backend
       ]
     }
   },
+```
+
+Run presets:
+```sh
+metalbox preset
+# or
+metalbox p dev # run `metalbox.presets.dev`
 ```
 
 > — This… is a bucket.
