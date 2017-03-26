@@ -39,7 +39,7 @@ module.exports = function Watch
 */
 (
 	prod_watch_src /* :ProdWatch<Env> */,
-	target         /* :T_Artifact<Env & EnvEntry> */,
+	target         /* :T_Artifact<Env & EnvEntryEvent> */,
 	options        /* ::?: Options */
 )
 	/* :T_Artifact<REnv> */
@@ -101,7 +101,11 @@ module.exports = function Watch
 		{
 			path = env.src.relative(path)
 
-			var $env = Object.assign({}, env, { entry: path })
+			var $env = Object.assign({}, env,
+			{
+				event: event,
+				entry: path,
+			})
 
 			/* @flow-off */
 			target.construct($env)
