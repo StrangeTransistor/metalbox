@@ -29,7 +29,7 @@ function Standard (globs /* :?string[] */)
 	return Composite(
 	[
 		Glob('', $globs, '', Copy()),
-		Glob('', $globs, 'dist', Rollup())
+		Glob('', $globs, '', RollupDist())
 	])
 }
 
@@ -46,12 +46,15 @@ module.exports.Watch = () =>
 		Watch(glob, label('Rollup/Dist', Composite(
 		[
 			Copy(),
-			With(Rollup(), dist)
+			RollupDist(),
 		])))
 	])
 }
 
-var dist = (env) => assign({}, env, { dst: env.dst.partial('dist') })
+function RollupDist ()
+{
+	return With(Rollup(), env => assign({}, env, { dst: env.dst.partial('dist') }))
+}
 
 module.exports.Types = () =>
 {
