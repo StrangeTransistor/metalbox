@@ -3,6 +3,7 @@
 var Composite = require('../../artifact/Composite')
 var Glob      = require('../../artifact/Glob')
 var Watch     = require('../../artifact/Watch')
+var Remover   = require('../../artifact/Remover')
 
 var Rollup = require('../metalbucket/Rollup')
 
@@ -32,6 +33,6 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Standard(),
-		Watch(glob, Rollup())
+		Watch(glob, Remover(Rollup()))
 	])
 }

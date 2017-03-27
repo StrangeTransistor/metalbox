@@ -6,8 +6,8 @@ var Glob = require('../../artifact/Glob')
 var Copy = require('../../artifact/Copy')
 var Composite = require('../../artifact/Composite')
 var With = require('../../artifact/With')
-
 var Watch = require('../../artifact/Watch')
+var Remover = require('../../artifact/Remover')
 
 var Rollup = require('../metalbucket/Rollup')
 
@@ -53,7 +53,10 @@ module.exports.Watch = () =>
 
 function RollupDist ()
 {
-	return With(Rollup(), env => assign({}, env, { dst: env.dst.partial('dist') }))
+	return With(Remover(Rollup()),
+		/* @flow-off */
+		env => assign({}, env, { dst: env.dst.partial('dist') })
+	)
 }
 
 module.exports.Types = () =>
