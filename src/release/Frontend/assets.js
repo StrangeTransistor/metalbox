@@ -1,7 +1,10 @@
 /* @flow */
 
+var assign = Object.assign
+
 var Glob  = require('../../artifact/Glob')
 var Copy  = require('../../artifact/Copy')
+var With  = require('../../artifact/With')
 var Watch = require('../../artifact/Watch')
 
 var Composite = require('../../artifact/Composite')
@@ -12,7 +15,7 @@ var glob = '**/*.@(jpg|png|gif)'
 
 var Standard = module.exports.Standard = () =>
 {
-	return Glob(env => env.src(env.buckets_path), glob, 'assets', Copy())
+	return Glob(env => env.src(env.buckets_path), glob, '', CopyAssets())
 }
 
 module.exports.Watch = () =>
@@ -20,6 +23,16 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Standard(),
-		Watch(env => env.src(env.buckets_path, glob), label('Assets', Copy()))
+		Watch(env => env.src(env.buckets_path, glob), label('Assets', CopyAssets()))
 	])
+}
+
+function CopyAssets ()
+{
+	return With(Copy(),
+	env =>
+	{
+		console.log('|', env.entry)
+		return assign({}, env, { dst: env.dst.partial('assets') })
+	})
 }

@@ -22,12 +22,12 @@ module.exports = function Remover /* ::
 		{
 			if (env.event === 'unlink')
 			{
-				console.log('RM')
+				// console.log('RM')
 				rm(env.dst(env.entry))
 			}
 			else
 			{
-				console.log('+')
+				// console.log('+')
 				return construct(env)
 			}
 		}
