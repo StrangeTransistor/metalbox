@@ -23,7 +23,12 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Standard(),
-		Watch(env => env.src(env.buckets_path, glob), label('Assets', CopyAssets()))
+		Watch(env => env.src(env.buckets_path, glob),
+		label('Assets', CopyAssets()),
+		{
+			/* @flow-off */
+			relative: env => env.src(env.buckets_path)
+		})
 	])
 }
 

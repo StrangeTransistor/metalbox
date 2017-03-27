@@ -7,7 +7,8 @@ export type WatchEnv = EnvInOut & EnvOnce & EnvPrinter & EnvNotify;
 
 export type Options =
 {
-	debounce?: boolean
+	debounce?: boolean,
+	relative?: WeakProductable<EnvIn, string>,
 };
 
 */
@@ -18,6 +19,7 @@ var bold = require('cli-color').bold
 
 var Promise = require('bluebird')
 var resolve = Promise.resolve
+var join    = Promise.join
 
 var watch = require('chokidar').watch
 var match = require('anymatch')
@@ -49,7 +51,14 @@ module.exports = function Watch
 	var $watch    = null
 	var $deferred = noop
 
-	var $options = Object.assign({ debounce: false }, options)
+	var $options = Object.assign(
+	{
+		debounce: false,
+		relative: '',
+	}
+	, options)
+
+	var $base = producer($options.relative)
 
 	var art = Artifact((env /* :REnv */) =>
 	{
@@ -58,8 +67,7 @@ module.exports = function Watch
 			return resolve()
 		}
 
-		$src(env)
-		.then(src_gen =>
+		join($src(env), $base(env), (src_gen, base_gen) =>
 		{
 			var src /* :string[] */ = [].concat(src_gen)
 
@@ -95,23 +103,26 @@ module.exports = function Watch
 					}
 				}
 			}
-		})
 
-		function next (event, path)
-		{
-			path = env.src.relative(path)
-
-			var $env = Object.assign({}, env,
+			function next (event, path)
 			{
-				event: event,
-				entry: path,
-			})
+				var base = env.src.partial(base_gen)
+				path = base.relative(path)
 
-			/* @flow-off */
-			target.construct($env)
-			.then(ok, nag)
-			.then(once)
-		}
+				console.log(base(), '**', path)
+
+				var $env = Object.assign({}, env,
+				{
+					event: event,
+					entry: path,
+				})
+
+				/* @flow-off */
+				target.construct($env)
+				.then(ok, nag)
+				.then(once)
+			}
+		})
 
 		function ok ()
 		{
