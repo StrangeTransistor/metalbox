@@ -35,9 +35,5 @@ module.exports.Watch = () =>
 function CopyAssets ()
 {
 	return With(Copy(),
-	env =>
-	{
-		console.log('|', env.entry)
-		return assign({}, env, { dst: env.dst.partial('assets') })
-	})
+		env => assign({}, env, { dst: env.dst.partial('assets') }))
 }

@@ -30,13 +30,11 @@ module.exports = function Copy /* ::<Env: EnvInOut & EnvCopy> */
 			/* @flow-off */
 			if (options.unlink)
 			{
-				// console.log('RM', env.dst(env.entry))
 				rm(env.dst(env.entry))
 			}
 		}
 		else
 		{
-			// console.log('+', env.src(env.entry), env.dst(env.entry))
 			cp(env.src(env.entry), env.dst(env.entry), { force: true })
 		}
 	})

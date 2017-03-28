@@ -109,8 +109,6 @@ module.exports = function Watch
 				var base = env.src.partial(base_gen)
 				path = base.relative(path)
 
-				console.log(base(), '**', path)
-
 				var $env = Object.assign({}, env,
 				{
 					event: event,
