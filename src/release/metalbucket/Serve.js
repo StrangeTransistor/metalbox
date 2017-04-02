@@ -5,7 +5,7 @@ var Command = require('../../artifact/Command')
 
 module.exports = function Serve ()
 {
-	return Proxy(Command('npm', [ 'run', 'serve' ]), construct =>
+	return Proxy(Command(npm(), [ 'run', 'serve' ]), construct =>
 	{
 		return (env) =>
 		{
@@ -15,4 +15,16 @@ module.exports = function Serve ()
 			}
 		}
 	})
+}
+
+function npm ()
+{
+	if (process.platform === 'win32')
+	{
+		return 'npm.cmd'
+	}
+	else
+	{
+		return 'npm'
+	}
 }
