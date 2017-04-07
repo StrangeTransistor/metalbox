@@ -28,7 +28,7 @@ module.exports = function Copy /* ::<Env: EnvInOut> */
 
 	return Artifact(env =>
 	{
-		return join($src, $dst, (src, dst) =>
+		return join($src(env), $dst(env), (src, dst) =>
 		{
 			cp(env.src(src), env.dst(dst), { force: true })
 		})
