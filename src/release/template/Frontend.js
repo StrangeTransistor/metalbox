@@ -14,8 +14,7 @@ module.exports = function ()
 {
 	return From('frontend', Composite(
 	[
-		/* @flow-off weird escalation Directory<> */
-		(Directory() /* :T_Artifact<EnvOut> */),
+		Directory(),
 		Glob('', glob, '', Copy(), { exclude_recursive: false }),
 	]))
 }

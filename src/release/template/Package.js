@@ -11,8 +11,7 @@ module.exports = function ()
 {
 	return From('package', Composite(
 	[
-		/* @flow-off weird escalation Directory<> */
-		(Directory() /* :T_Artifact<EnvOut> */),
+		Directory(),
 		Copy('package.json')
 	]))
 }
