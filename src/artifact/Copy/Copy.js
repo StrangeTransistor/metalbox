@@ -15,7 +15,7 @@ var assign = Object.assign
 var cp = require('fs-sync').copy
 var rm = require('fs-sync').remove
 
-var Artifact = require('./Artifact')
+var Artifact = require('../Artifact')
 
 module.exports = function Copy /* ::<Env: EnvInOut & EnvCopy> */
 (options /* ::?:Options */)
