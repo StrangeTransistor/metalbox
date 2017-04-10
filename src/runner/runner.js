@@ -47,6 +47,7 @@ module.exports = (argv /* :Array<string> */) =>
 	})
 	.help()
 	.version()
+	.alias('version', 'v')
 	.parse(argv.slice(2))
 }
 
