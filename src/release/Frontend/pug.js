@@ -8,6 +8,8 @@ var Heat = require('../../artifact/Watch/Heat')
 
 var Pug  = require('../metalbucket/Pug')
 
+var label = require('../../label')
+
 
 var glob = (env) =>
 {
@@ -21,7 +23,7 @@ var plain_entry = (env) =>
 
 var Standard = module.exports.Standard = function ()
 {
-	return Glob('', glob, '', File(plain_entry, Pug()))
+	return label('Pug → HTML', Glob('', glob, '', File(plain_entry, Pug())))
 }
 
 module.exports.Watch = function ()
