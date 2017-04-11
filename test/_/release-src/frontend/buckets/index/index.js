@@ -30,8 +30,11 @@ function lower (it: string): string
 0 && lower('ABC')
 
 import template from 'templates/template.pug'
+import template_static from 'templates/template.static.pug'
 
 0 && console.log(template(
 {
 	data: 'data'
 }))
+
+0 && console.log(template_static)
