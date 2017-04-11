@@ -1,14 +1,20 @@
 /* @flow */
+/* ::
+
+type EnvPug = EnvFrontend & EnvEntry;
+
+*/
+
 
 var pug = require('pug').renderFile
 var options = require('./pug-options')
 
 module.exports = function Pug ()
-	/* :Producer<EnvFrontend, string> */
+	/* :Producer<EnvPug, string> */
 {
 	return (env) =>
 	{
-		var filename = env.src(env.buckets_path, 'index/index.pug')
+		var filename = env.src(env.entry)
 
 		// TODO metalbox.resource
 
