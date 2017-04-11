@@ -3,7 +3,7 @@
 var File = require('../../artifact/File')
 var Heat = require('../../artifact/Watch/Heat')
 
-var Pug  = require('../../producer/Pug')
+var Pug  = require('../metalbucket/Pug')
 
 var Standard = module.exports.Standard = function ()
 {
