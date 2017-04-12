@@ -15,6 +15,7 @@ module.exports = function ()
 	return From('frontend', Composite(
 	[
 		Directory(),
+		// TODO rm option
 		Glob('', glob, '', Copy(), { exclude_recursive: false }),
 	]))
 }

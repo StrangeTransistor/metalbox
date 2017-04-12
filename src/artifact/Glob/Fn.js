@@ -62,12 +62,15 @@ module.exports = function Glob /* ::<Env: EnvInOut>*/
 
 			var globs = [].concat(glob)
 
+			// TODO questionable option
 			if ($options.exclude_node_modules)
 			{
 				globs = globs.concat('!**/node_modules/**')
 			}
+			// TODO questionable option
 			if ($options.exclude_recursive)
 			{
+				globs = globs.concat('!' + env.dst('**'))
 				globs = globs.concat('!release/**')
 			}
 
