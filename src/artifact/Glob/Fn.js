@@ -70,15 +70,15 @@ module.exports = function Glob /* ::<Env: EnvInOut>*/
 			// TODO questionable option
 			if ($options.exclude_recursive)
 			{
-				globs = globs.concat('!' + env.dst('**'))
 				globs = globs.concat('!release/**')
 			}
 
 			globs = glob_resolve(r_src(), globs)
 
+			// TODO rm
 			if ($options.exclude_recursive)
 			{
-				globs = globs.concat(recursion_indicator(env))
+				globs = globs.concat('!' + env.dst('**'))
 			}
 
 			var paths = find(globs)
@@ -104,9 +104,4 @@ module.exports = function Glob /* ::<Env: EnvInOut>*/
 	}
 
 	return art
-}
-
-function recursion_indicator (env /* :EnvInOut */)
-{
-	return '!' + env.dst('**')
 }
