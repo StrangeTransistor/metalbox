@@ -1,5 +1,8 @@
 include /other-bucket/mixin
 
+-
+	var manifest = require('../../package.json')
+
 doctype html
 html
 	meta(charset='utf-8')
@@ -8,3 +11,4 @@ html
 body
 	div #{dev}
 	+Mixin
+	div #{manifest.name}-#{manifest.version}

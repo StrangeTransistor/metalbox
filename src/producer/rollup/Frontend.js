@@ -20,9 +20,11 @@ module.exports = function Rollup ()
 {
 	return (env) =>
 	{
+		var entry = env.src(env.buckets_path, 'index/index.js')
+
 		return rollup.rollup(
 		{
-			entry: env.src(env.buckets_path, 'index/index.js'),
+			entry: entry,
 
 			plugins:
 			[
@@ -43,7 +45,7 @@ module.exports = function Rollup ()
 				}),
 				json(),
 				flow({ pretty: true }),
-				pug(pug_options(env)) // TODO dev is not passed to templates
+				pug(pug_options(env, entry)) // TODO dev is not passed to templates
 			],
 
 			/*

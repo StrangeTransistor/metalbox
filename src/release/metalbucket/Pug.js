@@ -18,6 +18,6 @@ module.exports = function Pug ()
 
 		// TODO metalbox.resource
 
-		return pug(filename, options(env))
+		return pug(filename, options(env, filename))
 	}
 }

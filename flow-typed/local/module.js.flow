@@ -1,0 +1,11 @@
+declare module 'module'
+{
+	declare class Module
+	{
+		constructor(filename: string, parent?: any): void,
+		require(path: string): any,
+		static _nodeModulePaths(path: string): string[],
+	}
+
+	declare var exports: Module
+}
