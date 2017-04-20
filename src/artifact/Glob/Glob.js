@@ -2,20 +2,13 @@
 
 var Glob = require('./Fn')
 
-/* ::
-
-import type { Options } from './Fn'
-
-*/
-
 /* eslint-disable max-params */
 module.exports = function Rule /* ::<Env: EnvInOut> */
 (
 	prod_src  /* :WeakProductable<Env, string>            */,
 	prod_glob /* :WeakProductable<Env, string | string[]> */,
 	prod_dst  /* :WeakProductable<Env, string>            */,
-	target    /* :T_Artifact<Env & EnvEntry> */,
-	options   /* :?Options */
+	target    /* :T_Artifact<Env & EnvEntry> */
 )
 	/* :T_Artifact<Env> */
 {
@@ -30,6 +23,5 @@ module.exports = function Rule /* ::<Env: EnvInOut> */
 		})
 
 		return target.construct($env)
-	}
-	, options)
+	})
 }

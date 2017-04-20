@@ -10,12 +10,6 @@ type F_Do<Env> =
 )
 => WeakResolution;
 
-export type Options =
-{
-	exclude_recursive?: boolean,
-	exclude_node_modules?: boolean
-};
-
 */
 
 var method = require('bluebird').method
@@ -35,8 +29,7 @@ module.exports = function Glob /* ::<Env: EnvInOut>*/
 	prod_src  /* :WeakProductable<Env, string>            */,
 	prod_glob /* :WeakProductable<Env, string | string[]> */,
 	prod_dst  /* :WeakProductable<Env, string>            */,
-	do_fn     /* :F_Do<Env> */,
-	options   /* :?Options */
+	do_fn     /* :F_Do<Env> */
 )
 	/* :T_Artifact<Env> */
 {
@@ -45,13 +38,6 @@ module.exports = function Glob /* ::<Env: EnvInOut>*/
 	var $dst  = producer(prod_dst)
 	var $glob = producer(prod_glob)
 	var $do   = method(do_fn)
-
-	var $options = Object.assign(
-	{
-		exclude_recursive: true,
-		exclude_node_modules: true,
-	}
-	, options)
 
 	var art = Artifact(env =>
 	{
@@ -62,24 +48,12 @@ module.exports = function Glob /* ::<Env: EnvInOut>*/
 
 			var globs = [].concat(glob)
 
-			// TODO questionable option
-			if ($options.exclude_node_modules)
-			{
-				globs = globs.concat('!**/node_modules/**')
-			}
-			// TODO questionable option
-			if ($options.exclude_recursive)
-			{
-				globs = globs.concat('!release/**')
-			}
+			globs = globs.concat('!**/node_modules/**')
+			globs = globs.concat('!release/**')
 
 			globs = glob_resolve(r_src(), globs)
 
-			// TODO rm
-			if ($options.exclude_recursive)
-			{
-				globs = globs.concat('!' + env.dst('**'))
-			}
+			globs = globs.concat('!' + env.dst('**'))
 
 			var paths = find(globs)
 			.map(path => r_src.relative(path))
