@@ -7,7 +7,7 @@ var mkdir = require('mkdirp').sync
 
 var expect = require('chai').expect
 
-var cmd   = require('command-promise')
+var cmd_metalbox = require('../_/cmd-metalbox')
 
 var dst_rootpath = require('../_/dst-rootpath')
 var tmp_rootpath = require('../_/tmp-rootpath')
@@ -27,8 +27,7 @@ describe('runner template', () =>
 
 		// write(tmp_root('package.json'), '{ "name": "name" }')
 
-		return cmd('node',
-			__dirname + '/../../run/metalbox', 'template template/Frontend')
+		return cmd_metalbox('template template/Frontend')
 		.then(() =>
 		{
 			expect(compare(dst_root(), tmp_root())).ok

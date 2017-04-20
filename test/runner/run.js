@@ -7,7 +7,7 @@ var load  = require('fs-sync').readJSON
 
 var expect = require('chai').expect
 
-var cmd   = require('command-promise')
+var cmd_metalbox = require('../_/cmd-metalbox')
 
 var tmp_rootpath = require('../_/tmp-rootpath')
 
@@ -22,7 +22,7 @@ describe('runner run', () =>
 
 		write(tmp_root('package.json'), '{ "name": "name" }')
 
-		return cmd('node', __dirname + '/../../run/metalbox', 'run Backend')
+		return cmd_metalbox('run Backend')
 		.then(() =>
 		{
 			var manifest = load(tmp_root('release/Backend/package.json'))
