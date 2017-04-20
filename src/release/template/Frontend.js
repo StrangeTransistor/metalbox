@@ -16,6 +16,6 @@ module.exports = function ()
 	[
 		Directory(),
 		// TODO rm option
-		Glob('', glob, '', Copy(), { exclude_recursive: false }),
+		Glob('', glob, '', Copy(), { exclude_recursive: true }),
 	]))
 }
