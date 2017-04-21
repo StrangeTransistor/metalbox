@@ -111,6 +111,8 @@ module.exports = function Watch
 
 				var $env = Object.assign({}, env,
 				{
+					src: base,
+
 					event: event,
 					entry: path,
 				})
