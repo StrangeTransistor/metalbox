@@ -7,9 +7,17 @@ module.exports = function Serve ()
 {
 	return Proxy(Command(npm(), [ 'run', 'serve' ]), construct =>
 	{
-		return (env) =>
+		return (env /* :EnvOnce & EnvPackage */) =>
 		{
-			if (! env.once)
+			if (env.once)
+			{
+				return
+			}
+			if (! (env.package.scripts))
+			{
+				return
+			}
+			if ('serve' in env.package.scripts)
 			{
 				return construct(env)
 			}
