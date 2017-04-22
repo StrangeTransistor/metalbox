@@ -1,6 +1,7 @@
 /* @flow */
 
-var Module = require('module')
+var Module  = require('module')
+var nocache = require('require-nocache')
 
 module.exports = function
 (
@@ -21,6 +22,6 @@ module.exports = function
 		pretty: false,
 		dev: env.dev || false,
 		basedir: env.src(env.buckets_path),
-		require: mod.require.bind(mod),
+		require: nocache(mod),
 	}
 }
