@@ -16,17 +16,16 @@ module.exports = function Command /* ::<Env> */
 )
 	/* :T_Artifact<Env> */
 {
-	var $spawn = null
+	var $spawn /* :?child_process$ChildProcess */ = null
 
 	var art = Artifact(() =>
 	{
 		release()
-		$spawn = spawn(command, args, { stdio: [ 'pipe', 'inherit', 'inherit' ] })
+		var $$spawn = $spawn = spawn(command, args, { stdio: [ 'pipe', 'inherit', 'inherit' ] })
 
 		return new Promise(rs =>
 		{
-			/* @flow-off */
-			$spawn.once('exit', () => rs())
+			$$spawn.once('exit', () => rs())
 		})
 	})
 
