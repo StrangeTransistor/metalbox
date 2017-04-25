@@ -1,5 +1,7 @@
 /* @flow */
 
+var assign = Object.assign
+
 var With = require('./With')
 
 module.exports = function Defaults
@@ -19,6 +21,6 @@ module.exports = function Defaults
 	return With(release, (env /* :OuterEnv */) /* :InnerEnv */ =>
 	{
 		/* @flow-off */
-		return Object.assign({}, defaults, env)
+		return assign({}, defaults, env)
 	})
 }
