@@ -21,13 +21,29 @@ module.exports =
 			visitor.visit(root)
 		}
 
-		v.visitUrl = (url, args) =>
+		// TODO
+		var hash = 'abcdef'
+
+		v.visitUrl = (url) =>
 		{
-			console.log(url)
-			console.log(args)
+			var value = url.value.value
+			if (re_asset().test(value))
+			{
+				value = subst(value, hash)
+			}
+
+			url.value.value = value
 			return url
 		}
 
 		pluginManager.addVisitor(v)
 	}
+}
+
+var re_asset = () => /^~assets\//
+var re_asset_subst = () => /^~assets\/(.*)$/
+
+function subst (url, hash)
+{
+	return url.replace(re_asset_subst(), 'assets-' + hash + '/' + '$1')
 }
