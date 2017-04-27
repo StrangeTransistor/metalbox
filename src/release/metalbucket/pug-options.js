@@ -3,6 +3,8 @@
 var Module  = require('module')
 var nocache = require('require-nocache')
 
+var asset = require('./pug-asset-hash')
+
 module.exports = function
 (
 	env /* :EnvFrontend */,
@@ -23,5 +25,6 @@ module.exports = function
 		dev: env.dev || false,
 		basedir: env.src(env.buckets_path),
 		require: nocache(mod),
+		asset: asset,
 	}
 }
