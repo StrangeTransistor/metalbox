@@ -1,6 +1,7 @@
 .class {
   color: Black;
   background: White;
+  background: url(~assets/index/empty.png);
 }
 .flex {
   display: -webkit-box;
