@@ -3,7 +3,7 @@
 var read = require('fs-sync').read
 var less = require('less')
 
-var asset_hash = require('./asset-hash')
+var asset_hash = require('./less-asset-hash')
 
 module.exports = function LessCss ()
 	/* :Producer<EnvFrontend, string> */
