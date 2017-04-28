@@ -18,8 +18,6 @@ module.exports = function Hash /* ::<Env: EnvFrontend> */
 			})
 		}
 
-		console.log('NEW', env.hash)
-
 		return env
 	})
 }
