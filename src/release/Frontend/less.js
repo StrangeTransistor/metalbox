@@ -22,9 +22,12 @@ module.exports.Watch = function ()
 	return Heat(env => env.src(env.buckets_path, '**/*.less'), Standard())
 }
 
+
+var hashed = (env) => `index.${env.hash}.css`
+
 module.exports.Min = function ()
 {
-	return File('index.css', Pipeline(
+	return File(hashed, Pipeline(
 		LessCss(),
 		Autoprefixer(),
 		CssNano()

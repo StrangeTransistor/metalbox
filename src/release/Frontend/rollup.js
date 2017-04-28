@@ -20,9 +20,12 @@ module.exports.Watch = function ()
 	return Heat(env => env.src(env.buckets_path, '**/*.@(js|pug)'), Standard())
 }
 
+
+var hashed = (env) => `index.${env.hash}.js`
+
 module.exports.Min = function ()
 {
-	return File('index.js', Pipeline(
+	return File(hashed, Pipeline(
 		Rollup(),
 		Babili()
 	))
