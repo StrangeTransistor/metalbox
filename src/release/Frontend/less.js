@@ -5,7 +5,7 @@ var Heat = require('../../artifact/Watch/Heat')
 
 var Pipeline = require('../../producer/Pipeline')
 
-var LessCss = require('../metalbucket/LessCss')
+var LessCss = require('../metalbucket/producer/LessCss')
 var Autoprefixer = require('../../pipe/Autoprefixer')
 var CssNano = require('../../pipe/CssNano')
 
