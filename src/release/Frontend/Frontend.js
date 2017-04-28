@@ -9,10 +9,12 @@ var less = require('./less')
 var rollup = require('./rollup')
 var assets = require('./assets')
 
+var Hash = require('./Hash')
+
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
 {
-	return defaults({},
+	return defaults({}, Hash(
 	Release(
 	[
 		Manifest(),
@@ -20,5 +22,5 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 		less.Min(),
 		rollup.Min(),
 		assets.Standard()
-	]))
+	])))
 }

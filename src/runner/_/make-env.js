@@ -48,6 +48,11 @@ module.exports = (pre_env /* :PreEnv */) =>
 		env.instance = yargv.instance
 	}
 
+	if (yargv.hash)
+	{
+		env.hash = yargv.hash
+	}
+
 	return env
 }
 /* eslint-enable complexity */
