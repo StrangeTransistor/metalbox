@@ -2,12 +2,12 @@
 
 module.exports = (env /* :EnvFrontend */) =>
 {
+	/* @flow-off */
+	var hash = env.hash
+
 	return {
 		install: (less /* :any */, pluginManager /* :any */) =>
 		{
-			// TODO
-			var hash = 'abcdef'
-
 			var asset_visitor = {}
 
 			var visitor = new less.visitors.Visitor(asset_visitor)
