@@ -21,6 +21,6 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 		pug.Min(),
 		less.Min(),
 		rollup.Min(),
-		assets.Standard()
+		assets.Min(),
 	])))
 }

@@ -35,5 +35,23 @@ module.exports.Watch = () =>
 function CopyAssets ()
 {
 	return With(Copy(),
-		env => assign({}, env, { dst: env.dst.partial('assets') }))
+	env =>
+	{
+		return assign({}, env, { dst: env.dst.partial('assets') })
+	})
+}
+
+
+module.exports.Min = () =>
+{
+	return Glob(env => env.src(env.buckets_path), glob, '', CopyAssetsHash())
+}
+
+function CopyAssetsHash ()
+{
+	return With(Copy(),
+	env =>
+	{
+		return assign({}, env, { dst: env.dst.partial(`assets-${env.hash}`) })
+	})
 }
