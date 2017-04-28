@@ -7,7 +7,7 @@ type EnvPug = EnvFrontend & EnvEntry;
 
 
 var pug = require('pug').renderFile
-var options = require('./pug-options')
+var options = require('./options')
 
 module.exports = function Pug ()
 	/* :Producer<EnvPug, string> */

@@ -6,7 +6,7 @@ var File = require('../../artifact/File')
 var Glob = require('../../artifact/Glob')
 var Heat = require('../../artifact/Watch/Heat')
 
-var Pug  = require('../metalbucket/Pug')
+var Pug  = require('../metalbucket/producer/Pug')
 
 var label = require('../../label')
 
