@@ -4,27 +4,19 @@ module.exports =
 {
 	install: (less /* :any */, pluginManager /* :any */) =>
 	{
-		/*
-		less.functions.functionRegistry.add('asset-hash', (filename) =>
-		{
-			console.log(filename)
-			return filename
-		})
-		*/
+		// TODO
+		var hash = 'abcdef'
 
-		var v = {}
+		var asset_visitor = {}
 
-		var visitor = new less.visitors.Visitor(v)
+		var visitor = new less.visitors.Visitor(asset_visitor)
 
-		v.run = (root) =>
+		asset_visitor.run = (root) =>
 		{
 			visitor.visit(root)
 		}
 
-		// TODO
-		var hash = 'abcdef'
-
-		v.visitUrl = (url) =>
+		asset_visitor.visitUrl = (url) =>
 		{
 			var value = url.value.value
 			if (re_asset().test(value))
@@ -36,7 +28,7 @@ module.exports =
 			return url
 		}
 
-		pluginManager.addVisitor(v)
+		pluginManager.addVisitor(asset_visitor)
 	}
 }
 
