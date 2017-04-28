@@ -21,6 +21,9 @@ describe('Frontend (Prod)', () =>
 
 	var env = tmp_env(src_root, tmp_root, { notify: true })
 
+	/* @flow-off */
+	env.hash = 'fixed'
+
 	var f = Frontend()
 
 	it('works', () =>
