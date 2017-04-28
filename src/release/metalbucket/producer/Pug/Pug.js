@@ -16,8 +16,6 @@ module.exports = function Pug ()
 	{
 		var filename = env.src(env.entry)
 
-		// TODO metalbox.resource
-
 		return pug(filename, options(env, filename))
 	}
 }

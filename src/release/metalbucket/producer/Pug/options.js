@@ -25,6 +25,6 @@ module.exports = function
 		dev: env.dev || false,
 		basedir: env.src(env.buckets_path),
 		require: nocache(mod),
-		asset: asset,
+		asset: asset(env),
 	}
 }

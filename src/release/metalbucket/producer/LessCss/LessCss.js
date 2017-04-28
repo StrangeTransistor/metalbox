@@ -19,7 +19,7 @@ module.exports = function LessCss ()
 			paths: [ env.src(), env.src(env.buckets_path) ],
 			plugins:
 			[
-				asset_hash,
+				asset_hash(env),
 			],
 		}
 

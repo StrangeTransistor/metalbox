@@ -1,11 +1,14 @@
 /* @flow */
 
-module.exports = (url /* :string */) =>
+module.exports = (env /* :EnvFrontend */) =>
 {
-	// TODO
-	var hash = 'abcdef'
+	return (url /* :string */) =>
+	{
+		// TODO
+		var hash = 'abcdef'
 
-	return url.replace(re_asset_subst(), '$1' + '.' + hash + '.' + '$2')
+		return url.replace(re_asset_subst(), '$1' + '.' + hash + '.' + '$2')
+	}
 }
 
 var re_asset_subst = () => /^(.+)\.([^.]+)$/

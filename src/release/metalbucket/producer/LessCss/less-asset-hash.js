@@ -1,34 +1,36 @@
 /* @flow */
 
-module.exports =
+module.exports = (env /* :EnvFrontend */) =>
 {
-	install: (less /* :any */, pluginManager /* :any */) =>
-	{
-		// TODO
-		var hash = 'abcdef'
-
-		var asset_visitor = {}
-
-		var visitor = new less.visitors.Visitor(asset_visitor)
-
-		asset_visitor.run = (root) =>
+	return {
+		install: (less /* :any */, pluginManager /* :any */) =>
 		{
-			visitor.visit(root)
-		}
+			// TODO
+			var hash = 'abcdef'
 
-		asset_visitor.visitUrl = (url) =>
-		{
-			var value = url.value.value
-			if (re_asset().test(value))
+			var asset_visitor = {}
+
+			var visitor = new less.visitors.Visitor(asset_visitor)
+
+			asset_visitor.run = (root) =>
 			{
-				value = subst(value, hash)
+				visitor.visit(root)
 			}
 
-			url.value.value = value
-			return url
-		}
+			asset_visitor.visitUrl = (url) =>
+			{
+				var value = url.value.value
+				if (re_asset().test(value))
+				{
+					value = subst(value, hash)
+				}
 
-		pluginManager.addVisitor(asset_visitor)
+				url.value.value = value
+				return url
+			}
+
+			pluginManager.addVisitor(asset_visitor)
+		}
 	}
 }
 
