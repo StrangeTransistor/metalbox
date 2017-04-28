@@ -5,6 +5,15 @@ module.exports = (env /* :EnvFrontend */) =>
 	/* @flow-off */
 	var hash = env.hash
 
+	if (hash)
+	{
+		var subst = subst_hash
+	}
+	else
+	{
+		var subst = subst_plain
+	}
+
 	return {
 		install: (less /* :any */, pluginManager /* :any */) =>
 		{
@@ -20,6 +29,7 @@ module.exports = (env /* :EnvFrontend */) =>
 			asset_visitor.visitUrl = (url) =>
 			{
 				var value = url.value.value
+
 				if (re_asset().test(value))
 				{
 					value = subst(value, hash)
@@ -37,7 +47,12 @@ module.exports = (env /* :EnvFrontend */) =>
 var re_asset = () => /^~assets\//
 var re_asset_subst = () => /^~assets\/(.*)$/
 
-function subst (url, hash)
+function subst_hash (url, hash)
 {
 	return url.replace(re_asset_subst(), 'assets-' + hash + '/' + '$1')
+}
+
+function subst_plain (url)
+{
+	return url.replace(re_asset_subst(), 'assets/' + '$1')
 }
