@@ -5,7 +5,7 @@ var randomstring = require('randomstring').generate
 
 module.exports = function Hash /* ::<Env: EnvFrontend> */
 (target /* :T_Artifact<Env> */)
-	/* :T_Artifact<Env> */
+	/* :T_Artifact<Env & EnvHash> */
 {
 	return With(target, env =>
 	{
