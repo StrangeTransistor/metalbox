@@ -32,7 +32,7 @@ describe('Backend (Prod)', () =>
 		})
 		.then(() =>
 		{
-			expect_release(tmp_root('release.json'), true)
+			expect_release(tmp_root('release.json'), { instance: true })
 		})
 	})
 })
