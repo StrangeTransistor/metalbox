@@ -1,4 +1,9 @@
 /* @flow */
+/* ::
+
+type Env = EnvPackage & EnvInstanceOptional & EnvHashOptional;
+
+*/
 
 var dump = require('../../json/dump')
 
@@ -8,7 +13,7 @@ var Rev = require('../../Rev')
 
 module.exports = function Manifest ()
 {
-	return File('release.json', (env /* :EnvPackage & EnvInstanceOptional */) =>
+	return File('release.json', (env /* :Env */) =>
 	{
 		var release = {}
 
@@ -23,6 +28,13 @@ module.exports = function Manifest ()
 			release.instance = instance
 
 			release.name = env.package.name + '-' + instance
+		}
+
+		var hash = env.hash
+
+		if (hash)
+		{
+			release.hash = hash
 		}
 
 		return Rev()

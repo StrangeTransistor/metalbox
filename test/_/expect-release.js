@@ -32,6 +32,12 @@ module.exports = (path /* :string */, options /* ::?:Options */) =>
 		expect(release.name).a('string')
 	}
 
+	if (options.hash)
+	{
+		expect(release.hash).a('string')
+		expect(release.hash).eq('fixed')
+	}
+
 	expect(release.git).an('object')
 	expect(release.git.rev).a('string')
 	expect(release.git.msg).a('string')

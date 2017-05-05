@@ -35,7 +35,7 @@ describe('Frontend (Prod)', () =>
 		})
 		.then(() =>
 		{
-			expect_release(tmp_root('release.json'))
+			expect_release(tmp_root('release.json'), { hash: true })
 		})
 	})
 })
