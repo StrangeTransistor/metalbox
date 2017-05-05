@@ -1,4 +1,9 @@
 /* @flow */
+/* ::
+
+import type { Options } from './Fn';
+
+*/
 
 var Glob = require('./Fn')
 
@@ -8,7 +13,8 @@ module.exports = function Rule /* ::<Env: EnvInOut> */
 	prod_src  /* :WeakProductable<Env, string>            */,
 	prod_glob /* :WeakProductable<Env, string | string[]> */,
 	prod_dst  /* :WeakProductable<Env, string>            */,
-	target    /* :T_Artifact<Env & EnvEntry> */
+	target    /* :T_Artifact<Env & EnvEntry> */,
+	options   /* ::?:Options */
 )
 	/* :T_Artifact<Env> */
 {
@@ -23,5 +29,6 @@ module.exports = function Rule /* ::<Env: EnvInOut> */
 		})
 
 		return target.construct($env)
-	})
+	}
+	, options)
 }
