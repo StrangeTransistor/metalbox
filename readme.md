@@ -50,6 +50,17 @@ metalbox preset
 metalbox p dev # run `metalbox.presets.dev`
 ```
 
+**urls**:
+```css
+background: url(~assets/index/image.png);
+```
+
+```jade
+link(rel='stylesheet' href=asset('index.css'))
+script(src=asset('index.js'))
+div(style={ 'background-image': asset.url('~assets/index/image.png') })
+```
+
 > — This… is a bucket.
 >
 > — Dear God!
