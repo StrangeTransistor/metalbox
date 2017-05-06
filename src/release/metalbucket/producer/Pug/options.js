@@ -23,6 +23,7 @@ module.exports = function
 	return {
 		pretty: false,
 		dev: env.dev || false,
+		hash: env.hash,
 		basedir: env.src(env.buckets_path),
 		require: nocache(mod),
 		asset: asset(env),
