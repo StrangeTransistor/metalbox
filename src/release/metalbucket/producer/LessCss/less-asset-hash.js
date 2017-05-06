@@ -1,18 +1,12 @@
 /* @flow */
 
+var asset_url = require('../../asset-url')
+
 module.exports = (env /* :EnvFrontend */) =>
 {
-	/* @flow-off */
 	var hash = env.hash
 
-	if (hash)
-	{
-		var subst = subst_hash
-	}
-	else
-	{
-		var subst = subst_plain
-	}
+	var subst = asset_url(hash)
 
 	return {
 		install: (less /* :any */, pluginManager /* :any */) =>
@@ -30,10 +24,7 @@ module.exports = (env /* :EnvFrontend */) =>
 			{
 				var value = url.value.value
 
-				if (re_asset().test(value))
-				{
-					value = subst(value, hash)
-				}
+				value = subst(value, hash)
 
 				url.value.value = value
 				return url
@@ -42,17 +33,4 @@ module.exports = (env /* :EnvFrontend */) =>
 			pluginManager.addVisitor(asset_visitor)
 		}
 	}
-}
-
-var re_asset = () => /^~assets\//
-var re_asset_subst = () => /^~assets\/(.*)$/
-
-function subst_hash (url, hash)
-{
-	return url.replace(re_asset_subst(), 'assets-' + hash + '/' + '$1')
-}
-
-function subst_plain (url)
-{
-	return url.replace(re_asset_subst(), 'assets/' + '$1')
 }

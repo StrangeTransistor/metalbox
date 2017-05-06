@@ -9,7 +9,7 @@ module.exports = (env /* :EnvFrontend */) =>
 	{
 		return (url /* :string */) =>
 		{
-			return url.replace(re_asset_subst(), '$1' + '.' + hash + '.' + '$2')
+			return url.replace(re_asset(), '$1' + '.' + hash + '.' + '$2')
 		}
 	}
 	else
@@ -21,4 +21,4 @@ module.exports = (env /* :EnvFrontend */) =>
 	}
 }
 
-var re_asset_subst = () => /^(.+)\.([^.]+)$/
+var re_asset = () => /^(.+)\.([^.]+)$/
