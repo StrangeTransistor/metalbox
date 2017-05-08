@@ -5,7 +5,7 @@ type Asset =
 {
 	(url: string): string,
 	url (url: string): string,
-}
+};
 
 */
 
@@ -25,16 +25,16 @@ module.exports = (env /* :EnvFrontend */) =>
 		return url.replace(re_asset(), '$1' + '.' + hash + '.' + '$2')
 	}
 
-	/* @flow-off */
 	var asset /* :Asset */
 
 	if (hash)
 	{
-		asset = flow(asset_url, asset_static)
+		asset = (flow(asset_url, asset_static) /* :Asset */)
 	}
 	else
 	{
-		asset = asset_url
+		/* @flow-off */
+		asset = (asset_url /*:Asset */)
 	}
 
 
