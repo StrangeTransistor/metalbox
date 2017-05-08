@@ -58,6 +58,7 @@ background: url(~assets/index/image.png);
 ```jade
 link(rel='stylesheet' href=asset('index.css'))
 script(src=asset('index.js'))
+img(src=asset('~assets/index/image.png'))
 div(style={ 'background-image': asset.url('~assets/index/image.png') })
 ```
 
