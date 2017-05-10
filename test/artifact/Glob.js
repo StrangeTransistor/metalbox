@@ -49,8 +49,9 @@ describe('Glob (fn)', () =>
 		{
 			expect(r).deep.eq(
 			[
-				'buckets/index/empty.png',
-				'buckets/other-bucket/empty.gif'
+				'buckets/index/green-large.png',
+				'buckets/index/green.png',
+				'buckets/other-bucket/green.gif'
 			])
 		})
 	})
