@@ -9,6 +9,7 @@ export type Options =
 {
 	debounce?: boolean,
 	relative?: WeakProductable<EnvIn, string>,
+	large?: boolean,
 };
 
 */
@@ -55,6 +56,7 @@ module.exports = function Watch
 	{
 		debounce: false,
 		relative: '',
+		large: false,
 	}
 	, options)
 
@@ -81,6 +83,16 @@ module.exports = function Watch
 			]
 
 			release()
+
+			var chokidar_options /* :Object */ =
+			{
+				ignored: ignored
+			}
+
+			if ($options.large)
+			{
+				chokidar_options.awaitWriteFinish = true
+			}
 
 			$watch = watch(env.src(src[0]), { ignored: ignored })
 
