@@ -27,7 +27,8 @@ module.exports.Watch = () =>
 		label('Assets', CopyAssets()),
 		{
 			/* @flow-off */
-			relative: env => env.src(env.buckets_path)
+			relative: env => env.src(env.buckets_path),
+			large: true,
 		})
 	])
 }
