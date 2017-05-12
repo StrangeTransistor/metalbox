@@ -94,7 +94,7 @@ module.exports = function Watch
 				chokidar_options.awaitWriteFinish = true
 			}
 
-			$watch = watch(env.src(src[0]), { ignored: ignored })
+			$watch = watch(env.src(src[0]), chokidar_options)
 
 			var $next = not_ignored(next)
 
