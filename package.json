@@ -187,7 +187,7 @@
       "0.41",
 
     "rollup-plugin-includepaths":
-      "0.1",
+      "0.2",
 
     "rollup-plugin-node-globals":
       "1",
@@ -196,10 +196,10 @@
       "2",
 
     "rollup-plugin-node-resolve":
-      "2",
+      "3",
 
     "rollup-plugin-commonjs":
-      "7",
+      "8",
 
     "rollup-plugin-json":
       "2",
