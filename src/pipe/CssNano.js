@@ -12,7 +12,7 @@ module.exports = function CssNano ()
 		[
 			cssnano(
 			{
-				discardUnused: { fontFace: false }
+				safe: true,
 			})
 		])
 		.process(input)
