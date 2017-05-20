@@ -11,7 +11,7 @@ var Composite = require('../../artifact/Composite')
 
 var label = require('../../label')
 
-var glob = '**/*.@(jpg|png|gif|svg)'
+var glob = '**/*.@(jpg|png|gif|svg|ico)'
 
 var Standard = module.exports.Standard = () =>
 {
