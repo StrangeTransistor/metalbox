@@ -40,8 +40,6 @@ module.exports = (env /* :EnvFrontend */) =>
 					value = subst_tilde(value, hash)
 				}
 
-				console.log(value)
-
 				url.value.value = value
 				return url
 			}
