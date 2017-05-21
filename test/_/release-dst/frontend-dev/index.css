@@ -5,8 +5,11 @@
 .bg1 {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAABVJREFUGNNj9FgbxIAbMDHgBSNVGgCWwwFb6t+mugAAAABJRU5ErkJggg==);
 }
-.bg1 {
+.bg2 {
   background: url(data:image/gif;base64,R0lGODdhCgAKAIABAEitc////ywAAAAACgAKAAACCISPqcvtD2MrADs=);
+}
+.bg3 {
+  background-image: url(data:image/gif;base64,R0lGODdhCgAKAIABAEitc////ywAAAAACgAKAAACCISPqcvtD2MrADs=);
 }
 .bg-large {
   background: url(assets/index/green-large.png);
@@ -16,6 +19,9 @@
 }
 .bg-nonexistent {
   background: url(assets/index/non-existent.png);
+}
+.bg-nonexistent2 {
+  background-image: url(assets/index/non-existent.png);
 }
 .flex {
   display: -webkit-box;
