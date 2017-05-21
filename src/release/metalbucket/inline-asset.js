@@ -23,5 +23,6 @@ module.exports = function inline (filename /* :string */)
 
 	var type = mime.lookup(filename)
 
+	// TODO handle svg by plain inlining
 	return `data:${ type };base64,${ content.toString('base64') }`
 }
