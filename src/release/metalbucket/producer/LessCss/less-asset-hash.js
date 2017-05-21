@@ -27,22 +27,40 @@ module.exports = (env /* :EnvFrontend */) =>
 			{
 				var value = url.value.value
 
-				var filename = resolve(value)
-				console.log('F', filename)
+				var data = subst_data(value)
 
-				if (filename)
+				if (data)
 				{
-					var data = inline(filename)
-					console.log(data)
+					/* inlined value */
+					value = data
+				}
+				else
+				{
+					/* check for other cases (~assets) */
+					value = subst_tilde(value, hash)
 				}
 
-				value = subst_tilde(value, hash)
+				console.log(value)
 
 				url.value.value = value
 				return url
 			}
 
 			pluginManager.addVisitor(asset_visitor)
+		}
+	}
+
+	function subst_data (url)
+	{
+		var filename = resolve(url)
+
+		if (filename)
+		{
+			return inline(filename)
+		}
+		else
+		{
+			return null
 		}
 	}
 }
