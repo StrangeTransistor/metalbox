@@ -6,7 +6,7 @@ module.exports = (env /* :EnvFrontend */) =>
 {
 	var hash = env.hash
 
-	var subst = asset_url(hash)
+	var subst_tilde = asset_url(hash)
 
 	return {
 		install: (less /* :any */, pluginManager /* :any */) =>
@@ -24,7 +24,7 @@ module.exports = (env /* :EnvFrontend */) =>
 			{
 				var value = url.value.value
 
-				value = subst(value, hash)
+				value = subst_tilde(value, hash)
 
 				url.value.value = value
 				return url

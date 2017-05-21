@@ -11,14 +11,14 @@ type Asset =
 
 var flow = require('lodash').flow
 
-var Asset_url = require('../../asset-url')
+var asset_url = require('../../asset-url')
 
 module.exports = (env /* :EnvFrontend */) =>
 {
 	/* @flow-off */
 	var hash = env.hash
 
-	var asset_url = Asset_url(hash)
+	var subst_tilde = asset_url(hash)
 
 	function asset_static (url /* :string */)
 	{
@@ -29,12 +29,12 @@ module.exports = (env /* :EnvFrontend */) =>
 
 	if (hash)
 	{
-		asset = (flow(asset_url, asset_static) /* :Asset */)
+		asset = (flow(subst_tilde, asset_static) /* :Asset */)
 	}
 	else
 	{
 		/* @flow-off */
-		asset = (asset_url /*:Asset */)
+		asset = (subst_tilde /*:Asset */)
 	}
 
 
