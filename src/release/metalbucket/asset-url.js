@@ -1,5 +1,8 @@
 /* @flow */
 
+var resolve = require('./resolve-resource')
+var re_asset = resolve.re
+
 module.exports = function asset_url (hash /* :?string */)
 {
 	if (hash)
@@ -12,8 +15,6 @@ module.exports = function asset_url (hash /* :?string */)
 	}
 
 }
-
-var re_asset = () => /^~assets\/(.*)$/
 
 function subst_hash (hash /* :string */)
 {
