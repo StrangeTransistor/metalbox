@@ -14,7 +14,7 @@ module.exports = function inline (filename /* :string */)
 		return null
 	}
 
-	var content = new Buffer.from(read(filename))
+	var content = read(filename)
 
 	if (content.length > threshold)
 	{
@@ -23,6 +23,21 @@ module.exports = function inline (filename /* :string */)
 
 	var type = mime.lookup(filename)
 
-	// TODO handle svg by plain inlining
-	return `data:${ type };base64,${ content.toString('base64') }`
+	return encode(type, content)
+}
+
+function encode (type, content)
+{
+	if (type === 'image/svg+xml')
+	{
+		var content_string = content.toString()
+
+		return `data:${ type },${ encodeURIComponent(content_string) }`
+		.replace(/%20/g, ' ')
+		.replace(/#/g, '%23')
+	}
+	else
+	{
+		return `data:${ type };base64,${ content.toString('base64') }`
+	}
 }
