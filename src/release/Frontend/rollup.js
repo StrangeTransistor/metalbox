@@ -6,13 +6,17 @@ var Heat = require('../../artifact/Watch/Heat')
 var Pipeline = require('../../producer/Pipeline')
 
 var Rollup = require('../../producer/rollup/Frontend')
+var Browser = require('../../pipe/Browser')
 var Babili = require('../../pipe/Babili')
 
 // TODO test.js
 
 var Standard = module.exports.Standard = function ()
 {
-	return File('index.js', Rollup())
+	return File('index.js', Pipeline(
+		Rollup(),
+		Browser()
+	))
 }
 
 module.exports.Watch = function ()
@@ -27,6 +31,7 @@ module.exports.Min = function ()
 {
 	return File(hashed, Pipeline(
 		Rollup(),
+		Browser(),
 		Babili()
 	))
 }
