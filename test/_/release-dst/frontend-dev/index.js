@@ -3,6 +3,15 @@
 
 var arrow3 = () => 3;
 
+
+
+
+
+// eslint-disable-next-line no-unused-vars
+let { x, y } = { x: 1, y: 2 };
+
+0 && console.log(x, y);
+
 var some = "value";
 var other_json = {
 	some: some
