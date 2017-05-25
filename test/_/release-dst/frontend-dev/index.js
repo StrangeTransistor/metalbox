@@ -340,7 +340,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }return pug_html;
   };
 
-  var template_static = "<p>Pug template</p><div></div><span class=\"mixin\">mixin</span>";
+  var template_static = "<p>Pug template</p><div>true</div><span class=\"mixin\">mixin</span>";
 
   /*  */
   // bucket:index
