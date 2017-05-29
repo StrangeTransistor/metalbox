@@ -9,6 +9,8 @@ var Rollup = require('../metalbucket/Rollup')
 
 var glob = require('../metalbucket/smart-js-glob')
 
+glob = glob.concat([ '!web/**' ])
+
 function Standard (globs /* :?string[] */)
 {
 	if (globs)

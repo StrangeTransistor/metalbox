@@ -17,7 +17,7 @@ var Copy      = require('../../artifact/Copy')
 var label = require('../../label')
 
 
-var glob = [ '**/*.json', '!package.json', '!coverage/**' ]
+var glob = [ '**/*.json', '!package.json', '!coverage/**', '!web/**' ]
 
 module.exports.Watch = () =>
 {
