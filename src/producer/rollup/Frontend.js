@@ -28,11 +28,11 @@ module.exports = function Rollup ()
 
 			plugins:
 			[
+				globals(),
 				include(
 				{
 					paths: [ env.src(), env.src(env.buckets_path) ],
 				}),
-				globals(),
 				builtins(),
 				resolve(
 				{
@@ -44,8 +44,8 @@ module.exports = function Rollup ()
 					sourcemap: false
 				}),
 				json(),
+				pug(pug_options(env, entry)), // TODO dev is not passed to templates
 				flow({ pretty: true }),
-				pug(pug_options(env, entry)) // TODO dev is not passed to templates
 			],
 
 			/*
