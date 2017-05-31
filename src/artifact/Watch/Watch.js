@@ -77,6 +77,7 @@ module.exports = function Watch
 
 			var ignored =
 			[
+				dot(),
 				env.dst(),
 				env.src('release/**'),
 				env.src('node_modules/**'),
@@ -186,6 +187,11 @@ module.exports = function Watch
 			$deferred = noop
 			$watch    = null
 		}
+	}
+
+	function dot ()
+	{
+		return /(^|[/\\])\../
 	}
 
 	return art
