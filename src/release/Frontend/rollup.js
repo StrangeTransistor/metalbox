@@ -13,10 +13,7 @@ var Babili = require('../../pipe/Babili')
 
 var Standard = module.exports.Standard = function ()
 {
-	return File('index.js', Pipeline(
-		Rollup(),
-		Browser()
-	))
+	return File('index.js', Rollup())
 }
 
 module.exports.Watch = function ()
