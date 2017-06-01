@@ -19,6 +19,7 @@ module.exports = function Package /* ::<Env: EnvRelease>*/ ()
 		if (main)
 		{
 			manifest['jsnext:main'] = main
+			manifest.module = main
 		}
 
 		return manifest

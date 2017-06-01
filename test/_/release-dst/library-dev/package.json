@@ -9,5 +9,6 @@
   "devDependencies": {
     "mocha": "*"
   },
-  "jsnext:main": "index.js"
+  "jsnext:main": "index.js",
+  "module": "index.js"
 }
