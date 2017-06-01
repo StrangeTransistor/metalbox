@@ -26,8 +26,10 @@ describe('Frontend (Prod)', () =>
 
 	var f = Frontend()
 
-	it('works', () =>
+	it('works', function ()
 	{
+		this.timeout(5000)
+
 		return f.construct(env)
 		.then(() =>
 		{
