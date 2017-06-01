@@ -18,6 +18,8 @@ var pug_options = require('../../release/metalbucket/producer/Pug/options')
 module.exports = function Rollup ()
 	/* :Producer<EnvFrontend, string> */
 {
+	var cache
+
 	return (env) =>
 	{
 		var entry = env.src(env.buckets_path, 'index/index.js')
@@ -25,6 +27,7 @@ module.exports = function Rollup ()
 		return rollup.rollup(
 		{
 			entry: entry,
+			cache: cache,
 
 			plugins:
 			[
@@ -47,16 +50,11 @@ module.exports = function Rollup ()
 				pug(pug_options(env, entry)),
 				flow({ pretty: true }),
 			],
-
-			/*
-			acorn:
-			{
-				allowReserved: true
-			},
-			*/
 		})
 		.then(bundle =>
 		{
+			cache = bundle
+
 			return bundle.generate(
 			{
 				format:  'iife',
