@@ -59,7 +59,7 @@ module.exports.Prod = () =>
 
 	return Composite(
 	[
-		Glob('', glob.concat('!cfg/**'), '', Copy()),
+		Glob('', glob.concat('!cfg/*.json'), '', Copy()),
 		assemble
 	])
 }
