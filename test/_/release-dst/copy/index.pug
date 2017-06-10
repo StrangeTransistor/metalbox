@@ -12,9 +12,9 @@ html
 	script(src=asset('index.js'))
 
 body
-	div #{dev}
-	div #{hash}
+	.dev #{dev}
+	.hash #{hash}
 	+Mixin
-	div #{manifest.name}-#{manifest.version}
+	.manifest #{manifest.name}-#{manifest.version}
 	div(style={ 'background-image': asset.url('~assets/index/green.png') })
 	img(src=asset('~assets/index/green.gif'))

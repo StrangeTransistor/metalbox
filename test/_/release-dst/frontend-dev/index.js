@@ -312,7 +312,7 @@ pug_html = pug_html + (pug.escape(null == (pug_interp = data) ? "" : pug_interp)
 pug_mixins["Mixin"]();
 }.call(this,"data" in locals_for_with?locals_for_with.data:typeof data!=="undefined"?data:undefined));} catch (err) {pug.rethrow(err, pug_debug_filename, pug_debug_line, pug_debug_sources[pug_debug_filename]);}return pug_html;};
 
-var template_static = "<p>Pug template</p><div>true</div><span class=\"mixin\">mixin</span>";
+var template_static = "<p>Pug template</p><div class=\"dev\">true</div><span class=\"mixin\">mixin</span>";
 
 /*  */
 // bucket:index
