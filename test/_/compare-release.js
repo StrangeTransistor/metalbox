@@ -23,7 +23,7 @@ module.exports = (dst, tmp) =>
 
 		console.warn('release differs: %s files differences', differences)
 		console.warn(diff)
-		console.log(bold(` $ meld ${tmp} ${dst}`))
+		console.log(bold(` meld ${tmp} ${dst}`))
 
 		return false
 	}
