@@ -21,6 +21,11 @@ module.exports = function LessCss ()
 			[
 				asset_hash(env),
 			],
+			modifyVars:
+			{
+				dev:  env.dev || false,
+				hash: env.hash,
+			},
 		}
 
 		return less.render(content, options)

@@ -28,3 +28,9 @@
   display: -ms-flexbox;
   display: flex;
 }
+.dev {
+  dev: true;
+}
+.hash {
+  hash: undefined;
+}
