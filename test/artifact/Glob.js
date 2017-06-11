@@ -5,7 +5,6 @@ var basename = require('path').basename
 var expect = require('chai').expect
 
 var Fn   = require('../../src/artifact/Glob/Fn')
-var GlobCopy = require('../../src/artifact/Glob/Copy')
 var Glob = require('../../src/artifact/Glob/Glob')
 
 var File = require('../../src/artifact/File')
@@ -61,27 +60,6 @@ describe('Glob (fn)', () =>
 		expect(r).a('function')
 		expect(r.path).a('string')
 	}
-
-
-	it('works with fs', () =>
-	{
-		var dst_root = dst_rootpath('static-only')
-		var tmp_root = tmp_rootpath()
-
-		var tmp_env =
-		{
-			src: src_root,
-			dst: tmp_root
-		}
-
-		var g = GlobCopy('buckets', '**/*.@(jpg|png|gif)', '')
-
-		return g.construct(tmp_env)
-		.then(() =>
-		{
-			expect(compare(dst_root(), tmp_root())).ok
-		})
-	})
 })
 
 describe('Glob', () =>
