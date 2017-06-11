@@ -2,6 +2,7 @@
 
 var defaults = require('./defaults')
 var Release  = require('../../artifact/Release')
+var Buckets  = require('./Buckets')
 
 var Manifest = require('../metalbucket/Manifest')
 
@@ -19,7 +20,7 @@ var Parallel = require('../../artifact/Parallel')
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
 {
-	return defaults({ dev: true },
+	return defaults({ dev: true }, Buckets(
 	Release(
 	[
 		Manifest(),
@@ -32,5 +33,5 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 			vendor.Standard(),
 			Serve(),
 		]))
-	]))
+	])))
 }

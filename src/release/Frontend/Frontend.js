@@ -2,6 +2,8 @@
 
 var defaults = require('./defaults')
 var Release  = require('../../artifact/Release')
+var Buckets  = require('./Buckets')
+var Hash     = require('./Hash')
 
 var Manifest = require('../metalbucket/Manifest')
 var pug  = require('./pug')
@@ -11,12 +13,11 @@ var assets = require('./assets')
 var vendor = require('./vendor')
 
 var Clean = require('./Clean')
-var Hash  = require('./Hash')
 
 module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 	/* :T_Release<Env> */
 {
-	return defaults({}, Hash(
+	return defaults({}, Buckets(Hash(
 	Release(
 	[
 		Clean(),
@@ -26,5 +27,5 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 		rollup.Min(),
 		assets.Min(),
 		vendor.Standard(),
-	])))
+	]))))
 }
