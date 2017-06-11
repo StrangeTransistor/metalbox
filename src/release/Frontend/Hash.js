@@ -1,3 +1,4 @@
+/* @flow */
 
 var With = require('../../artifact/With')
 
