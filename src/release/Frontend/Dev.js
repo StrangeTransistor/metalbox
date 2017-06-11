@@ -4,10 +4,13 @@ var defaults = require('./defaults')
 var Release  = require('../../artifact/Release')
 
 var Manifest = require('../metalbucket/Manifest')
+
 var pug  = require('./pug')
 var less = require('./less')
 var rollup = require('./rollup')
 var assets = require('./assets')
+var vendor = require('./vendor')
+
 var Serve  = require('../metalbucket/Serve')
 
 var Esc = require('../../artifact/Esc')
@@ -26,7 +29,8 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 			less.Watch(),
 			rollup.Watch(),
 			assets.Watch(),
-			Serve()
+			vendor.Standard(),
+			Serve(),
 		]))
 	]))
 }

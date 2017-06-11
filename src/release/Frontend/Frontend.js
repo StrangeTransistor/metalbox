@@ -8,6 +8,7 @@ var pug  = require('./pug')
 var less = require('./less')
 var rollup = require('./rollup')
 var assets = require('./assets')
+var vendor = require('./vendor')
 
 var Clean = require('./Clean')
 var Hash  = require('./Hash')
@@ -24,5 +25,6 @@ module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
 		less.Min(),
 		rollup.Min(),
 		assets.Min(),
+		vendor.Standard(),
 	])))
 }
