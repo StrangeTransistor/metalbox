@@ -17,7 +17,7 @@ var Serve  = require('../metalbucket/Serve')
 var Esc = require('../../artifact/Esc')
 var Parallel = require('../../artifact/Parallel')
 
-module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
+module.exports = function Frontend /* ::<Env: EnvFrontendOptional> */ ()
 	/* :T_Release<Env> */
 {
 	return defaults({ dev: true }, Buckets(

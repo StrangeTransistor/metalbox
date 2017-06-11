@@ -8,5 +8,5 @@ var glob = [ '*', '!~assets' ]
 
 module.exports.Standard = function ()
 {
-	return Glob(env => env.src(env.buckets_path, 'vendor'), glob, '', Copy())
+	return Glob(env => env.buckets('vendor'), glob, '', Copy())
 }

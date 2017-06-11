@@ -13,7 +13,7 @@ var label = require('../../label')
 
 var glob = (env) =>
 {
-	return env.src(env.buckets_path, 'index', '*.pug')
+	return env.buckets('index/*.pug')
 }
 
 var plain_entry = (env) =>
@@ -28,7 +28,7 @@ var Standard = module.exports.Standard = function ()
 
 module.exports.Watch = function ()
 {
-	return Heat(env => env.src(env.buckets_path, '**/*.@(pug|js)'), Standard())
+	return Heat(env => env.buckets('**/*.@(pug|js)'), Standard())
 }
 
 module.exports.Min = Standard

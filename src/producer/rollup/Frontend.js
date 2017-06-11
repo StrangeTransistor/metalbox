@@ -22,7 +22,7 @@ module.exports = function Rollup ()
 
 	return (env) =>
 	{
-		var entry = env.src(env.buckets_path, 'index/index.js')
+		var entry = env.buckets('index/index.js')
 
 		return rollup.rollup(
 		{
@@ -34,7 +34,7 @@ module.exports = function Rollup ()
 				globals(),
 				include(
 				{
-					paths: [ env.src(), env.src(env.buckets_path) ],
+					paths: [ env.src(), env.buckets() ],
 				}),
 				builtins(),
 				resolve(

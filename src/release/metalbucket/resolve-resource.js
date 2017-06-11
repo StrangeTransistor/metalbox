@@ -8,7 +8,7 @@ var resolve = module.exports = function resolver (env /* :EnvFrontend */)
 
 		if (match)
 		{
-			return env.src(env.buckets_path, match[1])
+			return env.buckets(match[1])
 		}
 		else
 		{

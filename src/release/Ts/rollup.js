@@ -19,14 +19,14 @@ module.exports = function Rollup ()
 	{
 		return rollup.rollup(
 		{
-			// entry: env.src(env.buckets_path, 'index/index.js'),
+			// entry: env.buckets(env, 'index/index.js'),
 			entry: env.src('index.ts'),
 
 			plugins:
 			[
 				/*include(
 				{
-					paths: [ env.src(), env.src(env.buckets_path) ],
+					paths: [ env.src(), env.buckets() ],
 				}),*/
 				globals(),
 				builtins(),

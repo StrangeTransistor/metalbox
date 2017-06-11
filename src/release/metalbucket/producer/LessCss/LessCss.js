@@ -10,13 +10,13 @@ module.exports = function LessCss ()
 {
 	return (env) =>
 	{
-		var filename = env.src(env.buckets_path, 'index/index.less')
+		var filename = env.buckets('index/index.less')
 		var content  = read(filename)
 
 		var options =
 		{
 			filename: filename,
-			paths: [ env.src(), env.src(env.buckets_path) ],
+			paths: [ env.src(), env.buckets() ],
 			plugins:
 			[
 				asset_hash(env),

@@ -15,7 +15,6 @@ var asset_url = require('../../asset-url')
 
 module.exports = (env /* :EnvFrontend */) =>
 {
-	/* @flow-off */
 	var hash = env.hash
 
 	var subst_tilde = asset_url(hash)

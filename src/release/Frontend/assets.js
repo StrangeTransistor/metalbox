@@ -15,7 +15,7 @@ var glob = '**/*.@(jpg|png|gif|svg|ico)'
 
 var Standard = module.exports.Standard = () =>
 {
-	return Glob(env => env.src(env.buckets_path), glob, '', CopyAssets())
+	return Glob(env => env.buckets(), glob, '', CopyAssets())
 }
 
 module.exports.Watch = () =>
@@ -23,11 +23,11 @@ module.exports.Watch = () =>
 	return Composite(
 	[
 		Standard(),
-		Watch(env => env.src(env.buckets_path, glob),
+		Watch(env => env.buckets(glob),
 		label('Assets', CopyAssets()),
 		{
 			/* @flow-off */
-			relative: env => env.src(env.buckets_path),
+			relative: env => env.buckets(),
 			large: true,
 		})
 	])
@@ -45,7 +45,7 @@ function CopyAssets ()
 
 module.exports.Min = () =>
 {
-	return Glob(env => env.src(env.buckets_path), glob, '', CopyAssetsHash())
+	return Glob(env => env.buckets(), glob, '', CopyAssetsHash())
 }
 
 function CopyAssetsHash ()

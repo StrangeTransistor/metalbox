@@ -14,7 +14,7 @@ var vendor = require('./vendor')
 
 var Clean = require('./Clean')
 
-module.exports = function Frontend /* ::<Env: EnvFrontend> */ ()
+module.exports = function Frontend /* ::<Env: EnvFrontendOptional> */ ()
 	/* :T_Release<Env> */
 {
 	return defaults({}, Buckets(Hash(
