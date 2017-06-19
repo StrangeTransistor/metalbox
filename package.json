@@ -118,7 +118,7 @@
       "1",
 
     "rootpath":
-      "StreetStrider/rootpath#v1.7.0",
+      "StreetStrider/rootpath#v1.8.1",
 
     "command-promise":
       "2",
@@ -247,7 +247,7 @@
       "StrangeTransistor/js-outlander#2.1.0",
 
     "flow-bin":
-      "0.46",
+      "0.48",
 
     "flow-typed":
       "2",

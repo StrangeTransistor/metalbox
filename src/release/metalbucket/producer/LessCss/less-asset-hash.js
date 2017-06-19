@@ -37,7 +37,7 @@ module.exports = (env /* :EnvFrontend */) =>
 				else
 				{
 					/* check for other cases (~assets) */
-					value = subst_tilde(value, hash)
+					value = subst_tilde(value)
 				}
 
 				url.value.value = value

@@ -1,5 +1,7 @@
 /* @flow */
 
+var assign = Object.assign
+
 var Rootpath = require('rootpath')
 var ReleaseNotify = require('../../notify/release-notify')
 
@@ -29,13 +31,14 @@ module.exports = (pre_env /* :PreEnv */) =>
 	env.dst = Rootpath(rootpath(env.dst || [ 'release', pre_env.preset_name ]))
 
 	env.printer  = pre_env.printer
-	env.notifier = ReleaseNotify(env)
+	env.notifier = ReleaseNotify()
 
 	var yargv = pre_env.yargv
 
 	if (yargv.env)
 	{
-		Object.assign(env, yargv.env)
+		/* @flow-off */
+		env = assign(env, yargv.env)
 	}
 
 	if (~ yargv._.indexOf(-1))
