@@ -18,6 +18,7 @@ module.exports
 	{
 		return (env) =>
 		{
+			/* @flow-off */
 			return $check_requisite(env)
 			.then(() =>
 			{
