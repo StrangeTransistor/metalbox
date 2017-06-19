@@ -8,7 +8,8 @@
 			[
 				".sublime",
 				"node_modules",
-				"coverage"
+				"coverage",
+				"flow-typed/npm"
 			]
 		}
 	]
