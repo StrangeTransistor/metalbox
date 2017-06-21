@@ -14,7 +14,7 @@
 
   "engines":
   {
-    "node": ">=4"
+    "node": ">=7"
   },
 
    "bin": "",
@@ -24,8 +24,8 @@
   {
     "presets":
     {
-      "npm": [ "Library" ],
-      "dev": [ "Library/Dev" ]
+      "dev": [ "Library/Dev" ],
+      "npm": [ "Library" ]
     }
   },
 
@@ -35,8 +35,9 @@
 
   "scripts":
   {
-    "flow-typed":
-      "flow-typed install",
+    "start":
+      "metalbox preset dev",
+
 
     "st":
       "eslint src/ test/",
@@ -44,13 +45,19 @@
     "flow":
       "flow check",
 
+
     "mocha":
                       "mocha    --recursive test/case/",
     "cover":
       "istanbul cover _mocha -- --recursive test/case/",
 
+
     "test":
       "npm run st && npm run flow && npm run mocha",
+
+
+    "release":
+      "metalbox preset npm"
   },
 
   "peerDependencies":
@@ -63,17 +70,22 @@
 
   "devDependencies":
   {
+    "metalbox":
+      "*",
+
+
     "eslint":
       "3",
 
     "js-outlander":
-      "StrangeTransistor/js-outlander#2.1.0",
+      "StrangeTransistor/js-outlander#2.1.1",
 
     "flow-bin":
-      "0.41",
+      "0.48",
 
     "flow-typed":
       "2",
+
 
     "mocha":
       "3",
@@ -82,9 +94,6 @@
       "3",
 
     "istanbul":
-      "0.4",
-
-    "metalbox":
-      "*"
+      "0.4"
   }
 }
