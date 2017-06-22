@@ -75,15 +75,21 @@ module.exports = function Watch
 
 			src = glob_resolve(env.src(), src)
 
-			// TODO propagate ignored from negative globs
 			var ignored =
 			[
 				dot(),
 				env.dst(),
 				env.src('release/**'),
-				env.src('web/**'),
 				env.src('node_modules/**'),
 			]
+
+			src.forEach(glob =>
+			{
+				if (glob.charAt(0) === '!')
+				{
+					ignored.push(glob.slice(1))
+				}
+			})
 
 			release()
 
