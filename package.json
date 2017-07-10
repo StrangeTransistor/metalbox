@@ -56,6 +56,17 @@
           "src": "test/_/release-src/library"
         }
       ],
+      "library-node":
+      [
+        "Library",
+        {
+          "src": "test/_/release-src/library",
+          "options":
+          {
+            "targets": "node-only"
+          }
+        }
+      ],
       "frontend-template":
       [
         "template/Frontend"
