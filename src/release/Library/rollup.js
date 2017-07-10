@@ -129,7 +129,7 @@ var target_aliases =
 	'node-first':
 	[
 		[ 'node',   './' ],
-		[ 'jsnext', 'dist/' ],
+		[ 'jsnext', 'jsnext/' ],
 	],
 	'node-only':
 	[
