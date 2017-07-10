@@ -41,12 +41,20 @@ function Standard (globs /* :?string[] */)
 
 		{
 			var jsnext = find(targets, such => such[0] === 'jsnext')
-			seq.push(Glob('', $globs, '', TargetJsnext(jsnext[1])))
+
+			if (jsnext)
+			{
+				seq.push(Glob('', $globs, '', TargetJsnext(jsnext[1])))
+			}
 		}
 
 		{
 			var node = find(targets, such => such[0] === 'node')
-			seq.push(Glob('', $globs, '', TargetNode(node[1])))
+
+			if (node)
+			{
+				seq.push(Glob('', $globs, '', TargetNode(node[1])))
+			}
 		}
 
 		return Composite(seq).construct(env)
@@ -61,14 +69,23 @@ module.exports.Watch = () =>
 		var targets = from_targets(env)
 		var seq = []
 
+		// TODO dry
 		{
 			var jsnext = find(targets, such => such[0] === 'jsnext')
-			seq.push(TargetJsnext(jsnext[1]))
+
+			if (jsnext)
+			{
+				seq.push(TargetJsnext(jsnext[1]))
+			}
 		}
 
 		{
 			var node = find(targets, such => such[0] === 'node')
-			seq.push(TargetNode(node[1]))
+
+			if (node)
+			{
+				seq.push(TargetNode(node[1]))
+			}
 		}
 
 		var composite = Composite(seq)
