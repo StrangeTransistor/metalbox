@@ -14,6 +14,7 @@ module.exports = function Package /* ::<Env: EnvRelease>*/ ()
 
 		var main = manifest.main || ''
 
+		// TODO library proper dist, main
 		manifest.main = join('dist', main)
 
 		if (main)
