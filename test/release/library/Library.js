@@ -37,6 +37,17 @@ describe('Library', () =>
 		return test_library('jsnext-only', 'library-jsnext-only')
 	})
 
+	it('works with special targets', () =>
+	{
+		var mode =
+		[
+			[ 'node',   'a/b' ],
+			[ 'jsnext', 'x/y' ],
+		]
+
+		return test_library(mode, 'library-special')
+	})
+
 	function test_library (mode, dst)
 	{
 		var dst_root = dst_rootpath(dst)
