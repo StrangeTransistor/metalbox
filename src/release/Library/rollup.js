@@ -18,6 +18,8 @@ var glob = require('../metalbucket/smart-js-glob')
 
 var label = require('../../label')
 
+var from_targets = require('./rollup-targets')
+
 
 module.exports.Prod = () =>
 {
@@ -113,56 +115,6 @@ function prepare_globs (globs)
 	{
 		return glob.slice()
 	}
-}
-
-
-/* */
-var target_defaults = 'jsnext-first'
-
-var target_aliases =
-{
-	'jsnext-first':
-	[
-		[ 'jsnext', './' ],
-		[ 'node',   'dist/' ],
-	],
-	'node-first':
-	[
-		[ 'node',   './' ],
-		[ 'jsnext', 'jsnext/' ],
-	],
-	'node-only':
-	[
-		[ 'node',   './' ],
-	],
-	'jsnext-only':
-	[
-		[ 'jsnext', './' ],
-	],
-}
-
-function from_targets (env)
-{
-	var target = target_defaults
-
-	if (env.options && env.options.targets)
-	{
-		target = env.options.targets
-	}
-
-	if (typeof target === 'string')
-	{
-		if (target in target_aliases)
-		{
-			target = target_aliases[target]
-		}
-		else
-		{
-			throw new TypeError(`unknown target alias ${target}`)
-		}
-	}
-
-	return target
 }
 
 
