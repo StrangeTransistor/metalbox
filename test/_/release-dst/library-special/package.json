@@ -2,13 +2,13 @@
   "name": "library",
   "version": "0.0.0",
   "private": true,
-  "main": "dist/index.js",
+  "main": "a/b/index.js",
   "dependencies": {
     "express": "*"
   },
   "devDependencies": {
     "mocha": "*"
   },
-  "jsnext:main": "index.js",
-  "module": "index.js"
+  "jsnext:main": "x/y/index.js",
+  "module": "x/y/index.js"
 }
