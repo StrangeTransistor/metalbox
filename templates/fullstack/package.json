@@ -1,0 +1,89 @@
+{
+     "name": "PROJECT",
+  "version": "0.0.0",
+
+  "private": true,
+
+   "author": "Strider <strange.transistor@gmail.com>",
+
+  "scripts":
+  {
+    "start":
+      "metalbox preset dev",
+
+    "serve":
+      "nodemon release/dev --ignore web/",
+
+
+    "test":
+      "npm run st && npm run flow",
+
+    "st":
+      "eslint src/",
+
+    "flow":
+      "flow check",
+
+
+    "release":
+      "metalbox preset battle; (cd web/; npm run release)",
+
+    "deploy":
+      "deploy battle outpost PROJECT",
+
+
+    "knex":
+      "npm start -- -1 && knex --knexfile=release/dev/db/knexfile.js",
+
+    "migrate":
+      "npm run knex -- migrate:latest",
+
+    "rollback":
+      "npm run knex -- migrate:rollback"
+  },
+
+  "scripts:battle":
+  {
+    "start":
+      "pm2 start . --name $(node -pe 'require(\"./release.json\").name')"
+  },
+
+  "metalbox":
+  {
+    "presets":
+    {
+      "dev":    [ "Backend/Dev" ],
+      "battle": [ "Backend" ]
+    }
+  },
+
+  "dependencies":
+  {
+  },
+
+  "devDependencies":
+  {
+    "metalbox":
+      "1",
+
+    "deploy":
+      "StrangeTransistor/deploy#0.2.0",
+
+    "nodemon":
+      "1",
+
+
+    "eslint":
+      "3",
+
+    "js-outlander":
+      "StrangeTransistor/js-outlander#2.1.1",
+
+
+    "flow-bin":
+      "0.50",
+
+    "flow-typed":
+      "2"
+  }
+}
