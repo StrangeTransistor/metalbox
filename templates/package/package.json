@@ -24,8 +24,8 @@
   {
     "presets":
     {
-      "dev": [ "Library/Dev" ],
-      "npm": [ "Library" ]
+      "dev": [ "Library/Dev", { "options": { "targets": "node-first" }} ],
+      "npm": [ "Library",     { "options": { "targets": "node-first" }} ]
     }
   },
 
@@ -46,14 +46,17 @@
       "flow check",
 
 
+    "unit":
+      "npm start -- -1 && npm run mocha",
+
     "mocha":
-                      "mocha    --recursive test/case/",
+                      "mocha    --recursive release/dev/test/",
     "cover":
-      "istanbul cover _mocha -- --recursive test/case/",
+      "istanbul cover _mocha -- --recursive release/dev/test/",
 
 
     "test":
-      "npm run st && npm run flow && npm run mocha",
+      "npm run st && npm run flow && npm run unit",
 
 
     "release":
