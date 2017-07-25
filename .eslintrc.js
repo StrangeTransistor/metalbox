@@ -1,5 +1,5 @@
 
 module.exports =
 {
-	extends: './node_modules/js-outlander/outlander.eslint.js',
+	extends: require.resolve('js-outlander/outlander.eslint.js'),
 }
