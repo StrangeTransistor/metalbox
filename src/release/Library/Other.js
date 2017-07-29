@@ -10,12 +10,15 @@ var glob =
 
 	'**/*.md',
 
-	'license',
-	'LICENSE',
-	'License',
+	'*license*',
+	'*LICENSE*',
+	'*License*',
 
 	'!package.json',
-	'!coverage/**'
+	'!coverage/**',
+
+	'!test/**',
+	'!tests/**',
 ]
 
 module.exports = () =>
