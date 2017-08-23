@@ -1,5 +1,6 @@
 
-import bar from './mod'
+import bar  from './mod'
+import mod2 from './mod2'
 
 function foo (this: void, s: string)
 {
@@ -7,5 +8,12 @@ function foo (this: void, s: string)
 }
 
 foo('abc')
-foo(bar(1))
+foo(String(bar(1)))
+foo(mod2())
 console.log(bar(2))
+
+/*
+
+tsc --pretty --noemit --allowjs --checkjs --strict test/_/release-src/ts/index.ts
+
+*/
