@@ -18,7 +18,7 @@ module.exports
 
 	artifact.describe  = () => '[Artifact]'
 
-	// TODO Artifact tree, construct result (timings), etc
+	// TODO(v2) Artifact tree, construct result (timings), etc
 
 	return artifact
 }

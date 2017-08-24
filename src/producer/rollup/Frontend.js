@@ -13,7 +13,7 @@ var pug      = require('rollup-plugin-pug')
 
 var pug_options = require('../../release/metalbucket/producer/Pug/options')
 
-// TODO pass options from env to plugins, use `object-path`
+// TODO(v2) pass options from env to plugins, use `object-path`
 
 module.exports = function Rollup ()
 	/* :Producer<EnvFrontend, string> */

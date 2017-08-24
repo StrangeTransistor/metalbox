@@ -9,7 +9,7 @@ var Rollup = require('../../producer/rollup/Frontend')
 var Browser = require('../../pipe/Browser')
 var Babili = require('../../pipe/Babili')
 
-// TODO test.js
+// TODO(v2) mocha,karma
 
 var Standard = module.exports.Standard = function ()
 {
