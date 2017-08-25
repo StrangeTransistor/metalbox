@@ -1,0 +1,7 @@
+
+[ignore]
+<PROJECT_ROOT>/node_modules/metalbox/.*
+<PROJECT_ROOT>/release/.*
+
+[options]
+suppress_comment= \\(.\\|\n\\)*\\@flow-off

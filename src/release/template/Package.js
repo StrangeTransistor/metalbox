@@ -12,6 +12,8 @@ module.exports = function ()
 	return From('package', Composite(
 	[
 		Directory(),
-		Copy('package.json')
+		Copy('package.json'),
+		Copy('.flowconfig'),
+		Copy('.eslintrc.js'),
 	]))
 }
