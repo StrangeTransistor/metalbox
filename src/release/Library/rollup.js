@@ -77,7 +77,7 @@ module.exports.Watch = () =>
 
 			if (jsnext)
 			{
-				seq.push(TargetJsnext(jsnext[1]))
+				seq.push(TargetJsnext(jsnext[1], true))
 			}
 		}
 
@@ -86,7 +86,7 @@ module.exports.Watch = () =>
 
 			if (node)
 			{
-				seq.push(TargetNode(node[1]))
+				seq.push(TargetNode(node[1], true))
 			}
 		}
 
@@ -118,17 +118,39 @@ function prepare_globs (globs)
 }
 
 
-function TargetJsnext (dest)
+function TargetJsnext (dest, with_remover = false)
 {
-	return Dest(Copy(), dest)
+	return Dest(WithRemover(Copy(), with_remover), dest)
 }
 
-function TargetNode (dest)
+function TargetNode (dest, with_remover = false)
 {
-	return Dest(Remover(Rollup()), dest)
+	return Dest(WithRemover(Rollup(), with_remover), dest)
 }
 
 function Dest (target, dest /* :string */)
 {
-	return With(target, env => assign({}, env, { dst: env.dst.partial(dest) }))
+	return With(target,
+		/* @flow-off */
+		env => assign({}, env,
+		{
+			dst: env.dst.partial(dest)
+		})
+	)
+}
+
+function WithRemover
+(
+	artifact /* :T_Artifact<*> */,
+	with_remover /* :boolean */
+)
+{
+	if (with_remover)
+	{
+		return Remover(artifact)
+	}
+	else
+	{
+		return artifact
+	}
 }
