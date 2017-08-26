@@ -45,6 +45,9 @@
     "flow":
       "flow check",
 
+    "ts":
+      "tsc index.ts",
+
 
     "unit":
       "npm start -- -1 && npm run mocha",
@@ -87,6 +90,9 @@
       "0.53",
 
     "flow-typed":
+      "2",
+
+    "typescript":
       "2",
 
 

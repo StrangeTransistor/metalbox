@@ -15,5 +15,6 @@ module.exports = function ()
 		Copy('package.json'),
 		Copy('.flowconfig'),
 		Copy('.eslintrc.js'),
+		Copy('tsconfig.json'),
 	]))
 }

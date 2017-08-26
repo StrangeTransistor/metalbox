@@ -1,0 +1,13 @@
+{
+	"compilerOptions":
+	{
+		"noEmit": true,
+		"pretty": true,
+
+		"strict": true,
+		"module": "ES6",
+
+		"allowJs": true,
+		"checkJs": true
+	}
+}
