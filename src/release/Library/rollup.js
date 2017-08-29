@@ -14,7 +14,7 @@ var Remover = require('../../artifact/Remover')
 
 var Rollup = require('../metalbucket/Rollup')
 
-var glob = require('../metalbucket/smart-js-glob')
+var smart_glob = require('../metalbucket/smart-js-glob')
 
 var label = require('../../label')
 
@@ -23,7 +23,7 @@ var from_targets = require('./rollup-targets')
 
 module.exports.Prod = () =>
 {
-	return Standard(glob.concat([ '!test/**', '!tests/**' ]))
+	return Standard(smart_glob({ tests: false }))
 }
 
 module.exports.Types = () =>
@@ -91,7 +91,7 @@ module.exports.Watch = () =>
 		}
 
 		var composite = Composite(seq)
-		var watch = Watch(glob, label('Rollup', composite))
+		var watch = Watch(smart_glob(), label('Rollup', composite))
 
 		/* TODO library watch.disengage */
 		return watch.construct(env)
@@ -113,7 +113,7 @@ function prepare_globs (globs)
 	}
 	else
 	{
-		return glob.slice()
+		return smart_glob()
 	}
 }
 
