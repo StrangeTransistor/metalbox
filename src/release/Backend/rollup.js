@@ -11,25 +11,13 @@ var smart_glob = require('../metalbucket/smart-js-glob')
 
 function smart_glob_web (options)
 {
-	var r = smart_glob(options)
-
-	r = r.concat([ '!web/**' ])
-
-	return r
+	return smart_glob(options).concat([ '!web/**' ])
 }
 
-function Standard (globs /* :?string[] */)
-{
-	if (globs)
-	{
-		var $globs = globs
-	}
-	else
-	{
-		var $globs = smart_glob_web()
-	}
 
-	return Glob('', $globs, '', Rollup())
+function Standard (glob /* :string[] */)
+{
+	return Glob('', glob, '', Rollup())
 }
 
 module.exports.Prod = () =>
@@ -39,9 +27,11 @@ module.exports.Prod = () =>
 
 module.exports.Watch = () =>
 {
+	var glob = smart_glob_web()
+
 	return Composite(
 	[
-		Standard(),
-		Watch(smart_glob_web(), Remover(Rollup()))
+		Standard(glob),
+		Watch(glob, Remover(Rollup()))
 	])
 }

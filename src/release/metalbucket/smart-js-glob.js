@@ -11,12 +11,12 @@ module.exports = function smart_glob (options /* :?Object */) /* :string[] */
 {
 	options = assign({}, defaults, options)
 
-	var r = [ '**/*.js', '!flow-typed/**', '!coverage/**' ]
+	var glob = [ '**/*.js', '!flow-typed/**', '!coverage/**' ]
 
 	if (! options.tests)
 	{
-		r = r.concat([ '!test/**', '!tests/**' ])
+		glob = glob.concat([ '!test/**', '!tests/**' ])
 	}
 
-	return r
+	return glob
 }

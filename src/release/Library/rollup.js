@@ -31,11 +31,8 @@ module.exports.Types = () =>
 	return Glob('', 'flow-typed/**', '', Copy())
 }
 
-
-function Standard (globs /* :?string[] */)
+function Standard (glob /* :string[] */)
 {
-	var $globs = prepare_globs(globs)
-
 	return Artifact(env =>
 	{
 		var targets = from_targets(env)
@@ -46,7 +43,7 @@ function Standard (globs /* :?string[] */)
 
 			if (jsnext)
 			{
-				seq.push(Glob('', $globs, '', TargetJsnext(jsnext[1])))
+				seq.push(Glob('', glob, '', TargetJsnext(jsnext[1])))
 			}
 		}
 
@@ -55,7 +52,7 @@ function Standard (globs /* :?string[] */)
 
 			if (node)
 			{
-				seq.push(Glob('', $globs, '', TargetNode(node[1])))
+				seq.push(Glob('', glob, '', TargetNode(node[1])))
 			}
 		}
 
@@ -65,6 +62,8 @@ function Standard (globs /* :?string[] */)
 
 module.exports.Watch = () =>
 {
+	var glob = smart_glob()
+
 	/* some crazyness: */
 	var watch = Artifact(env =>
 	{
@@ -91,7 +90,7 @@ module.exports.Watch = () =>
 		}
 
 		var composite = Composite(seq)
-		var watch = Watch(smart_glob(), label('Rollup', composite))
+		var watch = Watch(glob, label('Rollup', composite))
 
 		/* TODO library watch.disengage */
 		return watch.construct(env)
@@ -99,22 +98,9 @@ module.exports.Watch = () =>
 
 	return Composite(
 	[
-		Standard(),
+		Standard(glob),
 		watch,
 	])
-}
-
-
-function prepare_globs (globs)
-{
-	if (globs)
-	{
-		return globs
-	}
-	else
-	{
-		return smart_glob()
-	}
 }
 
 
@@ -128,6 +114,7 @@ function TargetNode (dest, with_remover = false)
 	return Dest(WithRemover(Rollup(), with_remover), dest)
 }
 
+
 function Dest (target, dest /* :string */)
 {
 	return With(target,
@@ -138,6 +125,7 @@ function Dest (target, dest /* :string */)
 		})
 	)
 }
+
 
 function WithRemover
 (
