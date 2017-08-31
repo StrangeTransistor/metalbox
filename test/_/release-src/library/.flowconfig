@@ -1,3 +1,6 @@
+[ignore]
+<PROJECT_ROOT>/coverage/.*
+
 [include]
 <PROJECT_ROOT>/../../../../../node_modules
 
