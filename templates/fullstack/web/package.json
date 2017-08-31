@@ -44,8 +44,8 @@
 
   "dependencies":
   {
-    "axiom":
-      "StreetStrider/axiom#0.4.0"
+    "@streetstrider/axiom":
+      "1"
   },
 
   "devDependencies":
