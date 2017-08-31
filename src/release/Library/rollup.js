@@ -28,7 +28,11 @@ module.exports.Prod = () =>
 
 module.exports.Types = () =>
 {
-	return Glob('', 'flow-typed/**', '', Copy())
+	return Composite(
+	[
+		Glob('', 'flow-typed/**', '', Copy()),
+		Glob('', '**.js.flow', '', Copy()),
+	])
 }
 
 function Standard (glob /* :string[] */)
