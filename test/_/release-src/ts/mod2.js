@@ -4,5 +4,5 @@
  */
 export default function mod2 (x)
 {
-	return 'mod2'
+	return 'mod2' + x
 }
