@@ -9,8 +9,8 @@ function foo (this: void, s: string)
 
 foo('abc')
 foo(String(bar(1)))
-foo(mod2())
-console.log(bar(2))
+foo(mod2(2))
+console.log(bar(3))
 
 /*
 
