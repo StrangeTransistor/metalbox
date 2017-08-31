@@ -21,8 +21,10 @@ module.exports = function ()
 
 		Copy1('.flowconfig'),
 		Copy1('.eslintrc.js'),
+		Copy1('.gitignore'),
 
 		Copy1('web/.flowconfig'),
 		Copy1('web/.eslintrc.js'),
+		Copy1('web/.gitignore'),
 	]))
 }

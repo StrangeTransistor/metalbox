@@ -13,6 +13,7 @@ module.exports = function ()
 	[
 		Directory(),
 		Copy('package.json'),
+		Copy('.gitignore'),
 		Copy('.flowconfig'),
 		Copy('.eslintrc.js'),
 		Copy('tsconfig.json'),
