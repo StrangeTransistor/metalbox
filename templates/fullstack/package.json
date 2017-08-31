@@ -14,6 +14,9 @@
     "serve":
       "nodemon release/dev --ignore web/",
 
+    "serve.":
+      "http-server ./release/dev/web -p 8080 -c-1 -s",
+
 
     "test":
       "npm run st && npm run flow",
@@ -71,6 +74,9 @@
 
     "nodemon":
       "1",
+
+    "http-server":
+      "0.10",
 
 
     "eslint":
