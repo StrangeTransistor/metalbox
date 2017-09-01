@@ -2,6 +2,9 @@
 
 var assign = Object.assign
 
+var dirname = require('path').dirname
+var basename = require('path').basename
+
 var From = require('../../artifact/From')
 var With = require('../../artifact/With')
 var Composite = require('../../artifact/Composite')
@@ -23,11 +26,22 @@ function Sublime ()
 	return With(Composite(
 	[
 		Copy('.gitignore'),
-		Copy('.sublime-project'),
+		Named(),
 	]),
 		env => assign({}, env,
 		{
 			dst: env.dst.partial('.sublime')
 		})
 	)
+}
+
+function Named ()
+{
+	return Copy('.sublime-project', (env) =>
+	{
+		var project_dir = dirname(env.dst())
+		var name = basename(project_dir)
+
+		return name + '.sublime-project'
+	})
 }
