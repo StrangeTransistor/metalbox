@@ -1,0 +1,66 @@
+{
+     "name": "PROJECT",
+  "version": "0.0.0",
+
+  "private": true,
+
+   "author": "Strider <strange.transistor@gmail.com>",
+
+  "scripts":
+  {
+    "start":
+      "metalbox preset dev",
+
+
+    "test":
+      "npm run st && npm run flow",
+
+    "st":
+      "eslint buckets/",
+
+    "flow":
+      "flow check",
+
+
+    "release":
+      "metalbox preset battle"
+  },
+
+  "metalbox":
+  {
+    "presets":
+    {
+      "dev":    [ "Frontend/Dev" ],
+      "battle": [ "Frontend" ]
+    }
+  },
+
+  "dependencies":
+  {
+    "@streetstrider/css-default":
+      "1",
+
+    "@streetstrider/axiom":
+      "1"
+  },
+
+  "devDependencies":
+  {
+    "metalbox":
+      "1",
+
+
+    "eslint":
+      "3",
+
+    "js-outlander":
+      "StrangeTransistor/js-outlander#2.1.1",
+
+
+    "flow-bin":
+      "0.53",
+
+    "flow-typed":
+      "2"
+  }
+}
