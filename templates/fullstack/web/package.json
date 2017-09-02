@@ -44,6 +44,9 @@
 
   "dependencies":
   {
+    "@streetstrider/css-default":
+      "1",
+
     "@streetstrider/axiom":
       "1"
   },
