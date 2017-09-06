@@ -15,26 +15,24 @@ var expect_release = require('../../_/expect-release')
 
 describe('Library', () =>
 {
-	var src_root = src_rootpath('library')
-
 	it('works with jsnext-first', () =>
 	{
-		return test_library('jsnext-first', 'library')
+		return test_library('jsnext-first', 'library', 'library')
 	})
 
 	it('works with node-first', () =>
 	{
-		return test_library('node-first', 'library-node-first')
+		return test_library('node-first', 'library', 'library-node-first')
 	})
 
 	it('works with node-only', () =>
 	{
-		return test_library('node-only', 'library-node-only')
+		return test_library('node-only', 'library', 'library-node-only')
 	})
 
 	it('works with jsnext-only', () =>
 	{
-		return test_library('jsnext-only', 'library-jsnext-only')
+		return test_library('jsnext-only', 'library', 'library-jsnext-only')
 	})
 
 	it('works with special targets', () =>
@@ -45,11 +43,17 @@ describe('Library', () =>
 			[ 'jsnext', 'x/y' ],
 		]
 
-		return test_library(mode, 'library-special')
+		return test_library(mode, 'library', 'library-special')
 	})
 
-	function test_library (mode, dst)
+	it('works in TS mode', () =>
 	{
+		return test_library('node-first', 'ts', 'library-ts')
+	})
+
+	function test_library (mode, src = 'library', dst = 'library')
+	{
+		var src_root = src_rootpath(src)
 		var dst_root = dst_rootpath(dst)
 		var tmp_root = tmp_rootpath()
 
