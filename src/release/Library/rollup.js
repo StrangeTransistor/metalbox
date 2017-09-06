@@ -2,7 +2,12 @@
 
 var assign = Object.assign
 
+var exists = require('fs-sync').exists
+var gfind  = require('globule').find
+
 var find = require('lodash/find')
+
+var glob_resolve = require('../../glob-resolve')
 
 var Artifact = require('../../artifact/Artifact')
 var Glob = require('../../artifact/Glob')
@@ -41,6 +46,8 @@ function Standard (glob /* :string[] */)
 	{
 		var targets = from_targets(env)
 		var seq = []
+
+		console.log(mode(env))
 
 		{
 			var jsnext = find(targets, such => such[0] === 'jsnext')
@@ -105,6 +112,24 @@ module.exports.Watch = () =>
 		Standard(glob),
 		watch,
 	])
+}
+
+
+function mode (env /* :EnvIn */)
+{
+	if (exists(env.src('tsconfig.json')))
+	{
+		return 'ts'
+	}
+
+	var glob = glob_resolve(env.src(), [ '**.ts' ])
+
+	if (gfind(glob).length)
+	{
+		return 'ts'
+	}
+
+	return 'flow'
 }
 
 
