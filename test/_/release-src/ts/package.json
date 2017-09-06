@@ -1,0 +1,27 @@
+{
+  "name":    "library",
+  "version": "0.0.0",
+  "private":  true,
+
+  "main": "index.js",
+
+  "metalbox":
+  {
+    "presets":
+    {
+      "library":
+      [
+        "Library"
+      ]
+    }
+  },
+
+  "dependencies":
+  {
+    "express": "*"
+  },
+  "devDependencies":
+  {
+    "mocha": "*"
+  }
+}
