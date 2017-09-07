@@ -1,0 +1,14 @@
+{
+  "name": "library",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "express": "*"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "jsnext:main": "jsnext/index.js",
+  "module": "jsnext/index.js"
+}

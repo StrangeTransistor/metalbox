@@ -53,8 +53,6 @@ module.exports.Watch = () =>
 			ts: mode === 'ts',
 		})
 
-		console.log('~~~', glob)
-
 		var targets = seq_targets(from_targets(env))
 		var seq = targets.map(it =>
 		{
@@ -95,8 +93,6 @@ function Standard (options /* :$Shape<typeof defaults> */)
 			tests: options.tests,
 			ts: mode === 'ts',
 		})
-
-		console.log('***', glob)
 
 		var targets = seq_targets(from_targets(env))
 		var seq = targets.map(it =>
