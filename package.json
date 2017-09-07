@@ -82,6 +82,14 @@
         {
           "src": "test/_/release-src/ts"
         }
+      ],
+      "ts-lib":
+      [
+        "Library",
+        {
+          "src": "test/_/release-src/ts",
+          "options": { "targets": "node-first" }
+        }
       ]
     }
   },
