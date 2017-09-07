@@ -26,11 +26,6 @@ var label = require('../../label')
 var from_targets = require('./rollup-targets')
 
 
-module.exports.Prod = () =>
-{
-	return Standard(smart_glob({ tests: false }))
-}
-
 module.exports.Types = () =>
 {
 	return Composite(
@@ -40,29 +35,26 @@ module.exports.Types = () =>
 	])
 }
 
-function Standard (glob /* :string[] */)
+module.exports.Prod = () =>
 {
-	return Artifact(env =>
-	{
-		console.log(mode(env))
-
-		var targets = seq_targets(from_targets(env))
-		var seq = targets.map(it =>
-		{
-			return Glob('', glob, '', it[0](it[1]))
-		})
-
-		return Composite(seq).construct(env)
-	})
+	return Standard({ tests: false })
 }
 
 module.exports.Watch = () =>
 {
-	var glob = smart_glob()
-
 	/* some crazyness: */
 	var watch = Artifact(env =>
 	{
+		// TODO dry
+		var mode = js_mode(env)
+		var glob = smart_glob(
+		{
+			tests: true,
+			ts: mode === 'ts',
+		})
+
+		console.log('~~~', glob)
+
 		var targets = seq_targets(from_targets(env))
 		var seq = targets.map(it =>
 		{
@@ -78,13 +70,46 @@ module.exports.Watch = () =>
 
 	return Composite(
 	[
-		Standard(glob),
+		Standard({ tests: true }),
 		watch,
 	])
 }
 
 
-function mode (env /* :EnvIn */)
+
+var defaults =
+{
+	tests: false,
+}
+
+function Standard (options /* :$Shape<typeof defaults> */)
+{
+	options = assign({}, defaults, options)
+
+	return Artifact(env =>
+	{
+		// TODO dry
+		var mode = js_mode(env)
+		var glob = smart_glob(
+		{
+			tests: options.tests,
+			ts: mode === 'ts',
+		})
+
+		console.log('***', glob)
+
+		var targets = seq_targets(from_targets(env))
+		var seq = targets.map(it =>
+		{
+			return Glob('', glob, '', it[0](it[1]))
+		})
+
+		return Composite(seq).construct(env)
+	})
+}
+
+
+function js_mode (env /* :EnvIn */)
 {
 	if (exists(env.src('tsconfig.json')))
 	{
