@@ -44,28 +44,13 @@ function Standard (glob /* :string[] */)
 {
 	return Artifact(env =>
 	{
-		var targets = from_targets(env)
-		var seq = []
-
 		console.log(mode(env))
 
+		var targets = seq_targets(from_targets(env))
+		var seq = targets.map(it =>
 		{
-			var jsnext = find(targets, such => such[0] === 'jsnext')
-
-			if (jsnext)
-			{
-				seq.push(Glob('', glob, '', TargetJsnext(jsnext[1])))
-			}
-		}
-
-		{
-			var node = find(targets, such => such[0] === 'node')
-
-			if (node)
-			{
-				seq.push(Glob('', glob, '', TargetNode(node[1])))
-			}
-		}
+			return Glob('', glob, '', it[0](it[1]))
+		})
 
 		return Composite(seq).construct(env)
 	})
@@ -78,27 +63,11 @@ module.exports.Watch = () =>
 	/* some crazyness: */
 	var watch = Artifact(env =>
 	{
-		var targets = from_targets(env)
-		var seq = []
-
-		// TODO dry
+		var targets = seq_targets(from_targets(env))
+		var seq = targets.map(it =>
 		{
-			var jsnext = find(targets, such => such[0] === 'jsnext')
-
-			if (jsnext)
-			{
-				seq.push(TargetJsnext(jsnext[1], true))
-			}
-		}
-
-		{
-			var node = find(targets, such => such[0] === 'node')
-
-			if (node)
-			{
-				seq.push(TargetNode(node[1], true))
-			}
-		}
+			return it[0](it[1], true)
+		})
 
 		var composite = Composite(seq)
 		var watch = Watch(glob, label('Rollup', composite))
@@ -133,12 +102,31 @@ function mode (env /* :EnvIn */)
 }
 
 
-function TargetJsnext (dest, with_remover = false)
+function seq_targets (targets)
+{
+	var seq = []
+
+	var found_jsnext = find(targets, such => such[0] === 'jsnext')
+	if (found_jsnext)
+	{
+		seq.push([ target_jsnext, found_jsnext[1] ])
+	}
+
+	var found_node = find(targets, such => such[0] === 'node')
+	if (found_node)
+	{
+		seq.push([ target_node, found_node[1] ])
+	}
+
+	return seq
+}
+
+function target_jsnext (dest, with_remover = false)
 {
 	return Dest(WithRemover(Copy(), with_remover), dest)
 }
 
-function TargetNode (dest, with_remover = false)
+function target_node (dest, with_remover = false)
 {
 	return Dest(WithRemover(Rollup(), with_remover), dest)
 }
