@@ -46,7 +46,7 @@
       "flow check",
 
     "ts":
-      "tsc index.ts",
+      "tsc",
 
 
     "unit":
