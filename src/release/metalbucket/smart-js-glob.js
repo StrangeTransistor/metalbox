@@ -12,13 +12,9 @@ module.exports = function smart_glob (options /* :?Object */) /* :string[] */
 {
 	options = assign({}, defaults, options)
 
-	var glob = []
+	var glob = [ '**/*.js' ]
 
-	if (! options.ts)
-	{
-		glob.push('**/*.js')
-	}
-	else
+	if (options.ts)
 	{
 		glob.push('**/*.ts')
 	}
