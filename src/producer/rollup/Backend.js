@@ -43,6 +43,14 @@ module.exports = function Rollup ()
 				exports: 'auto',
 			})
 		})
+		.then(bundle =>
+		{
+			// HACK
+			// console.log('---', bundle.code.match(/require.*\)/))
+			bundle.code = bundle.code.replace(/\u0000/g, '')
+			// console.log('---', bundle.code.match(/require.*\)/))
+			return bundle
+		})
 		.then(bundle => bundle.code)
 	}
 }
