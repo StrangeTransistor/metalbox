@@ -17,6 +17,7 @@ module.exports = function smart_glob (options /* :?Object */) /* :string[] */
 	if (options.ts)
 	{
 		glob.push('**/*.ts')
+		glob.push('!**/*.d.ts')
 	}
 
 	glob = glob.concat([ '!flow-typed/**', '!coverage/**' ])

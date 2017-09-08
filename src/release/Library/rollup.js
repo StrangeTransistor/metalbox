@@ -32,8 +32,11 @@ module.exports.Types = () =>
 	[
 		Glob('', 'flow-typed/**', '', Copy()),
 		Glob('', '**.js.flow', '', Copy()),
+		Glob('', '**.d.ts', '', Copy()),
 	])
 }
+
+// TODO copy types to both js-targets
 
 module.exports.Prod = () =>
 {
