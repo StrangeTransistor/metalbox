@@ -83,11 +83,16 @@ module.exports = function Watch
 				env.src('node_modules/**'),
 			]
 
+			var src_pos /* :string[] */ = []
 			src.forEach(glob =>
 			{
 				if (glob.charAt(0) === '!')
 				{
 					ignored.push(glob.slice(1))
+				}
+				else
+				{
+					src_pos.push(glob)
 				}
 			})
 
@@ -103,7 +108,7 @@ module.exports = function Watch
 				chokidar_options.awaitWriteFinish = true
 			}
 
-			$watch = watch(env.src(src[0]), chokidar_options)
+			$watch = watch(src_pos, chokidar_options)
 
 			var $next = not_ignored(next)
 
