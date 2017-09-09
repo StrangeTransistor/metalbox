@@ -18,7 +18,7 @@ var pug_options = require('../../release/metalbucket/producer/Pug/options')
 module.exports = function Rollup ()
 	/* :Producer<EnvFrontend, string> */
 {
-	var cache
+	// var cache
 
 	return (env) =>
 	{
@@ -27,7 +27,7 @@ module.exports = function Rollup ()
 		return rollup.rollup(
 		{
 			input: input,
-			cache: cache,
+			// cache: cache,
 
 			plugins:
 			[
@@ -53,7 +53,8 @@ module.exports = function Rollup ()
 		})
 		.then(bundle =>
 		{
-			cache = bundle
+			// TODO turn cache on again
+			// cache = bundle
 
 			return bundle.generate(
 			{
