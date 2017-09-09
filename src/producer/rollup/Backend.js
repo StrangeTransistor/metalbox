@@ -12,10 +12,10 @@ module.exports = function Rollup ()
 {
 	return (env) =>
 	{
-		var entry = env.src(env.entry)
+		var input = env.src(env.entry)
 
 		var plugins = []
-		if (extname(entry) !== '.ts')
+		if (extname(input) !== '.ts')
 		{
 			plugins.push(flow({ pretty: true }))
 		}
@@ -29,9 +29,9 @@ module.exports = function Rollup ()
 
 		return rollup.rollup(
 		{
-			entry: entry,
+			input: input,
 
-			external: id => id !== entry,
+			external: id => id !== input,
 
 			plugins: plugins,
 		})

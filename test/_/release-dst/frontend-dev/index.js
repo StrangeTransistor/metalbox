@@ -39,7 +39,7 @@ var throttle = function( fn, timing=200 ) {
 
 };
 
-var pug = ((function(exports){
+var pug = (function(exports){
   'use strict';
 
   var pug_has_own_property = Object.prototype.hasOwnProperty;
@@ -296,12 +296,11 @@ var pug = ((function(exports){
   }
 
   return exports
-}))({});
+})({});
 
 var template = function(locals) {var pug_html = "", pug_mixins = {}, pug_interp;var pug_debug_filename, pug_debug_line;try {var pug_debug_sources = {};
 var locals_for_with = (locals || {});(function (data) {
 pug_mixins["Mixin"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Cspan class=\"mixin\"\u003E";
 pug_html = pug_html + "mixin\u003C\u002Fspan\u003E";
 };

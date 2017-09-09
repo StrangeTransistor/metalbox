@@ -22,11 +22,11 @@ module.exports = function Rollup ()
 
 	return (env) =>
 	{
-		var entry = env.buckets('index/index.js')
+		var input = env.buckets('index/index.js')
 
 		return rollup.rollup(
 		{
-			entry: entry,
+			input: input,
 			cache: cache,
 
 			plugins:
@@ -47,7 +47,7 @@ module.exports = function Rollup ()
 					sourcemap: false
 				}),
 				json(),
-				pug(pug_options(env, entry)),
+				pug(pug_options(env, input)),
 				flow({ pretty: true }),
 			],
 		})
