@@ -1,0 +1,38 @@
+{
+	"name":    "backend",
+	"version": "0.0.0",
+	"private":  true,
+
+	"scripts":
+	{
+		"start": "start-dev"
+	},
+	"scripts:battle":
+	{
+		"start": "start-prod"
+	},
+
+	"metalbox":
+	{
+		"presets":
+		{
+			"backend":
+			[
+				"Backend"
+			],
+			"backend-dev":
+			[
+				"Backend/Dev"
+			]
+		}
+	},
+
+	"dependencies":
+	{
+		"express": "*"
+	},
+	"devDependencies":
+	{
+		"mocha": "*"
+	}
+}

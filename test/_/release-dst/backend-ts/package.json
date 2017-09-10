@@ -1,0 +1,11 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "express": "*"
+  },
+  "scripts": {
+    "start": "start-prod"
+  }
+}
