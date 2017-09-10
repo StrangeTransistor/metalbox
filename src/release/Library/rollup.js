@@ -2,12 +2,7 @@
 
 var assign = Object.assign
 
-var exists = require('fs-sync').exists
-var gfind  = require('globule').find
-
 var find = require('lodash/find')
-
-var glob_resolve = require('../../glob-resolve')
 
 var Artifact = require('../../artifact/Artifact')
 var Glob = require('../../artifact/Glob')
@@ -20,6 +15,7 @@ var Remover = require('../../artifact/Remover')
 var Rollup = require('../metalbucket/Rollup')
 
 var smart_glob = require('../metalbucket/smart-js-glob')
+var js_mode = require('../metalbucket/js-mode')
 
 var label = require('../../label')
 
@@ -48,12 +44,10 @@ module.exports.Watch = () =>
 	/* some crazyness: */
 	var watch = Artifact(env =>
 	{
-		// TODO dry
-		var mode = js_mode(env)
 		var glob = smart_glob(
 		{
 			tests: true,
-			ts: mode === 'ts',
+			ts: js_mode(env) === 'ts',
 		})
 
 		var targets = seq_targets(from_targets(env))
@@ -89,12 +83,10 @@ function Standard (options /* :$Shape<typeof defaults> */)
 
 	return Artifact(env =>
 	{
-		// TODO dry
-		var mode = js_mode(env)
 		var glob = smart_glob(
 		{
 			tests: options.tests,
-			ts: mode === 'ts',
+			ts: js_mode(env) === 'ts',
 		})
 
 		var targets = seq_targets(from_targets(env))
@@ -105,24 +97,6 @@ function Standard (options /* :$Shape<typeof defaults> */)
 
 		return Composite(seq).construct(env)
 	})
-}
-
-
-function js_mode (env /* :EnvIn */)
-{
-	if (exists(env.src('tsconfig.json')))
-	{
-		return 'ts'
-	}
-
-	var glob = glob_resolve(env.src(), [ '**.ts' ])
-
-	if (gfind(glob).length)
-	{
-		return 'ts'
-	}
-
-	return 'flow'
 }
 
 
