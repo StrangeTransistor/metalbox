@@ -15,16 +15,37 @@ var expect_release = require('../../_/expect-release')
 
 describe('Backend (Prod)', () =>
 {
-	var src_root = src_rootpath('backend')
-	var dst_root = dst_rootpath('backend')
-	var tmp_root = tmp_rootpath()
-
-	var env = tmp_env(src_root, tmp_root)
-
-	var b = Backend()
-
 	it('works', () =>
 	{
+		var src_root = src_rootpath('backend')
+		var dst_root = dst_rootpath('backend')
+		var tmp_root = tmp_rootpath()
+
+		var env = tmp_env(src_root, tmp_root)
+
+		var b = Backend()
+
+		return b.construct(env)
+		.then(() =>
+		{
+			expect(compare(dst_root(), tmp_root())).ok
+		})
+		.then(() =>
+		{
+			expect_release(tmp_root('release.json'), { instance: true })
+		})
+	})
+
+	it('works in TS-mode', () =>
+	{
+		var src_root = src_rootpath('backend-ts')
+		var dst_root = dst_rootpath('backend-ts')
+		var tmp_root = tmp_rootpath()
+
+		var env = tmp_env(src_root, tmp_root)
+
+		var b = Backend()
+
 		return b.construct(env)
 		.then(() =>
 		{
