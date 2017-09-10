@@ -2,6 +2,7 @@
 
 var Composite = require('../../artifact/Composite')
 
+// TODO watch vendor
 // var Watch = require('../../artifact/Watch')
 var Glob = require('../../artifact/Glob')
 var Copy = require('../../artifact/Copy')
