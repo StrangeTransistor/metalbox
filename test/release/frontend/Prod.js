@@ -15,20 +15,48 @@ var expect_release = require('../../_/expect-release')
 
 describe('Frontend (Prod)', () =>
 {
-	var src_root = src_rootpath('frontend')
-	var dst_root = dst_rootpath('frontend')
-	var tmp_root = tmp_rootpath()
-
-	var env = tmp_env(src_root, tmp_root, { notify: true })
-
-	/* @flow-off */
-	env.hash = 'fixed'
-
-	var f = Frontend()
-
 	it('works', function ()
 	{
 		this.timeout(5000)
+
+		var src_root = src_rootpath('frontend')
+		var dst_root = dst_rootpath('frontend')
+		var tmp_root = tmp_rootpath()
+
+		var env = tmp_env(src_root, tmp_root, { notify: true })
+
+		/* @flow-off */
+		env.hash = 'fixed'
+
+		var f = Frontend()
+
+		return f.construct(env)
+		.then(() =>
+		{
+			expect(compare(dst_root(), tmp_root())).ok
+		})
+		.then(() =>
+		{
+			expect_release(tmp_root('release.json'), { hash: true })
+		})
+	})
+
+	it.only('works in TS-mode', function ()
+	{
+		this.timeout(5000)
+
+		var src_root = src_rootpath('frontend-ts')
+		var dst_root = dst_rootpath('frontend-ts')
+		var tmp_root = tmp_rootpath()
+
+		var env = tmp_env(src_root, tmp_root, { notify: true })
+
+		env.hash = 'fixed'
+
+		// TODO fix rollup-plugin-typescript bug
+		process.chdir(src_root())
+
+		var f = Frontend()
 
 		return f.construct(env)
 		.then(() =>

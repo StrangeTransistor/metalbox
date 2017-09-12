@@ -1,9 +1,11 @@
 
 import mod from './mod'
 
-0 && console.log(mod(1))
+function so () { return 1 - 1 }
+
+if (so()) console.log(mod(1))
 
 import mod2 from 'other-bucket/mod2'
 
-0 && console.log(mod2(1))
-0 && console.log(mod2('a'))
+so() && console.log(mod2(1))
+so() && console.log(mod2('a'))

@@ -1,0 +1,1 @@
+'use strict';(function(){'use strict';function b(d){return d+''+'.'}function c(){return 0}c()&&console.log(function(d){return d+5}(1)),c()&&console.log(b(1)),c()&&console.log(b('a'))})();
