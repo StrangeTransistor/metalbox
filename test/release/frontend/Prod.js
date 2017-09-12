@@ -41,7 +41,7 @@ describe('Frontend (Prod)', () =>
 		})
 	})
 
-	it.only('works in TS-mode', function ()
+	it('works in TS-mode', function ()
 	{
 		this.timeout(5000)
 

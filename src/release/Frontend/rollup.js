@@ -18,7 +18,7 @@ var Standard = module.exports.Standard = function ()
 
 module.exports.Watch = function ()
 {
-	return Heat(env => env.buckets('**/*.@(js|pug)'), Standard())
+	return Heat(env => env.buckets('**/*.@(js|ts|pug)'), Standard())
 }
 
 
