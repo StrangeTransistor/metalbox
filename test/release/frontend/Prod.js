@@ -53,10 +53,6 @@ describe('Frontend (Prod)', () =>
 
 		env.hash = 'fixed'
 
-		// TODO fix rollup-plugin-typescript bug
-		var cwd = process.cwd()
-		process.chdir(src_root())
-
 		var f = Frontend()
 
 		return f.construct(env)
@@ -67,11 +63,6 @@ describe('Frontend (Prod)', () =>
 		.then(() =>
 		{
 			expect_release(tmp_root('release.json'), { hash: true })
-		})
-		.finally(() =>
-		{
-			// TODO rm
-			process.chdir(cwd)
 		})
 	})
 })

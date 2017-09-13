@@ -1,5 +1,7 @@
 /* @flow */
 
+var presolve = require('bluebird').resolve
+
 var rollup = require('rollup')
 
 var include  = require('rollup-plugin-includepaths')
@@ -33,6 +35,10 @@ module.exports = function Rollup ()
 		}
 		else
 		{
+			// TODO fix rollup-plugin-typescript bug
+			var prev_dir = process.cwd()
+			process.chdir(env.src())
+
 			var input = env.buckets('index/index.ts')
 		}
 
@@ -74,13 +80,13 @@ module.exports = function Rollup ()
 			plugins.push(flow({ pretty: true }))
 		}
 
-		return rollup.rollup(
+		return presolve(rollup.rollup(
 		{
 			input: input,
 			// cache: cache,
 
 			plugins: plugins,
-		})
+		}))
 		.then(bundle =>
 		{
 			// TODO turn cache on again
@@ -93,5 +99,13 @@ module.exports = function Rollup ()
 			})
 		})
 		.then(bundle => bundle.code)
+		.finally(() =>
+		{
+			if (mode === 'ts')
+			{
+				// TODO rm
+				process.chdir(prev_dir)
+			}
+		})
 	}
 }
