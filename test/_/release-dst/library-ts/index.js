@@ -18,3 +18,8 @@ foo('abc');
 foo(String(bar(1)));
 foo(mod2(2));
 console.log(bar(3));
+function over(n) {
+    return Number(n);
+}
+console.log(over(1));
+console.log(over('1'));
