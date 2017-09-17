@@ -8,7 +8,8 @@
 			"*":
 			[
 				"*",
-				"buckets/*"
+				"buckets/*",
+				"node_modules/*"
 			]
 		},
 
@@ -16,7 +17,7 @@
 		"pretty": true,
 
 		"strict": true,
-		"module": "ES6",
+		"target": "ES6",
 
 		"allowJs": true,
 		"checkJs": true
