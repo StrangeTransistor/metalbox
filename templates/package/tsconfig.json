@@ -9,6 +9,6 @@
 		"target": "ES6",
 
 		"allowJs": true,
-		"checkJs": true
+		"checkJs": false
 	}
 }
