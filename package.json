@@ -25,6 +25,8 @@
 
   "scripts":
   {
+    "st": "eslint run/ src/",
+    "test": "npm run st"
   },
 
   "dependencies":
@@ -35,5 +37,10 @@
 
   "devDependencies":
   {
+    "eslint":
+      "4",
+
+    "js-outlander":
+      "StrangeTransistor/js-outlander#master"
   }
 }
