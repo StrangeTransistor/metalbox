@@ -1,5 +1,6 @@
+/* @flow */
 
-export default function runner (...args)
+export default function runner (...args: string[])
 {
 	console.log(args)
 }

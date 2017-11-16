@@ -1,0 +1,9 @@
+
+[version]
+0.59.0
+
+[ignore]
+<PROJECT_ROOT>/node_modules/.*
+
+[options]
+suppress_comment= \\(.\\|\n\\)*\\@flow-off
