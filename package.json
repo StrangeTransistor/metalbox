@@ -4,7 +4,7 @@
   "license": "ISC",
 
   "author": "StrangeTransistor <strange.transistor@gmail.com>",
-  "description": "tool for assembling stuff",
+  "description": "a tool for assembling stuff",
 
   "homepage":            "https://github.com/StrangeTransistor/metalbox",
   "repository": { "url": "https://github.com/StrangeTransistor/metalbox.git", "type": "git" },
