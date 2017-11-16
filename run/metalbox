@@ -1,5 +1,7 @@
 #! /usr/bin/env node
 
-var runner = require('../src/')
+require = require("@std/esm")(module)
+
+var runner = require('../src/').default
 
 runner(process.argv)

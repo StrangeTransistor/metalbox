@@ -1,5 +1,5 @@
 
-module.exports = function runner (...args)
+export default function runner (...args)
 {
 	console.log(args)
 }

@@ -10,6 +10,8 @@
   "repository": { "url": "https://github.com/StrangeTransistor/metalbox.git", "type": "git" },
   "bugs":       { "url": "https://github.com/StrangeTransistor/metalbox/issues" },
 
+  "@std/esm": "cjs",
+
   "engines":
   {
     "node": ">=6.5"
@@ -27,6 +29,8 @@
 
   "dependencies":
   {
+    "@std/esm":
+      "0.15"
   },
 
   "devDependencies":
