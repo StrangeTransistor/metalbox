@@ -1,0 +1,35 @@
+{
+     "name": "metalbox",
+  "version": "2.0.0-pre",
+  "license": "ISC",
+
+  "author": "StrangeTransistor <strange.transistor@gmail.com>",
+  "description": "tool for assembling stuff",
+
+  "homepage":            "https://github.com/StrangeTransistor/metalbox",
+  "repository": { "url": "https://github.com/StrangeTransistor/metalbox.git", "type": "git" },
+  "bugs":       { "url": "https://github.com/StrangeTransistor/metalbox/issues" },
+
+  "engines":
+  {
+    "node": ">=6.5"
+  },
+
+  "bin": "run/metalbox",
+
+  "files":
+  [
+  ],
+
+  "scripts":
+  {
+  },
+
+  "dependencies":
+  {
+  },
+
+  "devDependencies":
+  {
+  }
+}
