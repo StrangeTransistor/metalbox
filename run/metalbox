@@ -1,0 +1,5 @@
+#! /usr/bin/env node
+
+var runner = require('../src/')
+
+runner(process.argv)
