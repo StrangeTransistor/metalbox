@@ -3,7 +3,10 @@
 export default async function runner (...args /*: string[] */)
 {
 	console.log(args)
-	console.log(await product())
+
+	var f /* :Producer<void, string> */ = product
+
+	console.log(await f())
 }
 
 async function product ()
