@@ -6,14 +6,18 @@ export default async function runner (...args /*: string[] */)
 {
 	console.log(args)
 
-	var f /* :$Producer<[ number ], string> */ = product
+	var unit = Unit(() => 17)
 
-	console.log(await f(17))
+	var context =
+	{
+		input: null,
+		first: true,
+		once: false,
+		live: false,
 
-	var u /* $Unit<number> */ = Unit(() => {})
-}
+		engine: {},
+		storage: {},
+	}
 
-async function product ()
-{
-	return 'product'
+	console.log(await unit(context))
 }

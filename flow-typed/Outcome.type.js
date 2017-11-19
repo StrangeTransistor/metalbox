@@ -1,5 +1,5 @@
 
 type $Outcome =
 {
-	r: any,
+	value: any,
 }
