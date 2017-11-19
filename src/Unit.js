@@ -1,13 +1,13 @@
 /* @flow */
 
-export default function Unit /* ::<$product> */
+export default function Unit /* ::<$in, $out> */
 (
-	fn /* :$Fn<$product> */
+	fn /* :$Fn<$in, $out> */
 )
-	/* :$Unit<$product> */
+	/* :$Unit<$in, $out> */
 {
 	return async function (context)
 	{
-		return { value: await fn(context) }
+		return { output: await fn(context) }
 	}
 }

@@ -1,9 +1,9 @@
 
-type $Fn<$product> = $Producer<[ $Context ], $product>
+type $Fn<$in, $out> = $Producer<[ $Context<$in> ], $out>
 
 ;
 
-type $Unit<$product> =
+type $Unit<$in, $out> =
 {
-	(context: $Context): Promise<$Outcome>,
+	(context: $Context<$in>): Promise<$Outcome<$out>>,
 }

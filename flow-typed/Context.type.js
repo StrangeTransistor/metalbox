@@ -1,7 +1,7 @@
 
-interface $Context
+interface $Context<$in>
 {
-	input: any,
+	input: $in,
 	first: boolean,
 	once:  boolean,
 	live:  boolean,

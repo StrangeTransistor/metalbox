@@ -1,5 +1,5 @@
 
-type $Outcome =
+type $Outcome<$out> =
 {
-	value: any,
+	output: $out,
 }
