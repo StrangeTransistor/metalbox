@@ -33,7 +33,10 @@
   "dependencies":
   {
     "@std/esm":
-      "0.15"
+      "0.15",
+
+    "flyd":
+      "0.2"
   },
 
   "devDependencies":
