@@ -10,9 +10,7 @@ export default async function runner (...args /*: string[] */)
 
 	console.log(await f(17))
 
-	var u = Unit()
-
-	console.log(u()())
+	var u /* $Unit<number> */ = Unit(() => {})
 }
 
 async function product ()

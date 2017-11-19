@@ -1,8 +1,10 @@
 /* @flow */
 
-import { stream } from 'flyd'
-
-export default function Unit ()
+export default function Unit /* ::<$product> */ (fn /* :$Fn<$product> */) /* :$Unit<$product> */
 {
-	return () => stream(1)
+	return async function (context)
+	{
+		return /* :: ( */ 17 /* :any) */
+		// return Promise.resolve(/* :: ( */ 17 /* :any) */)
+	}
 }
