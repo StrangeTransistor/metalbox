@@ -6,9 +6,9 @@ export default async function runner (...args /*: string[] */)
 {
 	console.log(args)
 
-	var f /* :Producer<void, string> */ = product
+	var f /* :$Producer<[ number ], string> */ = product
 
-	console.log(await f())
+	console.log(await f(17))
 
 	var u = Unit()
 

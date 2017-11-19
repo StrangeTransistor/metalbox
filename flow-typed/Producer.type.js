@@ -1,2 +1,7 @@
 
-type Producer<$in, $out> = ($in) => $Promisable<$out>
+type $Producer
+<
+	$in: $Iterable<*, *, *>,
+	$out
+>
+ = (...args: $in) => $Promisable<$out>
