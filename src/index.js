@@ -3,6 +3,8 @@
 // import Unit from './Unit'
 import File from './Unit/File'
 
+import tmp from './tmp'
+
 export default async function runner (...args /*: string[] */)
 {
 	console.log(args)
@@ -22,4 +24,9 @@ export default async function runner (...args /*: string[] */)
 	}
 
 	console.log(await unit(context))
+
+	var t = tmp()
+
+	console.log(t())
+	console.log(t('abc'))
 }

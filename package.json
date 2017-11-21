@@ -35,6 +35,12 @@
     "@std/esm":
       "0.15",
 
+    "@streetstrider/rootpath":
+      "2",
+
+    "randomstring":
+      "1",
+
     "mz":
       "2.7",
 
