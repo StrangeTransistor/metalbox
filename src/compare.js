@@ -5,7 +5,7 @@ import { compareSync as compare } from 'dir-compare'
 
 var bold = clc.bold
 
-export default function (dst, tmp)
+export default function (dst /* :string */, tmp /* :string */)
 {
 	var r = compare(dst, tmp,
 	{
