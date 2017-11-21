@@ -27,7 +27,8 @@
   {
       "st": "eslint run/ src/",
        "t": "flow check",
-    "test": "npm run st && npm run t"
+    "test": "npm run st && npm run t",
+    "unit": "mocha -r @std/esm -R dot test/case/**"
   },
 
   "dependencies":
@@ -55,6 +56,10 @@
 
     "js-outlander":
       "StrangeTransistor/js-outlander#2.3.0",
+
+
+    "mocha":
+      "4",
 
 
     "flow-bin":
