@@ -27,8 +27,9 @@
   {
       "st": "eslint run/ src/",
        "t": "flow check",
-    "test": "npm run st && npm run t",
-    "unit": "mocha -r test/patch -r @std/esm -R dot test/case/**"
+    "unit": "mocha -r test/patch -r @std/esm -R dot test/case/**",
+
+    "test": "npm run st && npm run t && npm run unit"
   },
 
   "dependencies":
