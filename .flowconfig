@@ -6,4 +6,7 @@
 <PROJECT_ROOT>/node_modules/.*
 
 [options]
+module.name_mapper='^src/' -> '<PROJECT_ROOT>/\0'
+# module.system.node.resolve_dirname
+
 suppress_comment= \\(.\\|\n\\)*\\@flow-off

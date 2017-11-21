@@ -2,12 +2,12 @@
 
 import rootpath from '@streetstrider/rootpath'
 
-import tmp from '../../../src/tmp'
-import collate from '../../../src/collate'
+import tmp from 'src/tmp'
+import collate from 'src/collate'
 
-import File from '../../../src/Unit/File'
+import File from 'src/Unit/File'
 
-import compare from '../../../src/compare'
+import compare from 'src/compare'
 
 describe('File', () =>
 {
