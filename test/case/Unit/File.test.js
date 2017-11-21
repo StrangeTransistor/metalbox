@@ -3,6 +3,8 @@
 import rootpath from '@streetstrider/rootpath'
 
 import tmp from '../../../src/tmp'
+import collate from '../../../src/collate'
+
 import File from '../../../src/Unit/File'
 
 import compare from '../../../src/compare'
@@ -11,8 +13,8 @@ describe('File', () =>
 {
 	it('File(str, str)', async () =>
 	{
-		var cl = rootpath(__dirname, '../../collate/file/1')
 		var tm = tmp()
+		var cl = collate('file/1')
 
 		var unit = File(tm('abc'), 'content\n')
 
