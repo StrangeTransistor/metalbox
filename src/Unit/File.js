@@ -17,3 +17,5 @@ export default function File
 		console.log(content)
 	})
 }
+
+// fs.writeFile(file, data[, options], callback)
