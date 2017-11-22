@@ -96,3 +96,20 @@ describe('File', () =>
 		throw new TypeError
 	})
 })
+
+describe('File.Name', () =>
+{
+	var cl1 = collate('file/1')
+	var context_string = Context('content\n')
+
+	it('File.Name(str)', async () =>
+	{
+		var tm = tmp()
+
+		var unit = File.Name(tm('abc'))
+
+		await unit(context_string)
+
+		compare(cl1(), tm())
+	})
+})

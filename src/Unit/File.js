@@ -10,11 +10,12 @@ import Unit from './Unit'
 
 import unroll from '../unroll'
 
-export default function File
+export default function File /* ::<$in> */
 (
-	filename /* :$Computable<*, string> */,
-	content  /* :$Computable<*, string> */
+	filename /* :$Computable<$in, string> */,
+	content  /* :$Computable<$in, string> */
 )
+	/* :$Unit<$in, void> */
 {
 	return Unit(async (context) =>
 	{
@@ -31,4 +32,9 @@ export default function File
 
 		return write(filename_u, content_u)
 	})
+}
+
+File.Name = function (filename /* :$Computable<string, string> */)
+{
+	return File(filename, (context /* :$Context<string> */) => context.input)
 }
