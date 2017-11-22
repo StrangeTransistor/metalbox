@@ -14,19 +14,19 @@ export default function (dst /* :string */, tmp /* :string */)
 		excludeFilter: 'release.json'
 	})
 
-	if (r.same)
-	{
-		console.log(` ${bold('tmp:')} ${tmp}`)
-	}
-	else
+	if (! r.same)
 	{
 		var differences = r.differences
 		var diff = r.diffSet.filter(it => it.state !== 'equal')
 
+		console.log()
 		console.warn('release differs: %s files differences', differences)
 		console.warn(diff)
 		console.log(bold(` meld ${tmp} ${dst}`))
 
 		throw new Error('release differs')
 	}
+	/*{
+		// console.log(` ${bold('tmp:')} ${tmp}`)
+	}*/
 }
