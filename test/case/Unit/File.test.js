@@ -113,3 +113,20 @@ describe('File.Name', () =>
 		compare(cl1(), tm())
 	})
 })
+
+describe('File.Entry', () =>
+{
+	var cl1 = collate('file/1')
+
+	it('File.Entry()', async () =>
+	{
+		var tm = tmp()
+		var context_entry = Context([ tm('abc'), 'content\n' ])
+
+		var unit = File.Entry()
+
+		await unit(context_entry)
+
+		compare(cl1(), tm())
+	})
+})

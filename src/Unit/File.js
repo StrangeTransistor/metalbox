@@ -38,3 +38,16 @@ File.Name = function (filename /* :$Computable<string, string> */)
 {
 	return File(filename, (context /* :$Context<string> */) => context.input)
 }
+
+File.Entry = function ()
+{
+	return File(
+	(context /* :$Entry */) =>
+	{
+		return context.input[0]
+	},
+	(context /* :$Entry */) =>
+	{
+		return context.input[1]
+	})
+}
