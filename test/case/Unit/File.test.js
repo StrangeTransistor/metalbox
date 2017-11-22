@@ -74,4 +74,25 @@ describe('File', () =>
 
 		compare(cl1(), tm())
 	})
+
+	it('not absolute path', async () =>
+	{
+		var unit = File('abc', '')
+
+		try
+		{
+			await unit(context_null)
+		}
+		catch (e)
+		{
+			if (e.message !== 'filename_must_be_absolute_path')
+			{
+				throw e
+			}
+
+			return
+		}
+
+		throw new TypeError
+	})
 })
