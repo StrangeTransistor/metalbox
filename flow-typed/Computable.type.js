@@ -4,7 +4,7 @@ type $Value
 	$in: $Iterable<*, *, *>,
 	$out
 >
- = $out | $Producer<$in, $out>
+ = $Producer<$in, $out> | $out
 
 ;
 
