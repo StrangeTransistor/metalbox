@@ -34,4 +34,28 @@ describe('File', () =>
 
 		compare(cl(), tm())
 	})
+
+	it('File(computable, computable)', async () =>
+	{
+		var tm = tmp()
+		var cl = collate('file/1')
+
+		var unit = File(() => tm('abc'), async () => 'content\n')
+
+		var context =
+		{
+			input: null,
+
+			first: true,
+			once: false,
+			live: false,
+
+			engine:  {},
+			storage: {},
+		}
+
+		await unit(context)
+
+		compare(cl(), tm())
+	})
 })

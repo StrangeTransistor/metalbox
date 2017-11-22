@@ -40,6 +40,9 @@
     "@streetstrider/rootpath":
       "2",
 
+    "bluebird":
+      "3.5",
+
     "randomstring":
       "1",
 
