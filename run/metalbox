@@ -4,4 +4,4 @@ require = require('@std/esm')(module)
 
 var runner = require('../src/').default
 
-runner(process.argv)
+runner(process.argv.slice(2))
