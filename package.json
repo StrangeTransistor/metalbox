@@ -40,6 +40,9 @@
     "@streetstrider/rootpath":
       "2",
 
+    "minimist":
+      "1",
+
     "bluebird":
       "3.5",
 
