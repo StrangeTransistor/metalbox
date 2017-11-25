@@ -25,7 +25,7 @@
 
   "scripts":
   {
-      "st": "eslint run/ src/",
+      "st": "eslint run/ src/ test/",
        "t": "flow check",
     "unit": "mocha -r test/patch -r @std/esm -R dot test/case/**",
 

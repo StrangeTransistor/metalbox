@@ -1,7 +1,5 @@
 /* @flow */
 
-import rootpath from '@streetstrider/rootpath'
-
 import bluebird from 'bluebird'
 var delay = bluebird.delay
 
