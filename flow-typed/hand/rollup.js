@@ -1,19 +1,36 @@
 
 declare module 'rollup'
 {
-	declare type Options =
+	declare type InputOptions =
 	{
 		input: string,
 	}
 
 	;
 
-	declare type Bundle =
+	declare type OutputOptions =
 	{
-		generate (options: any): { code: string, map?: ?Object }
+		format: 'cjs' | 'iife' | 'es' | 'umd' | 'amd',
+		exports?: 'auto' | 'default' | 'named' | 'none',
+		sourcemap?: boolean,
 	}
 
 	;
 
-	declare function rollup (options: Options): Promise<Bundle>
+	declare type Bundle =
+	{
+		generate (options: OutputOptions): Output,
+	}
+
+	;
+
+	declare type Output =
+	{
+		code: string,
+		map?: Object,
+	}
+
+	;
+
+	declare function rollup (options: InputOptions): Promise<Bundle>
 }
