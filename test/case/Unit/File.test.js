@@ -8,6 +8,7 @@ import collate from 'src/collate'
 import compare from 'src/compare'
 
 import Context from 'src/Context'
+import Entry from 'src/Entry'
 import File from 'src/Unit/File'
 
 describe('File', () =>
@@ -119,11 +120,7 @@ describe('File.Entry', () =>
 	it('File.Entry()', async () =>
 	{
 		var tm = tmp()
-		var context_entry = Context(
-		{
-			filename: tm('abc'),
-			content:  'content\n',
-		})
+		var context_entry = Context(Entry(tm('abc'), 'content\n'))
 
 		var unit = File.Entry()
 
