@@ -42,12 +42,12 @@ File.Name = function (filename /* :$Computable<string, string> */)
 File.Entry = function ()
 {
 	return File(
-	(context /* :$Entry */) =>
+	(context /* :$Context<$Entry> */) =>
 	{
-		return context.input[0]
+		return context.input.filename
 	},
-	(context /* :$Entry */) =>
+	(context /* :$Context<$Entry> */) =>
 	{
-		return context.input[1]
+		return context.input.content
 	})
 }

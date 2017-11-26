@@ -27,7 +27,7 @@ declare module 'rollup'
 	declare type Output =
 	{
 		code: string,
-		map?: Object,
+		map: ?Object,
 	}
 
 	;

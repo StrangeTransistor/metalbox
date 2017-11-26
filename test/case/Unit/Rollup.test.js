@@ -11,7 +11,7 @@ import origin from 'src/origin'
 import Context from 'src/Context'
 import Rollup from 'src/Unit/Rollup/Rollup'
 
-describe.only('Rollup', () =>
+describe('Rollup', () =>
 {
 	it('Rollup(input)', async () =>
 	{

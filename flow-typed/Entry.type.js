@@ -1,2 +1,7 @@
 
-type $Entry = $Context<[ string, string ]>
+type $Entry =
+{
+	filename:   string,
+	content:    string,
+	sourcemap?: Object,
+}
