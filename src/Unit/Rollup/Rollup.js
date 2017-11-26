@@ -19,7 +19,6 @@ export default function Rollup /* ::<$in> */
 		return rollup({ input: input_u })
 		.then(it =>
 		{
-			// console.log(it)
 			return it.generate(
 			{
 				format:  'cjs',
@@ -29,9 +28,12 @@ export default function Rollup /* ::<$in> */
 		})
 		.then(bundle =>
 		{
-			// console.log(input_u)
-			// console.log(bundle.map)
-			return Entry(input_u, bundle.code)
+			return Entry(
+			{
+				filename:  input_u,
+				content:   bundle.code,
+				sourcemap: bundle.map
+			})
 		})
 	})
 }

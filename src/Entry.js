@@ -2,16 +2,15 @@
 
 export default function Entry
 (
-	filename /* :string */,
-	content  /* :string */
+	options /* :$Entry$Optional */
 )
 	/* :$Entry */
 {
 	var entry =
 	{
-		filename,
-		content,
-		sourcemap: null,
+		filename:  options.filename,
+		content:   options.content,
+		sourcemap: options.sourcemap || null,
 	}
 
 	return entry
