@@ -3,13 +3,14 @@
 import { rollup } from 'rollup'
 
 import unroll from '../../unroll'
+import Entry from '../../Entry'
 import Unit from '../Unit'
 
 export default function Rollup /* ::<$in> */
 (
 	input /* :$Computable<$in, string> */
 )
-	/* :$Unit<$in, [ string, string ]> */
+	/* :$Unit<$in, $Entry> */
 {
 	return Unit(async (context) =>
 	{
@@ -18,7 +19,7 @@ export default function Rollup /* ::<$in> */
 		return rollup({ input: input_u })
 		.then(it =>
 		{
-			console.log(it)
+			// console.log(it)
 			return it.generate(
 			{
 				format:  'cjs',
@@ -26,10 +27,11 @@ export default function Rollup /* ::<$in> */
 				// sourcemap: true,
 			})
 		})
-		.then(it =>
+		.then(bundle =>
 		{
-			console.log(it)
-			return [ 'a', 'a' ]
+			// console.log(input_u)
+			// console.log(bundle.map)
+			return Entry(input_u, bundle.code)
 		})
 	})
 }
