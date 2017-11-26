@@ -20,6 +20,8 @@ describe('Rollup', () =>
 
 		var unit = Rollup(org('index.js'))
 
-		await unit(context)
+		var outcome = await unit(context)
+
+		console.log(outcome)
 	})
 })
