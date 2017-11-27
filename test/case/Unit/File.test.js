@@ -3,10 +3,7 @@
 import bluebird from 'bluebird'
 var delay = bluebird.delay
 
-import chai from 'chai'
-import chai_promise from 'chai-as-promised'
-chai.use(chai_promise)
-var { expect } = chai
+import { expect } from 'chai'
 
 import tmp from 'src/tmp'
 import collate from 'src/collate'
