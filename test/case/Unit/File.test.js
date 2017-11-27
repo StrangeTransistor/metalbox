@@ -3,6 +3,11 @@
 import bluebird from 'bluebird'
 var delay = bluebird.delay
 
+import chai from 'chai'
+import chai_promise from 'chai-as-promised'
+chai.use(chai_promise)
+var { expect } = chai
+
 import tmp from 'src/tmp'
 import collate from 'src/collate'
 import compare from 'src/compare'
@@ -78,21 +83,8 @@ describe('File', () =>
 	{
 		var unit = File('abc', '')
 
-		try
-		{
-			await unit(context_null)
-		}
-		catch (e)
-		{
-			if (e.message !== 'filename_must_be_absolute_path')
-			{
-				throw e
-			}
-
-			return
-		}
-
-		throw new TypeError
+		await expect(unit(context_null))
+		.rejectedWith('filename_must_be_absolute_path')
 	})
 })
 

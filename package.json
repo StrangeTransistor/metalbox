@@ -81,6 +81,12 @@
     "mocha":
       "4",
 
+    "chai":
+      "4",
+
+    "chai-as-promised":
+      "7",
+
 
     "flow-bin":
       "0.59.0",

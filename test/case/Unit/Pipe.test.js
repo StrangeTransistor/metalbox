@@ -1,5 +1,7 @@
 /* @flow */
 
+import { expect } from 'chai'
+
 import Unit from 'src/Unit'
 import Context from 'src/Context'
 
@@ -26,11 +28,6 @@ describe('Pipe', () =>
 
 		var outcome = await u(context)
 
-		var y = outcome.output.y
-
-		if (y !== 7)
-		{
-			throw new TypeError
-		}
+		expect(outcome.output).deep.eq({ y: 7 })
 	})
 })
