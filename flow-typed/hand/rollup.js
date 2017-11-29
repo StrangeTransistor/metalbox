@@ -8,18 +8,23 @@ declare module 'rollup'
 
 	;
 
-	declare type OutputOptions =
+	declare type Bundle =
 	{
-		format: 'cjs' | 'iife' | 'es' | 'umd' | 'amd',
-		exports?: 'auto' | 'default' | 'named' | 'none',
-		sourcemap?: boolean,
+		generate (options: OutputOptions): Output,
 	}
 
 	;
 
-	declare type Bundle =
+	declare function rollup (options: InputOptions): Promise<Bundle>
+
+	;
+
+
+	declare type OutputOptions =
 	{
-		generate (options: OutputOptions): Output,
+		format:     'cjs' |    'iife' |    'es' | 'umd' | 'amd',
+		exports?:  'auto' | 'default' | 'named' | 'none',
+		sourcemap?: boolean,
 	}
 
 	;
@@ -29,8 +34,4 @@ declare module 'rollup'
 		code: string,
 		map: ?Object,
 	}
-
-	;
-
-	declare function rollup (options: InputOptions): Promise<Bundle>
 }
