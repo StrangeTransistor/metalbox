@@ -1,5 +1,5 @@
 
-type $Fn<$in, $out> = $Producer<[ $Context<$in> ], $out>
+type $Unit$Fn<$in, $out> = $Producer<[ $Context<$in> ], $out>
 
 ;
 

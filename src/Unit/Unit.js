@@ -4,7 +4,7 @@ import Context from '../Context'
 
 export default function Unit /* ::<$in, $out> */
 (
-	fn /* :$Fn<$in, $out> */
+	fn /* :$Unit$Fn<$in, $out> */
 )
 	/* :$Unit<$in, $out> */
 {
