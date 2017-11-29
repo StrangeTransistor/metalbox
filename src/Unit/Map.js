@@ -10,8 +10,6 @@ export default function Map /* ::<$in, $out> */
 {
 	return Unit(async (context) =>
 	{
-		var input = context.input
-
-		return await fn(input)
+		return await fn(context.input)
 	})
 }
