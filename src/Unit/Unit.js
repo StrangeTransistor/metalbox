@@ -22,6 +22,16 @@ export default function Unit /* ::<$in, $out> */
 		return Pipe(unit, next)
 	}
 
+	/* TODO: experimental, test for viability */
+	unit.before = function before /* ::<$in_before> */
+	(
+		map /* :$Unit<$in_before, $in> */
+	)
+		/* :$Unit<$in_before, $out> */
+	{
+		return Pipe(map, unit)
+	}
+
 	return unit
 }
 
