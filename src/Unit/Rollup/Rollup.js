@@ -64,3 +64,13 @@ export function Cjs ()
 {
 	return Generate('cjs', 'auto')
 }
+
+export function Es6 ()
+{
+	return Generate('es', 'auto')
+}
+
+export function Iife ()
+{
+	return Generate('iife', 'none')
+}
