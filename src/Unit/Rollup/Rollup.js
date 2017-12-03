@@ -39,6 +39,15 @@ export default function Rollup /* ::<$in> */
 	})
 }
 
+Rollup.Entry = function (options /* :: ?:$Shape<$Rollup$InputOptions> */)
+{
+	return Rollup((context /* :$Context<$Entry<any>> */) =>
+	{
+		return context.input.filename
+	}
+	, options)
+}
+
 export function Generate
 (
 	format  /* :$Rollup$Format  */,
