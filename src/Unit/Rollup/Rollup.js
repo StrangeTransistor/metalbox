@@ -2,8 +2,12 @@
 /* ::
 
 import type { Bundle as $Rollup$Bundle } from 'rollup'
+import type { Format as $Rollup$Format } from 'rollup'
+import type { Exports as $Rollup$Exports } from 'rollup'
 
 */
+
+var assign = Object.assign
 
 import { rollup } from 'rollup'
 
@@ -27,13 +31,36 @@ export default function Rollup /* ::<$in> */
 	})
 }
 
-/*
+export function Generate
+(
+	format  /* :$Rollup$Format  */,
+	exports /* :$Rollup$Exports */,
+	options /* :: ?:Object */
+)
+	/* :$Unit<$Entry<$Rollup$Bundle>, $Entry<$Entry$File>> */
+{
+	return Unit(async (context) =>
+	{
+		var entry = context.input
+		var bundle /* :$Rollup$Bundle */ = entry.content
 
-			return it.generate(
-			{
-				format:  'cjs',
-				exports: 'auto',
-				// sourcemap: true,
-			})
+		var options_u = assign({}, options,
+		{
+			format,
+			exports,
+		})
 
-*/
+		var codepair = await bundle.generate(options_u)
+
+		return Entry(entry.filename,
+		{
+			content:   codepair.code,
+			sourcemap: codepair.map
+		})
+	})
+}
+
+export function Cjs ()
+{
+	return Generate('cjs', 'auto')
+}

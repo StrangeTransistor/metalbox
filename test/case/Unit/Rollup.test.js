@@ -9,7 +9,9 @@ import origin from 'src/origin'
 // import compare from 'src/compare'
 
 import Context from 'src/Context'
-import Rollup from 'src/Unit/Rollup/Rollup'
+
+import Rollup  from 'src/Unit/Rollup/Rollup'
+import { Cjs } from 'src/Unit/Rollup/Rollup'
 // import File from 'src/Unit/File'
 
 describe('Rollup', () =>
@@ -19,24 +21,20 @@ describe('Rollup', () =>
 		var org = origin('rollup')
 		var context = Context(null)
 
-		var unit = Rollup(org('index.js'))
+		var rollup = Rollup(org('index.js'))
+		var cjs    = Cjs()
+
+		var unit = rollup.pipe(cjs)
 
 		var outcome = await unit(context)
 
 		expect(outcome).an('object')
 		expect(outcome.output).an('object')
 
-		console.log(outcome.output)
-
-		var generated = await outcome.output.content.generate(
-		{
-			format:  'cjs',
-			exports: 'auto',
-			// sourcemap: true,
-		})
+		var codepair = outcome.output.content
 
 		// eslint-disable-next-line max-len
-		expect(generated.code).eq("'use strict';\n\nfunction main ()\n{\n\tconsole.log('main');\n}\n\nmodule.exports = main;\n")
-		expect(generated.map).null
+		expect(codepair.content).eq("'use strict';\n\nfunction main ()\n{\n\tconsole.log('main');\n}\n\nmodule.exports = main;\n")
+		expect(codepair.sourcemap).null
 	})
 })

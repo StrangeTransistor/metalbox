@@ -19,11 +19,16 @@ declare module 'rollup'
 
 	;
 
+	declare type Format  =  'cjs' |    'iife' |    'es' | 'umd' | 'amd'
+	;
+	declare type Exports = 'auto' | 'default' | 'named' | 'none'
+
+	;
 
 	declare type OutputOptions =
 	{
-		format:     'cjs' |    'iife' |    'es' | 'umd' | 'amd',
-		exports?:  'auto' | 'default' | 'named' | 'none',
+		format:     Format,
+		exports?:   Exports,
 		sourcemap?: boolean,
 	}
 
