@@ -1,8 +1,11 @@
 /* @flow */
 /* ::
 
-import type { Bundle as $Rollup$Bundle } from 'rollup'
-import type { Format as $Rollup$Format } from 'rollup'
+import type { InputOptions  as $Rollup$InputOptions }  from 'rollup'
+import type { OutputOptions as $Rollup$OutputOptions } from 'rollup'
+
+import type { Bundle  as $Rollup$Bundle }  from 'rollup'
+import type { Format  as $Rollup$Format }  from 'rollup'
 import type { Exports as $Rollup$Exports } from 'rollup'
 
 */
@@ -17,17 +20,22 @@ import Unit from '../Unit'
 
 export default function Rollup /* ::<$in> */
 (
-	input /* :$Computable<$in, string> */
+	input   /* :$Computable<$in, string> */,
+	options /* :: ?:$Shape<$Rollup$InputOptions> */
 )
 	/* :$Unit<$in, $Entry<$Rollup$Bundle>> */
 {
 	return Unit(async (context) =>
 	{
-		var input_u = await unroll(context, input)
+		var Σinput   = await unroll(context, input)
+		var Σoptions = assign({}, options,
+		{
+			input: Σinput
+		})
 
-		var bundle = await rollup({ input: input_u })
+		var bundle = await rollup(Σoptions)
 
-		return Entry(input_u, bundle)
+		return Entry(Σinput, bundle)
 	})
 }
 
@@ -35,7 +43,7 @@ export function Generate
 (
 	format  /* :$Rollup$Format  */,
 	exports /* :$Rollup$Exports */,
-	options /* :: ?:Object */
+	options /* :: ?:$Shape<$Rollup$OutputOptions> */
 )
 	/* :$Unit<$Entry<$Rollup$Bundle>, $Entry<$Entry$File>> */
 {
@@ -44,13 +52,13 @@ export function Generate
 		var entry = context.input
 		var bundle /* :$Rollup$Bundle */ = entry.content
 
-		var options_u = assign({}, options,
+		var Σoptions = assign({}, options,
 		{
 			format,
 			exports,
 		})
 
-		var codepair = await bundle.generate(options_u)
+		var codepair = await bundle.generate(Σoptions)
 
 		return Entry(entry.filename,
 		{

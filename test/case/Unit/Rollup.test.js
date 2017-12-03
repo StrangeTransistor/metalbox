@@ -23,7 +23,7 @@ describe('Rollup', () =>
 
 		var context = Context(null)
 
-		var unit = Rollup(org('index.js'))
+		var unit = Rollup(org('index.js'), {})
 		.pipe(Cjs())
 		.pipe(Rebase(org(), tm()))
 		.pipe(File.Entry())
