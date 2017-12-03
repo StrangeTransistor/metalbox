@@ -1,17 +1,14 @@
 /* @flow */
 
-export default function Entry
+export default function Entry /* ::<$content> */
 (
-	options /* :$Entry$Optional */
+	filename /* :string */,
+	content  /* :$content */
 )
-	/* :$Entry */
+	/* :$Entry<$content> */
 {
-	var entry =
-	{
-		filename:  options.filename,
-		content:   options.content,
-		sourcemap: options.sourcemap || null,
+	return {
+		filename,
+		content,
 	}
-
-	return entry
 }

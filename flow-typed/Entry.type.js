@@ -1,21 +1,14 @@
 
-type $Entry$Base =
+type $Entry<$content> =
 {
-	filename:   string,
-	content:    string,
+	filename:  string,
+	content:  $content,
 }
 
 ;
 
-type $Entry = $Entry$Base &
+type $Entry$File =
 {
-	sourcemap: ?Object,
-}
-
-;
-
-/* $Shape not working */
-type $Entry$Optional = $Entry$Base &
-{
-	sourcemap?: ?Object
+	content:     string,
+	sourcemap?: ?Object,
 }

@@ -1,4 +1,9 @@
 /* @flow */
+/* ::
+
+import type { Bundle as $Rollup$Bundle } from 'rollup'
+
+*/
 
 import { rollup } from 'rollup'
 
@@ -10,30 +15,25 @@ export default function Rollup /* ::<$in> */
 (
 	input /* :$Computable<$in, string> */
 )
-	/* :$Unit<$in, $Entry> */
+	/* :$Unit<$in, $Entry<$Rollup$Bundle>> */
 {
 	return Unit(async (context) =>
 	{
 		var input_u = await unroll(context, input)
 
-		return rollup({ input: input_u })
-		.then(it =>
-		{
+		var bundle = await rollup({ input: input_u })
+
+		return Entry(input_u, bundle)
+	})
+}
+
+/*
+
 			return it.generate(
 			{
 				format:  'cjs',
 				exports: 'auto',
 				// sourcemap: true,
 			})
-		})
-		.then(bundle =>
-		{
-			return Entry(
-			{
-				filename:  input_u,
-				content:   bundle.code,
-				sourcemap: bundle.map
-			})
-		})
-	})
-}
+
+*/

@@ -26,8 +26,17 @@ describe('Rollup', () =>
 		expect(outcome).an('object')
 		expect(outcome.output).an('object')
 
+		console.log(outcome.output)
+
+		var generated = await outcome.output.content.generate(
+		{
+			format:  'cjs',
+			exports: 'auto',
+			// sourcemap: true,
+		})
+
 		// eslint-disable-next-line max-len
-		expect(outcome.output.content).eq("'use strict';\n\nfunction main ()\n{\n\tconsole.log('main');\n}\n\nmodule.exports = main;\n")
-		expect(outcome.output.sourcemap).null
+		expect(generated.code).eq("'use strict';\n\nfunction main ()\n{\n\tconsole.log('main');\n}\n\nmodule.exports = main;\n")
+		expect(generated.map).null
 	})
 })

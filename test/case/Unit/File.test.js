@@ -110,10 +110,9 @@ describe('File.Entry', () =>
 	{
 		var tm = tmp()
 		var context_entry = Context(Entry(
-		{
-			filename: tm('abc'),
-			content:  'content\n',
-		}))
+			tm('abc'),
+			{ content: 'content\n' }
+		))
 
 		var unit = File.Entry()
 
