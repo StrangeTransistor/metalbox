@@ -55,8 +55,8 @@
     "mz":
       "2.7",
 
-    "mkdirp":
-      "0.5",
+    "mkdirp-promise":
+      "5",
 
     "flyd":
       "0.2",
@@ -91,6 +91,9 @@
     "flow-bin":
       "0.59.0",
 
+
+    "mkdirp":
+      "0.5",
 
     "dir-compare":
       "1.4"
