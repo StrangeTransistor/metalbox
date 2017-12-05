@@ -1,6 +1,6 @@
 /* @flow */
 
-import Context from '../Context'
+import Pipe from './compose/Pipe'
 
 export default function Unit /* ::<$in, $out> */
 (
@@ -33,21 +33,4 @@ export default function Unit /* ::<$in, $out> */
 	}
 
 	return unit
-}
-
-function Pipe /* ::<$in, $mid, $out> */
-(
-	u1 /* :$Unit<$in, $mid>  */,
-	u2 /* :$Unit<$mid, $out> */
-)
-	/* :$Unit<$in, $out> */
-{
-	return Unit(async (context) =>
-	{
-		var outcome = await u1(context)
-
-		var outcome_next = await u2(Context(outcome.output))
-
-		return outcome_next.output
-	})
 }
