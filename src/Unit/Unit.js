@@ -1,6 +1,7 @@
 /* @flow */
 
 import Pipe from './compose/Pipe'
+import Precursor from './compose/Precursor'
 
 export default function Unit /* ::<$in, $out> */
 (
@@ -20,6 +21,15 @@ export default function Unit /* ::<$in, $out> */
 		/* :$Unit<$in, $out_next> */
 	{
 		return Pipe(unit, next)
+	}
+
+	unit.pre = function pre /* ::<$out_next> */
+	(
+		next /* :$Unit<$in, $out_next> */
+	)
+		/* :$Unit<$in, $out_next> */
+	{
+		return Precursor(unit, next)
 	}
 
 	/* TODO: experimental, test for viability */

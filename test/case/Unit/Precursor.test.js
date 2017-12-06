@@ -54,4 +54,29 @@ describe('Precursor', () =>
 		await expect(u(context))
 		.rejectedWith('no_pass')
 	})
+
+	it('u1.pre(u2)', async () =>
+	{
+		var u1 = Unit(() =>
+		{
+			var x /* :string */ = context.input.x
+
+			return { x: x + x }
+		})
+
+		var u2 = Unit(context =>
+		{
+			var x /* :string */ = context.input.x
+
+			return { y: x + 'a' }
+		})
+
+		var u = u1.pre(u2)
+
+		var context = Context({ x: '5' })
+
+		var outcome = await u(context)
+
+		expect(outcome.output).deep.eq({ y: '5a' })
+	})
 })
