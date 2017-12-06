@@ -19,7 +19,7 @@ export default function File /* ::<$in> */
 {
 	return Unit(async (context) =>
 	{
-		var filename_u = unroll(context, filename)
+		var filename_u = prep_path(context, filename)
 		var content_u  = unroll(context, content)
 
 		; [ filename_u, content_u ] = await join(filename_u, content_u)
@@ -33,6 +33,16 @@ export default function File /* ::<$in> */
 		return write(filename_u, content_u)
 	})
 }
+
+async function prep_path /* ::<$in> */
+(
+	context  /* :$Context<$in> */,
+	filename /* :$Computable<$in, string> */
+)
+{
+	return unroll(context, filename)
+}
+
 
 File.Name = function (filename /* :$Computable<string, string> */)
 {
