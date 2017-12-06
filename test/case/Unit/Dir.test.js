@@ -7,12 +7,12 @@ import collate from 'src/collate'
 import compare from 'src/compare'
 
 import Context from 'src/Context'
-// import Entry from 'src/Entry'
+import Entry from 'src/Entry'
 
 import Dir from 'src/Unit/Dir'
 import File from 'src/Unit/File'
 
-describe('File', () =>
+describe('Dir', () =>
 {
 	var context_null = Context(null)
 
@@ -38,6 +38,26 @@ describe('File', () =>
 		.pipe(File(tm('foo/bar/abc'), ''))
 
 		await unit(context_null)
+
+		compare(cl(), tm())
+	})
+})
+
+describe('Dir.Ensure', () =>
+{
+	it('Dir.Ensure(entry)', async () =>
+	{
+		var tm = tmp()
+		var cl = collate('dir/2')
+
+		var context = Context(Entry(
+			tm('foo/bar/abc'),
+			{ content: '' }
+		))
+
+		var unit = Dir.Ensure(File.Entry())
+
+		await unit(context)
 
 		compare(cl(), tm())
 	})
