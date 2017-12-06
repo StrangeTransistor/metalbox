@@ -37,18 +37,18 @@ export default function File /* ::<$in> */
 
 	return Unit(async (context) =>
 	{
-		var filename_u = prep_path(context, filename, Σoptions)
-		var content_u  = unroll(context, content)
+		var Σfilename = prep_path(context, filename, Σoptions)
+		var Σcontent  = unroll(context, content)
 
-		; [ filename_u, content_u ] = await join(filename_u, content_u)
+		; [ Σfilename, Σcontent ] = await join(Σfilename, Σcontent)
 
-		if (! is_abs(filename_u))
+		if (! is_abs(Σfilename))
 		{
 			/* TODO error infrastructure */
 			throw new TypeError('filename_must_be_absolute_path')
 		}
 
-		return write(filename_u, content_u)
+		return write(Σfilename, Σcontent)
 	})
 }
 
