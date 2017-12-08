@@ -1,21 +1,23 @@
 /* @flow */
 
-export default function Providers ()
+var assign = Object.assign
+
+export default function Providers /* ::<$base: Object> */
+(
+	base /* :$base */
+)
+	/* :$Providers<$base> */
 {
-	var prov = {}
+	base = assign({}, base)
 
-	var providers =
+	base.extend = function extend /* ::<$extend: Object> */
+	(
+		providers /* :$extend */
+	)
+		/* :Providers<$base & $extend> */
 	{
-		reg (name /* :string */, service /* :any */)
-		{
-			prov[name] = service
-		},
-
-		dep (name /* :string */)
-		{
-			return prov[name]
-		},
+		return Providers(assign(base, providers))
 	}
 
-	return providers
+	return base
 }
