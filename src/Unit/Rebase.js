@@ -11,12 +11,12 @@ import unroll from '../unroll'
 import Entry from '../Entry'
 import Unit from './Unit'
 
-export default function Rebase /* ::<$content> */
+export default function Rebase /* ::<$content, $prov: $Providers$Base> */
 (
-	from /* :$Computable<$Entry<$content>, string> */,
-	to   /* :$Computable<$Entry<$content>, string> */
+	from /* :$Computable<$Entry<$content>, $prov, string> */,
+	to   /* :$Computable<$Entry<$content>, $prov, string> */
 )
-	/* :$Unit<$Entry<$content>, $Entry<$content>> */
+	/* :$Unit<$Entry<$content>, $prov, $Entry<$content>> */
 {
 	return Unit(async (context) =>
 	{

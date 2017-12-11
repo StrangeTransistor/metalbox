@@ -12,11 +12,11 @@ import Precursor from './compose/Precursor'
 
 import unroll from '../unroll'
 
-export default function Dir /* ::<$in> */
+export default function Dir /* ::<$in, $prov: $Providers$Base> */
 (
-	dirname /* :$Computable<$in, string> */
+	dirname /* :$Computable<$in, $prov, string> */
 )
-	/* :$Unit<$in, void> */
+	/* :$Unit<$in, $prov, void> */
 {
 	return Unit(async (context) =>
 	{
@@ -41,15 +41,15 @@ type $Dir$Entry$Options =
 
 */
 
-Dir.Entry = function /* ::<$in: $Entry<*>> */
+Dir.Entry = function /* ::<$in: $Entry<*>, $prov: $Providers$Base> */
 (
 	options /* :$Shape<$Dir$Entry$Options> */
 )
-	/* :$Unit<$in, void> */
+	/* :$Unit<$in, $prov, void> */
 {
 	var Σoptions = assign({ path_dirname: true }, options)
 
-	return Dir((context /* :$Context<$in> */) =>
+	return Dir((context /* :$Context<$in, $prov> */) =>
 	{
 		var filename = context.input.filename
 
@@ -62,11 +62,11 @@ Dir.Entry = function /* ::<$in: $Entry<*>> */
 	})
 }
 
-Dir.Ensure = function /* ::<$in: $Entry<*>, $out> */
+Dir.Ensure = function /* ::<$in: $Entry<*>, $prov: $Providers$Base, $out> */
 (
-	unit /* :$Unit<$in, $out> */
+	unit /* :$Unit<$in, $prov, $out> */
 )
-	/* :$Unit<$in, $out> */
+	/* :$Unit<$in, $prov, $out> */
 {
 	return Precursor(Dir.Entry(), unit)
 }

@@ -18,12 +18,12 @@ import unroll from '../../unroll'
 import Entry from '../../Entry'
 import Unit from '../Unit'
 
-export default function Rollup /* ::<$in> */
+export default function Rollup /* ::<$in, $prov: $Providers$Base> */
 (
-	input   /* :$Computable<$in, string> */,
+	input   /* :$Computable<$in, $prov, string> */,
 	options /* :: ?:$Shape<$Rollup$InputOptions> */
 )
-	/* :$Unit<$in, $Entry<$Rollup$Bundle>> */
+	/* :$Unit<$in, $prov, $Entry<$Rollup$Bundle>> */
 {
 	return Unit(async (context) =>
 	{
@@ -41,7 +41,7 @@ export default function Rollup /* ::<$in> */
 
 Rollup.Entry = function (options /* :: ?:$Shape<$Rollup$InputOptions> */)
 {
-	return Rollup((context /* :$Context<$Entry<any>> */) =>
+	return Rollup((context /* :$Context<$Entry<any>, any> */) =>
 	{
 		return context.input.filename
 	}
@@ -54,7 +54,7 @@ export function Generate
 	exports /* :$Rollup$Exports */,
 	options /* :: ?:$Shape<$Rollup$OutputOptions> */
 )
-	/* :$Unit<$Entry<$Rollup$Bundle>, $Entry<$Entry$File>> */
+	/* :$Unit<$Entry<$Rollup$Bundle>, any, $Entry<$Entry$File>> */
 {
 	return Unit(async (context) =>
 	{

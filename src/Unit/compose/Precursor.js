@@ -2,12 +2,12 @@
 
 import Unit from '../Unit'
 
-export default function Precursor /* ::<$in, $out> */
+export default function Precursor /* ::<$in, $prov: $Providers$Base, $out> */
 (
-	u1 /* :$Unit<$in, any>  */,
-	u2 /* :$Unit<$in, $out> */
+	u1 /* :$Unit<$in, $prov, any>  */,
+	u2 /* :$Unit<$in, $prov, $out> */
 )
-	/* :$Unit<$in, $out> */
+	/* :$Unit<$in, $prov, $out> */
 {
 	return Unit(async (context) =>
 	{

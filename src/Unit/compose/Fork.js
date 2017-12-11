@@ -5,12 +5,12 @@ var join = bluebird.join
 
 import Unit from '../Unit'
 
-export default function Fork /* ::<$in, $out1, $out2> */
+export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
 (
-	u1 /* :$Unit<$in, $out1> */,
-	u2 /* :$Unit<$in, $out2> */
+	u1 /* :$Unit<$in, $prov, $out1> */,
+	u2 /* :$Unit<$in, $prov, $out2> */
 )
-	/* :$Unit<$in, [ $out1, $out2 ]> */
+	/* :$Unit<$in, $prov, [ $out1, $out2 ]> */
 {
 	return Unit(async (context) =>
 	{

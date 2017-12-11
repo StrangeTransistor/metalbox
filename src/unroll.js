@@ -1,9 +1,10 @@
 /* @flow */
 
-export default async function unroll /* ::<$in, $value> */
+export default async function unroll
+	/* ::<$in, $prov: $Providers$Base, $value> */
 (
-	context /* :$Context<$in> */,
-	value   /* :$Computable<$in, $value> */
+	context /* :$Context<$in, $prov> */,
+	value   /* :$Computable<$in, $prov, $value> */
 )
 	/* :Promise<$value> */
 {

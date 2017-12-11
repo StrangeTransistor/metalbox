@@ -4,12 +4,13 @@ import Unit from '../Unit'
 
 import Context from '../../Context'
 
-export default function Pipe /* ::<$in, $medium, $out> */
+export default function Pipe
+	/* ::<$in, $prov: $Providers$Base, $medium, $out> */
 (
-	u1 /* :$Unit<$in, $medium>  */,
-	u2 /* :$Unit<$medium, $out> */
+	u1 /* :$Unit<$in,     $prov, $medium>  */,
+	u2 /* :$Unit<$medium, $prov, $out>     */
 )
-	/* :$Unit<$in, $out> */
+	/* :$Unit<$in, $prov, $out> */
 {
 	return Unit(async (context) =>
 	{

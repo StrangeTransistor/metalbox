@@ -2,7 +2,7 @@
 
 var assign = Object.assign
 
-export default function Providers /* ::<$base: Object> */
+export default function Providers /* ::<$base: $Providers$Base> */
 (
 	base /* :$base */
 )
@@ -10,7 +10,7 @@ export default function Providers /* ::<$base: Object> */
 {
 	base = assign({}, base)
 
-	base.extend = function extend /* ::<$extend: Object> */
+	base.extend = function extend /* ::<$extend: $Providers$Base> */
 	(
 		providers /* :$extend */
 	)

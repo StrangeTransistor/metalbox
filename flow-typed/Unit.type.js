@@ -1,12 +1,12 @@
 
-type $Unit$Fn<$in, $out> = $Producer<[ $Context<$in> ], $out>
+type $Unit$Fn<$in, $prov: $Providers$Base, $out> = $Producer<[ $Context<$in, $prov> ], $out>
 
 ;
 
-type $Unit<$in, $out> =
+type $Unit<$in, $prov: $Providers$Base, $out> =
 {
-	(context: $Context<$in>): Promise<$Outcome<$out>>,
+	(context: $Context<$in, $prov>): Promise<$Outcome<$out>>,
 
-	pipe<$out_next> (next: $Unit<$out, $out_next>): $Unit<$in, $out_next>,
-	pre<$out_next>  (next: $Unit<$in,  $out_next>): $Unit<$in, $out_next>,
+	pipe<$out_next> (next: $Unit<$out, $prov, $out_next>): $Unit<$in, $prov, $out_next>,
+	pre<$out_next>  (next: $Unit<$in,  $prov, $out_next>): $Unit<$in, $prov, $out_next>,
 }

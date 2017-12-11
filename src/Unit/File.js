@@ -25,13 +25,13 @@ type $File$Options =
 
 */
 
-export default function File /* ::<$in> */
+export default function File /* ::<$in, $prov: $Providers$Base> */
 (
-	filename /* :$Computable<$in, string> */,
-	content  /* :$Computable<$in, string> */,
+	filename /* :$Computable<$in, $prov, string> */,
+	content  /* :$Computable<$in, $prov, string> */,
 	options  /* :$Shape<$File$Options> */
 )
-	/* :$Unit<$in, void> */
+	/* :$Unit<$in, $prov, void> */
 {
 	var Σoptions = assign({ mkdirp: true }, options)
 
@@ -52,10 +52,10 @@ export default function File /* ::<$in> */
 	})
 }
 
-async function prep_path /* ::<$in> */
+async function prep_path /* ::<$in, $prov: $Providers$Base> */
 (
-	context  /* :$Context<$in> */,
-	filename /* :$Computable<$in, string> */,
+	context  /* :$Context<$in, $prov> */,
+	filename /* :$Computable<$in, $prov, string> */,
 	options  /* :$File$Options */
 )
 {
@@ -70,19 +70,22 @@ async function prep_path /* ::<$in> */
 }
 
 
-File.Name = function (filename /* :$Computable<string, string> */)
+File.Name = function (filename /* :$Computable<string, any, string> */)
 {
-	return File(filename, (context /* :$Context<string> */) => context.input)
+	return File(filename, (context /* :$Context<string, any> */) =>
+	{
+		return context.input
+	})
 }
 
 File.Entry = function ()
 {
 	return File(
-	(context /* :$Context<$Entry<$Entry$File>> */) =>
+	(context /* :$Context<$Entry<$Entry$File>, any> */) =>
 	{
 		return context.input.filename
 	},
-	(context /* :$Context<$Entry<$Entry$File>> */) =>
+	(context /* :$Context<$Entry<$Entry$File>, any> */) =>
 	{
 		return context.input.content.content
 	})

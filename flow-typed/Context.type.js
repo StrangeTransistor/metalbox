@@ -1,5 +1,5 @@
 
-interface $Context<$in>
+interface $Context<$in, $prov: $Providers$Base>
 {
 	input: $in,
 
@@ -7,6 +7,6 @@ interface $Context<$in>
 	once:  boolean,
 	live:  boolean,
 
-	engine:  Object,
-	storage: Object,
+	engine: Object,
+	providers: $Providers<$prov>,
 }

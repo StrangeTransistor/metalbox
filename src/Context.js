@@ -1,10 +1,14 @@
 /* @flow */
 
-export default function Context /* :: <$in> */
+import Providers from './Providers'
+
+export default function Context /* :: <$in, $prov: $Providers$Base> */
 (
-	input /* :$in */
+	input     /* :$in   */,
+	/* @flow-off */
+	providers /* :$prov */ = {}
 )
-	/* :$Context<$in> */
+	/* :$Context<$in, $prov> */
 {
 	var context =
 	{
@@ -14,8 +18,8 @@ export default function Context /* :: <$in> */
 		once: false,
 		live: false,
 
-		engine:  {},
-		storage: {},
+		engine: {},
+		providers: Providers(providers),
 	}
 
 	return context
