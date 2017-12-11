@@ -1,5 +1,6 @@
 
-type $Unit$Fn<$in, $prov: $Providers$Base, $out> = $Producer<[ $Context<$in, $prov> ], $out>
+type $Unit$Fn<$in, $prov: $Providers$Base, $out>
+ = $Producer<[ $in, $Context<$in, $prov> ], $out>
 
 ;
 

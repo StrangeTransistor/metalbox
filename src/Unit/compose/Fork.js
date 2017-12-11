@@ -12,7 +12,7 @@ export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
 )
 	/* :$Unit<$in, $prov, [ $out1, $out2 ]> */
 {
-	return Unit(async (context) =>
+	return Unit(async (_, context) =>
 	{
 		var [ a, b ] = await join(u1(context), u2(context))
 

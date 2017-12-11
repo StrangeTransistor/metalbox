@@ -25,7 +25,7 @@ export default function Rollup /* ::<$in, $prov: $Providers$Base> */
 )
 	/* :$Unit<$in, $prov, $Entry<$Rollup$Bundle>> */
 {
-	return Unit(async (context) =>
+	return Unit(async (_, context) =>
 	{
 		var Σinput   = await unroll(context, input)
 		var Σoptions = assign({}, options,
@@ -56,9 +56,8 @@ export function Generate
 )
 	/* :$Unit<$Entry<$Rollup$Bundle>, any, $Entry<$Entry$File>> */
 {
-	return Unit(async (context) =>
+	return Unit(async (entry) =>
 	{
-		var entry = context.input
 		var bundle /* :$Rollup$Bundle */ = entry.content
 
 		var Σoptions = assign({}, options,

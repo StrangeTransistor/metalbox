@@ -18,14 +18,13 @@ export default function Rebase /* ::<$content, $prov: $Providers$Base> */
 )
 	/* :$Unit<$Entry<$content>, $prov, $Entry<$content>> */
 {
-	return Unit(async (context) =>
+	return Unit(async (entry, context) =>
 	{
 		var Σfrom = await unroll(context, from)
 		var Σto   = await unroll(context, to)
 
 		; [ Σfrom, Σto ] = await join(Σfrom, Σto)
 
-		var entry = context.input
 		var filename = entry.filename
 
 		filename = rebase(filename, Σfrom, Σto)

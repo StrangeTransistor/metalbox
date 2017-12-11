@@ -18,7 +18,7 @@ export default function Dir /* ::<$in, $prov: $Providers$Base> */
 )
 	/* :$Unit<$in, $prov, void> */
 {
-	return Unit(async (context) =>
+	return Unit(async (_, context) =>
 	{
 		var Σdirname = await unroll(context, dirname)
 

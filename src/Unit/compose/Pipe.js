@@ -12,7 +12,7 @@ export default function Pipe
 )
 	/* :$Unit<$in, $prov, $out> */
 {
-	return Unit(async (context) =>
+	return Unit(async (_, context) =>
 	{
 		var outcome = await u1(context)
 

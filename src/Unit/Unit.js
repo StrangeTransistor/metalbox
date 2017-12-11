@@ -11,7 +11,7 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 {
 	var unit = async function (context)
 	{
-		return { output: await fn(context) }
+		return { output: await fn(context.input, context) }
 	}
 
 	unit.pipe = function pipe /* ::<$out_next> */

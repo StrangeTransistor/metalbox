@@ -35,7 +35,7 @@ export default function File /* ::<$in, $prov: $Providers$Base> */
 {
 	var Σoptions = assign({ mkdirp: true }, options)
 
-	return Unit(async (context) =>
+	return Unit(async (_, context) =>
 	{
 		var Σfilename = prep_path(context, filename, Σoptions)
 		var Σcontent  = unroll(context, content)

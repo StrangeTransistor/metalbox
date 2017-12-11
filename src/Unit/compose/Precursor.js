@@ -9,7 +9,7 @@ export default function Precursor /* ::<$in, $prov: $Providers$Base, $out> */
 )
 	/* :$Unit<$in, $prov, $out> */
 {
-	return Unit(async (context) =>
+	return Unit(async (_, context) =>
 	{
 		await u1(context)
 

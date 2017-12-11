@@ -11,15 +11,15 @@ describe('Precursor', () =>
 {
 	it('Precursor(u1, u2)', async () =>
 	{
-		var u1 = Unit(context =>
+		var u1 = Unit((_, context) =>
 		{
 			var x /* :number */ = context.input.x + 17
 			return { x }
 		})
 
-		var u2 = Unit(context =>
+		var u2 = Unit(input =>
 		{
-			var x /* :number */ = context.input.x
+			var x /* :number */ = input.x
 
 			return { y: x + 2 }
 		})
@@ -40,7 +40,7 @@ describe('Precursor', () =>
 			throw new Error('no_pass')
 		})
 
-		var u2 = Unit(context =>
+		var u2 = Unit((_, context) =>
 		{
 			var x /* :number */ = context.input.x
 
@@ -64,9 +64,9 @@ describe('Precursor', () =>
 			return { x: x + x }
 		})
 
-		var u2 = Unit(context =>
+		var u2 = Unit(input =>
 		{
-			var x /* :string */ = context.input.x
+			var x /* :string */ = input.x
 
 			return { y: x + 'a' }
 		})

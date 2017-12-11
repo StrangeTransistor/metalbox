@@ -2,7 +2,7 @@
 
 import { expect } from 'chai'
 
-import Map from 'src/Unit/Map'
+import Unit from 'src/Unit'
 import Context from 'src/Context'
 
 describe('Map', () =>
@@ -11,7 +11,7 @@ describe('Map', () =>
 	{
 		var context = Context(5)
 
-		var unit = Map((n /* :number */) => n + 2)
+		var unit = Unit((n /* :number */) => n + 2)
 
 		var outcome = await unit(context)
 

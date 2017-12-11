@@ -11,15 +11,15 @@ describe('Pipe / Unit.pipe', () =>
 {
 	it('Pipe(u1, u2)', async () =>
 	{
-		var u1 = Unit(context =>
+		var u1 = Unit((_, context) =>
 		{
 			var x /* :number */ = context.input.x
 			return { x }
 		})
 
-		var u2 = Unit(context =>
+		var u2 = Unit((input) =>
 		{
-			var x /* :number */ = context.input.x
+			var x /* :number */ = input.x
 
 			return { y: x + 2 }
 		})
@@ -35,15 +35,15 @@ describe('Pipe / Unit.pipe', () =>
 
 	it('u1.pipe(u2)', async () =>
 	{
-		var u1 = Unit(context =>
+		var u1 = Unit((_, context) =>
 		{
 			var x /* :number */ = context.input.x
 			return { x }
 		})
 
-		var u2 = Unit(context =>
+		var u2 = Unit((input) =>
 		{
-			var x /* :number */ = context.input.x
+			var x /* :number */ = input.x
 
 			return { y: x + 2 }
 		})
