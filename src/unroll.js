@@ -10,7 +10,7 @@ export default async function unroll
 {
 	if (typeof value === 'function')
 	{
-		return await value(context)
+		return await value(context.input, context)
 	}
 	else
 	{

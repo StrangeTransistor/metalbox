@@ -41,11 +41,10 @@ export default function Rollup /* ::<$in, $prov: $Providers$Base> */
 
 Rollup.Entry = function (options /* :: ?:$Shape<$Rollup$InputOptions> */)
 {
-	return Rollup((context /* :$Context<$Entry<any>, any> */) =>
-	{
-		return context.input.filename
-	}
-	, options)
+	return Rollup(
+		(entry /* :$Entry<any> */) => entry.filename,
+		options
+	)
 }
 
 export function Generate

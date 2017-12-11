@@ -8,4 +8,5 @@ type $Value
 
 ;
 
-type $Computable<$in, $prov: $Providers$Base, $out> = $Value<[ $Context<$in, $prov> ], $out>
+type $Computable<$in, $prov: $Providers$Base, $out>
+ = $Value<[ $in, $Context<$in, $prov> ], $out>

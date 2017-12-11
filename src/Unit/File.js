@@ -72,21 +72,13 @@ async function prep_path /* ::<$in, $prov: $Providers$Base> */
 
 File.Name = function (filename /* :$Computable<string, any, string> */)
 {
-	return File(filename, (context /* :$Context<string, any> */) =>
-	{
-		return context.input
-	})
+	return File(filename, (input /* :string */) => input)
 }
 
 File.Entry = function ()
 {
 	return File(
-	(context /* :$Context<$Entry<$Entry$File>, any> */) =>
-	{
-		return context.input.filename
-	},
-	(context /* :$Context<$Entry<$Entry$File>, any> */) =>
-	{
-		return context.input.content.content
-	})
+		(entry /* :$Entry<$Entry$File> */) => entry.filename,
+		(entry /* :$Entry<$Entry$File> */) => entry.content.content
+	)
 }

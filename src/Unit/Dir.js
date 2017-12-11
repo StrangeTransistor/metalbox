@@ -49,9 +49,9 @@ Dir.Entry = function /* ::<$in: $Entry<*>, $prov: $Providers$Base> */
 {
 	var Σoptions = assign({ path_dirname: true }, options)
 
-	return Dir((context /* :$Context<$in, $prov> */) =>
+	return Dir((entry /* :$in */) =>
 	{
-		var filename = context.input.filename
+		var filename = entry.filename
 
 		if (Σoptions.path_dirname)
 		{
