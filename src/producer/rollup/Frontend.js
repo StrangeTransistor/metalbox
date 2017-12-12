@@ -1,5 +1,7 @@
 /* @flow */
 
+var dump = JSON.stringify
+
 var presolve = require('bluebird').resolve
 
 var rollup = require('rollup')
@@ -13,6 +15,7 @@ var json     = require('rollup-plugin-json')
 var ts       = require('rollup-plugin-typescript')
 var flow     = require('rollup-plugin-flow')
 var pug      = require('rollup-plugin-pug')
+var virtual  = require('rollup-plugin-virtual')
 
 var js_mode = require('../../release/metalbucket/js-mode')
 
@@ -28,6 +31,11 @@ module.exports = function Rollup ()
 	return (env) =>
 	{
 		var mode = js_mode(env)
+
+		var metalbox_virtual
+		metalbox_virtual = { dev: env.dev || false }
+		metalbox_virtual = dump(metalbox_virtual)
+		metalbox_virtual = 'export default ' + metalbox_virtual
 
 		if (mode !== 'ts')
 		{
@@ -73,6 +81,10 @@ module.exports = function Rollup ()
 			}),
 			json(),
 			pug(pug_options(env, input)),
+			virtual(
+			{
+				'@metalbox': metalbox_virtual,
+			}),
 		])
 
 		if (mode !== 'ts')

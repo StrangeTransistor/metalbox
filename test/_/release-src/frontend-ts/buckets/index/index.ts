@@ -1,7 +1,11 @@
 
+import metalbox from '@metalbox'
+
 import mod from './mod'
 
 function so () { return 1 - 1 }
+
+if (so()) console.log(metalbox.dev)
 
 if (so()) console.log(mod(1))
 

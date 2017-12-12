@@ -1,6 +1,10 @@
 /* @flow */
 // bucket:index
 
+import metalbox from '@metalbox'
+
+0 && console.log(metalbox.dev)
+
 0 && console.log('index')
 
 var arrow1 = () => 1

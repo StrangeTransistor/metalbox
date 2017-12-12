@@ -1,6 +1,8 @@
 (function () {
 'use strict';
 
+var metalbox = {"dev":true};
+
 var arrow3 = () => 3;
 
 
@@ -315,6 +317,8 @@ var template_static = "<p>Pug template</p><div class=\"dev\">true</div><span cla
 
 /*  */
 // bucket:index
+
+0 && console.log(metalbox.dev);
 
 0 && console.log('index');
 
