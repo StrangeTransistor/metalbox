@@ -5,9 +5,9 @@ import { expect } from 'chai'
 import Unit from 'src/Unit'
 import Context from 'src/Context'
 
-describe('Map', () =>
+describe('Unit as Map', () =>
 {
-	it('Map(fn)', async () =>
+	it('Unit/Map (fn)', async () =>
 	{
 		var context = Context(5)
 
