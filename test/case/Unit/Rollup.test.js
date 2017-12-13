@@ -82,4 +82,20 @@ describe('Rollup', () =>
 
 		compare(collate('rollup/iife')(), tm())
 	})
+
+	it('Cjs Rollup(str, external = true)', async () =>
+	{
+		var tm = tmp()
+
+		var context = Context(Entry(org('index.js')))
+
+		var unit = Rollup.Entry({ external: true })
+		.pipe(Cjs())
+		.pipe(Rebase(org(), tm()))
+		.pipe(File.Entry())
+
+		await unit(context)
+
+		compare(collate('rollup/es6-external')(), tm())
+	})
 })

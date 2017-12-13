@@ -1,7 +1,7 @@
 /* @flow */
 /* ::
 
-import type { InputOptions  as $Rollup$InputOptions }  from 'rollup'
+// import type { InputOptions  as $Rollup$InputOptions }  from 'rollup'
 import type { OutputOptions as $Rollup$OutputOptions } from 'rollup'
 
 import type { Bundle  as $Rollup$Bundle }  from 'rollup'
@@ -21,7 +21,7 @@ import Unit from '../Unit'
 export default function Rollup /* ::<$in, $prov: $Providers$Base> */
 (
 	input   /* :$Computable<$in, $prov, string> */,
-	options /* :: ?:$Shape<$Rollup$InputOptions> */
+	options /* :: ?:$Shape<$Rollup$Options> */
 )
 	/* :$Unit<$in, $prov, $Entry<$Rollup$Bundle>> */
 {
@@ -33,13 +33,23 @@ export default function Rollup /* ::<$in, $prov: $Providers$Base> */
 			input: Σinput
 		})
 
+		if (Σoptions.external === true)
+		{
+			Σoptions.external = externalize(Σinput)
+		}
+
 		var bundle = await rollup(Σoptions)
 
 		return Entry(Σinput, bundle)
 	})
 }
 
-Rollup.Entry = function (options /* :: ?:$Shape<$Rollup$InputOptions> */)
+function externalize (input)
+{
+	return (entry) => input !== entry
+}
+
+Rollup.Entry = function (options /* :: ?:$Shape<$Rollup$Options> */)
 {
 	return Rollup(
 		(entry /* :$Entry<any> */) => entry.filename,
