@@ -1,7 +1,5 @@
 /* @flow */
 
-// import { expect } from 'chai'
-
 import tmp from 'src/rootpath/tmp'
 import collate from 'src/rootpath/collate'
 
