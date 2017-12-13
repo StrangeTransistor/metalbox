@@ -21,6 +21,8 @@ describe('Rollup', () =>
 	var org = origin('rollup')
 	var cl_cjs = collate('rollup/cjs')
 
+	var context_null = Context(null)
+
 	it('Cjs Rollup(str)', async () =>
 	{
 		var tm = tmp()
@@ -30,7 +32,7 @@ describe('Rollup', () =>
 		.pipe(Rebase(org(), tm()))
 		.pipe(File.Entry())
 
-		await unit(Context(null))
+		await unit(context_null)
 
 		compare(cl_cjs(), tm())
 	})
@@ -55,14 +57,12 @@ describe('Rollup', () =>
 	{
 		var tm = tmp()
 
-		var context = Context(Entry(org('index.js')))
-
-		var unit = Rollup.Entry()
+		var unit = Rollup(org('index.js'))
 		.pipe(Es6())
 		.pipe(Rebase(org(), tm()))
 		.pipe(File.Entry())
 
-		await unit(context)
+		await unit(context_null)
 
 		compare(collate('rollup/es6')(), tm())
 	})
@@ -71,14 +71,12 @@ describe('Rollup', () =>
 	{
 		var tm = tmp()
 
-		var context = Context(Entry(org('iife.js')))
-
-		var unit = Rollup.Entry()
+		var unit = Rollup(org('iife.js'))
 		.pipe(Iife())
 		.pipe(Rebase(org(), tm()))
 		.pipe(File.Entry())
 
-		await unit(context)
+		await unit(context_null)
 
 		compare(collate('rollup/iife')(), tm())
 	})
@@ -87,14 +85,12 @@ describe('Rollup', () =>
 	{
 		var tm = tmp()
 
-		var context = Context(Entry(org('index.js')))
-
-		var unit = Rollup.Entry({ external: true })
+		var unit = Rollup(org('index.js'), { external: true })
 		.pipe(Cjs())
 		.pipe(Rebase(org(), tm()))
 		.pipe(File.Entry())
 
-		await unit(context)
+		await unit(context_null)
 
 		compare(collate('rollup/es6-external')(), tm())
 	})
