@@ -1,8 +1,8 @@
 /* @flow */
 
-import tmp from 'src/tmp'
-import collate from 'src/collate'
-import origin from 'src/origin'
+import tmp from 'src/rootpath/tmp'
+import collate from 'src/rootpath/collate'
+import origin from 'src/rootpath/origin'
 
 import compare from 'src/compare'
 

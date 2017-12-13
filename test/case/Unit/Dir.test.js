@@ -2,8 +2,9 @@
 
 // import { expect } from 'chai'
 
-import tmp from 'src/tmp'
-import collate from 'src/collate'
+import tmp from 'src/rootpath/tmp'
+import collate from 'src/rootpath/collate'
+
 import compare from 'src/compare'
 
 import Context from 'src/Context'
