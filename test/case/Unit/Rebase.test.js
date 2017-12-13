@@ -15,8 +15,39 @@ describe('Rebase', () =>
 
 		var unit = Rebase('/src', '/dst')
 
-		var outcome = await unit(context)
-		var { output } = outcome
+		var { output } = await unit(context)
+
+		expect(output.filename).eq('/dst/foo/bar.js')
+		expect(output.content.content).eq('content')
+	})
+
+	it('Rebase(from, <empty>)', async () =>
+	{
+		var entry = Entry('/src/foo/bar.js', { content: 'content' })
+		var context = Context(entry)
+
+		var u1 = Rebase('/src', '')
+		var u2 = Rebase('/src/foo', '')
+
+		var { output } = await u1(context)
+
+		expect(output.filename).eq('foo/bar.js')
+		expect(output.content.content).eq('content')
+
+		var { output } = await u2(context)
+
+		expect(output.filename).eq('bar.js')
+		expect(output.content.content).eq('content')
+	})
+
+	it('Rebase(<empty>, to)', async () =>
+	{
+		var entry = Entry('foo/bar.js', { content: 'content' })
+		var context = Context(entry)
+
+		var unit = Rebase('', '/dst')
+
+		var { output } = await unit(context)
 
 		expect(output.filename).eq('/dst/foo/bar.js')
 		expect(output.content.content).eq('content')
