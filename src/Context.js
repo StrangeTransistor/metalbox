@@ -6,7 +6,7 @@ export default function Context /* :: <$in, $prov: $Providers$Base> */
 (
 	input     /* :$in   */,
 	/* @flow-off */
-	providers /* :$prov */ = {}
+	providers /* :$prov */ = /* :: (*/ {} /* :$Providers$Base ) */
 )
 	/* :$Context<$in, $prov> */
 {
