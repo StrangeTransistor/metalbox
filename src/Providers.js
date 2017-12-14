@@ -10,11 +10,11 @@ export default function Providers /* ::<$base: $Providers$Base> */
 {
 	base = assign({}, base)
 
-	base.extend = function extend /* ::<$extend: $Providers$Base> */
+	base.derive = function derive /* ::<$derive: $Providers$Base> */
 	(
-		providers /* :$extend */
+		providers /* :$derive */
 	)
-		/* :Providers<$base & $extend> */
+		/* :Providers<$base & $derive> */
 	{
 		return Providers(assign(base, providers))
 	}
