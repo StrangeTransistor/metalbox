@@ -2,8 +2,6 @@
 
 import Unit from '../Unit'
 
-import Context from '../../Context'
-
 export default function Pipe
 	/* ::<$in, $prov: $Providers$Base, $medium, $out> */
 (
@@ -16,7 +14,7 @@ export default function Pipe
 	{
 		var outcome = await u1(context)
 
-		var outcome_next = await u2(Context(outcome.output))
+		var outcome_next = await u2(context.derive(outcome.output))
 
 		/* TODO: compose context */
 		return outcome_next.output
