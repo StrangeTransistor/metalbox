@@ -20,6 +20,22 @@ export default function Context /* :: <$in, $prov: $Providers$Base> */
 
 		engine: {},
 		providers: Providers(providers),
+
+		derive: function /* ::<$d_in> */ (input /* :$d_in */)
+			/* :$Context<$d_in, $prov> */
+		{
+			var derived = Context(input)
+
+			derived.first = context.first
+			derived.once  = context.once
+			derived.live  = context.live
+
+			derived.engine = context.engine
+
+			derived.providers = context.providers
+
+			return /* :: ( */ derived /* :$Context<$d_in, $prov> ) */
+		}
 	}
 
 	return context
