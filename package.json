@@ -58,6 +58,9 @@
     "mkdirp-promise":
       "5",
 
+    "globule":
+      "1",
+
     "flyd":
       "0.2",
 
