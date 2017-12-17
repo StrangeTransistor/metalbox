@@ -13,7 +13,7 @@ describe('Glob', () =>
 {
 	var org = origin('glob')
 
-	it('works', async () =>
+	it('Glob', async () =>
 	{
 		/* eslint-disable max-nested-callbacks */
 		var unit = Unit(_ =>
@@ -37,5 +37,22 @@ describe('Glob', () =>
 		var glob = Glob(org('*.ext'), unit)
 
 		await glob(Context(null))
+	})
+
+	it('Glob.Each', async () =>
+	{
+		var unit = Unit(_ =>
+		{
+			expect(_).property('filename')
+			expect(_).property('content')
+
+			return org.relative(_.filename)
+		})
+
+		var glob = Glob.Each(org('*.ext'), unit)
+
+		var outcome = await glob(Context(null))
+
+		expect(outcome.output).deep.eq([ '1.ext', '2.ext', '3.ext' ])
 	})
 })
