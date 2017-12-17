@@ -8,7 +8,9 @@
 			[
 				".sublime",
 				"node_modules",
-				"coverage"
+				"coverage",
+				"test/collate",
+				"test/origin"
 			]
 		}
 	]
