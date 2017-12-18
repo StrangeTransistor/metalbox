@@ -16,7 +16,7 @@ export default function Pipe
 
 		var outcome_next = await u2(context.derive(outcome.output))
 
-		/* TODO: compose context */
+		/* TODO: compose outcome */
 		return outcome_next.output
 	})
 }

@@ -40,6 +40,7 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 		var found = find(Σglob, options)
 		var entries = found.map(filename => Entry(filename))
 
+		/* TODO: compose outcome */
 		var outcome = await unit(context.derive(entries))
 		return outcome.output
 	})

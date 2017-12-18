@@ -16,6 +16,7 @@ export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
 	{
 		var [ a, b ] = await join(u1(context), u2(context))
 
+		/* TODO: compose outcome */
 		return [ a.output, b.output ]
 	})
 }

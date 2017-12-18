@@ -15,7 +15,7 @@ export default function Precursor /* ::<$in, $prov: $Providers$Base, $out> */
 
 		var outcome = await u2(context)
 
-		/* TODO: compose context */
+		/* TODO: compose outcome */
 		return outcome.output
 	})
 }
