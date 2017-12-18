@@ -58,9 +58,6 @@
     "mz":
       "2.7",
 
-    "mkdirp-promise":
-      "5",
-
     "globule":
       "1",
 
@@ -97,9 +94,6 @@
     "flow-bin":
       "0.61.0",
 
-
-    "mkdirp":
-      "0.5",
 
     "dir-compare":
       "1.4"
