@@ -5,7 +5,7 @@ var assign = Object.assign
 import { isAbsolute as is_abs } from 'path'
 import { dirname } from 'path'
 
-import { writeFile  as write }  from 'mz/fs'
+import { writeFile  as write } from 'fs-extra'
 
 import bluebird from 'bluebird'
 var join = bluebird.join

@@ -52,6 +52,9 @@
     "randomstring":
       "1",
 
+    "fs-extra":
+      "5",
+
     "mz":
       "2.7",
 
