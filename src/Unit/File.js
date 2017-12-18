@@ -37,10 +37,10 @@ export default function File /* ::<$in, $prov: $Providers$Base> */
 
 	return Unit(async (_, context) =>
 	{
-		var Σfilename = prep_path(context, filename, Σoptions)
-		var Σcontent  = unroll(context, content)
-
-		; [ Σfilename, Σcontent ] = await join(Σfilename, Σcontent)
+		var [ Σfilename, Σcontent ] = await join(
+			prep_path(context, filename, Σoptions),
+			unroll(context, content)
+		)
 
 		ensure_abs(Σfilename)
 
@@ -69,20 +69,20 @@ File.Copy = function /* ::<$in, $prov: $Providers$Base> */
 async function prep_binary_op /* ::<$in, $prov: $Providers$Base> */
 (
 	context /* :$Context<$in, $prov> */,
-	src /* :$Computable<$in, $prov, string> */,
-	dst /* :$Computable<$in, $prov, string> */,
+	src     /* :$Computable<$in, $prov, string> */,
+	dst     /* :$Computable<$in, $prov, string> */,
 	options /* :$Shape<$File$Options> */
 )
 {
-	var Σsrc = unroll(context, src)
-	var Σdst = prep_path(context, dst, options)
+	[ src, dst ] = await join(
+		unroll(context, src),
+		prep_path(context, dst, options)
+	)
 
-	; [ Σsrc, Σdst ] = await join(Σsrc, Σdst)
+	ensure_abs(src)
+	ensure_abs(dst)
 
-	ensure_abs(Σsrc)
-	ensure_abs(Σdst)
-
-	return [ Σsrc, Σdst ]
+	return [ src, dst ]
 }
 
 async function prep_path /* ::<$in, $prov: $Providers$Base> */
