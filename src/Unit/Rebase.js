@@ -20,10 +20,10 @@ export default function Rebase /* ::<$content, $prov: $Providers$Base> */
 {
 	return Unit(async (entry, context) =>
 	{
-		var Σfrom = await unroll(context, from)
-		var Σto   = await unroll(context, to)
-
-		; [ Σfrom, Σto ] = await join(Σfrom, Σto)
+		var [ Σfrom, Σto ] = await join(
+			unroll(context, from),
+			unroll(context, to)
+		)
 
 		var filename = entry.filename
 
