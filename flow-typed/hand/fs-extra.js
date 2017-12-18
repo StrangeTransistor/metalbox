@@ -25,4 +25,12 @@ declare module 'fs-extra'
 		options?: Object
 	)
 	: Promise<void>
+
+	declare function move
+	(
+		src:  string,
+		dest: string,
+		options?: Object
+	)
+	: Promise<void>
 }

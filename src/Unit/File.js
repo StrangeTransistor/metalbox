@@ -7,6 +7,7 @@ import { dirname } from 'path'
 
 import { writeFile as write } from 'fs-extra'
 import { copy } from 'fs-extra'
+import { move } from 'fs-extra'
 import { ensureDir as mkdirp } from 'fs-extra'
 
 import bluebird from 'bluebird'
@@ -63,6 +64,24 @@ File.Copy = function /* ::<$in, $prov: $Providers$Base> */
 		var [ Σsrc, Σdst ] = await prep_binary_op(context, src, dst, Σoptions)
 
 		return copy(Σsrc, Σdst)
+	})
+}
+
+File.Move = function /* ::<$in, $prov: $Providers$Base> */
+(
+	src /* :$Computable<$in, $prov, string> */,
+	dst /* :$Computable<$in, $prov, string> */,
+	options /* :$Shape<$File$Options> */
+)
+	/* :$Unit<$in, $prov, void> */
+{
+	var Σoptions = assign({ mkdirp: true }, options)
+
+	return Unit(async (_, context) =>
+	{
+		var [ Σsrc, Σdst ] = await prep_binary_op(context, src, dst, Σoptions)
+
+		return move(Σsrc, Σdst)
 	})
 }
 
