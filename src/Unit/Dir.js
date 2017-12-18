@@ -5,7 +5,7 @@ var assign = Object.assign
 import { isAbsolute as is_abs } from 'path'
 import { dirname } from 'path'
 
-import mkdirp from 'mkdirp-promise'
+import { ensureDir as mkdirp } from 'fs-extra'
 
 import Unit from './Unit'
 import Precursor from './compose/Precursor'

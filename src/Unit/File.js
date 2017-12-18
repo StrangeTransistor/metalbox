@@ -5,12 +5,11 @@ var assign = Object.assign
 import { isAbsolute as is_abs } from 'path'
 import { dirname } from 'path'
 
-import { writeFile  as write } from 'fs-extra'
+import { writeFile as write }  from 'fs-extra'
+import { ensureDir as mkdirp } from 'fs-extra'
 
 import bluebird from 'bluebird'
 var join = bluebird.join
-
-import mkdirp from 'mkdirp-promise'
 
 import Unit from './Unit'
 
