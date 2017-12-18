@@ -9,10 +9,11 @@ import compare from 'src/compare'
 import Context from 'src/Context'
 import Entry   from 'src/Entry'
 
-import Rollup   from 'src/Unit/Rollup/Rollup'
-import { Cjs }  from 'src/Unit/Rollup/Rollup'
-import { Es6 }  from 'src/Unit/Rollup/Rollup'
-import { Iife } from 'src/Unit/Rollup/Rollup'
+import Rollup   from 'src/Unit/Rollup'
+import { Cjs }  from 'src/Unit/Rollup'
+import { Es6 }  from 'src/Unit/Rollup'
+import { Iife } from 'src/Unit/Rollup'
+
 import Rebase   from 'src/Unit/Rebase'
 import File     from 'src/Unit/File'
 

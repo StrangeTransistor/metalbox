@@ -14,9 +14,9 @@ var assign = Object.assign
 
 import { rollup } from 'rollup'
 
-import unroll from '../../unroll'
-import Entry from '../../Entry'
-import Unit from '../Unit'
+import unroll from '../unroll'
+import Entry from '../Entry'
+import Unit from './Unit'
 
 export default function Rollup /* ::<$in, $prov: $Providers$Base> */
 (
