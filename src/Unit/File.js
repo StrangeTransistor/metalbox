@@ -60,16 +60,29 @@ File.Copy = function /* ::<$in, $prov: $Providers$Base> */
 
 	return Unit(async (_, context) =>
 	{
-		var Σsrc = unroll(context, src)
-		var Σdst = prep_path(context, dst, Σoptions)
-
-		; [ Σsrc, Σdst ] = await join(Σsrc, Σdst)
-
-		ensure_abs(Σsrc)
-		ensure_abs(Σdst)
+		var [ Σsrc, Σdst ] = await prep_binary_op(context, src, dst, Σoptions)
 
 		return copy(Σsrc, Σdst)
 	})
+}
+
+async function prep_binary_op /* ::<$in, $prov: $Providers$Base> */
+(
+	context /* :$Context<$in, $prov> */,
+	src /* :$Computable<$in, $prov, string> */,
+	dst /* :$Computable<$in, $prov, string> */,
+	options /* :$Shape<$File$Options> */
+)
+{
+	var Σsrc = unroll(context, src)
+	var Σdst = prep_path(context, dst, options)
+
+	; [ Σsrc, Σdst ] = await join(Σsrc, Σdst)
+
+	ensure_abs(Σsrc)
+	ensure_abs(Σdst)
+
+	return [ Σsrc, Σdst ]
 }
 
 async function prep_path /* ::<$in, $prov: $Providers$Base> */
