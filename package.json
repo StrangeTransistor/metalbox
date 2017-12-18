@@ -47,7 +47,7 @@
       "4",
 
     "bluebird":
-      "3.5",
+      "^3.5",
 
     "randomstring":
       "1",
@@ -57,9 +57,6 @@
 
     "globule":
       "1",
-
-    "flyd":
-      "0.2",
 
     "cli-color":
       "1",
@@ -91,8 +88,11 @@
     "flow-bin":
       "0.61.0",
 
+    "flow-typed":
+      "^2.2.3",
+
 
     "dir-compare":
-      "1.4"
+      "^1.4"
   }
 }
