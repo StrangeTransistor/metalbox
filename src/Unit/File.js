@@ -5,7 +5,8 @@ var assign = Object.assign
 import { isAbsolute as is_abs } from 'path'
 import { dirname } from 'path'
 
-import { writeFile as write }  from 'fs-extra'
+import { writeFile as write } from 'fs-extra'
+import { copy } from 'fs-extra'
 import { ensureDir as mkdirp } from 'fs-extra'
 
 import bluebird from 'bluebird'
@@ -41,13 +42,33 @@ export default function File /* ::<$in, $prov: $Providers$Base> */
 
 		; [ Σfilename, Σcontent ] = await join(Σfilename, Σcontent)
 
-		if (! is_abs(Σfilename))
-		{
-			/* TODO error infrastructure */
-			throw new TypeError('filename_must_be_absolute_path')
-		}
+		ensure_abs(Σfilename)
 
 		return write(Σfilename, Σcontent)
+	})
+}
+
+File.Copy = function /* ::<$in, $prov: $Providers$Base> */
+(
+	src /* :$Computable<$in, $prov, string> */,
+	dst /* :$Computable<$in, $prov, string> */,
+	options /* :$Shape<$File$Options> */
+)
+	/* :$Unit<$in, $prov, void> */
+{
+	var Σoptions = assign({ mkdirp: true }, options)
+
+	return Unit(async (_, context) =>
+	{
+		var Σsrc = unroll(context, src)
+		var Σdst = prep_path(context, dst, Σoptions)
+
+		; [ Σsrc, Σdst ] = await join(Σsrc, Σdst)
+
+		ensure_abs(Σsrc)
+		ensure_abs(Σdst)
+
+		return copy(Σsrc, Σdst)
 	})
 }
 
@@ -66,6 +87,15 @@ async function prep_path /* ::<$in, $prov: $Providers$Base> */
 	}
 
 	return Σfilename
+}
+
+function ensure_abs (filename)
+{
+	if (! is_abs(filename))
+	{
+		/* TODO error infrastructure */
+		throw new TypeError('filename_must_be_absolute_path')
+	}
 }
 
 

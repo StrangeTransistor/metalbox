@@ -122,3 +122,24 @@ describe('File.Entry', () =>
 		compare(cl1(), tm())
 	})
 })
+
+describe('File.Copy', () =>
+{
+	var cl1 = collate('file/2')
+	var context_null = Context(null)
+
+	it('File.Copy()', async () =>
+	{
+		var tm = tmp()
+
+		var unit = File(tm('def'), 'content\n')
+		.pipe(File.Copy(
+			      () => delay(200, tm('def')),
+			async () => delay(100, tm('abc'))
+		))
+
+		await unit(context_null)
+
+		compare(cl1(), tm())
+	})
+})

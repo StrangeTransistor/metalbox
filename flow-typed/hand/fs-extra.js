@@ -17,4 +17,12 @@ declare module 'fs-extra'
 	declare function ensureDir(dir: string): Promise<void>
 
 	declare function ensureDirSync(dir: string): void
+
+	declare function copy
+	(
+		src:  string,
+		dest: string,
+		options?: Object
+	)
+	: Promise<void>
 }
