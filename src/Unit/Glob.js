@@ -13,9 +13,6 @@ var assign = Object.assign
 
 import { find } from 'globule'
 
-import bluebird from 'bluebird'
-var map = bluebird.mapSeries
-
 import unroll from '../unroll'
 
 import Entry from '../Entry'
@@ -52,14 +49,21 @@ Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 	unit /* :$Unit<$Entry<void>, $prov, $out> */,
 	options /* :: ?:$Shape<$Glob$Options> */
 )
-	/* :$Unit<$in, $prov, [ $out ]> */
+	/* :$Unit<$in, $prov, $out[]> */
 {
 	var each = Unit(async (entries, context) =>
 	{
-		var contexts =  entries.map(entry => context.derive(entry))
-		var outcomes =    await map(contexts, unit)
+		var outputs /* :$out[] */ = []
 
-		return outcomes.map(it => it.output)
+		for (let entry of entries)
+		{
+			/* TODO: compose outcome */
+			var outcome = await unit(context.derive(entry))
+
+			outputs.push(outcome.output)
+		}
+
+		return outputs
 	})
 
 	return Glob(glob, each, options)
