@@ -14,9 +14,7 @@ declare module 'fs-extra'
 	)
 	: Promise<void>
 
-	declare function ensureDir
-	(
-		dir: string
-	)
-	: Promise<void>
+	declare function ensureDir(dir: string): Promise<void>
+
+	declare function ensureDirSync(dir: string): void
 }

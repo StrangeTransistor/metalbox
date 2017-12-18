@@ -3,7 +3,7 @@
 import { tmpdir } from 'os'
 import { generate as random } from 'randomstring'
 import rootpath from '@streetstrider/rootpath'
-import { sync as mkdir } from 'mkdirp'
+import { ensureDirSync as mkdirp } from 'fs-extra'
 
 export default function tmp ()
 {
@@ -11,7 +11,7 @@ export default function tmp ()
 
 	var fromroot = rootpath(tmpdir(), 'metalbox', hash)
 
-	mkdir(fromroot())
+	mkdirp(fromroot())
 
 	return fromroot
 }
