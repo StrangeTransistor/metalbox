@@ -19,7 +19,6 @@ var map = bluebird.mapSeries
 import unroll from '../unroll'
 
 import Entry from '../Entry'
-import Context from '../Context'
 
 import Unit from './Unit'
 
@@ -41,7 +40,7 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 		var found = find(Σglob, options)
 		var entries = found.map(filename => Entry(filename))
 
-		var outcome = await unit(Context(entries))
+		var outcome = await unit(context.derive(entries))
 		return outcome.output
 	})
 }
@@ -54,9 +53,9 @@ Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 )
 	/* :$Unit<$in, $prov, [ $out ]> */
 {
-	var each = Unit(async (entries) =>
+	var each = Unit(async (entries, context) =>
 	{
-		var contexts =  entries.map(entry => Context(entry))
+		var contexts =  entries.map(entry => context.derive(entry))
 		var outcomes =    await map(contexts, unit)
 
 		return outcomes.map(it => it.output)
