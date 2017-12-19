@@ -12,3 +12,7 @@ type $Entry$File =
 	content:     string,
 	sourcemap?: ?Object,
 }
+
+;
+
+type $Entry$File$Remove = Symbol
