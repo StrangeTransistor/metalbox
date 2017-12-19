@@ -164,3 +164,23 @@ describe('File.Move', () =>
 		compare(cl1(), tm())
 	})
 })
+
+describe('File.Remove', () =>
+{
+	var cl1 = collate('file/1')
+	var context_null = Context(null)
+
+	it('File.Remove()', async () =>
+	{
+		var tm = tmp()
+
+		var unit =
+		File(tm('def'), '')
+		.pipe(File(tm('abc'), 'content\n'))
+		.pipe(File.Remove(tm('def')))
+
+		await unit(context_null)
+
+		compare(cl1(), tm())
+	})
+})

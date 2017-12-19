@@ -33,4 +33,6 @@ declare module 'fs-extra'
 		options?: Object
 	)
 	: Promise<void>
+
+	declare function unlink(path: string): Promise<void>
 }

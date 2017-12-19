@@ -8,6 +8,7 @@ import { dirname } from 'path'
 import { writeFile as write } from 'fs-extra'
 import { copy } from 'fs-extra'
 import { move } from 'fs-extra'
+import { unlink } from 'fs-extra'
 import { ensureDir as mkdirp } from 'fs-extra'
 
 import bluebird from 'bluebird'
@@ -119,6 +120,22 @@ async function prep_path /* ::<$in, $prov: $Providers$Base> */
 	}
 
 	return Σfilename
+}
+
+File.Remove = function /* ::<$in, $prov: $Providers$Base> */
+(
+	filename /* :$Computable<$in, $prov, string> */
+)
+	/* :$Unit<$in, $prov, void> */
+{
+	return Unit(async (_, context) =>
+	{
+		var Σfilename = await unroll(context, filename)
+
+		ensure_abs(Σfilename)
+
+		return unlink(Σfilename)
+	})
 }
 
 function ensure_abs (filename)
