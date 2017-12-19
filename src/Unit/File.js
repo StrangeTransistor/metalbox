@@ -16,6 +16,8 @@ var join = bluebird.join
 
 import Unit from './Unit'
 
+import Entry from '../Entry'
+
 import unroll from '../unroll'
 
 /* ::
@@ -49,6 +51,20 @@ export default function File /* ::<$in, $prov: $Providers$Base> */
 		return write(Σfilename, Σcontent)
 	})
 }
+
+File.Name = function (filename /* :$Computable<string, any, string> */)
+{
+	return File(filename, (input /* :string */) => input)
+}
+
+File.Entry = function ()
+{
+	return File(
+		(entry /* :$Entry<$Entry$File> */) => entry.filename,
+		(entry /* :$Entry<$Entry$File> */) => entry.content.content
+	)
+}
+
 
 File.Copy = function /* ::<$in, $prov: $Providers$Base> */
 (
@@ -122,6 +138,7 @@ async function prep_path /* ::<$in, $prov: $Providers$Base> */
 	return Σfilename
 }
 
+
 File.Remove = function /* ::<$in, $prov: $Providers$Base> */
 (
 	filename /* :$Computable<$in, $prov, string> */
@@ -138,6 +155,24 @@ File.Remove = function /* ::<$in, $prov: $Providers$Base> */
 	})
 }
 
+File.Remove.Entry = function ()
+{
+	return File.Remove((entry /* :$Entry<$Entry$Remove> */) =>
+	{
+		ensure_remove(entry)
+
+		return entry.filename
+	})
+}
+
+function ensure_remove (entry /* :$Entry<$Entry$Remove> */)
+{
+	if (entry.content !== Entry.Remove)
+	{
+		throw new Error('must_be_entry_remove')
+	}
+}
+
 function ensure_abs (filename)
 {
 	if (! is_abs(filename))
@@ -145,18 +180,4 @@ function ensure_abs (filename)
 		/* TODO error infrastructure */
 		throw new TypeError('filename_must_be_absolute_path')
 	}
-}
-
-
-File.Name = function (filename /* :$Computable<string, any, string> */)
-{
-	return File(filename, (input /* :string */) => input)
-}
-
-File.Entry = function ()
-{
-	return File(
-		(entry /* :$Entry<$Entry$File> */) => entry.filename,
-		(entry /* :$Entry<$Entry$File> */) => entry.content.content
-	)
 }

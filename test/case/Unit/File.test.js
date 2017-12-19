@@ -183,4 +183,24 @@ describe('File.Remove', () =>
 
 		compare(cl1(), tm())
 	})
+
+	it('File.Remove.Entry()', async () =>
+	{
+		var tm = tmp()
+
+		var pre =
+		File(tm('def'), '')
+		.pipe(File(tm('abc'), 'content\n'))
+
+		await pre(context_null)
+
+		var unit = File.Remove.Entry()
+
+		await unit(Context(Entry(
+			tm('def'),
+			Entry.Remove
+		)))
+
+		compare(cl1(), tm())
+	})
 })

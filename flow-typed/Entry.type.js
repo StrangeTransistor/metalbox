@@ -15,4 +15,4 @@ type $Entry$File =
 
 ;
 
-type $Entry$File$Remove = Symbol
+type $Entry$Remove = Symbol
