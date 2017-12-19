@@ -14,6 +14,8 @@ import Context from 'src/Context'
 import Entry from 'src/Entry'
 import File from 'src/Unit/File'
 
+var typical_content = 'content\n'
+
 describe('File', () =>
 {
 	var cl1 = collate('file/1')
@@ -23,7 +25,7 @@ describe('File', () =>
 	{
 		var tm = tmp()
 
-		var unit = File(tm('abc'), 'content\n')
+		var unit = File(tm('abc'), typical_content)
 
 		await unit(context_null)
 
@@ -34,7 +36,7 @@ describe('File', () =>
 	{
 		var tm = tmp()
 
-		var unit = File(tm('abc'), async () => 'content\n')
+		var unit = File(tm('abc'), async () => typical_content)
 
 		await unit(context_null)
 
@@ -45,7 +47,7 @@ describe('File', () =>
 	{
 		var tm = tmp()
 
-		var unit = File(() => tm('abc'), 'content\n')
+		var unit = File(() => tm('abc'), typical_content)
 
 		await unit(context_null)
 
@@ -56,7 +58,7 @@ describe('File', () =>
 	{
 		var tm = tmp()
 
-		var unit = File(() => tm('abc'), async () => 'content\n')
+		var unit = File(() => tm('abc'), async () => typical_content)
 
 		await unit(context_null)
 
@@ -69,7 +71,7 @@ describe('File', () =>
 
 		var unit = File(
 			      () => delay(100, tm('abc')),
-			async () => delay(200, 'content\n')
+			async () => delay(200, typical_content)
 		)
 
 		await unit(context_null)
@@ -89,7 +91,7 @@ describe('File', () =>
 describe('File.Name', () =>
 {
 	var cl1 = collate('file/1')
-	var context_string = Context('content\n')
+	var context_string = Context(typical_content)
 
 	it('File.Name(str)', async () =>
 	{
@@ -112,7 +114,7 @@ describe('File.Entry', () =>
 		var tm = tmp()
 		var context_entry = Context(Entry(
 			tm('abc'),
-			{ content: 'content\n' }
+			{ content: typical_content }
 		))
 
 		var unit = File.Entry()
@@ -132,7 +134,7 @@ describe('File.Copy', () =>
 	{
 		var tm = tmp()
 
-		var unit = File(tm('def'), 'content\n')
+		var unit = File(tm('def'), typical_content)
 		.pipe(File.Copy(
 			      () => delay(200, tm('def')),
 			async () => delay(100, tm('abc'))
@@ -153,7 +155,7 @@ describe('File.Move', () =>
 	{
 		var tm = tmp()
 
-		var unit = File(tm('def'), 'content\n')
+		var unit = File(tm('def'), typical_content)
 		.pipe(File.Move(
 			      () => delay(200, tm('def')),
 			async () => delay(100, tm('abc'))
@@ -176,7 +178,7 @@ describe('File.Remove', () =>
 
 		var unit =
 		File(tm('def'), '')
-		.pipe(File(tm('abc'), 'content\n'))
+		.pipe(File(tm('abc'), typical_content))
 		.pipe(File.Remove(tm('def')))
 
 		await unit(context_null)
@@ -190,7 +192,7 @@ describe('File.Remove', () =>
 
 		var pre =
 		File(tm('def'), '')
-		.pipe(File(tm('abc'), 'content\n'))
+		.pipe(File(tm('abc'), typical_content))
 
 		await pre(context_null)
 
