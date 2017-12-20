@@ -12,7 +12,7 @@ import Glob from 'src/Unit/Glob'
 import Rollup from 'src/Unit/Rollup'
 import { Cjs } from 'src/Unit/Rollup'
 
-import deflow from 'rollup-plugin-flow'
+import deflow from 'src/metal/deflow'
 
 import Rebase from 'src/Unit/Rebase'
 import File from 'src/Unit/File'
@@ -28,7 +28,7 @@ describe('Es6', () =>
 
 		var plugins =
 		[
-			deflow({ pretty: true }),
+			deflow(),
 		]
 
 		var unit = Rollup.Entry(
