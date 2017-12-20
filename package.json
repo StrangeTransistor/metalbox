@@ -63,7 +63,10 @@
 
 
     "rollup":
-      "0.52"
+      "0.52",
+
+    "rollup-plugin-flow":
+      "^1.1"
   },
 
   "devDependencies":

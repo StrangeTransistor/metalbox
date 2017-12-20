@@ -4,7 +4,12 @@ declare module 'rollup'
 	declare type InputOptions =
 	{
 		input: string,
+		plugins: Plugin[],
 	}
+
+	;
+
+	declare type Plugin = Object
 
 	;
 
