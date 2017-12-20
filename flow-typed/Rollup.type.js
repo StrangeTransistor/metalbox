@@ -4,13 +4,12 @@
 
 /*::
 
-import { Plugin } from 'rollup'
+import { InputOptions } from 'rollup'
 
 */
 
-type $Rollup$Options =
+type $Rollup$Options = InputOptions
+&
 {
-	input: string,
-	external: boolean,
-	plugins: Plugin[],
+	external?: boolean,
 }
