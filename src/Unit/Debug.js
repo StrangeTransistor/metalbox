@@ -15,7 +15,7 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base>*/ ()
 {
 	return Unit(it =>
 	{
-		process.stdout.write(inspect(it, defaults))
+		process.stdout.write(inspect(it, defaults) + '\n')
 
 		return it
 	})
