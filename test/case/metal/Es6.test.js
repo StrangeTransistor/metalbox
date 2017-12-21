@@ -40,7 +40,7 @@ describe('Es6', () =>
 		.pipe(Cjs())
 		.pipe(File.Entry())
 
-		var glob = Glob.Each(es6_org('**.js'), unit)
+		var glob = Glob.Each(es6_org('**/*.js'), unit)
 
 		await glob(Context(null))
 
