@@ -4,7 +4,6 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var mod = _interopDefault(require('./lib/mod'))
 
-/*  */
 
 function main ()
 {

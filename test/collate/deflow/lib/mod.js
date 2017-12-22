@@ -1,6 +1,5 @@
 'use strict'
 
-/*  */
 
 
 function mod (...args)

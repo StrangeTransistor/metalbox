@@ -14,6 +14,7 @@ import { Cjs } from 'src/Unit/Rollup'
 
 import deflow from 'src/metal/deflow'
 import Outlander from 'src/metal/Outlander'
+import Emptish from 'src/metal/Emptish'
 
 import Rebase from 'src/Unit/Rebase'
 import File from 'src/Unit/File'
@@ -40,6 +41,7 @@ describe('Es6', () =>
 		.pipe(Rebase(es6_org(), tm()))
 		.pipe(Cjs())
 		.pipe(Outlander())
+		.pipe(Emptish())
 		.pipe(File.Entry())
 
 		var glob = Glob.Each(es6_org('**/*.js'), unit)
