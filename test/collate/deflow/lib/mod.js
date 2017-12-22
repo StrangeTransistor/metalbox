@@ -1,7 +1,5 @@
 'use strict'
 
-
-
 function mod (...args)
 {
 	return args.join(':')
