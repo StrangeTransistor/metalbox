@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /*  */
 
@@ -8,4 +8,4 @@ function mod (...args)
 	return args.join(':')
 }
 
-module.exports = mod;
+module.exports = mod
