@@ -1,8 +1,8 @@
 'use strict'
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex.default : ex }
+function iop (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex.default : ex }
 
-var mod = _interopDefault(require('./lib/mod'))
+var mod = iop(require('./lib/mod'))
 
 function main ()
 {

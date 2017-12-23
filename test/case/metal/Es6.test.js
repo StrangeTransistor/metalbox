@@ -12,12 +12,13 @@ import Glob from 'src/Unit/Glob'
 import Rollup from 'src/Unit/Rollup'
 import { Cjs } from 'src/Unit/Rollup'
 
+import Rebase from 'src/Unit/Rebase'
+import File from 'src/Unit/File'
+
 import deflow from 'src/metal/deflow'
 import Outlander from 'src/metal/Outlander'
 import Emptish from 'src/metal/Emptish'
-
-import Rebase from 'src/Unit/Rebase'
-import File from 'src/Unit/File'
+import Iop from 'src/metal/Iop'
 
 describe('Es6', () =>
 {
@@ -42,6 +43,7 @@ describe('Es6', () =>
 		.pipe(Cjs())
 		.pipe(Outlander())
 		.pipe(Emptish())
+		.pipe(Iop())
 		.pipe(File.Entry())
 
 		var glob = Glob.Each(es6_org('**/*.js'), unit)
