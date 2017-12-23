@@ -1,27 +1,18 @@
 /* @flow */
 
 import { Linter } from 'eslint'
+import outlander  from 'js-outlander'
 
-import Unit from '../Unit'
-import Entry from '../Entry'
-
-import outlander from 'js-outlander'
+import Content from '../Unit/Content'
 
 export default function Outlander ()
-	/* :$Unit<$Entry<$Entry$File>, any, $Entry<$Entry$File>> */
 {
 	var linter = new Linter
 
-	return Unit(entry =>
+	return Content(content =>
 	{
-		var content = entry.content.content
-
 		var verf = linter.verifyAndFix(content, outlander)
 
-		return Entry(entry.filename,
-		{
-			content: verf.output,
-			sourcemap: entry.content.sourcemap,
-		})
+		return verf.output
 	})
 }
