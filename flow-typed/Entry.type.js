@@ -16,3 +16,7 @@ type $Entry$File =
 ;
 
 type $Entry$Remove = Symbol
+
+;
+
+type $Entries<$content> = $Entry<$content>[]

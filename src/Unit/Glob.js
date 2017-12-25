@@ -1,8 +1,6 @@
 /* @flow */
 /* ::
 
-type $Entries<$content> = Array<$Entry<$content>>
-
 type $Glob$Glob = string | string[]
 
 type $Glob$Options = Object
