@@ -58,6 +58,9 @@
     "globule":
       "1",
 
+    "chokidar":
+      "1.7",
+
     "cli-color":
       "1",
 
