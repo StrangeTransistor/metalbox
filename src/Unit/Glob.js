@@ -1,8 +1,6 @@
 /* @flow */
 /* ::
 
-type $Glob$Glob = string | string[]
-
 type $Glob$Options = Object
 
 */
@@ -19,7 +17,7 @@ import Unit from './Unit'
 
 export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 (
-	glob /* :$Computable<$in, $prov, $Glob$Glob> */,
+	glob /* :$Computable<$in, $prov, $Glob> */,
 	unit /* :$Unit<$Entries<void>, $prov, $out> */,
 	options /* :: ?:$Shape<$Glob$Options> */
 )
@@ -43,7 +41,7 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 
 Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 (
-	glob /* :$Computable<$in, $prov, $Glob$Glob> */,
+	glob /* :$Computable<$in, $prov, $Glob> */,
 	unit /* :$Unit<$Entry<void>, $prov, $out> */,
 	options /* :: ?:$Shape<$Glob$Options> */
 )
