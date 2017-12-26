@@ -45,6 +45,9 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 
 			unit(context.derive(entry))
 		})
+
+		// unwatch
+		// close
 	})
 }
 
