@@ -26,16 +26,46 @@ var pug_options = require('../../release/metalbucket/producer/Pug/options')
 module.exports = function Rollup ()
 	/* :Producer<EnvFrontend, string> */
 {
+	var plugins_common =
+	[
+		globals(),
+		'#include',
+		builtins(),
+		'#typescript',
+		resolve(
+		{
+			jsnext:  true,
+			browser: true,
+		}),
+		commonjs(
+		{
+			sourcemap: false
+		}),
+		json(),
+		'#pug',
+		'#virtual',
+		'#flow',
+	]
+
+	var plugins_ts = plugins_common
+
+	/*
+	plugins_ts = replace(plugins_ts, '#typescript', ts(
+	{
+		typescript: require('typescript')
+	}))
+	*/
+	plugins_ts = replace(plugins_ts, '#flow', null)
+
+	var plugins_flow = replace(plugins_common, '#flow', flow({ pretty: true }))
+	plugins_flow = replace(plugins_flow, '#typescript', null)
+
+
 	// var cache
 
 	return (env) =>
 	{
 		var mode = js_mode(env)
-
-		var metalbox_virtual
-		metalbox_virtual = { dev: env.dev || false }
-		metalbox_virtual = dump(metalbox_virtual)
-		metalbox_virtual = 'export default ' + metalbox_virtual
 
 		if (mode !== 'ts')
 		{
@@ -50,47 +80,37 @@ module.exports = function Rollup ()
 			var input = env.buckets('index/index.ts')
 		}
 
-		var plugins =
-		[
-			globals(),
-			include(
-			{
-				paths: [ env.src(), env.buckets() ],
-			}),
-			builtins(),
-		]
-
 		if (mode === 'ts')
 		{
-			plugins.push(ts(
+			var plugins = plugins_ts
+
+			plugins = replace(plugins, '#typescript', ts(
 			{
 				typescript: require('typescript')
 			}))
 		}
-
-		plugins = plugins.concat(
-		[
-			resolve(
-			{
-				jsnext:  true,
-				browser: true,
-			}),
-			commonjs(
-			{
-				sourcemap: false
-			}),
-			json(),
-			pug(pug_options(env, input)),
-			virtual(
-			{
-				'@metalbox': metalbox_virtual,
-			}),
-		])
-
-		if (mode !== 'ts')
+		else
 		{
-			plugins.push(flow({ pretty: true }))
+			var plugins = plugins_flow
 		}
+
+		plugins = replace(plugins, '#include', include(
+		{
+			paths: [ env.src(), env.buckets() ],
+		}))
+
+		plugins = replace(plugins, '#pug', pug(pug_options(env, input)))
+
+		var metalbox_virtual
+		metalbox_virtual = { dev: env.dev || false }
+		metalbox_virtual = dump(metalbox_virtual)
+		metalbox_virtual = 'export default ' + metalbox_virtual
+		plugins = replace(plugins, '#virtual', virtual(
+		{
+			'@metalbox': metalbox_virtual,
+		}))
+
+		plugins = compact(plugins)
 
 		return presolve(rollup.rollup(
 		{
@@ -120,4 +140,24 @@ module.exports = function Rollup ()
 			}
 		})
 	}
+}
+
+function replace (plugins, tag, value)
+{
+	return plugins.map(plugin =>
+	{
+		if (plugin === tag)
+		{
+			return value
+		}
+		else
+		{
+			return plugin
+		}
+	})
+}
+
+function compact (plugins)
+{
+	return plugins.filter(Boolean)
 }
