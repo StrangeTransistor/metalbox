@@ -28,9 +28,9 @@ describe('Pipe / Unit.pipe', () =>
 
 		var context = Context({ x: 5 })
 
-		var outcome = await u(context)
+		var output = await u(context).output
 
-		expect(outcome.output).deep.eq({ y: 7 })
+		expect(output).deep.eq({ y: 7 })
 	})
 
 	it('u1.pipe(u2)', async () =>
@@ -52,8 +52,8 @@ describe('Pipe / Unit.pipe', () =>
 
 		var context = Context({ x: 5 })
 
-		var outcome = await u(context)
+		var output = await u(context).output
 
-		expect(outcome.output).deep.eq({ y: 7 })
+		expect(output).deep.eq({ y: 7 })
 	})
 })

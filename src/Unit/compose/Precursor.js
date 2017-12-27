@@ -11,11 +11,11 @@ export default function Precursor /* ::<$in, $prov: $Providers$Base, $out> */
 {
 	return Unit(async (_, context) =>
 	{
-		await u1(context)
+		await u1(context).output
 
-		var outcome = await u2(context)
+		var output = await u2(context).output
 
 		/* TODO: compose outcome */
-		return outcome.output
+		return output
 	})
 }

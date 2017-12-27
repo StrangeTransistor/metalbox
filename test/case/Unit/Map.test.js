@@ -13,8 +13,8 @@ describe('Unit as Map', () =>
 
 		var unit = Unit((n /* :number */) => n + 2)
 
-		var outcome = await unit(context)
+		var output = await unit(context).output
 
-		expect(outcome.output).eq(7)
+		expect(output).eq(7)
 	})
 })

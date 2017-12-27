@@ -15,7 +15,7 @@ describe('Rebase', () =>
 
 		var unit = Rebase('/src', '/dst')
 
-		var { output } = await unit(context)
+		var output = await unit(context).output
 
 		expect(output.filename).eq('/dst/foo/bar.js')
 		expect(output.content.content).eq('content')
@@ -29,12 +29,12 @@ describe('Rebase', () =>
 		var u1 = Rebase('/src', '')
 		var u2 = Rebase('/src/foo', '')
 
-		var { output } = await u1(context)
+		var output = await u1(context).output
 
 		expect(output.filename).eq('foo/bar.js')
 		expect(output.content.content).eq('content')
 
-		var { output } = await u2(context)
+		var output = await u2(context).output
 
 		expect(output.filename).eq('bar.js')
 		expect(output.content.content).eq('content')
@@ -47,7 +47,7 @@ describe('Rebase', () =>
 
 		var unit = Rebase('', '/dst')
 
-		var { output } = await unit(context)
+		var output = await unit(context).output
 
 		expect(output.filename).eq('/dst/foo/bar.js')
 		expect(output.content.content).eq('content')

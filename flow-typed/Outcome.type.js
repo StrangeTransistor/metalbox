@@ -1,5 +1,5 @@
 
 type $Outcome<$out> =
 {
-	output: $out,
+	output: Promise<$out>,
 }

@@ -12,11 +12,11 @@ export default function Pipe
 {
 	return Unit(async (_, context) =>
 	{
-		var outcome = await u1(context)
+		var output = await u1(context).output
 
-		var outcome_next = await u2(context.derive(outcome.output))
+		var output_next = await u2(context.derive(output)).output
 
-		/* TODO: compose outcome */
-		return outcome_next.output
+		/* TODO: compose outcome (children, named?) */
+		return output_next
 	})
 }

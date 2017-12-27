@@ -42,7 +42,7 @@ describe('Glob', () =>
 
 		var glob = Glob(globexpr, unit)
 
-		await glob(Context(null))
+		await glob(Context(null)).output
 	})
 
 	it('Glob.Each', async () =>
@@ -57,9 +57,9 @@ describe('Glob', () =>
 
 		var glob = Glob.Each(globexpr, unit)
 
-		var outcome = await glob(Context(null))
+		var output = await glob(Context(null)).output
 
-		expect(outcome.output).deep.eq(expected)
+		expect(output).deep.eq(expected)
 	})
 
 	it('Glob.Each async', async () =>
@@ -71,8 +71,8 @@ describe('Glob', () =>
 
 		var glob = Glob.Each(globexpr, unit)
 
-		var outcome = await glob(Context(null))
+		var output = await glob(Context(null)).output
 
-		expect(outcome.output).deep.eq(expected)
+		expect(output).deep.eq(expected)
 	})
 })

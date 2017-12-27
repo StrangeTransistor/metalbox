@@ -1,5 +1,10 @@
 /* @flow */
 
+import bluebird from 'bluebird'
+var method = bluebird.method
+
+import Outcome from '../Outcome'
+
 import Pipe from './compose/Pipe'
 import Precursor from './compose/Precursor'
 import Fork from './compose/Fork'
@@ -10,9 +15,11 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 )
 	/* :$Unit<$in, $prov, $out> */
 {
-	var unit = async function (context)
+	var Σfn = method(fn)
+
+	var unit = function (context)
 	{
-		return { output: await fn(context.input, context) }
+		return Outcome(Σfn(context.input, context))
 	}
 
 	unit.pipe = function pipe /* ::<$out_next> */

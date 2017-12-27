@@ -28,9 +28,9 @@ describe('Precursor', () =>
 
 		var context = Context({ x: 5 })
 
-		var outcome = await u(context)
+		var output = await u(context).output
 
-		expect(outcome.output).deep.eq({ y: 7 })
+		expect(output).deep.eq({ y: 7 })
 	})
 
 	it('Precursor(u1, u2) throw', async () =>
@@ -51,7 +51,7 @@ describe('Precursor', () =>
 
 		var context = Context({ x: 5 })
 
-		await expect(u(context))
+		await expect(u(context).output)
 		.rejectedWith('no_pass')
 	})
 
@@ -75,8 +75,8 @@ describe('Precursor', () =>
 
 		var context = Context({ x: '5' })
 
-		var outcome = await u(context)
+		var output = await u(context).output
 
-		expect(outcome.output).deep.eq({ y: '5a' })
+		expect(output).deep.eq({ y: '5a' })
 	})
 })

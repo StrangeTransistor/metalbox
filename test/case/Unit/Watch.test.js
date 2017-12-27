@@ -1,14 +1,15 @@
 /* @flow */
 
-import origin from 'src/rootpath/origin'
+// import origin from 'src/rootpath/origin'
 
-import Context from 'src/Context'
+// import Context from 'src/Context'
 
 // import Unit from 'src/Unit'
-import Debug from 'src/Unit/Debug'
-import Watch from 'src/Unit/Watch'
+// import Debug from 'src/Unit/Debug'
+// import Watch from 'src/Unit/Watch'
 
-describe.only('Watch', () =>
+/*
+describe('Watch', () =>
 {
 	var org = origin('glob')
 
@@ -23,3 +24,4 @@ describe.only('Watch', () =>
 		return await watch(Context(null))
 	})
 })
+*/

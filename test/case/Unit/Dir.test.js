@@ -23,7 +23,7 @@ describe('Dir', () =>
 		var unit = Dir(tm('foo'))
 		.pipe(File(tm('foo/abc'), ''))
 
-		await unit(context_null)
+		await unit(context_null).output
 
 		compare(cl(), tm())
 	})
@@ -36,7 +36,7 @@ describe('Dir', () =>
 		var unit = Dir(tm('foo/bar'))
 		.pipe(File(tm('foo/bar/abc'), ''))
 
-		await unit(context_null)
+		await unit(context_null).output
 
 		compare(cl(), tm())
 	})
@@ -56,7 +56,7 @@ describe('Dir.Ensure', () =>
 
 		var unit = Dir.Ensure(File.Entry())
 
-		await unit(context)
+		await unit(context).output
 
 		compare(cl(), tm())
 	})

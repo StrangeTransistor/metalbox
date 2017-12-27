@@ -48,7 +48,7 @@ describe('Es6', () =>
 
 		var glob = Glob.Each(es6_org('**/*.js'), unit)
 
-		await glob(Context(null))
+		await glob(Context(null)).output
 
 		compare(es6_cl(), tm())
 	})

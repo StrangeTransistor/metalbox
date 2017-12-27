@@ -53,10 +53,10 @@ Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 
 		for (let entry of entries)
 		{
-			/* TODO: compose outcome */
-			var outcome = await unit(context.derive(entry))
+			/* TODO: compose outcome (children) */
+			var outcome = unit(context.derive(entry))
 
-			outputs.push(outcome.output)
+			outputs.push(await outcome.output)
 		}
 
 		return outputs

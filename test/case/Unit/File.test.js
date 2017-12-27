@@ -27,7 +27,7 @@ describe('File', () =>
 
 		var unit = File(tm('abc'), typical_content)
 
-		await unit(context_null)
+		await unit(context_null).output
 
 		compare(cl1(), tm())
 	})
@@ -38,7 +38,7 @@ describe('File', () =>
 
 		var unit = File(tm('abc'), async () => typical_content)
 
-		await unit(context_null)
+		await unit(context_null).output
 
 		compare(cl1(), tm())
 	})
@@ -49,7 +49,7 @@ describe('File', () =>
 
 		var unit = File(() => tm('abc'), typical_content)
 
-		await unit(context_null)
+		await unit(context_null).output
 
 		compare(cl1(), tm())
 	})
@@ -60,7 +60,7 @@ describe('File', () =>
 
 		var unit = File(() => tm('abc'), async () => typical_content)
 
-		await unit(context_null)
+		await unit(context_null).output
 
 		compare(cl1(), tm())
 	})
@@ -74,7 +74,7 @@ describe('File', () =>
 			async () => delay(200, typical_content)
 		)
 
-		await unit(context_null)
+		await unit(context_null).output
 
 		compare(cl1(), tm())
 	})
@@ -83,7 +83,7 @@ describe('File', () =>
 	{
 		var unit = File('abc', '')
 
-		await expect(unit(context_null))
+		await expect(unit(context_null).output)
 		.rejectedWith('filename_must_be_absolute_path')
 	})
 })
@@ -99,7 +99,7 @@ describe('File.Name', () =>
 
 		var unit = File.Name(tm('abc'))
 
-		await unit(context_string)
+		await unit(context_string).output
 
 		compare(cl1(), tm())
 	})
@@ -119,7 +119,7 @@ describe('File.Entry', () =>
 
 		var unit = File.Entry()
 
-		await unit(context_entry)
+		await unit(context_entry).output
 
 		compare(cl1(), tm())
 	})
@@ -140,7 +140,7 @@ describe('File.Copy', () =>
 			async () => delay(100, tm('abc'))
 		))
 
-		await unit(context_null)
+		await unit(context_null).output
 
 		compare(cl1(), tm())
 	})
@@ -161,7 +161,7 @@ describe('File.Move', () =>
 			async () => delay(100, tm('abc'))
 		))
 
-		await unit(context_null)
+		await unit(context_null).output
 
 		compare(cl1(), tm())
 	})
@@ -181,7 +181,7 @@ describe('File.Remove', () =>
 		.pipe(File(tm('abc'), typical_content))
 		.pipe(File.Remove(tm('def')))
 
-		await unit(context_null)
+		await unit(context_null).output
 
 		compare(cl1(), tm())
 	})
@@ -194,7 +194,7 @@ describe('File.Remove', () =>
 		File(tm('def'), '')
 		.pipe(File(tm('abc'), typical_content))
 
-		await pre(context_null)
+		await pre(context_null).output
 
 		var unit = File.Remove.Entry()
 
@@ -202,6 +202,7 @@ describe('File.Remove', () =>
 			tm('def'),
 			Entry.Remove
 		)))
+		.output
 
 		compare(cl1(), tm())
 	})
