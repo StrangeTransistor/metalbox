@@ -10,4 +10,5 @@ type $Unit<$in, $prov: $Providers$Base, $out> =
 
 	pipe<$out_next> (next: $Unit<$out, $prov, $out_next>): $Unit<$in, $prov, $out_next>,
 	pre<$out_next>  (next: $Unit<$in,  $prov, $out_next>): $Unit<$in, $prov, $out_next>,
+	fork<$out_next> (next: $Unit<$in,  $prov, $out_next>): $Unit<$in, $prov, [ $out, $out_next ]>,
 }
