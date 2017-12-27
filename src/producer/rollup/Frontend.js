@@ -61,7 +61,7 @@ module.exports = function Rollup ()
 	plugins_flow = replace(plugins_flow, '#typescript', null)
 
 
-	// var cache
+	var cache
 
 	return (env) =>
 	{
@@ -115,14 +115,13 @@ module.exports = function Rollup ()
 		return presolve(rollup.rollup(
 		{
 			input: input,
-			// cache: cache,
+			cache: cache,
 
 			plugins: plugins,
 		}))
 		.then(bundle =>
 		{
-			// TODO turn cache on again
-			// cache = bundle
+			cache = bundle
 
 			return bundle.generate(
 			{
