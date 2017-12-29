@@ -49,6 +49,9 @@
     "bluebird":
       "^3.5",
 
+    "flyd":
+      "0.2",
+
     "randomstring":
       "1",
 

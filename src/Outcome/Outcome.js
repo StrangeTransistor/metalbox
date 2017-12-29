@@ -1,17 +1,19 @@
 /* @flow */
 
-import bluebird from 'bluebird'
-var resolve = bluebird.resolve
+import capture from './capture'
 
 export default function Outcome /* ::<$out> */
 (
-	output /* :$Promisable<$out> */
+	output /* :$Outcome$Value<$out> */
 )
 	/* :$Outcome<$out> */
 {
+	var [ promise, stream ] = capture(output)
+
 	var outcome =
 	{
-		output: resolve(output),
+		stream,
+		output: promise,
 	}
 
 	return outcome
