@@ -1,8 +1,5 @@
 /* @flow */
 
-import bluebird from 'bluebird'
-var method = bluebird.method
-
 import Outcome from '../Outcome'
 
 import Pipe from './compose/Pipe'
@@ -15,11 +12,9 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 )
 	/* :$Unit<$in, $prov, $out> */
 {
-	var Σfn = method(fn)
-
 	var unit = function (context)
 	{
-		return Outcome(Σfn(context.input, context))
+		return Outcome(fn(context.input, context))
 	}
 
 	unit.pipe = function pipe /* ::<$out_next> */
