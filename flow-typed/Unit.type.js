@@ -1,6 +1,6 @@
 
 type $Unit$Fn<$in, $prov: $Providers$Base, $out>
- = $Producer<[ $in, $Context<$in, $prov> ], $out>
+ = $Producer$Streaming<[ $in, $Context<$in, $prov> ], $out>
 
 ;
 
