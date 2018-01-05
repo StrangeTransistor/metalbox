@@ -26,8 +26,7 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 )
 	/* :$Unit<$in, $prov, $out> */
 {
-	options = assign({}, options)
-	console.log(options)
+	var Σoptions = assign({}, options)
 
 	return Unit((_, context) =>
 	{
@@ -54,10 +53,12 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 		{
 			glob = [].concat(glob)
 
-			var ignored =
-			[
-				dot(),
-			]
+			var ignored = []
+
+			if (! Σoptions.dot)
+			{
+				ignored.push(dot())
+			}
 
 			var options_w = { ignored }
 
