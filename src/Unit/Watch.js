@@ -24,42 +24,24 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 	unit /* :$Unit<$Entry<void>, $prov, $out> */,
 	options /* :: ?:$Shape<$Watch$Options> */
 )
-	/* :$Unit<$in, $prov, void> */
+	/* :$Unit<$in, $prov, $out> */
 {
 	options = assign({}, options)
 	console.log(options)
 
-	return Unit(async (_, context) =>
+	return Unit((_, context) =>
 	{
-		var live = stream()
+		var handler
 
-		var Σglob = await unroll(context, glob)
-		Σglob = [].concat(Σglob)
-
-		var ignored =
-		[
-			dot(),
-		]
-
-		var options_w = { ignored }
-
-		var handler = watch(Σglob, options_w)
-
-		handler.on('all', async (event, path) =>
-		{
-			var entry = Entry(path)
-			var context_entry = context.derive(entry)
-			context_entry.live = true
-
-			var output = await unit(context_entry).output
-
-			live(output)
-		})
+		/* @flow-off */
+		var live /* :flyd$Stream<$out> */ = stream()
 
 		on(release, live.end)
 
 		function release ()
 		{
+			if (! handler) return
+
 			/* @flow-off */
 			handler.unwatch()
 
@@ -67,7 +49,33 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 			handler.close()
 		}
 
-		// return live
+		unroll(context, glob)
+		.then(glob =>
+		{
+			glob = [].concat(glob)
+
+			var ignored =
+			[
+				dot(),
+			]
+
+			var options_w = { ignored }
+
+			handler = watch(glob, options_w)
+
+			handler.on('all', async (event, path) =>
+			{
+				var entry = Entry(path)
+				var context_entry = context.derive(entry)
+				context_entry.live = true
+
+				var output = await unit(context_entry).output
+
+				live(output)
+			})
+		})
+
+		return live
 	})
 }
 
