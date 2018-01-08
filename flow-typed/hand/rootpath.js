@@ -26,5 +26,5 @@ declare module '@streetstrider/rootpath'
 		toString(): string,
 	}
 
-	declare var exports: Rootpath$Constructor
+	declare module.exports: Rootpath$Constructor
 }
