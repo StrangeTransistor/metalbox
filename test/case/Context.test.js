@@ -41,7 +41,6 @@ describe('Context', () =>
 	{
 		expect(context).property('input')
 
-		expect(context).property('first')
 		expect(context).property('once')
 		expect(context).property('live')
 

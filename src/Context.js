@@ -14,7 +14,6 @@ export default function Context /* :: <$in, $prov: $Providers$Base> */
 	{
 		input,
 
-		first: true,
 		once: false,
 		live: false,
 
@@ -27,7 +26,6 @@ export default function Context /* :: <$in, $prov: $Providers$Base> */
 		{
 			var derived = Context(input)
 
-			derived.first = context.first
 			derived.once  = context.once
 			derived.live  = context.live
 
