@@ -11,16 +11,6 @@ import Outcome from 'src/Outcome'
 
 describe('Outcome', () =>
 {
-	function defer /* ::<value> */
-	(
-		s  /* :flyd$Stream<value> | (value) => any */,
-		ms /* :number */,
-		v  /* :value */
-	)
-	{
-		setTimeout(() => s(v), ms)
-	}
-
 	it('captures plain value', async () =>
 	{
 		var v = 17
@@ -54,7 +44,6 @@ describe('Outcome', () =>
 	it('captures stream', async () =>
 	{
 		var s = stream()
-
 		var outcome = Outcome(s)
 
 		expect(outcome).property('stream')
@@ -62,14 +51,14 @@ describe('Outcome', () =>
 
 		var buffer = []
 
-		defer(s, 100, 1)
-		defer(s, 200, 2)
-		defer(s, 300, 3)
-
-		defer(s.end, 400, true)
-
 		/* @flow-off */
 		outcome.stream.map(v => buffer.push(v))
+
+		s(1)
+		s(2)
+		s(3)
+
+		s.end(true)
 
 		var output = await outcome.output
 
