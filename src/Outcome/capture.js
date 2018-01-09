@@ -17,17 +17,10 @@ export default function capture /* ::<$out> */
 		/* @flow-off */
 		var stream /* :flyd$Stream<$out> */ = value
 
-		if (stream.hasVal)
+		var promise /* :Promise<$out> */ = new Promise(rs =>
 		{
-			var promise /* :Promise<$out> */ = resolve(stream())
-		}
-		else
-		{
-			var promise /* :Promise<$out> */ = new Promise(rs =>
-			{
-				on(() => rs(stream()), stream.end)
-			})
-		}
+			on(() => rs(stream()), stream.end)
+		})
 
 		return [ promise, stream ]
 	}
