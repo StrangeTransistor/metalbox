@@ -15,4 +15,4 @@
 *— [Expiration Date](https://www.youtube.com/watch?v=JmSqorj-EC0)*
 
 ## license
-ISC © StrangeTransistor, 2017.
+ISC © Strider, 2018.
