@@ -3,8 +3,6 @@
 import { on } from 'flyd'
 import { isStream as is_stream } from 'flyd'
 
-import once from 'lodash/once'
-
 import Promise from 'bluebird'
 var resolve = Promise.resolve
 
@@ -27,7 +25,7 @@ export default function capture /* ::<$out> */
 		{
 			var promise /* :Promise<$out> */ = new Promise(rs =>
 			{
-				on(once(() => rs(stream())), stream.end)
+				on(() => rs(stream()), stream.end)
 			})
 		}
 
