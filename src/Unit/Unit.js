@@ -14,7 +14,7 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 {
 	var unit = function (context)
 	{
-		return Outcome(fn(context.input, context))
+		return Outcome.invoke(fn, context)
 	}
 
 	unit.pipe = function pipe /* ::<$out_next> */
