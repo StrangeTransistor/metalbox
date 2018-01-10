@@ -1,10 +1,11 @@
 /* @flow */
 
-import { on } from 'flyd'
 import { isStream as is_stream } from 'flyd'
 
 import Promise from 'bluebird'
 var resolve = Promise.resolve
+
+import drain from '../drain'
 
 export default function capture /* ::<$out> */
 (
@@ -17,12 +18,7 @@ export default function capture /* ::<$out> */
 		/* @flow-off */
 		var stream /* :flyd$Stream<$out> */ = value
 
-		var promise /* :Promise<$out> */ = new Promise(rs =>
-		{
-			on(() => rs(stream()), stream.end)
-		})
-
-		return [ promise, stream ]
+		return [ drain(stream), stream ]
 	}
 	else
 	{
