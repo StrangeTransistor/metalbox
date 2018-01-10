@@ -1,4 +1,5 @@
 /* @flow */
+// TODO timing
 
 import Promise from 'bluebird'
 var reject = Promise.reject
