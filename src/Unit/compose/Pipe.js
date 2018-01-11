@@ -1,5 +1,7 @@
 /* @flow */
 
+import { on } from 'flyd'
+
 import Unit from '../Unit'
 
 export default function Pipe
@@ -10,13 +12,32 @@ export default function Pipe
 )
 	/* :$Unit<$in, $prov, $out> */
 {
-	return Unit(async (_, context) =>
+	/* TODO: compose outcome (children, named?) */
+	return Unit((_, context) =>
 	{
-		var output = await u1(context).output
+		var out1 = u1(context)
 
-		var output_next = await u2(context.derive(output)).output
+		if (out1.stream)
+		{
+			var stream = out1.stream.map(output =>
+			{
+				/* @flow-off */
+				return (u2(context.derive(output)).output /* :$out */)
+			})
 
-		/* TODO: compose outcome (children, named?) */
-		return output_next
+			/* @flow-off */
+			on(out1.stream.end, stream.end)
+
+			return stream
+		}
+		else
+		{
+			var promise = out1.output.then(output =>
+			{
+				return u2(context.derive(output)).output
+			})
+
+			return promise
+		}
 	})
 }

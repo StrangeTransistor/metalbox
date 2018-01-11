@@ -15,6 +15,7 @@ describe('Watch', () =>
 	var org = origin('glob')
 
 	var globexpr = org('*.ext')
+	var expected = [ '1.ext', '2.ext', '3.ext' ]
 
 	function end (outcome /* :$Outcome<*> */)
 	{
@@ -46,19 +47,24 @@ describe('Watch', () =>
 		await outcome.output
 		.then(() =>
 		{
-			expect(buffer).deep.eq([ '1.ext', '2.ext', '3.ext' ])
+			expect(buffer).deep.eq(expected)
 		})
 	})
 
-	/*
 	it('works inside composition', async () =>
 	{
-		var f1 = false
-		var f2 = false
+		var b1 = []
+		var b2 = []
 
-		var watch = Watch(globexpr, Unit(() => { f1 = true }))
+		var watch = Watch(globexpr, Unit(input =>
+		{
+			return b1.push(org.relative(input.filename))
+		}))
 
-		var unit = watch.pipe(Unit(() => { f2 = true }))
+		var unit = watch.pipe(Unit(input =>
+		{
+			return b2.push(input)
+		}))
 
 		var outcome = unit(Context(null))
 
@@ -67,9 +73,8 @@ describe('Watch', () =>
 		await outcome.output
 		.then(() =>
 		{
-			expect(f1).true
-			expect(f2).true
+			expect(b1).deep.eq(expected)
+			expect(b2).deep.eq([ 1, 2, 3 ])
 		})
 	})
-	*/
 })
