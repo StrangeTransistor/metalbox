@@ -67,6 +67,32 @@ describe('Outcome', () =>
 		expect(buffer).deep.eq([ 1, 2, 3 ])
 	})
 
+	it('captures stream error', async () =>
+	{
+		var s = stream()
+		var outcome = Outcome(s)
+		var error = new Error('e')
+
+		var buffer = []
+
+		/* @flow-off */
+		outcome.stream.map(v => buffer.push(v))
+
+		s(1)
+		s(error)
+		s(new Error('not'))
+		s(2)
+		s(3)
+		s(new Error('that'))
+
+		var output = await outcome.output.then(
+		()  => expect(false).true,
+		(e) => e)
+
+		expect(output).eq(error)
+		expect(buffer).deep.eq([ 1, error ])
+	})
+
 	it('Outcome.invoke', async () =>
 	{
 		var outcome = Outcome.invoke(input => input, Context(17))

@@ -5,7 +5,8 @@ import { isStream as is_stream } from 'flyd'
 import Promise from 'bluebird'
 var resolve = Promise.resolve
 
-import drain from '../drain'
+import { finalize } from '../drain'
+import { either as drain } from '../drain'
 
 export default function capture /* ::<$out> */
 (
@@ -17,6 +18,8 @@ export default function capture /* ::<$out> */
 	{
 		/* @flow-off */
 		var stream /* :flyd$Stream<$out> */ = value
+
+		stream = finalize(stream)
 
 		return [ drain(stream), stream ]
 	}
