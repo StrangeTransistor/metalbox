@@ -7,6 +7,7 @@ import { stream } from 'flyd'
 
 import { expect } from 'chai'
 
+import Context from 'src/Context'
 import Outcome from 'src/Outcome'
 
 describe('Outcome', () =>
@@ -64,5 +65,32 @@ describe('Outcome', () =>
 
 		expect(output).eq(3)
 		expect(buffer).deep.eq([ 1, 2, 3 ])
+	})
+
+	it('Outcome.invoke', async () =>
+	{
+		var outcome = Outcome.invoke(input => input, Context(17))
+
+		expect(outcome).property('stream')
+		expect(outcome).property('output')
+
+		var output = await outcome.output
+
+		expect(output).eq(17)
+	})
+
+	it('Outcome.invoke captures throw', async () =>
+	{
+		var error = new Error('e')
+
+		var outcome = Outcome.invoke(() =>
+		{
+			throw error
+		}
+		, Context(null))
+
+		await outcome.output.then(
+		() => expect(false).true,
+		(e) => expect(e).eq(error))
 	})
 })
