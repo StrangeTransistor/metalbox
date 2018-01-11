@@ -89,8 +89,10 @@ describe('Outcome', () =>
 		}
 		, Context(null))
 
-		await outcome.output.then(
-		() => expect(false).true,
-		(e) => expect(e).eq(error))
+		var r = await outcome.output.then(
+		()  => expect(false).true,
+		(e) => e)
+
+		expect(r).eq(error)
 	})
 })
