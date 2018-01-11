@@ -50,7 +50,11 @@ export function finalize /* ::<$value> */
 )
 	/* :flyd$Stream<$value> */
 {
-	return combine(handle, [ stream ])
+	var stream_f = combine(handle, [ stream ])
+
+	on(stream.end, stream_f.end)
+
+	return stream_f
 
 	function handle (stream, self)
 	{
