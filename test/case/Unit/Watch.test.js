@@ -15,7 +15,7 @@ describe('Watch', () =>
 	var org = origin('glob')
 
 	var globexpr = org('*.ext')
-	var expected = [ '1.ext', '2.ext', '3.ext' ]
+	var expected = [ '1.ext', '2.ext', '3.ext' ].sort()
 
 	function end (outcome /* :$Outcome<*> */)
 	{
@@ -47,7 +47,7 @@ describe('Watch', () =>
 		await outcome.output
 		.then(() =>
 		{
-			expect(buffer).deep.eq(expected)
+			expect(buffer.sort()).deep.eq(expected)
 		})
 	})
 
@@ -73,8 +73,8 @@ describe('Watch', () =>
 		await outcome.output
 		.then(() =>
 		{
-			expect(b1).deep.eq(expected)
-			expect(b2).deep.eq([ 1, 2, 3 ])
+			expect(b1.sort()).deep.eq(expected)
+			expect(b2.sort()).deep.eq([ 1, 2, 3 ].sort())
 		})
 	})
 })
