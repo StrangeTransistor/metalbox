@@ -1,6 +1,7 @@
 /* @flow */
 
 import { on } from 'flyd'
+import { combine } from 'flyd'
 
 import Unit from '../Unit'
 
@@ -19,25 +20,39 @@ export default function Pipe
 
 		if (out1.stream)
 		{
-			var stream = out1.stream.map(output =>
+			var stream = combine(handle, [ out1.stream ])
+
+			function handle (prev, self)
 			{
-				/* @flow-off */
-				return (u2(context.derive(output)).output /* :$out */)
-			})
+				var value = prev()
+
+				var context_live  = context.derive(value)
+				context_live.live = true
+
+				if (value instanceof Error)
+				{
+					self(value)
+				}
+				else
+				{
+					/* TODO: stream in stream */
+					u2(context_live).output.then(self, self)
+					// out2.stream +
+				}
+			}
 
 			/* @flow-off */
 			on(out1.stream.end, stream.end)
+			// out2.stream +
 
 			return stream
 		}
 		else
 		{
-			var promise = out1.output.then(output =>
+			return out1.output.then(output =>
 			{
 				return u2(context.derive(output)).output
 			})
-
-			return promise
 		}
 	})
 }
