@@ -13,7 +13,6 @@ export default function Pipe
 )
 	/* :$Unit<$in, $prov, $out> */
 {
-	/* TODO: compose outcome (children, named?) */
 	return Unit((_, context) =>
 	{
 		var out1 = u1(context)
@@ -36,7 +35,14 @@ export default function Pipe
 				else
 				{
 					/* TODO: stream in stream */
-					u2(context_live).output.then(self, self)
+					u2(context_live).output
+					.catch((error) =>
+					{
+						if (! (error instanceof Error)) error = Error(error)
+
+						return error
+					})
+					.then(self)
 					// out2.stream +
 				}
 			}
