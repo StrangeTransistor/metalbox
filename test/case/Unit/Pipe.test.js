@@ -2,6 +2,9 @@
 
 import { expect } from 'chai'
 
+import Promise from 'bluebird'
+var delay = Promise.delay
+
 import { stream } from 'flyd'
 
 import Unit from 'src/Unit'
@@ -59,23 +62,24 @@ describe('Pipe / Unit.pipe', () =>
 		expect(output).deep.eq({ y: 7 })
 	})
 
-	it.only('(stream u1).pipe(u2)', async () =>
+	it('(stream u1).pipe(u2)', async () =>
 	{
 		var u1 = Unit(() =>
 		{
 			var s = stream({ x: 1 })
 
-			var s = stream()
-
 			// eslint-disable-next-line max-nested-callbacks
-			setTimeout(() =>
+			delay(50).then(() =>
 			{
-				s({ x: 1 })
 				s({ x: 2 })
 				s({ x: 3 })
+			})
+			.delay(50)
+			// eslint-disable-next-line max-nested-callbacks
+			.then(() =>
+			{
 				s.end(true)
-			}
-			, 100)
+			})
 
 			return s
 		})
@@ -83,7 +87,6 @@ describe('Pipe / Unit.pipe', () =>
 		var u2 = Unit((input) =>
 		{
 			var x /* :number */ = input.x
-			// console.log('!', x)
 
 			return x + 2
 		})
