@@ -7,6 +7,8 @@ import { stream } from 'flyd'
 
 import { expect } from 'chai'
 
+import { concat } from 'src/drain'
+
 import Context from 'src/Context'
 import Outcome from 'src/Outcome'
 
@@ -50,10 +52,9 @@ describe('Outcome', () =>
 		expect(outcome).property('stream')
 		expect(outcome).property('output')
 
-		var buffer = []
-
 		/* @flow-off */
-		outcome.stream.map(v => buffer.push(v))
+		var buffer = concat(outcome.stream)
+		var output = outcome.output
 
 		s(1)
 		s(2)
@@ -61,10 +62,8 @@ describe('Outcome', () =>
 
 		s.end(true)
 
-		var output = await outcome.output
-
-		expect(output).eq(3)
-		expect(buffer).deep.eq([ 1, 2, 3 ])
+		expect(await output).eq(3)
+		expect(await buffer).deep.eq([ 1, 2, 3 ])
 	})
 
 	it('captures stream error', async () =>
@@ -73,10 +72,12 @@ describe('Outcome', () =>
 		var outcome = Outcome(s)
 		var error = new Error('e')
 
-		var buffer = []
-
 		/* @flow-off */
-		outcome.stream.map(v => buffer.push(v))
+		var buffer = concat(outcome.stream)
+
+		var output = outcome.output.then(
+		()  => expect(false).true,
+		(e) => e)
 
 		s(1)
 		s(error)
@@ -85,12 +86,8 @@ describe('Outcome', () =>
 		s(3)
 		s(new Error('that'))
 
-		var output = await outcome.output.then(
-		()  => expect(false).true,
-		(e) => e)
-
-		expect(output).eq(error)
-		expect(buffer).deep.eq([ 1, error ])
+		expect(await output).eq(error)
+		expect(await buffer).deep.eq([ 1, error ])
 	})
 
 	it('Outcome.invoke', async () =>

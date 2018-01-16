@@ -43,6 +43,28 @@ export function either /* ::<$value, $error: Error> */
 	})
 }
 
+export function concat /* ::<$value> */
+(
+	stream /* :flyd$Stream<$value> */
+)
+	/* :Promise<$value[]> */
+{
+	var buffer /* :$value[] */ = []
+
+	on(push, stream)
+
+	function push (value)
+	{
+		buffer.push(value)
+	}
+
+	return new Promise(rs =>
+	{
+		on(rs, stream.end)
+	})
+	.then(() => buffer)
+}
+
 
 export function finalize /* ::<$value> */
 (

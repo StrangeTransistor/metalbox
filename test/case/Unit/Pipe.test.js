@@ -7,6 +7,8 @@ var delay = Promise.delay
 
 import { stream } from 'flyd'
 
+import { concat } from 'src/drain'
+
 import Unit from 'src/Unit'
 import Pipe from 'src/Unit/compose/Pipe'
 
@@ -95,16 +97,13 @@ describe('Pipe / Unit.pipe', () =>
 
 		var context = Context(null)
 
-		var buffer = []
-
 		var outcome = u(context)
 
 		/* @flow-off */
-		outcome.stream.map(x => buffer.push(x))
+		var buffer = concat(outcome.stream)
+		var output = outcome.output
 
-		var output = await outcome.output
-
-		expect(buffer).deep.eq([ 3, 4, 5 ])
-		expect(output).eq(5)
+		expect(await output).eq(5)
+		expect(await buffer).deep.eq([ 3, 4, 5 ])
 	})
 })
