@@ -94,9 +94,7 @@ describe('Pipe / Unit.pipe', () =>
 		})
 
 		var u = u1.pipe(u2)
-
 		var context = Context(null)
-
 		var outcome = u(context)
 
 		/* @flow-off */
@@ -105,5 +103,49 @@ describe('Pipe / Unit.pipe', () =>
 
 		expect(await output).eq(5)
 		expect(await buffer).deep.eq([ 3, 4, 5 ])
+	})
+
+	it('(stream u1 Error).pipe(u2)', async () =>
+	{
+		var error = new Error('e')
+
+		var u1 = Unit(() =>
+		{
+			var s = stream({ x: 1 })
+
+			// eslint-disable-next-line max-nested-callbacks
+			delay(50).then(() =>
+			{
+				s({ x: 2 })
+			})
+			.delay(50)
+			// eslint-disable-next-line max-nested-callbacks
+			.then(() =>
+			{
+				s(error)
+			})
+
+			return s
+		})
+
+		var u2 = Unit((input) =>
+		{
+			var x /* :number */ = input.x
+
+			return x + 2
+		})
+
+		var u = u1.pipe(u2)
+		var context = Context(null)
+		var outcome = u(context)
+
+		/* @flow-off */
+		var buffer = concat(outcome.stream)
+		var r = outcome.output.then(
+		()  => expect(false).true,
+		(e) => e)
+
+		expect(await r).eq(error)
+		expect(await buffer).deep.eq([ 3, 4, error ])
 	})
 })

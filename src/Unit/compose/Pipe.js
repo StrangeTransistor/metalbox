@@ -1,5 +1,7 @@
 /* @flow */
 
+var noop = () => {}
+
 import { on } from 'flyd'
 import { combine } from 'flyd'
 
@@ -50,6 +52,8 @@ export default function Pipe
 			/* @flow-off */
 			on(out1.stream.end, stream.end)
 			// out2.stream +
+
+			out1.output.catch(noop)
 
 			return stream
 		}
