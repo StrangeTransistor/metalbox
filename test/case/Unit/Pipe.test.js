@@ -109,24 +109,30 @@ describe('Pipe / Unit.pipe', () =>
 	{
 		var error = new Error('e')
 
+		/* eslint-disable max-nested-callbacks */
 		var u1 = Unit(() =>
 		{
 			var s = stream({ x: 1 })
 
-			// eslint-disable-next-line max-nested-callbacks
 			delay(50).then(() =>
 			{
 				s({ x: 2 })
 			})
 			.delay(50)
-			// eslint-disable-next-line max-nested-callbacks
 			.then(() =>
 			{
+				s(error)
+			})
+			.delay(50)
+			.then(() =>
+			{
+				/* check for dup */
 				s(error)
 			})
 
 			return s
 		})
+		/* eslint-enable max-nested-callbacks */
 
 		var u2 = Unit((input) =>
 		{
