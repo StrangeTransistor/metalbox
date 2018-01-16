@@ -9,13 +9,12 @@ export default function Precursor /* ::<$in, $prov: $Providers$Base, $out> */
 )
 	/* :$Unit<$in, $prov, $out> */
 {
-	return Unit(async (_, context) =>
+	return Unit((_, context) =>
 	{
-		await u1(context).output
+		var u = u1.pipe(Unit(() => context.input)).pipe(u2)
 
-		var output = await u2(context).output
+		var outcome = u(context)
 
-		/* TODO: compose outcome */
-		return output
+		return outcome.stream || outcome.output
 	})
 }
