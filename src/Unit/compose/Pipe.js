@@ -27,15 +27,15 @@ export default function Pipe
 			{
 				var value = prev()
 
-				var context_live  = context.derive(value)
-				context_live.live = true
-
 				if (value instanceof Error)
 				{
 					self(value)
 				}
 				else
 				{
+					var context_live  = context.derive(value)
+					context_live.live = true
+
 					/* TODO: stream in stream */
 					u2(context_live).output
 					.catch((error) =>
