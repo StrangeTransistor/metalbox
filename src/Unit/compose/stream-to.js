@@ -6,9 +6,9 @@ var resolve = bluebird.resolve
 export default function stream_to /* ::<$value> */
 (
 	value  /* :$Promisable<$value> */,
-	stream /* :($value) => any */
+	stream /* :flyd$Stream<$value> */
 )
-	/* :void */
+	/* :flyd$Stream<$value> */
 {
 	resolve(value).catch(error =>
 	{
@@ -17,4 +17,6 @@ export default function stream_to /* ::<$value> */
 		return error
 	})
 	.then(stream)
+
+	return stream
 }
