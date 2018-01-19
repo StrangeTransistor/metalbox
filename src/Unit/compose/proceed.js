@@ -5,6 +5,8 @@ var noop = () => {}
 import { on } from 'flyd'
 import { combine } from 'flyd'
 
+import stream_to from './stream-to'
+
 export default function proceed
 	/* ::<$prov: $Providers$Base, $medium, $medium_in, $out> */
 (
@@ -30,14 +32,7 @@ export default function proceed
 			context_live.live = true
 
 			/* TODO: stream in stream */
-			next(context_live).output
-			.catch((error) =>
-			{
-				if (! (error instanceof Error)) error = Error(error)
-
-				return error
-			})
-			.then(self)
+			stream_to(next(context_live).output, self)
 			// out2.stream +
 		}
 	}
