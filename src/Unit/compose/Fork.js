@@ -3,6 +3,7 @@
 import bluebird from 'bluebird'
 var join = bluebird.join
 
+import { on } from 'flyd'
 import lift from 'flyd/module/lift'
 
 import Unit from '../Unit'
@@ -26,7 +27,12 @@ export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
 			var s1 = alive(out1.stream || out1.output)
 			var s2 = alive(out2.stream || out2.output)
 
-			return lift((v1, v2) => [ v1, v2 ], s1, s2)
+			var stream = lift((v1, v2) => [ v1, v2 ], s1, s2)
+
+			on(s1.end, stream.end)
+			on(s2.end, stream.end)
+
+			return stream
 		}
 		else
 		{
