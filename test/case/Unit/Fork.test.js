@@ -125,4 +125,50 @@ describe('Fork', () =>
 		expect(await output).deep.eq([ 3, 17 ])
 		expect(await buffer).deep.eq([[ 1, 17 ], [ 2, 17 ], [ 3, 17 ]])
 	})
+
+	it('(stream u1).fork(stream u2)', async () =>
+	{
+		var s1 = stream(1)
+		var s2 = stream(2)
+
+		delay(25).then(() =>
+		{
+			s1(3)
+		})
+		.delay(25).then(() =>
+		{
+			s2(4)
+		})
+		.delay(25).then(() =>
+		{
+			s1(5)
+		})
+		.delay(25).then(() =>
+		{
+			s2.end(true)
+		})
+		.delay(25).then(() =>
+		{
+			s1.end(true)
+		})
+
+		var u1 = Unit(() => s1)
+		var u2 = Unit(() => s2)
+
+		var u = u1.fork(u2)
+		var context = Context(null)
+		var outcome = u(context)
+
+		/* @flow-off */
+		var buffer = concat(outcome.stream)
+		var output = outcome.output
+
+		expect(await output).deep.eq([ 5, 4 ])
+		expect(await buffer).deep.eq([
+			[ 1, 2 ],
+			[ 3, 2 ],
+			[ 3, 4 ],
+			[ 5, 4 ],
+		])
+	})
 })
