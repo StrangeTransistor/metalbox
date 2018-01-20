@@ -1,16 +1,13 @@
 /* @flow */
 
-import bluebird from 'bluebird'
-var resolve = bluebird.resolve
-
 export default function stream_to /* ::<$value> */
 (
-	value  /* :$Promisable<$value> */,
+	value  /* :Promise<$value> */,
 	stream /* :flyd$Stream<$value> */
 )
 	/* :flyd$Stream<$value> */
 {
-	resolve(value).catch(error =>
+	value.catch(error =>
 	{
 		if (! (error instanceof Error)) error = Error(error)
 
