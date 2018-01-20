@@ -220,4 +220,29 @@ describe('Fork', () =>
 			error,
 		])
 	})
+
+	it('(stream u1).fork(u2 throw)', async () =>
+	{
+		var s1 = stream(1)
+
+		var error = new Error('e')
+
+		var u1 = Unit(() => s1)
+		var u2 = Unit(() => { throw error })
+
+		var u = u1.fork(u2)
+		var context = Context(null)
+		var outcome = u(context)
+
+		/* @flow-off */
+		var buffer = concat(outcome.stream)
+		var r = outcome.output.then(
+		()  => expect(false).true,
+		(e) => e)
+
+		expect(await r).eq(error)
+		expect(await buffer).deep.eq([
+			error,
+		])
+	})
 })
