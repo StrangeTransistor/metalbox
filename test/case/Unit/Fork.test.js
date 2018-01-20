@@ -199,6 +199,10 @@ describe('Fork', () =>
 		{
 			s2(error)
 		})
+		.delay(25).then(() =>
+		{
+			s1(new Error('not'))
+		})
 
 		var u1 = Unit(() => s1)
 		var u2 = Unit(() => s2)
