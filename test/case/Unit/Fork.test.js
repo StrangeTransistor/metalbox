@@ -89,8 +89,10 @@ describe('Fork', () =>
 
 	it('(stream u1).fork(u2)', async () =>
 	{
-		var u1 = Unit(() =>
+		var u1 = Unit(input =>
 		{
+			expect(input).deep.eq({ x: 17 })
+
 			var s = stream(1)
 
 			// eslint-disable-next-line max-nested-callbacks
@@ -109,13 +111,13 @@ describe('Fork', () =>
 			return s
 		})
 
-		var u2 = Unit(() =>
+		var u2 = Unit(input =>
 		{
-			return 17
+			return input.x
 		})
 
 		var u = u1.fork(u2)
-		var context = Context(null)
+		var context = Context({ x: 17 })
 		var outcome = u(context)
 
 		/* @flow-off */

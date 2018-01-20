@@ -89,8 +89,10 @@ describe('Precursor', () =>
 
 	it('(stream u1).pre(u2)', async () =>
 	{
-		var u1 = Unit(() =>
+		var u1 = Unit(input =>
 		{
+			expect(input).deep.eq({ x: '5' })
+
 			var s = stream({ x: 1 })
 
 			// eslint-disable-next-line max-nested-callbacks
@@ -133,8 +135,10 @@ describe('Precursor', () =>
 		var error = new Error('e')
 
 		/* eslint-disable max-nested-callbacks */
-		var u1 = Unit(() =>
+		var u1 = Unit(input =>
 		{
+			expect(input).deep.eq({ x: '5' })
+
 			var s = stream({ x: 1 })
 
 			delay(50).then(() =>

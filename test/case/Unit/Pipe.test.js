@@ -66,8 +66,10 @@ describe('Pipe / Unit.pipe', () =>
 
 	it('(stream u1).pipe(u2)', async () =>
 	{
-		var u1 = Unit(() =>
+		var u1 = Unit(initial =>
 		{
+			expect(initial).eq(17)
+
 			var s = stream({ x: 1 })
 
 			// eslint-disable-next-line max-nested-callbacks
@@ -94,7 +96,7 @@ describe('Pipe / Unit.pipe', () =>
 		})
 
 		var u = u1.pipe(u2)
-		var context = Context(null)
+		var context = Context(17)
 		var outcome = u(context)
 
 		/* @flow-off */
@@ -110,8 +112,10 @@ describe('Pipe / Unit.pipe', () =>
 		var error = new Error('e')
 
 		/* eslint-disable max-nested-callbacks */
-		var u1 = Unit(() =>
+		var u1 = Unit(initial =>
 		{
+			expect(initial).eq(17)
+
 			var s = stream({ x: 1 })
 
 			delay(50).then(() =>
@@ -142,7 +146,7 @@ describe('Pipe / Unit.pipe', () =>
 		})
 
 		var u = u1.pipe(u2)
-		var context = Context(null)
+		var context = Context(17)
 		var outcome = u(context)
 
 		/* @flow-off */
