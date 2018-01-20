@@ -171,4 +171,53 @@ describe('Fork', () =>
 			[ 5, 4 ],
 		])
 	})
+
+	it('(stream u1 Error).fork(stream u2)', async () =>
+	{
+		var s1 = stream(1)
+		var s2 = stream(2)
+
+		var error = new Error('e')
+
+		delay(25).then(() =>
+		{
+			s1(3)
+		})
+		.delay(25).then(() =>
+		{
+			s2(error)
+		})
+		.delay(25).then(() =>
+		{
+			s1(5)
+		})
+		.delay(25).then(() =>
+		{
+			s2(6)
+		})
+		.delay(25).then(() =>
+		{
+			s2(error)
+		})
+
+		var u1 = Unit(() => s1)
+		var u2 = Unit(() => s2)
+
+		var u = u1.fork(u2)
+		var context = Context(null)
+		var outcome = u(context)
+
+		/* @flow-off */
+		var buffer = concat(outcome.stream)
+		var r = outcome.output.then(
+		()  => expect(false).true,
+		(e) => e)
+
+		expect(await r).eq(error)
+		expect(await buffer).deep.eq([
+			[ 1, 2 ],
+			[ 3, 2 ],
+			error,
+		])
+	})
 })
