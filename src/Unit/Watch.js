@@ -18,7 +18,7 @@ import Entry from '../Entry'
 
 import Unit from './Unit'
 
-export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
+export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 (
 	glob /* :$Computable<$in, $prov, $Glob> */,
 	unit /* :$Unit<$Entry<void>, $prov, $out> */,
