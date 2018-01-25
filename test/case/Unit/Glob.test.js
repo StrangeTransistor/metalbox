@@ -59,7 +59,7 @@ describe('Glob', () =>
 
 		var output = await glob(Context(null)).output
 
-		expect(output).deep.eq(expected)
+		expect(output).eq('3.ext')
 	})
 
 	it('Glob.Each async', async () =>
@@ -73,6 +73,30 @@ describe('Glob', () =>
 
 		var output = await glob(Context(null)).output
 
-		expect(output).deep.eq(expected)
+		expect(output).eq('3.ext')
+	})
+
+	it('Glob.Each streaming', async () =>
+	{
+		var b1 = []
+		var b2 = []
+
+		var glob = Glob.Each(globexpr, Unit(input =>
+		{
+			return b1.push(org.relative(input.filename))
+		}))
+
+		var unit = glob.pipe(Unit(input =>
+		{
+			return (b2.push(input), input)
+		}))
+
+		var outcome = unit(Context(null))
+
+		var output = await outcome.output
+
+		expect(output).eq(3)
+		expect(b1.sort()).deep.eq(expected)
+		expect(b2.sort()).deep.eq([ 1, 2, 3 ].sort())
 	})
 })

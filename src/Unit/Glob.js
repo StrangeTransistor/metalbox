@@ -9,6 +9,15 @@ var assign = Object.assign
 
 import { find } from 'globule'
 
+import Promise from 'bluebird'
+var resolve = Promise.resolve
+var map = Promise.mapSeries
+
+import { stream } from 'flyd'
+import { on } from 'flyd'
+import stream_to from './compose/stream-to'
+import alive from './compose/alive'
+
 import unroll from '../unroll'
 
 import Entry from '../Entry'
@@ -25,17 +34,27 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 {
 	options = assign({}, options)
 
-	return Unit(async (_, context) =>
+	return Unit((_, context) =>
 	{
-		var Σglob = await unroll(context, glob)
-		Σglob = [].concat(Σglob)
+		var s = stream()
 
-		var found = find(Σglob, options)
-		var entries = found.map(filename => Entry(filename))
+		resolve(unroll(context, glob))
+		.then(glob =>
+		{
+			glob = [].concat(glob)
 
-		/* TODO: compose outcome */
-		var outcome = unit(context.derive(entries))
-		return outcome.output
+			var found = find(glob, options)
+			var entries = found.map(filename => Entry(filename))
+
+			/* TODO: compose outcome */
+			var outcome = unit(context.derive(entries))
+
+			var a = alive(outcome.stream || outcome.output)
+			on(s, a)
+			on(s.end, a.end)
+		})
+
+		return s
 	})
 }
 
@@ -45,21 +64,25 @@ Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 	unit /* :$Unit<$Entry<void>, $prov, $out> */,
 	options /* :: ?:$Shape<$Glob$Options> */
 )
-	/* :$Unit<$in, $prov, $out[]> */
+	/* :$Unit<$in, $prov, $out> */
 {
-	var each = Unit(async (entries, context) =>
+	var each = Unit((entries, context) =>
 	{
-		var outputs /* :$out[] */ = []
+		var s = stream()
 
-		for (let entry of entries)
+		map(entries, entry =>
 		{
-			/* TODO: compose outcome (children) */
-			var outcome = unit(context.derive(entry))
+			// TODO: stream in stream
+			var output = unit(context.derive(entry)).output
 
-			outputs.push(await outcome.output)
-		}
+			stream_to(output, s)
 
-		return outputs
+			return output
+		})
+		.delay(0) /* defer */
+		.finally(() => s.end(true))
+
+		return s
 	})
 
 	return Glob(glob, each, options)
