@@ -36,7 +36,8 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 
 	return Unit((_, context) =>
 	{
-		var s = stream()
+		/* @flow-off */
+		var s /* :flyd$Stream<$out> */ = stream()
 
 		resolve(unroll(context, glob))
 		.then(glob =>
@@ -68,7 +69,8 @@ Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 {
 	var each = Unit((entries, context) =>
 	{
-		var s = stream()
+		/* @flow-off */
+		var s /* :flyd$Stream<$out> */ = stream()
 
 		map(entries, entry =>
 		{
