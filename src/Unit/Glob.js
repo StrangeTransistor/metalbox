@@ -10,7 +10,6 @@ var assign = Object.assign
 import { find } from 'globule'
 
 import Promise from 'bluebird'
-var resolve = Promise.resolve
 var map = Promise.mapSeries
 
 import { stream } from 'flyd'
@@ -39,7 +38,7 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 		/* @flow-off */
 		var s /* :flyd$Stream<$out> */ = stream()
 
-		resolve(unroll(context, glob))
+		unroll(context, glob)
 		.then(glob =>
 		{
 			glob = [].concat(glob)
