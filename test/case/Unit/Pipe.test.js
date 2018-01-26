@@ -158,4 +158,51 @@ describe('Pipe / Unit.pipe', () =>
 		expect(await r).eq(error)
 		expect(await buffer).deep.eq([ 3, 4, error ])
 	})
+
+	it('(stream u1).pipe(u2 Error)', async () =>
+	{
+		var error = new Error('e')
+
+		var buffer_spy = []
+
+		var u1 = Unit(() =>
+		{
+			var s = stream(1)
+
+			/* eslint-disable max-nested-callbacks */
+			delay(50)
+			.then(() => s(2))
+			.delay(50)
+			.then(() => s(3))
+
+			s.map(v => buffer_spy.push(v))
+			/* eslint-enable max-nested-callbacks */
+
+			return s
+		})
+
+		var u2 = Unit(input =>
+		{
+			if (input === 2)
+			{
+				throw error
+			}
+
+			return input
+		})
+
+		var u = u1.pipe(u2)
+		var context = Context(null)
+		var outcome = u(context)
+
+		/* @flow-off */
+		var buffer = concat(outcome.stream)
+		var r = outcome.output.then(
+		()  => expect(false).true,
+		(e) => e)
+
+		expect(await r).eq(error)
+		expect(await buffer).deep.eq([ 1, error ])
+		expect(buffer_spy).deep.eq([ 1, 2 ])
+	})
 })
