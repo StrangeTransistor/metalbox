@@ -52,6 +52,7 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 			var a = alive(outcome.stream || outcome.output)
 			on(s, a)
 			on(s.end, a.end)
+			// on(() => a.end() || a.end(true), s.end)
 		})
 
 		return s
@@ -73,6 +74,14 @@ Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 
 		map(entries, entry =>
 		{
+			// TODO: investigate that
+			/*
+			if (s.end())
+			{
+				return
+			}
+			*/
+
 			// TODO: stream in stream
 			var output = unit(context.derive(entry)).output
 
