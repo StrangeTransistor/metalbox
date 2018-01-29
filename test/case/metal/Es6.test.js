@@ -9,6 +9,8 @@ import compare from 'src/compare'
 import Context from 'src/Context'
 
 import Glob from 'src/Unit/Glob'
+import Watch from 'src/Unit/Watch'
+
 import Rollup from 'src/Unit/Rollup'
 import { Cjs } from 'src/Unit/Rollup'
 
@@ -25,30 +27,53 @@ describe('Es6', () =>
 	var es6_org = origin('es6')
 	var es6_cl  = collate('deflow')
 
-	it('Rollup(flow)', async () =>
+	function R (src, dst)
 	{
-		var tm = tmp()
-
 		var plugins =
 		[
 			deflow(),
 		]
 
-		var unit = Rollup.Entry(
+		return Rollup.Entry(
 		{
 			external: true,
 			plugins,
 		})
-		.pipe(Rebase(es6_org(), tm()))
+		.pipe(Rebase(src(), dst()))
 		.pipe(Cjs())
 		.pipe(Outlander())
 		.pipe(Emptish())
 		.pipe(Iop())
 		.pipe(File.Entry())
+	}
 
-		var glob = Glob.Each(es6_org('**/*.js'), unit)
+	it('Rollup(flow)', async () =>
+	{
+		var tm = tmp()
+
+		var glob = Glob.Each(es6_org('**/*.js'), R(es6_org, tm))
 
 		await glob(Context(null)).output
+
+		compare(es6_cl(), tm())
+	})
+
+	it('Rollup(flow) Watch', async () =>
+	{
+		var tm = tmp()
+
+		var watch = Watch(es6_org('**/*.js'), R(es6_org, tm))
+
+		var outcome = watch(Context(null))
+
+		setTimeout(() =>
+		{
+			/* @flow-off */
+			outcome.stream.end(true)
+		}
+		, 200)
+
+		await outcome.output
 
 		compare(es6_cl(), tm())
 	})
