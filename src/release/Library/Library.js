@@ -16,6 +16,6 @@ module.exports = function Library /* ::<Env: EnvRelease> */ ()
 		Package(),
 		rollup.Prod(),
 		rollup.Types(),
-		Other()
+		Other(),
 	])
 }

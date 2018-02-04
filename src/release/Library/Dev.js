@@ -1,7 +1,8 @@
 /* @flow */
 
-var Release = require('../../artifact/Release')
-var Esc = require('../../artifact/Esc')
+var Release  = require('../../artifact/Release')
+var Parallel = require('../../artifact/Parallel')
+var Esc      = require('../../artifact/Esc')
 
 var Manifest = require('../metalbucket/Manifest')
 var Package  = require('./Package')
@@ -16,7 +17,10 @@ module.exports = function Library /* ::<Env: EnvRelease> */ ()
 		Manifest(),
 		Package(),
 		rollup.Types(),
-		Other(),
-		Esc(rollup.Watch())
+		Esc(Parallel(
+		[
+			rollup.Watch(),
+			Other.Watch(),
+		]))
 	])
 }

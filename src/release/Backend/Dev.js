@@ -9,6 +9,7 @@ var Package  = require('./Package')
 var json     = require('./json')
 var rollup   = require('./rollup')
 var Serve    = require('../metalbucket/Serve')
+var Other    = require('./Other')
 
 var Esc = require('../../artifact/Esc')
 
@@ -28,7 +29,8 @@ module.exports = function Backend /* ::<Env: EnvBackend> */ ()
 		[
 			rollup.Watch(),
 			json.Watch(),
-			Serve()
+			Other.Watch(),
+			Serve(),
 		])),
 	]))
 }

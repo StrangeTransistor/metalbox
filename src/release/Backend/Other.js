@@ -10,16 +10,8 @@ var Copy  = require('../../artifact/Copy')
 
 var glob =
 [
-	'**/*.json',
-	'**/*.hjson',
-
 	'**/*.md',
 
-	'*license*',
-	'*LICENSE*',
-	'*License*',
-
-	'!package.json',
 	'!coverage/**',
 
 	'!test/**',

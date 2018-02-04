@@ -7,6 +7,7 @@ var Manifest = require('../metalbucket/Manifest')
 var Package  = require('./Package')
 var json     = require('./json')
 var rollup   = require('./rollup')
+var Other    = require('./Other')
 
 var defaults =
 {
@@ -22,5 +23,6 @@ module.exports = function Backend /* ::<Env: EnvBackend> */ ()
 		Package(),
 		json.Prod(),
 		rollup.Prod(),
+		Other(),
 	]))
 }
