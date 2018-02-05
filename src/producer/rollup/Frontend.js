@@ -28,6 +28,7 @@ module.exports = function Rollup ()
 {
 	var plugins_common =
 	[
+		'#flow',
 		globals(),
 		'#include',
 		builtins(),
@@ -44,7 +45,6 @@ module.exports = function Rollup ()
 		json(),
 		'#pug',
 		'#virtual',
-		'#flow',
 	]
 
 	var plugins_ts = plugins_common
