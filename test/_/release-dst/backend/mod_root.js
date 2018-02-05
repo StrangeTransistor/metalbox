@@ -9,6 +9,6 @@ var Rootpath = _interopDefault(require('rootpath'));
 var mod_root = () =>
 {
 	return Rootpath(__dirname)
-};
+}
 
 module.exports = mod_root;

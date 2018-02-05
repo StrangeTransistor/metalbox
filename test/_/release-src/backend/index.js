@@ -5,12 +5,14 @@ import os from 'os'
 import mod_rootpath from './mod_root'
 var rootpath = mod_rootpath()
 
-0 && console.log(rootpath())
-0 && console.log(os.arch())
+function so () { return 1 - 1 }
+
+so() && console.log(rootpath())
+so() && console.log(os.arch())
 
 import other_dirname from './dir/other-dirname'
 
-0 && console.log(other_dirname)
+so() && console.log(other_dirname)
 
 export default (argv: string[]) =>
 {

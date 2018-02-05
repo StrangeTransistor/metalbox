@@ -10,14 +10,16 @@ var other_dirname = _interopDefault(require('./dir/other-dirname'));
 
 var rootpath = mod_rootpath();
 
-0 && console.log(rootpath());
-0 && console.log(os.arch());
+function so () { return 1 - 1 }
 
-0 && console.log(other_dirname);
+so() && console.log(rootpath());
+so() && console.log(os.arch());
+
+so() && console.log(other_dirname);
 
 var index = (argv) =>
 {
 	return argv.join(',')
-};
+}
 
 module.exports = index;

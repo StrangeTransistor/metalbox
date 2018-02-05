@@ -1,7 +1,9 @@
 (function () {
 'use strict';
 
-var metalbox = {"dev":true};
+var metalbox = {"dev":true}
+
+function so () { return 1 - 1 }
 
 var arrow3 = () => 3;
 
@@ -12,10 +14,9 @@ function method (...args)
 	return args
 }
 
-// eslint-disable-next-line no-unused-vars
 let { x, y } = { x: 1, y: 2 };
 
-0 && console.log(x, y);
+so() && console.log(x, y);
 
 var some = "value";
 var other_json = {
@@ -25,9 +26,9 @@ var other_json = {
 var other_mod = () =>
 {
 	console.log('other mod');
-};
+}
 
-var throttle = function( fn, timing=200 ) {
+function throttle( fn, timing=200 ) {
 
     var timer;
 
@@ -39,11 +40,9 @@ var throttle = function( fn, timing=200 ) {
 
     };
 
-};
+}
 
 var pug = (function(exports){
-  'use strict';
-
   var pug_has_own_property = Object.prototype.hasOwnProperty;
 
   /**
@@ -300,9 +299,10 @@ var pug = (function(exports){
   return exports
 })({});
 
-var template = function(locals) {var pug_html = "", pug_mixins = {}, pug_interp;var pug_debug_filename, pug_debug_line;try {var pug_debug_sources = {};
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;var pug_debug_filename, pug_debug_line;try {var pug_debug_sources = {};
 var locals_for_with = (locals || {});(function (data) {
 pug_mixins["Mixin"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Cspan class=\"mixin\"\u003E";
 pug_html = pug_html + "mixin\u003C\u002Fspan\u003E";
 };
@@ -311,39 +311,41 @@ pug_html = pug_html + "Pug template\u003C\u002Fp\u003E";
 pug_html = pug_html + "\u003Ca\u003E";
 pug_html = pug_html + (pug.escape(null == (pug_interp = data) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
 pug_mixins["Mixin"]();
-}.call(this,"data" in locals_for_with?locals_for_with.data:typeof data!=="undefined"?data:undefined));} catch (err) {pug.rethrow(err, pug_debug_filename, pug_debug_line, pug_debug_sources[pug_debug_filename]);}return pug_html;};
+}.call(this,"data" in locals_for_with?locals_for_with.data:typeof data!=="undefined"?data:undefined));} catch (err) {pug.rethrow(err, pug_debug_filename, pug_debug_line, pug_debug_sources[pug_debug_filename]);}return pug_html;}
 
 var template_static = "<p>Pug template</p><div class=\"dev\">true</div><span class=\"mixin\">mixin</span>";
 
 /*  */
 // bucket:index
 
-0 && console.log(metalbox.dev);
+function so$1 () { return 1 - 1 }
 
-0 && console.log('index');
+so$1() && console.log(metalbox.dev);
+
+so$1() && console.log('index');
 
 var arrow1 = () => 1;
 
-0 && console.log([ 1, 2, 3 ].map(arrow1));
+so$1() && console.log([ 1, 2, 3 ].map(arrow1));
 
-0 && console.log([ 1, 2, 3 ].map(arrow3));
-0 && console.log([ 4, 5, 6 ].map(method));
+so$1() && console.log([ 1, 2, 3 ].map(arrow3));
+so$1() && console.log([ 4, 5, 6 ].map(method));
 
 var other_mod_thr = throttle(other_mod);
-0 && other_mod_thr(other_json);
+so$1() && other_mod_thr(other_json);
 
 function lower (it)
 {
 	return it.toLowerCase()
 }
 
-0 && lower('ABC');
+so$1() && lower('ABC');
 
-0 && console.log(template(
+so$1() && console.log(template(
 {
 	data: 'data'
 }));
 
-0 && console.log(template_static);
+so$1() && console.log(template_static);
 
 }());
