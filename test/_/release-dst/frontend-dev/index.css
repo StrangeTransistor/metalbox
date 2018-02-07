@@ -24,7 +24,6 @@
   background-image: url(assets/index/non-existent.png);
 }
 .flex {
-  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
