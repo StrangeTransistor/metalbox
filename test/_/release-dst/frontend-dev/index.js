@@ -18,6 +18,15 @@ let { x, y } = { x: 1, y: 2 };
 
 so() && console.log(x, y);
 
+/*  */
+
+function mod2 ()
+{
+	console.log('mod2');
+}
+
+/*  */
+
 var some = "value";
 var other_json = {
 	some: some
@@ -330,6 +339,8 @@ so$1() && console.log([ 1, 2, 3 ].map(arrow1));
 
 so$1() && console.log([ 1, 2, 3 ].map(arrow3));
 so$1() && console.log([ 4, 5, 6 ].map(method));
+
+so$1() && mod2();
 
 var other_mod_thr = throttle(other_mod);
 so$1() && other_mod_thr(other_json);

@@ -14,6 +14,10 @@ import other_dirname from './dir/other-dirname'
 
 so() && console.log(other_dirname)
 
+import mod2 from './re-mod2'
+
+so() && mod2()
+
 export default (argv: string[]) =>
 {
 	return argv.join(',')

@@ -20,6 +20,10 @@ import { arrow3, method } from './mod'
 so() && console.log([ 1, 2, 3 ].map(arrow3))
 so() && console.log([ 4, 5, 6 ].map(method))
 
+import arrow4 from './re-mod2'
+
+so() && arrow4()
+
 import other_json from 'other-bucket/other.json'
 import other_mod  from 'other-bucket/other-mod'
 
