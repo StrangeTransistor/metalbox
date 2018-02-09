@@ -1,5 +1,7 @@
 /* @flow */
 
+import { inspect } from 'util'
+
 import Outcome from '../Outcome'
 
 import Pipe from './compose/Pipe'
@@ -44,5 +46,23 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 		return Fork(unit, side)
 	}
 
+	unit[inspect.custom] = function inspect ()
+	{
+		return { family: unit.family }
+	}
+
+	unit.family = Name()
+
 	return unit
+}
+
+
+import { generate as random } from 'randomstring'
+import pad from 'lodash/padStart'
+
+var n = 1
+var opts = { length: 3, capitalization: 'uppercase' }
+function Name ()
+{
+	return `${ pad(String(n++), 3, '0') }.${ random(opts) }`
 }
