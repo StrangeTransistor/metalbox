@@ -205,4 +205,57 @@ describe('Pipe / Unit.pipe', () =>
 		expect(await buffer).deep.eq([ 1, error ])
 		expect(buffer_spy).deep.eq([ 1, 2 ])
 	})
+
+	it('(stream u1).pipe(u2 Error).pipe(effect)', async () =>
+	{
+		var error = new Error('e')
+
+		var b2 = []
+		var b3 = []
+
+		var u1 = Unit(() =>
+		{
+			var s = stream(1)
+
+			/* eslint-disable max-nested-callbacks */
+			delay(25)
+			.then(() => s(2))
+			.delay(25)
+			.then(() => s(3))
+			.delay(25)
+			.then(() => s(4))
+			/* eslint-enable max-nested-callbacks */
+
+			return s
+		})
+
+		var u2 = Unit(async (input) =>
+		{
+			b2.push(input)
+
+			if (input === 3)
+			{
+				throw error
+			}
+
+			return (input * 10)
+		})
+
+		var u3 = Unit(async (input) =>
+		{
+			b3.push(input)
+		})
+
+		var u = u1.pipe(u2).pipe(u3)
+		var context = Context(null)
+
+		var outcome = u(context)
+		var r = await outcome.output.then(
+		()  => expect(false).true,
+		(e) => e)
+
+		expect(r).eq(error)
+		expect(b2).deep.eq([ 1, 2, 3 ])
+		expect(b3).deep.eq([ 10, 20 ])
+	})
 })
