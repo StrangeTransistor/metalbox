@@ -90,6 +90,7 @@ Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 			return output
 		})
 		.delay(0) /* defer */
+		// TODO: remove this when stream data cache/backpressure
 		.finally(() => s.end(true))
 
 		return s
