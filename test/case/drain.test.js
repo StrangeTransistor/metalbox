@@ -4,9 +4,9 @@ import { stream } from 'flyd'
 
 import { expect } from 'chai'
 
-import drain from 'src/drain'
-import { either } from 'src/drain'
-import { finalize } from 'src/drain'
+import drain from 'src/flyd/drain'
+import { either } from 'src/flyd/drain'
+import { finalize } from 'src/flyd/drain'
 
 describe('drain', () =>
 {

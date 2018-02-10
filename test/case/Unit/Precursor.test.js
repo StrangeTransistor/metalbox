@@ -7,7 +7,7 @@ var delay = Promise.delay
 
 import { stream } from 'flyd'
 
-import { concat } from 'src/drain'
+import { concat } from 'src/flyd/drain'
 
 import Unit from 'src/Unit'
 import Precursor from 'src/Unit/compose/Precursor'

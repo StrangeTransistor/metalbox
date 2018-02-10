@@ -7,7 +7,7 @@ import { expect } from 'chai'
 
 import origin from 'src/rootpath/origin'
 
-import { concat } from 'src/drain'
+import { concat } from 'src/flyd/drain'
 
 import Context from 'src/Context'
 

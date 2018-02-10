@@ -7,7 +7,7 @@ import { stream } from 'flyd'
 
 import { expect } from 'chai'
 
-import { concat } from 'src/drain'
+import { concat } from 'src/flyd/drain'
 
 import Context from 'src/Context'
 import Outcome from 'src/Outcome'
