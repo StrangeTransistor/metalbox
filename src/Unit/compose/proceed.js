@@ -5,7 +5,7 @@ var noop = () => {}
 import { on } from 'flyd'
 import { combine } from 'flyd'
 
-import stream_to from './stream-to'
+import stream_to from '../../flyd/stream-to'
 
 export default function proceed
 	/* ::<$prov: $Providers$Base, $medium, $medium_in, $out> */

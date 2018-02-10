@@ -14,8 +14,8 @@ var map = Promise.mapSeries
 
 import { stream } from 'flyd'
 import { on } from 'flyd'
-import stream_to from './compose/stream-to'
-import alive from './compose/alive'
+import stream_to from '../flyd/stream-to'
+import alive from '../flyd/alive'
 
 import unroll from '../unroll'
 
