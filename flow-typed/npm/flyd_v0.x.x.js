@@ -4,7 +4,7 @@
 declare class flyd$Stream<+T> {
   static val: T;
 
-  end(boolean): flyd$Stream<boolean>;
+  end(?boolean): flyd$Stream<boolean>;
   map<T, V>((T) => V): flyd$Stream<V>;
   ap<V>(flyd$Stream<V>): flyd$Stream<V>;
   of<V>(...values: V[]): flyd$Stream<V>;
