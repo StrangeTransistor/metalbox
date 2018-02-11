@@ -3,6 +3,8 @@
 import { stream } from 'flyd'
 import { on } from 'flyd'
 
+import turnoff from './turnoff'
+
 export default function backpressure /* ::<$value> */
 (
 	reactive /* :flyd$Stream<$value> */
@@ -15,6 +17,8 @@ export default function backpressure /* ::<$value> */
 
 	/* @flow-off */
 	var backpressured /* :flyd$Stream$Backpressure<$value> */ = stream()
+
+	turnoff(backpressured, reactive)
 
 	on(handle_end, reactive.end)
 	on(handle, reactive)

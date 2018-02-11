@@ -44,4 +44,18 @@ describe('backpressure', () =>
 		expect(b1).deep.eq([ 3, 'end' ])
 		expect(b2).deep.eq([ 1, 2, 3, 'end' ])
 	})
+
+	it('ends backforward', () =>
+	{
+		var s = stream()
+		var b = backpressure(s)
+
+		var has_ended = false
+
+		s.end.map(v => { has_ended = v })
+
+		b.end(true)
+
+		expect(has_ended).true
+	})
 })
