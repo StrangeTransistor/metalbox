@@ -19,7 +19,7 @@ describe('backpressure', () =>
 		var b1 = []
 		var b2 = []
 
-		var r = delay(25)
+		await delay(25)
 		.then(() => s(1))
 		.delay(25)
 		.then(() => s(2))
@@ -27,8 +27,6 @@ describe('backpressure', () =>
 		.then(() => s(3))
 		.delay(25)
 		.then(() => s.end(true))
-
-		await r
 
 		s.map(v => b1.push(v))
 		b.map(v => b2.push(v))
