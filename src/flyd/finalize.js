@@ -1,7 +1,8 @@
 /* @flow */
 
-import { on }  from 'flyd'
 import { combine } from 'flyd'
+
+import turnoff from './turnoff'
 
 export default function finalize /* ::<$value> */
 (
@@ -9,11 +10,11 @@ export default function finalize /* ::<$value> */
 )
 	/* :flyd$Stream<$value> */
 {
-	var stream_f = combine(handle, [ stream ])
+	var stream_finalized = combine(handle, [ stream ])
 
-	on(stream.end, stream_f.end)
+	turnoff(stream_finalized, stream)
 
-	return stream_f
+	return stream_finalized
 
 	function handle (stream, self)
 	{
