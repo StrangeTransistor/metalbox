@@ -93,6 +93,6 @@ describe('Rollup', () =>
 
 		await unit(context_null).output
 
-		compare(collate('rollup/es6-external')(), tm())
+		compare(collate('rollup/cjs-external')(), tm())
 	})
 })
