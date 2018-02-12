@@ -12,22 +12,26 @@ import backpressure from 'src/flyd/backpressure'
 
 describe('backpressure', () =>
 {
+	function track_pair (s, b)
+	{
+		var bs = []
+		var bb = []
+
+		s.map(value => bs.push(value))
+		b.map(value => bb.push(value))
+
+		s.end.map(() => bs.push('end'))
+		b.end.map(() => bb.push('end'))
+
+		return [ bs, bb ]
+	}
+
 	it('stores data', async () =>
 	{
 		var s = stream()
 		var b = backpressure(s)
 
-		var b_s1 = []
-		var b_b1 = []
-
-		var b_s2 = []
-		var b_b2 = []
-
-		s.map(v => b_s1.push(v))
-		b.map(v => b_b1.push(v))
-
-		s.end.map(() => b_s1.push('end'))
-		b.end.map(() => b_b1.push('end'))
+		var [ b_s1, b_b1 ] = track_pair(s, b)
 
 		await delay(25)
 		.then(() => s(1))
@@ -38,11 +42,7 @@ describe('backpressure', () =>
 		.delay(25)
 		.then(() => s.end(true))
 
-		s.map(v => b_s2.push(v))
-		b.map(v => b_b2.push(v))
-
-		s.end.map(() => b_s2.push('end'))
-		b.end.map(() => b_b2.push('end'))
+		var [ b_s2, b_b2 ] = track_pair(s, b)
 
 		b.continue()
 		b.continue()
@@ -61,17 +61,7 @@ describe('backpressure', () =>
 		var s = stream(0)
 		var b = backpressure(s)
 
-		var b_s1 = []
-		var b_b1 = []
-
-		var b_s2 = []
-		var b_b2 = []
-
-		s.map(v => b_s1.push(v))
-		b.map(v => b_b1.push(v))
-
-		s.end.map(() => b_s1.push('end'))
-		b.end.map(() => b_b1.push('end'))
+		var [ b_s1, b_b1 ] = track_pair(s, b)
 
 		await delay(25)
 		.then(() => s(1))
@@ -82,11 +72,7 @@ describe('backpressure', () =>
 		.delay(25)
 		.then(() => s.end(true))
 
-		s.map(v => b_s2.push(v))
-		b.map(v => b_b2.push(v))
-
-		s.end.map(() => b_s2.push('end'))
-		b.end.map(() => b_b2.push('end'))
+		var [ b_s2, b_b2 ] = track_pair(s, b)
 
 		b.continue()
 		b.continue()
