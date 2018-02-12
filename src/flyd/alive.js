@@ -30,5 +30,7 @@ export default function /* ::<$value> */
 	/* @flow-off */
 	var s /* :flyd$Stream<$value> */ = stream()
 
-	return stream_to(pv, s, true)
+	stream_to(pv, s, true)
+
+	return s
 }

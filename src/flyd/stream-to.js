@@ -6,9 +6,9 @@ export default function stream_to /* ::<$value> */
 	stream   /* :flyd$Stream<$value> */,
 	finalize /* ::?: boolean */
 )
-	/* :flyd$Stream<$value> */
+	/* :Promise<void> */
 {
-	value.catch(error =>
+	return value.catch(error =>
 	{
 		if (! (error instanceof Error)) error = Error(error)
 
@@ -22,6 +22,4 @@ export default function stream_to /* ::<$value> */
 			stream.end(true)
 		}
 	})
-
-	return stream
 }

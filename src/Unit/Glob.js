@@ -85,9 +85,7 @@ Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 			// TODO: stream in stream
 			var output = unit(context.derive(entry)).output
 
-			stream_to(output, s)
-
-			return output
+			return stream_to(output, s)
 		})
 		.delay(0) /* defer */
 		// TODO: remove this when stream data cache/backpressure
