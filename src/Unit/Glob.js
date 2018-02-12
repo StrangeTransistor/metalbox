@@ -75,14 +75,6 @@ Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 
 		map(entries, entry =>
 		{
-			// TODO: investigate that
-			/*
-			if (s.end())
-			{
-				return
-			}
-			*/
-
 			// TODO: stream in stream
 			var output = unit(context.derive(entry)).output
 

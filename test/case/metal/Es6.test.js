@@ -14,7 +14,7 @@ import Watch from 'src/Unit/Watch'
 import Rollup from 'src/Unit/Rollup'
 import { Cjs } from 'src/Unit/Rollup'
 
-// import Unit from 'src/Unit'
+import Unit from 'src/Unit'
 import Rebase from 'src/Unit/Rebase'
 import File from 'src/Unit/File'
 
@@ -28,7 +28,7 @@ describe('Es6', () =>
 	var es6_org = origin('es6')
 	var es6_cl  = collate('deflow')
 
-	// var Identity = Unit(x => x)
+	var Identity = Unit(x => x)
 
 	function R (src, dst)
 	{
@@ -61,27 +61,17 @@ describe('Es6', () =>
 		compare(es6_cl(), tm())
 	})
 
-	/* TODO: requires stream data cache/backpressure */
-	// it('Rollup(flow) pipe', async () =>
-	// {
-	// 	var tm = tmp()
+	it('Rollup(flow) pipe', async () =>
+	{
+		var tm = tmp()
 
-	// 	var glob = Glob.Each(es6_org('**/*.js'), Identity)
-	// 	var unit = glob.pipe(R(es6_org, tm))
+		var glob = Glob.Each(es6_org('**/*.js'), Identity)
+		var unit = glob.pipe(R(es6_org, tm))
 
-	// 	var outcome = unit(Context(null))
+		await unit(Context(null)).output
 
-	// 	setTimeout(() =>
-	// 	{
-	// 		/* @flow-off */
-	// 		outcome.stream.end(true)
-	// 	}
-	// 	, 500)
-
-	// 	await outcome.output
-
-	// 	compare(es6_cl(), tm())
-	// })
+		compare(es6_cl(), tm())
+	})
 
 	it('Rollup(flow) Watch', async () =>
 	{
