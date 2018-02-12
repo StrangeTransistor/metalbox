@@ -17,6 +17,7 @@ import { on } from 'flyd'
 
 import stream_to from '../flyd/stream-to'
 import alive from '../flyd/alive'
+import turnoff from '../flyd/turnoff'
 
 import unroll from '../unroll'
 
@@ -52,8 +53,9 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 
 			var a = alive(outcome.stream || outcome.output)
 			on(s, a)
-			on(s.end, a.end)
-			// on(() => a.end() || a.end(true), s.end)
+
+			turnoff(a, s)
+			turnoff(s, a)
 		})
 
 		return s
@@ -75,6 +77,11 @@ Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 
 		map(entries, entry =>
 		{
+			if (s.end())
+			{
+				return
+			}
+
 			// TODO: stream in stream
 			var output = unit(context.derive(entry)).output
 
