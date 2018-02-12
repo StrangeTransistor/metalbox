@@ -2,11 +2,11 @@
 
 var noop = () => {}
 
-import { on } from 'flyd'
 import { combine } from 'flyd'
 
 import stream_to from '../../flyd/stream-to'
 import backpressure from '../../flyd/backpressure'
+import turnoff from '../../flyd/turnoff'
 
 export default function proceed
 	/* ::<$prov: $Providers$Base, $medium, $medium_in, $out> */
@@ -45,7 +45,7 @@ export default function proceed
 		}
 	}
 
-	on(prev.end, stream.end)
+	turnoff(stream, prev)
 	// out2.stream +
 
 	prev_out.output.catch(noop)
