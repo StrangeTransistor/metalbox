@@ -5,13 +5,13 @@ var noop = () => {}
 import bluebird from 'bluebird'
 var join = bluebird.join
 
-import { on } from 'flyd'
 import { combine } from 'flyd'
 
 import Unit from '../Unit'
 
 import finalize from '../../flyd/finalize'
 import alive from '../../flyd/alive'
+import turnoff from '../../flyd/turnoff'
 
 export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
 (
@@ -58,8 +58,8 @@ export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
 				}
 			}
 
-			on(s1.end, stream.end)
-			on(s2.end, stream.end)
+			turnoff(stream, s1)
+			turnoff(stream, s2)
 
 			out1.output.catch(noop)
 			out2.output.catch(noop)
