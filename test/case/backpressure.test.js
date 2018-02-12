@@ -87,6 +87,38 @@ describe('backpressure', () =>
 		expect(b_b2).deep.eq([ 0, 1, 2, 3, 'end' ])
 	})
 
+	it('no emit when nothing to continue with', async () =>
+	{
+		var s = stream()
+		var b = backpressure(s)
+
+		var [ b_s1, b_b1 ] = track_pair(s, b)
+
+		await delay(25)
+		.then(() => s(1))
+		.delay(25)
+		.then(() => s(2))
+		.delay(25)
+		.then(() => s(3))
+		.delay(25)
+		.then(() => s.end(true))
+
+		var [ b_s2, b_b2 ] = track_pair(s, b)
+
+		b.continue()
+		b.continue()
+		b.continue()
+		b.continue()
+		b.continue() /* no data */
+		b.continue() /* no data */
+
+		expect(b_s1).deep.eq([ 1, 2, 3, 'end' ])
+		expect(b_b1).deep.eq([ 1, 2, 3, 'end' ])
+
+		expect(b_s2).deep.eq([ 3, 'end' ])
+		expect(b_b2).deep.eq([ 1, 2, 3, 'end' ])
+	})
+
 	it('ends backforward', () =>
 	{
 		var s = stream()

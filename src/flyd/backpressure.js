@@ -58,6 +58,10 @@ export default function backpressure /* ::<$value> */
 
 	backpressured.continue = () =>
 	{
+		if (! backpressured)
+		{
+			return
+		}
 		if (buffer.length)
 		{
 			var value = buffer.shift()
