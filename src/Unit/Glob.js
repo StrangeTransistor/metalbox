@@ -14,6 +14,7 @@ var map = Promise.mapSeries
 
 import { stream } from 'flyd'
 import { on } from 'flyd'
+
 import stream_to from '../flyd/stream-to'
 import alive from '../flyd/alive'
 
@@ -87,9 +88,7 @@ Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
 
 			return stream_to(output, s)
 		})
-		.delay(0) /* defer */
-		// TODO: remove this when stream data cache/backpressure
-		.finally(() => s.end(true))
+		.then(() => s.end(true))
 
 		return s
 	})

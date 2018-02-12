@@ -6,6 +6,7 @@ import { on } from 'flyd'
 import { combine } from 'flyd'
 
 import stream_to from '../../flyd/stream-to'
+import backpressure from '../../flyd/backpressure'
 
 export default function proceed
 	/* ::<$prov: $Providers$Base, $medium, $medium_in, $out> */
@@ -16,9 +17,14 @@ export default function proceed
 )
 {
 	/* @flow-off */
-	var stream = combine(handle, [ prev_out.stream ])
+	var prev_stream /* :flyd$Stream<$medium> */ = prev_out.stream
+	var prev = backpressure(prev_stream)
 
-	function handle (prev, self)
+	var stream = combine(handle, [ prev ])
+
+	prev.continue()
+
+	function handle (_, self)
 	{
 		var value = prev()
 
@@ -32,13 +38,14 @@ export default function proceed
 			context_live.live = true
 
 			/* TODO: stream in stream */
-			stream_to(next(context_live).output, self)
+			var output = next(context_live).output
+
+			stream_to(output, self).then(prev.continue)
 			// out2.stream +
 		}
 	}
 
-	/* @flow-off */
-	on(prev_out.stream.end, stream.end)
+	on(prev.end, stream.end)
 	// out2.stream +
 
 	prev_out.output.catch(noop)
