@@ -5,7 +5,7 @@ import { isStream as is_stream } from 'flyd'
 import Promise from 'bluebird'
 var resolve = Promise.resolve
 
-import { finalize } from '../flyd/drain'
+import finalize from '../flyd/finalize'
 import { either as drain } from '../flyd/drain'
 
 export default function capture /* ::<$out> */

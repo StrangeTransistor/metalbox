@@ -10,7 +10,7 @@ import { combine } from 'flyd'
 
 import Unit from '../Unit'
 
-import { finalize } from '../../flyd/drain'
+import finalize from '../../flyd/finalize'
 import alive from '../../flyd/alive'
 
 export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
