@@ -68,7 +68,7 @@ describe('Glob', () =>
 	{
 		var unit = Unit(_ =>
 		{
-			return delay(100, org.relative(_.filename))
+			return delay(25, org.relative(_.filename))
 		})
 
 		var glob = Glob.Each(globexpr, unit)
@@ -111,7 +111,7 @@ describe('Glob', () =>
 
 		var glob = Glob.Each(globexpr, Unit(async (input) =>
 		{
-			await delay(250)
+			await delay(25)
 
 			return b1.push(org.relative(input.filename))
 		}))

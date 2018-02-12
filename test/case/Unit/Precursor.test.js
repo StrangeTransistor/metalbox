@@ -96,12 +96,12 @@ describe('Precursor', () =>
 			var s = stream({ x: 1 })
 
 			// eslint-disable-next-line max-nested-callbacks
-			delay(50).then(() =>
+			delay(25).then(() =>
 			{
 				s({ x: 2 })
 				s({ x: 3 })
 			})
-			.delay(50)
+			.delay(25)
 			// eslint-disable-next-line max-nested-callbacks
 			.then(() =>
 			{
@@ -141,16 +141,16 @@ describe('Precursor', () =>
 
 			var s = stream({ x: 1 })
 
-			delay(50).then(() =>
+			delay(25).then(() =>
 			{
 				s({ x: 2 })
 			})
-			.delay(50)
+			.delay(25)
 			.then(() =>
 			{
 				s(error)
 			})
-			.delay(50)
+			.delay(25)
 			.then(() =>
 			{
 				/* check for dup */

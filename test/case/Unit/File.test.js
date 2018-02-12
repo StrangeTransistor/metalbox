@@ -70,8 +70,8 @@ describe('File', () =>
 		var tm = tmp()
 
 		var unit = File(
-			      () => delay(100, tm('abc')),
-			async () => delay(200, typical_content)
+			      () => delay(25, tm('abc')),
+			async () => delay(50, typical_content)
 		)
 
 		await unit(context_null).output
@@ -136,8 +136,8 @@ describe('File.Copy', () =>
 
 		var unit = File(tm('def'), typical_content)
 		.pipe(File.Copy(
-			      () => delay(200, tm('def')),
-			async () => delay(100, tm('abc'))
+			      () => delay(50, tm('def')),
+			async () => delay(25, tm('abc'))
 		))
 
 		await unit(context_null).output
@@ -157,8 +157,8 @@ describe('File.Move', () =>
 
 		var unit = File(tm('def'), typical_content)
 		.pipe(File.Move(
-			      () => delay(200, tm('def')),
-			async () => delay(100, tm('abc'))
+			      () => delay(50, tm('def')),
+			async () => delay(25, tm('abc'))
 		))
 
 		await unit(context_null).output

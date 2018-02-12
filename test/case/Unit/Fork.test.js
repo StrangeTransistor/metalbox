@@ -101,7 +101,7 @@ describe('Fork', () =>
 				s(2)
 				s(3)
 			})
-			.delay(50)
+			.delay(25)
 			// eslint-disable-next-line max-nested-callbacks
 			.then(() =>
 			{
