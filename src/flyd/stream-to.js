@@ -1,10 +1,11 @@
 /* @flow */
 
+var noop = () => {}
+
 export default function stream_to /* ::<$value> */
 (
-	value    /* :Promise<$value> */,
-	stream   /* :flyd$Stream<$value> */,
-	finalize /* ::?: boolean */
+	value  /* :Promise<$value> */,
+	stream /* :flyd$Stream<$value> */
 )
 	/* :Promise<void> */
 {
@@ -15,11 +16,5 @@ export default function stream_to /* ::<$value> */
 		return error
 	})
 	.then(stream)
-	.then(() =>
-	{
-		if (finalize)
-		{
-			stream.end(true)
-		}
-	})
+	.then(noop)
 }

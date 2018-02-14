@@ -25,12 +25,14 @@ export default function /* ::<$value> */
 		return (value /* :flyd$Stream<$value> */)
 	}
 
-	var pv = resolve(value)
-
 	/* @flow-off */
 	var s /* :flyd$Stream<$value> */ = stream()
 
-	stream_to(pv, s, true)
+	stream_to(resolve(value), s)
+	.then(() =>
+	{
+		s.end(true)
+	})
 
 	return s
 }
