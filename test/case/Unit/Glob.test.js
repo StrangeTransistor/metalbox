@@ -137,8 +137,7 @@ describe('Glob', () =>
 		expect(await r).eq(error)
 		expect(await buffer).deep.eq([ 1, error ])
 
-		// not guaranteed (depend on async timing), but anyway:
 		expect(b1.sort()).deep.eq([ '1.ext', '2.ext' ])
-		expect(b2.sort()).deep.eq([ 1 ].sort())
+		expect(b2.sort()).deep.eq([ 1 ])
 	})
 })
