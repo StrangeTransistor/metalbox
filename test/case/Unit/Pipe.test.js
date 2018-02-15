@@ -244,17 +244,23 @@ describe('Pipe / Unit.pipe', () =>
 		var u3 = Unit(async (input) =>
 		{
 			b3.push(input)
+
+			return (input * 10)
 		})
 
 		var u = u1.pipe(u2).pipe(u3)
 		var context = Context(null)
 
 		var outcome = u(context)
-		var r = await outcome.output.then(
+
+		/* @flow-off */
+		var b = concat(outcome.stream)
+		var r = outcome.output.then(
 		()  => expect(false).true,
 		(e) => e)
 
-		expect(r).eq(error)
+		expect(await r).eq(error)
+		expect(await b).deep.eq([ 100, 200, error ])
 		expect(b2).deep.eq([ 1, 2, 3 ])
 		expect(b3).deep.eq([ 10, 20 ])
 	})
