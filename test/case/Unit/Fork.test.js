@@ -256,4 +256,46 @@ describe('Fork', () =>
 			error,
 		])
 	})
+
+	it('(stream payload) pipe to (fork u1 u2)', async () =>
+	{
+		var s = stream(1)
+
+		var p = Unit(() => s)
+
+		var u1 = Unit(n => n + 1)
+		var u2 = Unit(n => n * 2)
+
+		delay(25).then(() =>
+		{
+			s(2)
+		})
+		.delay(25).then(() =>
+		{
+			s(3)
+		})
+		.delay(25).then(() =>
+		{
+			s(4)
+		})
+		.delay(25).then(() =>
+		{
+			s.end(true)
+		})
+
+		var u = p.pipe(u1.fork(u2))
+		var outcome = u(Context(null))
+
+		/* @flow-off */
+		var buffer = concat(outcome.stream)
+		var output = outcome.output
+
+		expect(await output).deep.eq([ 5, 8 ])
+		expect(await buffer).deep.eq([
+			[ 2, 2 ],
+			[ 3, 4 ],
+			[ 4, 6 ],
+			[ 5, 8 ],
+		])
+	})
 })
