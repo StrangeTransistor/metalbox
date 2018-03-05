@@ -147,11 +147,15 @@ describe('Fork', () =>
 		})
 		.delay(25).then(() =>
 		{
-			s2.end(true)
+			s1.end(true)
 		})
 		.delay(25).then(() =>
 		{
-			s1.end(true)
+			s2(6)
+		})
+		.delay(25).then(() =>
+		{
+			s2.end(true)
 		})
 
 		var u1 = Unit(() => s1)
@@ -165,12 +169,13 @@ describe('Fork', () =>
 		var buffer = concat(outcome.stream)
 		var output = outcome.output
 
-		expect(await output).deep.eq([ 5, 4 ])
+		expect(await output).deep.eq([ 5, 6 ])
 		expect(await buffer).deep.eq([
 			[ 1, 2 ],
 			[ 3, 2 ],
 			[ 3, 4 ],
 			[ 5, 4 ],
+			[ 5, 6 ],
 		])
 	})
 
