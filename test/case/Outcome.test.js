@@ -2,6 +2,7 @@
 
 import Promise from 'bluebird'
 var resolve = Promise.resolve
+var delay   = Promise.delay
 
 import { stream } from 'flyd'
 
@@ -117,5 +118,43 @@ describe('Outcome', () =>
 		(e) => e)
 
 		expect(r).eq(error)
+	})
+
+	it('Outcome timing', async () =>
+	{
+		var outcome_never = Outcome(new Promise(() => {}))
+
+		expect_hrtime(outcome_never.time.start)
+		expect(outcome_never.time.stop).eq(null)
+		expect(outcome_never.time.taken).eq(null)
+
+		var outcome = Outcome(delay(25))
+
+		await outcome.output
+
+		var time = outcome.time
+
+		expect_hrtime(time.start)
+
+		/* @flow-off */
+		expect_hrtime((time.stop  /* :$Hrtime */))
+		/* @flow-off */
+		expect_hrtime((time.taken /* :$Hrtime */))
+
+		/* @flow-off */
+		expect(time.taken[0]).eq(0)
+		/* @flow-off */
+		expect(time.taken[1] > 25e6).true
+		/* @flow-off */
+		expect(time.taken[1] < 30e6).true
+
+
+		function expect_hrtime (time /* :$Hrtime */)
+		{
+			expect(time).an('array')
+			expect(time.length).eq(2)
+			expect(time[0]).a('number')
+			expect(time[1]).a('number')
+		}
 	})
 })
