@@ -144,7 +144,7 @@ describe('Outcome', () =>
 		/* @flow-off */
 		expect(time.taken[0]).eq(0)
 		/* @flow-off */
-		expect(time.taken[1] > 25e6).true
+		expect(time.taken[1] > 10e6).true
 		/* @flow-off */
 		expect(time.taken[1] < 30e6).true
 
