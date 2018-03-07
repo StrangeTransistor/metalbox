@@ -3,7 +3,6 @@
 var time = (...v) => process.hrtime(...v)
 
 import capture from './capture'
-import invoke  from './invoke'
 
 export default function Outcome /* ::<$out> */
 (
@@ -36,5 +35,3 @@ export default function Outcome /* ::<$out> */
 
 	return outcome
 }
-
-Outcome.invoke = invoke

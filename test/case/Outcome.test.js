@@ -11,7 +11,9 @@ import { expect } from 'chai'
 import { concat } from 'src/flyd/drain'
 
 import Context from 'src/Context'
+
 import Outcome from 'src/Outcome'
+import invoke from 'src/Outcome/invoke'
 
 describe('Outcome', () =>
 {
@@ -91,9 +93,9 @@ describe('Outcome', () =>
 		expect(await buffer).deep.eq([ 1, error ])
 	})
 
-	it('Outcome.invoke', async () =>
+	it('Outcome/invoke', async () =>
 	{
-		var outcome = Outcome.invoke(input => input, Context(17))
+		var outcome = invoke(input => input, Context(17))
 
 		expect(outcome).property('stream')
 		expect(outcome).property('output')
@@ -103,11 +105,11 @@ describe('Outcome', () =>
 		expect(output).eq(17)
 	})
 
-	it('Outcome.invoke captures throw', async () =>
+	it('Outcome/invoke captures throw', async () =>
 	{
 		var error = new Error('e')
 
-		var outcome = Outcome.invoke(() =>
+		var outcome = invoke(() =>
 		{
 			throw error
 		}

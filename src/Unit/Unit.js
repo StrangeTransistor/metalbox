@@ -2,7 +2,7 @@
 
 import { inspect } from 'util'
 
-import Outcome from '../Outcome'
+import invoke from '../Outcome/invoke'
 
 import Pipe from './compose/Pipe'
 import Precursor from './compose/Precursor'
@@ -16,7 +16,7 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 {
 	var unit = function (context)
 	{
-		return Outcome.invoke(fn, context)
+		return invoke(fn, context)
 	}
 
 	unit.pipe = function pipe /* ::<$out_next> */
