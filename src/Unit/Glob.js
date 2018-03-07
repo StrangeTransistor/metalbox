@@ -16,7 +16,7 @@ import { stream } from 'flyd'
 import { on } from 'flyd'
 
 import stream_to from '../flyd/stream-to'
-import alive from '../flyd/alive'
+import alive from '../Outcome/alive'
 import turnoff from '../flyd/turnoff'
 
 import unroll from '../unroll'
@@ -51,7 +51,7 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 			/* TODO: compose outcome */
 			var outcome = unit(context.derive(entries))
 
-			var a = alive(outcome.stream || outcome.output)
+			var a = alive(outcome)
 			on(s, a)
 
 			turnoff(a, s)

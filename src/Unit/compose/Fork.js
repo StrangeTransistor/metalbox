@@ -10,7 +10,7 @@ import { combine } from 'flyd'
 import Unit from '../Unit'
 
 import finalize from '../../flyd/finalize'
-import alive from '../../flyd/alive'
+import alive from '../../Outcome/alive'
 import turnoff from '../../flyd/turnoff'
 
 export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
@@ -27,8 +27,8 @@ export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
 
 		if (out1.stream || out2.stream)
 		{
-			var s1 = alive(out1.stream || out1.output)
-			var s2 = alive(out2.stream || out2.output)
+			var s1 = alive(out1)
+			var s2 = alive(out2)
 
 			s1 = finalize(s1)
 			s2 = finalize(s2)

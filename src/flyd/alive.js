@@ -1,9 +1,4 @@
 /* @flow */
-/* ::
-
-type Mixed<$value> = flyd$Stream<$value> | $Promisable<$value>
-
-*/
 
 import { isStream as is_stream } from 'flyd'
 import { stream } from 'flyd'
@@ -15,7 +10,7 @@ import stream_to from './stream-to'
 
 export default function /* ::<$value> */
 (
-	value /* :Mixed<$value> */
+	value /* :$Outcome$Value<$value> */
 )
 	/* :flyd$Stream<$value> */
 {
