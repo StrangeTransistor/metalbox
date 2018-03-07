@@ -13,20 +13,24 @@ import Watch from 'src/Unit/Watch'
 
 import Unit from 'src/Unit'
 import Rebase from 'src/Unit/Rebase'
+import Load from 'src/Unit/Load'
 import File from 'src/Unit/File'
 
 import Es5 from 'src/metal/Es5'
+import FlowDecl from 'src/metal/FlowDecl'
 
 describe('Es6', () =>
 {
 	var es6_org = origin('es6')
-	var es6_cl  = collate('deflow')
+
+	var es5_cl  = collate('es5')
+	var es5_flow_cl  = collate('es5-flow')
 
 	var Identity = Unit(x => x)
 
-	function Gen (src, dst)
+	function Gen (target, src, dst)
 	{
-		return Es5()
+		return target
 		.pipe(Rebase(src(), dst()))
 		.pipe(File.Entry())
 	}
@@ -35,11 +39,11 @@ describe('Es6', () =>
 	{
 		var tm = tmp()
 
-		var glob = Glob.Each(es6_org('**/*.js'), Gen(es6_org, tm))
+		var glob = Glob.Each(es6_org('**/*.js'), Gen(Es5(), es6_org, tm))
 
 		await glob(Context(null)).output
 
-		compare(es6_cl(), tm())
+		compare(es5_cl(), tm())
 	})
 
 	it('Rollup(flow) pipe', async () =>
@@ -47,18 +51,18 @@ describe('Es6', () =>
 		var tm = tmp()
 
 		var glob = Glob.Each(es6_org('**/*.js'), Identity)
-		var unit = glob.pipe(Gen(es6_org, tm))
+		var unit = glob.pipe(Gen(Es5(), es6_org, tm))
 
 		await unit(Context(null)).output
 
-		compare(es6_cl(), tm())
+		compare(es5_cl(), tm())
 	})
 
 	it('Rollup(flow) Watch', async () =>
 	{
 		var tm = tmp()
 
-		var watch = Watch(es6_org('**/*.js'), Gen(es6_org, tm))
+		var watch = Watch(es6_org('**/*.js'), Gen(Es5(), es6_org, tm))
 
 		var outcome = watch(Context(null))
 
@@ -71,6 +75,22 @@ describe('Es6', () =>
 
 		await outcome.output
 
-		compare(es6_cl(), tm())
+		compare(es5_cl(), tm())
+	})
+
+	it('Rollup(flow + flow files)', async () =>
+	{
+		var tm = tmp()
+
+		var js   = Gen(Es5(), es6_org, tm)
+		var flow = Gen(Load().pipe(FlowDecl()), es6_org, tm)
+
+		var unit = js.fork(flow)
+
+		var glob = Glob.Each(es6_org('**/*.js'), unit)
+
+		await glob(Context(null)).output
+
+		compare(es5_flow_cl(), tm())
 	})
 })
