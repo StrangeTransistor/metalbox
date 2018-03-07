@@ -13,4 +13,4 @@ export default function Entry /* ::<$content> */
 	}
 }
 
-Entry.Remove = /* ::( */ Symbol('Remove') /* :$Entry$Remove) */
+Entry.Remove = (Symbol('Remove') /* :$Entry$Remove */)

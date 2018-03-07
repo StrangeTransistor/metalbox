@@ -6,7 +6,7 @@ export default function Context /* :: <$in, $prov: $Providers$Base> */
 (
 	input     /* :$in   */,
 	/* @flow-off */
-	providers /* :$prov */ = /* :: (*/ {} /* :$Providers$Base ) */
+	providers /* :$prov */ = ({} /* :$Providers$Base */)
 )
 	/* :$Context<$in, $prov> */
 {
@@ -33,7 +33,7 @@ export default function Context /* :: <$in, $prov: $Providers$Base> */
 
 			derived.providers = context.providers
 
-			return /* :: ( */ derived /* :$Context<$d_in, $prov> ) */
+			return (derived /* :$Context<$d_in, $prov> */)
 		}
 	}
 
