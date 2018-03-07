@@ -19,7 +19,7 @@ import File from 'src/Unit/File'
 import Es5 from 'src/metal/Es5'
 import FlowDecl from 'src/metal/FlowDecl'
 
-describe('Es6', () =>
+describe('Es5', () =>
 {
 	var es6_org = origin('es6')
 
