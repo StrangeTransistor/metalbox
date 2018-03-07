@@ -1,6 +1,33 @@
 
 declare module 'fs-extra'
 {
+	declare function readFile
+	(
+		path: string | Buffer | URL | number
+	)
+	: Promise<Buffer>
+
+	declare function readFile
+	(
+		path: string | Buffer | URL | number,
+		encoding: string
+	)
+	: Promise<string>
+
+	declare function readFile
+	(
+		path: string | Buffer | URL | number,
+		options: { encoding: string; flag?: string }
+	)
+	: Promise<string>
+
+	declare function readFile
+	(
+		path: string | Buffer | URL | number,
+		options: { flag?: string }
+	)
+	: Promise<Buffer>
+
 	declare function writeFile
 	(
 		filename: string | Buffer | number,
