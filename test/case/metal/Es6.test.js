@@ -11,17 +11,11 @@ import Context from 'src/Context'
 import Glob from 'src/Unit/Glob'
 import Watch from 'src/Unit/Watch'
 
-import Rollup from 'src/Unit/Rollup'
-import { Cjs } from 'src/Unit/Rollup'
-
 import Unit from 'src/Unit'
 import Rebase from 'src/Unit/Rebase'
 import File from 'src/Unit/File'
 
-import deflow from 'src/metal/deflow'
-import Outlander from 'src/metal/Outlander'
-import Emptish from 'src/metal/Emptish'
-import Iop from 'src/metal/Iop'
+import Es5 from 'src/metal/Es5'
 
 describe('Es6', () =>
 {
@@ -30,23 +24,10 @@ describe('Es6', () =>
 
 	var Identity = Unit(x => x)
 
-	function R (src, dst)
+	function Gen (src, dst)
 	{
-		var plugins =
-		[
-			deflow(),
-		]
-
-		return Rollup.Entry(
-		{
-			external: true,
-			plugins,
-		})
+		return Es5()
 		.pipe(Rebase(src(), dst()))
-		.pipe(Cjs())
-		.pipe(Outlander())
-		.pipe(Emptish())
-		.pipe(Iop())
 		.pipe(File.Entry())
 	}
 
@@ -54,7 +35,7 @@ describe('Es6', () =>
 	{
 		var tm = tmp()
 
-		var glob = Glob.Each(es6_org('**/*.js'), R(es6_org, tm))
+		var glob = Glob.Each(es6_org('**/*.js'), Gen(es6_org, tm))
 
 		await glob(Context(null)).output
 
@@ -66,7 +47,7 @@ describe('Es6', () =>
 		var tm = tmp()
 
 		var glob = Glob.Each(es6_org('**/*.js'), Identity)
-		var unit = glob.pipe(R(es6_org, tm))
+		var unit = glob.pipe(Gen(es6_org, tm))
 
 		await unit(Context(null)).output
 
@@ -77,7 +58,7 @@ describe('Es6', () =>
 	{
 		var tm = tmp()
 
-		var watch = Watch(es6_org('**/*.js'), R(es6_org, tm))
+		var watch = Watch(es6_org('**/*.js'), Gen(es6_org, tm))
 
 		var outcome = watch(Context(null))
 
