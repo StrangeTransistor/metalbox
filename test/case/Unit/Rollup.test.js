@@ -1,7 +1,5 @@
 /* @flow */
 
-var noop = () => {}
-
 import tmp from 'src/rootpath/tmp'
 import collate from 'src/rootpath/collate'
 import origin from 'src/rootpath/origin'
@@ -30,7 +28,7 @@ describe('Rollup', () =>
 	{
 		var tm = tmp()
 
-		var unit = Rollup(org('index.js'), { onwarn: noop })
+		var unit = Rollup(org('index.js'), { silent: true })
 		.pipe(Cjs())
 		.pipe(Rebase(org(), tm()))
 		.pipe(File.Entry())
@@ -46,7 +44,7 @@ describe('Rollup', () =>
 
 		var context = Context(Entry(org('index.js')))
 
-		var unit = Rollup.Entry({ onwarn: noop })
+		var unit = Rollup.Entry({ silent: true })
 		.pipe(Cjs())
 		.pipe(Rebase(org(), tm()))
 		.pipe(File.Entry())
@@ -60,7 +58,7 @@ describe('Rollup', () =>
 	{
 		var tm = tmp()
 
-		var unit = Rollup(org('index.js'), { onwarn: noop })
+		var unit = Rollup(org('index.js'), { silent: true })
 		.pipe(Es6())
 		.pipe(Rebase(org(), tm()))
 		.pipe(File.Entry())
@@ -74,7 +72,7 @@ describe('Rollup', () =>
 	{
 		var tm = tmp()
 
-		var unit = Rollup(org('iife.js'), { onwarn: noop })
+		var unit = Rollup(org('iife.js'), { silent: true })
 		.pipe(Iife())
 		.pipe(Rebase(org(), tm()))
 		.pipe(File.Entry())

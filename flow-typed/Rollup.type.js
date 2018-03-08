@@ -12,4 +12,5 @@ type $Rollup$Options = InputOptions
 &
 {
 	external?: boolean,
+	silent?: boolean,
 }

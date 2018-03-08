@@ -10,6 +10,7 @@ import type { Exports as $Rollup$Exports } from 'rollup'
 
 */
 
+var noop = () => {}
 var assign = Object.assign
 
 import { rollup } from 'rollup'
@@ -36,6 +37,11 @@ export default function Rollup /* ::<$in, $prov: $Providers$Base> */
 		if (Σoptions.external === true)
 		{
 			Σoptions.external = externalize(Σinput)
+		}
+		if (Σoptions.silent)
+		{
+			delete Σoptions.silent
+			Σoptions.onwarn = noop
 		}
 
 		var bundle = await rollup(Σoptions)
