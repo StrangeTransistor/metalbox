@@ -3,7 +3,7 @@
 import Unit  from '../Unit'
 import Entry from '../Entry'
 
-export default function DotFlow /* ::<$content, $prov: $Providers$Base> */ ()
+export default function FlowDecl /* ::<$content, $prov: $Providers$Base> */ ()
 	/* :$Unit<$Entry<$content>, $prov, $Entry<$content>> */
 {
 	return Unit(entry =>
