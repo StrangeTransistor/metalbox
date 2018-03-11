@@ -10,7 +10,7 @@
   "repository": { "url": "https://github.com/StrangeTransistor/metalbox.git", "type": "git" },
   "bugs":       { "url": "https://github.com/StrangeTransistor/metalbox/issues" },
 
-  "@std/esm": "cjs",
+  "esm": true,
 
   "engines":
   {
@@ -27,15 +27,15 @@
   {
       "st": "eslint run/ src/ test/",
        "t": "glow || flow",
-    "unit": "mocha -r test/patch -r @std/esm -R dot test/case/**",
+    "unit": "mocha -r test/patch -r esm -R dot test/case/**",
 
     "test": "npm run st && npm run t && npm run unit"
   },
 
   "dependencies":
   {
-    "@std/esm":
-      "0.15",
+    "esm":
+      "3",
 
     "@streetstrider/rootpath":
       "2",
