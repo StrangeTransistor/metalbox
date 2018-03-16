@@ -4,7 +4,7 @@ import Providers from './Providers'
 
 export default function Context /* :: <$in, $prov: $Providers$Base> */
 (
-	input     /* :$in   */,
+	input     /* :$in */,
 	/* @flow-off */
 	providers /* :$prov */ = ({} /* :$Providers$Base */)
 )
