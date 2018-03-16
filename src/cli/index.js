@@ -12,10 +12,13 @@ import runner from './runner'
 
 var index = runner(
 {
-	help,
-	version,
-}
-, describe)
+	variants:
+	{
+		help,
+		version,
+	},
+	default_variant: describe,
+})
 
 export default function (mini /* :minimistOutput */)
 {

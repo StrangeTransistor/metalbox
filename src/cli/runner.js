@@ -1,12 +1,24 @@
 /* @flow */
 /* :: import type { minimistOutput } from 'minimist' */
+/* ::
+
+export type Options =
+{
+	variants:{ [string]: Function },
+	default_variant: Function,
+}
+
+*/
 
 import slice from './slice'
 
 export default function runner
 (
-	variants        /* :{ [string]: Function } */,
-	default_variant /* :Function */
+{
+	variants,
+	default_variant,
+}
+/* :Options */
 )
 {
 	return (mini /* :minimistOutput */) =>
