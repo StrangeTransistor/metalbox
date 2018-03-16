@@ -12,6 +12,12 @@ import runner from './runner'
 
 var index = runner(
 {
+	aliases:
+	{
+		h: 'help',
+		'?': 'help',
+		v: 'version',
+	},
 	variants:
 	{
 		help,
