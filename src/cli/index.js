@@ -15,9 +15,9 @@ var index = runner(
 {
 	aliases:
 	{
-		h: 'help',
+		'h': 'help',
 		'?': 'help',
-		v: 'version',
+		'v': 'version',
 	},
 	variants:
 	{
