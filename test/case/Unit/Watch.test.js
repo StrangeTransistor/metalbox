@@ -31,8 +31,10 @@ describe('Watch', () =>
 	{
 		var buffer = []
 
-		var unit = Unit(({ filename }) =>
+		var unit = Unit(({ filename }, context) =>
 		{
+			expect(context.live).true
+
 			buffer.push(filename)
 		})
 
@@ -56,13 +58,17 @@ describe('Watch', () =>
 		var b1 = []
 		var b2 = []
 
-		var watch = Watch(globexpr, Unit(input =>
+		var watch = Watch(globexpr, Unit((input, context) =>
 		{
+			expect(context.live).true
+
 			return b1.push(org.relative(input.filename))
 		}))
 
-		var unit = watch.pipe(Unit(input =>
+		var unit = watch.pipe(Unit((input, context) =>
 		{
+			expect(context.live).true
+
 			return b2.push(input)
 		}))
 
