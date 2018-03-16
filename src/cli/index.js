@@ -24,6 +24,7 @@ var index = runner(
 		version,
 	},
 	default_variant: describe,
+	missing_variant: describe,
 })
 
 export default function (mini /* :minimistOutput */)

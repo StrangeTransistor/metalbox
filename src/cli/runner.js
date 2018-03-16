@@ -7,18 +7,22 @@ export type Options =
 	aliases: { [string]: string },
 	variants:{ [string]: Function },
 	default_variant: Function,
+	missing_variant: Function,
 }
 
 */
+
+var noop = () => {}
 
 import slice from './slice'
 
 export default function runner
 (
 {
-	aliases,
-	variants,
-	default_variant,
+	aliases = {},
+	variants = {},
+	default_variant = noop,
+	missing_variant = noop,
 }
 /* :Options */
 )
@@ -37,7 +41,7 @@ export default function runner
 			}
 			else
 			{
-				return default_variant(mini)
+				return missing_variant(mini)
 			}
 		}
 		else
