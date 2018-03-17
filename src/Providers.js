@@ -2,6 +2,9 @@
 
 var assign = Object.assign
 
+import def from 'def-prop'
+import { val } from 'def-prop'
+
 export default function Providers /* ::<$base: $Providers$Base> */
 (
 	base /* :$base */
@@ -10,7 +13,9 @@ export default function Providers /* ::<$base: $Providers$Base> */
 {
 	base = assign({}, base)
 
-	base.derive = function derive /* ::<$derive: $Providers$Base> */
+	def(base, 'derive', val(derive))
+
+	function derive /* ::<$derive: $Providers$Base> */
 	(
 		providers /* :$derive */
 	)

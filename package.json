@@ -67,6 +67,9 @@
     "cli-color":
       "1",
 
+    "def-prop":
+      "1",
+
 
     "rollup":
       "0.57",
