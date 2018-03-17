@@ -20,9 +20,13 @@ export default function Context /* :: <$in, $prov: $Providers$Base> */
 		engine: {},
 		providers: Providers(providers),
 
-		// TODO: providers derive
-		derive: function /* ::<$d_in> */ (input /* :$d_in */)
-			/* :$Context<$d_in, $prov> */
+		derive: function /* ::<$d_in, $prov_add: $Providers$Base> */
+		(
+			input     /* :$d_in */,
+			/* @flow-off */
+			providers /* :$prov_add */ = ({} /* :$Providers$Base */)
+		)
+			/* :$Context<$d_in, $prov & $prov_add> */
 		{
 			var derived = Context(input)
 
@@ -31,9 +35,17 @@ export default function Context /* :: <$in, $prov: $Providers$Base> */
 
 			derived.engine = context.engine
 
-			derived.providers = context.providers
-
-			return (derived /* :$Context<$d_in, $prov> */)
+			if (providers)
+			{
+				derived.providers = context.providers.derive(providers)
+				return (derived /* :$Context<$d_in, $prov & $prov_add> */)
+			}
+			else
+			{
+				/* @flow-off */
+				derived.providers = context.providers.derive({})
+				return (derived /* :$Context<$d_in, $prov & $prov_add> */)
+			}
 		}
 	}
 
