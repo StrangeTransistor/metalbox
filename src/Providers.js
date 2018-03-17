@@ -16,7 +16,7 @@ export default function Providers /* ::<$base: $Providers$Base> */
 	)
 		/* :Providers<$base & $derive> */
 	{
-		return Providers(assign(base, providers))
+		return Providers(assign({}, base, providers))
 	}
 
 	return base
