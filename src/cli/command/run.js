@@ -1,7 +1,19 @@
 /* @flow */
 /* :: import type { minimistOutput } from 'minimist' */
 
+import compose from '../resolver/compose'
+import cwd  from '../resolver/cwd'
+import base from '../resolver/base'
+
+var basic_resolver = compose(
+[
+	cwd(),
+	base(__dirname + '/../..'),
+])
+
 export default function (mini /* :minimistOutput */)
 {
-	console.log(mini._)
+	var name = String(mini._[0] || '')
+
+	console.log(basic_resolver(name))
 }
