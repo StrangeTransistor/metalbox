@@ -9,7 +9,6 @@ var bold = clc.bold
 import manifest from '../../package.json'
 
 import runner from './runner'
-import re_solve from './resolve'
 
 import run from './command/run'
 
@@ -27,7 +26,6 @@ export default runner(
 	{
 		help,
 		version,
-		resolve,
 		run,
 	},
 	default_variant: describe,
@@ -52,12 +50,6 @@ function describe ()
 	write('$ metalbox version', nl)
 }
 
-function resolve (mini /* :minimistOutput */)
-{
-	var name = mini._[0] || ''
-
-	re_solve(String(name))
-}
 
 function write (...args /* :string[] */)
 {
