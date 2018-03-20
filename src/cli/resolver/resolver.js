@@ -30,4 +30,4 @@ export default function resolver /* ::<$module> */
 	}
 }
 
-var Nothing = resolver.Nothing = Symbol('Nothing')
+export var Nothing = resolver.Nothing = Symbol('Nothing')
