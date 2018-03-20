@@ -13,7 +13,7 @@ import re_solve from './resolve'
 
 import run from './command/run'
 
-var index = runner(
+export default runner(
 {
 	aliases:
 	{
@@ -33,11 +33,6 @@ var index = runner(
 	default_variant: describe,
 	missing_variant: describe,
 })
-
-export default function (mini /* :minimistOutput */)
-{
-	return index(mini)
-}
 
 function help ()
 {
