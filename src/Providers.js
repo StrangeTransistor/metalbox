@@ -7,7 +7,8 @@ import { val } from 'def-prop'
 
 export default function Providers /* ::<$base: $Providers$Base> */
 (
-	base /* :$base */
+	/* @flow-off */
+	base /* :$base */ = ({} /* :$Providers$Base */)
 )
 	/* :$Providers<$base> */
 {
