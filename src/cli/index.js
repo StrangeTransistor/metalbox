@@ -11,6 +11,8 @@ import manifest from '../../package.json'
 import runner from './runner'
 import re_solve from './resolve'
 
+import run from './command/run'
+
 var index = runner(
 {
 	aliases:
@@ -18,12 +20,15 @@ var index = runner(
 		'h': 'help',
 		'?': 'help',
 		'v': 'version',
+
+		'r': 'run',
 	},
 	variants:
 	{
 		help,
 		version,
 		resolve,
+		run,
 	},
 	default_variant: describe,
 	missing_variant: describe,
