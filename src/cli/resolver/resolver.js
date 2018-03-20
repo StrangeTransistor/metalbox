@@ -3,7 +3,8 @@
 
 export type $Resolver$Fn = (name: string) => string
 
-export type $Resolver<$module> = (name: string) => $module | Symbol
+export type $Resolver<$module>
+ = (name: string) => [ string, string, $module ] | Symbol
 
 */
 
@@ -17,8 +18,10 @@ export default function resolver /* ::<$module> */
 	{
 		try
 		{
+			var fullname = resolver_fn(...args)
+
 			/* @flow-off */
-			return (require(resolver_fn(...args)) /* :$module */)
+			var mod = (require(fullname) /* :$module */)
 		}
 		catch (e)
 		{
@@ -27,6 +30,8 @@ export default function resolver /* ::<$module> */
 
 			return Nothing
 		}
+
+		return [ fullname, require.resolve(fullname), mod ]
 	}
 }
 
