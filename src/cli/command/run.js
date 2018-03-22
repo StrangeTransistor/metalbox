@@ -8,7 +8,8 @@ import base from '../resolver/base'
 var basic_resolver = compose(
 [
 	cwd(),
-	base(__dirname + '/../..'),
+	base(__dirname + '/../..'),    /* metalbox/src/ */
+	base(__dirname + '/../../..'), /* metalbox/     */
 ])
 
 export default function (mini /* :minimistOutput */)
