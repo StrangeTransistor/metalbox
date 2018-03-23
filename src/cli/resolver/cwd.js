@@ -8,6 +8,9 @@ export default function ()
 {
 	return resolver((name /* :string */) =>
 	{
-		return resolve(name)
+		if (name.match(/^(\.\.\/|\.\/)/))
+		{
+			return resolve(name)
+		}
 	})
 }
