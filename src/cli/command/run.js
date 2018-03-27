@@ -7,6 +7,8 @@ import base from '../resolver/base'
 
 import { Nothing } from '../resolver/resolver'
 
+import Context from '../../Context'
+
 var basic_resolver = compose(
 [
 	cwd(),
@@ -20,16 +22,23 @@ export default function (mini /* :minimistOutput */)
 
 	var resolved = basic_resolver(name)
 
-	if (resolved !== Nothing)
-	{
-		/* @flow-off */
-		var tuple /* :[string, string, any] */ = resolved
-
-		console.log(tuple.slice(0, 2))
-		console.log(tuple[2].default)
-	}
-	else
+	if (resolved === Nothing)
 	{
 		console.log(resolved)
+		return
 	}
+
+	/* @flow-off */
+	/* :: resolved = (resolved :[string, string, any]) */
+
+	var Unit = resolved[2].default
+
+	console.log(resolved.slice(0, 2))
+	console.log(Unit)
+
+	var unit = Unit(17)
+
+	unit(Context(28))
+	.output
+	.then(console.log, console.error)
 }
