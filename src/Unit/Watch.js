@@ -57,7 +57,7 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 
 			if (! Σoptions.dot)
 			{
-				ignored.push(dot())
+				ignored.push(/(^|[/\\])\../)
 			}
 
 			var options_w = { ignored }
@@ -79,9 +79,4 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 
 		return live
 	})
-}
-
-function dot ()
-{
-	return /(^|[/\\])\../
 }
