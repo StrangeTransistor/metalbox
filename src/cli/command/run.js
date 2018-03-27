@@ -5,6 +5,8 @@ import compose from '../resolver/compose'
 import cwd  from '../resolver/cwd'
 import base from '../resolver/base'
 
+import { Nothing } from '../resolver/resolver'
+
 var basic_resolver = compose(
 [
 	cwd(),
@@ -16,5 +18,18 @@ export default function (mini /* :minimistOutput */)
 {
 	var name = String(mini._[0] || '')
 
-	console.log(basic_resolver(name))
+	var resolved = basic_resolver(name)
+
+	if (resolved !== Nothing)
+	{
+		/* @flow-off */
+		var tuple /* :[string, string, any] */ = resolved
+
+		console.log(tuple.slice(0, 2))
+		console.log(tuple[2].default)
+	}
+	else
+	{
+		console.log(resolved)
+	}
 }
