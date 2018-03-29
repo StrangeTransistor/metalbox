@@ -9,21 +9,16 @@ var assign = Object.assign
 
 import { find } from 'globule'
 
-import Promise from 'bluebird'
-var map = Promise.mapSeries
-
 import { stream } from 'flyd'
 import { on } from 'flyd'
 
-import stream_to from '../flyd/stream-to'
-import alive from '../Outcome/alive'
-import turnoff from '../flyd/turnoff'
+import alive   from '../../Outcome/alive'
+import turnoff from '../../flyd/turnoff'
 
-import unroll from '../unroll'
+import unroll from '../../unroll'
+import Entry  from '../../Entry'
 
-import Entry from '../Entry'
-
-import Unit from './Unit'
+import Unit from '../Unit'
 
 export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 (
@@ -60,37 +55,4 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 
 		return s
 	})
-}
-
-Glob.Each = function /* ::<$in, $prov: $Providers$Base, $out> */
-(
-	glob /* :$Computable<$in, $prov, $Glob> */,
-	unit /* :$Unit<$Entry<void>, $prov, $out> */,
-	options /* :: ?:$Shape<$Glob$Options> */
-)
-	/* :$Unit<$in, $prov, $out> */
-{
-	var each = Unit((entries, context) =>
-	{
-		/* @flow-off */
-		var s /* :flyd$Stream<$out> */ = stream()
-
-		map(entries, entry =>
-		{
-			if (s.end())
-			{
-				return
-			}
-
-			// TODO: stream in stream
-			var output = unit(context.derive(entry)).output
-
-			return stream_to(output, s)
-		})
-		.then(() => s.end(true))
-
-		return s
-	})
-
-	return Glob(glob, each, options)
 }

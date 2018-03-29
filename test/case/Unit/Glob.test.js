@@ -13,6 +13,7 @@ import Context from 'src/Context'
 
 import Unit from 'src/Unit'
 import Glob from 'src/Unit/Glob'
+import Each from 'src/Unit/Glob/Each'
 
 describe('Glob', () =>
 {
@@ -47,7 +48,7 @@ describe('Glob', () =>
 		await glob(Context(null)).output
 	})
 
-	it('Glob.Each', async () =>
+	it('Glob/Each', async () =>
 	{
 		var unit = Unit(_ =>
 		{
@@ -57,33 +58,33 @@ describe('Glob', () =>
 			return org.relative(_.filename)
 		})
 
-		var glob = Glob.Each(globexpr, unit)
+		var glob = Each(globexpr, unit)
 
 		var output = await glob(Context(null)).output
 
 		expect(output).eq('3.ext')
 	})
 
-	it('Glob.Each async', async () =>
+	it('Glob/Each async', async () =>
 	{
 		var unit = Unit(_ =>
 		{
 			return delay(25, org.relative(_.filename))
 		})
 
-		var glob = Glob.Each(globexpr, unit)
+		var glob = Each(globexpr, unit)
 
 		var output = await glob(Context(null)).output
 
 		expect(output).eq('3.ext')
 	})
 
-	it('Glob.Each streaming', async () =>
+	it('Glob/Each streaming', async () =>
 	{
 		var b1 = []
 		var b2 = []
 
-		var glob = Glob.Each(globexpr, Unit(input =>
+		var glob = Each(globexpr, Unit(input =>
 		{
 			return b1.push(org.relative(input.filename))
 		}))
@@ -102,14 +103,14 @@ describe('Glob', () =>
 		expect(b2.sort()).deep.eq([ 1, 2, 3 ].sort())
 	})
 
-	it('Glob.Each streaming Error', async () =>
+	it('Glob/Each streaming Error', async () =>
 	{
 		var error = new Error('e')
 
 		var b1 = []
 		var b2 = []
 
-		var glob = Glob.Each(globexpr, Unit(async (input) =>
+		var glob = Each(globexpr, Unit(async (input) =>
 		{
 			await delay(25)
 

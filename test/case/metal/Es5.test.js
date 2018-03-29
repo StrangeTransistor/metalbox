@@ -8,7 +8,7 @@ import compare from 'src/compare'
 
 import Context from 'src/Context'
 
-import Glob from 'src/Unit/Glob'
+import Glob from 'src/Unit/Glob/Each'
 import Watch from 'src/Unit/Watch'
 
 import Unit from 'src/Unit'
@@ -39,7 +39,7 @@ describe('Es5', () =>
 	{
 		var tm = tmp()
 
-		var glob = Glob.Each(es6_org('**/*.js'), Gen(Es5(), es6_org, tm))
+		var glob = Glob(es6_org('**/*.js'), Gen(Es5(), es6_org, tm))
 
 		await glob(Context(null)).output
 
@@ -50,7 +50,7 @@ describe('Es5', () =>
 	{
 		var tm = tmp()
 
-		var glob = Glob.Each(es6_org('**/*.js'), Identity)
+		var glob = Glob(es6_org('**/*.js'), Identity)
 		var unit = glob.pipe(Gen(Es5(), es6_org, tm))
 
 		await unit(Context(null)).output
@@ -87,7 +87,7 @@ describe('Es5', () =>
 
 		var unit = js.fork(flow)
 
-		var glob = Glob.Each(es6_org('**/*.js'), unit)
+		var glob = Glob(es6_org('**/*.js'), unit)
 
 		await glob(Context(null)).output
 
