@@ -9,13 +9,15 @@ import compare from 'src/compare'
 import Context from 'src/Context'
 import Entry   from 'src/Entry'
 
-import Rollup   from 'src/Unit/Rollup'
-import { Cjs }  from 'src/Unit/Rollup'
-import { Es6 }  from 'src/Unit/Rollup'
-import { Iife } from 'src/Unit/Rollup'
+import Rollup from 'src/Unit/Rollup'
+import RollupEntry from 'src/Unit/Rollup/Entry'
 
-import Rebase   from 'src/Unit/Rebase'
-import File     from 'src/Unit/File'
+import Cjs  from 'src/Unit/Rollup/target/Cjs'
+import Es6  from 'src/Unit/Rollup/target/Es6'
+import Iife from 'src/Unit/Rollup/target/Iife'
+
+import Rebase from 'src/Unit/Rebase'
+import File   from 'src/Unit/File'
 
 describe('Rollup', () =>
 {
@@ -38,13 +40,13 @@ describe('Rollup', () =>
 		compare(cl_cjs(), tm())
 	})
 
-	it('Rollup.Entry', async () =>
+	it('Rollup/Entry', async () =>
 	{
 		var tm = tmp()
 
 		var context = Context(Entry(org('index.js')))
 
-		var unit = Rollup.Entry({ silent: true })
+		var unit = RollupEntry({ silent: true })
 		.pipe(Cjs())
 		.pipe(Rebase(org(), tm()))
 		.pipe(File.Entry())

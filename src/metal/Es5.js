@@ -1,7 +1,7 @@
 /* @flow */
 
-import Rollup from '../Unit/Rollup'
-import { Cjs } from '../Unit/Rollup'
+import Rollup from '../Unit/Rollup/Entry'
+import Cjs from '../Unit/Rollup/target/Cjs'
 
 import deflow from './deflow'
 import Outlander from './Outlander'
@@ -16,7 +16,7 @@ export default function Es5 ()
 		deflow(),
 	]
 
-	return Rollup.Entry(
+	return Rollup(
 	{
 		external: true,
 		plugins,
