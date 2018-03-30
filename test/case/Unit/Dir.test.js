@@ -8,8 +8,10 @@ import compare from 'src/compare'
 import Context from 'src/Context'
 import Entry from 'src/Entry'
 
-import Dir from 'src/Unit/Dir'
 import File from 'src/Unit/File'
+
+import Dir from 'src/Unit/Dir'
+import Ensure from 'src/Unit/Dir/Ensure'
 
 describe('Dir', () =>
 {
@@ -42,9 +44,9 @@ describe('Dir', () =>
 	})
 })
 
-describe('Dir.Ensure', () =>
+describe('Dir/Ensure', () =>
 {
-	it('Dir.Ensure(entry)', async () =>
+	it('Dir/Ensure(entry)', async () =>
 	{
 		var tm = tmp()
 		var cl = collate('dir/2')
@@ -54,7 +56,7 @@ describe('Dir.Ensure', () =>
 			{ content: '' }
 		))
 
-		var unit = Dir.Ensure(File.Entry())
+		var unit = Ensure(File.Entry())
 
 		await unit(context).output
 
