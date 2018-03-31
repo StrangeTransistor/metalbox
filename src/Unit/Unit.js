@@ -66,3 +66,14 @@ function Name ()
 {
 	return `${ pad(String(n++), 3, '0') }.${ random(opts) }`
 }
+
+
+export var Make = Unit.Make = function Make
+	/* ::<$in, $prov: $Providers$Base, $out> */
+(
+	fn /* :$Unit$Fn<$in, $prov, $out> */
+)
+		/* :$Unit<$in, $prov, $out> */
+{
+	return Unit(fn)
+}
