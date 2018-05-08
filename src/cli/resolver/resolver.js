@@ -8,6 +8,9 @@ export type $Resolver<$module>
 
 */
 
+import assert from 'assert'
+import { isAbsolute as is_abs } from 'path'
+
 export default function resolver /* ::<$module> */
 (
 	resolver_fn /* :$Resolver$Fn */
@@ -24,6 +27,8 @@ export default function resolver /* ::<$module> */
 			{
 				return Nothing
 			}
+
+			assert(is_abs(fullname))
 
 			/* @flow-off */
 			var mod = (require(fullname) /* :$module */)
