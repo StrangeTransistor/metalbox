@@ -1,6 +1,6 @@
 /* @flow */
 
-import { resolve } from 'path'
+import { resolve as from_cwd } from 'path'
 
 import resolver from './resolver'
 
@@ -10,7 +10,7 @@ export default function ()
 	{
 		if (name.match(/^(\.\.\/|\.\/)/))
 		{
-			return resolve(name)
+			return from_cwd(name)
 		}
 	})
 }
