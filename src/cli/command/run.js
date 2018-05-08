@@ -12,8 +12,9 @@ import Context from '../../Context'
 var basic_resolver = compose(
 [
 	cwd(),
-	base(__dirname + '/../..'),    /* metalbox/src/ */
-	base(__dirname + '/../../..'), /* metalbox/     */
+	base(__dirname + '/../../Unit'), /* metalbox/src/Unit/ */
+	base(__dirname + '/../..'),      /* metalbox/src/ */
+	base(__dirname + '/../../..'),   /* metalbox/     */
 ])
 
 export default function (mini /* :minimistOutput */)
