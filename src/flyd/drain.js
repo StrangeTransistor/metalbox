@@ -22,23 +22,15 @@ export function either /* ::<$value, $error: Error> */
 )
 	/* :Promise<$value> */
 {
-	return new Promise((rs, rj) =>
+	return drain(stream)
+	.then(value =>
 	{
-		on(decide, stream.end)
-
-		function decide ()
+		if (value instanceof Error)
 		{
-			var value = stream()
-
-			if (value instanceof Error)
-			{
-				rj(value)
-			}
-			else
-			{
-				rs(value)
-			}
+			throw value
 		}
+
+		return value
 	})
 }
 
@@ -57,9 +49,5 @@ export function concat /* ::<$value> */
 		buffer.push(value)
 	}
 
-	return new Promise(rs =>
-	{
-		on(rs, stream.end)
-	})
-	.then(() => buffer)
+	return drain(stream).then(() => buffer)
 }
