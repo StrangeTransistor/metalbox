@@ -8,6 +8,8 @@ import Pipe from './compose/Pipe'
 import Precursor from './compose/Precursor'
 import Fork from './compose/Fork'
 
+import random_family from './_/random-family'
+
 /* ::
 
 type $Options<$in, $prov: $Providers$Base, $out> =
@@ -54,7 +56,7 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 	}
 	else
 	{
-		unit.family = Name()
+		unit.family = random_family()
 	}
 
 	unit[inspect.custom] = function inspect ()
@@ -92,18 +94,6 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 
 	return unit
 }
-
-
-import { generate as random } from 'randomstring'
-import pad from 'lodash/padStart'
-
-var n = 1
-var opts = { length: 3, capitalization: 'uppercase' }
-function Name ()
-{
-	return `${ pad(String(n++), 3, '0') }.${ random(opts) }`
-}
-
 
 export var Make = Unit.Make = function Make
 	/* ::<$in, $prov: $Providers$Base, $out> */
