@@ -4,8 +4,8 @@ import Content from '../Unit/Content'
 
 export default function Emptish ()
 {
-	var block = /\/\*\s*\*\/\n?/g
-	var line  = /\/\/\s*\n/g
+	var block = /\/\*\s*\*\//g
+	var line  = /\/\/\s*/g
 
 	var multinw = /\n\n+/g
 
