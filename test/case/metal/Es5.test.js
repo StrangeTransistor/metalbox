@@ -23,8 +23,8 @@ describe('Es5', () =>
 {
 	var es6_org = origin('es6')
 
-	var es5_cl  = collate('es5')
-	var es5_flow_cl  = collate('es5-flow')
+	var es5_cl = collate('es5')
+	var es5_flow_cl = collate('es5-flow')
 
 	var Identity = Unit(x => x)
 
