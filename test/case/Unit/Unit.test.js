@@ -26,4 +26,19 @@ describe('Unit', () =>
 
 		expect(i.family).eq(u.family)
 	})
+
+	it('inspect', () =>
+	{
+		var family = 'Name'
+
+		var u = Unit(
+		{
+			family,
+			unit () {},
+		})
+
+		expect(u.family).eq(family)
+		var i = u[inspect.custom]()
+		expect(i.family).eq(family)
+	})
 })
