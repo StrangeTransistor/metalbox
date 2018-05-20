@@ -4,6 +4,14 @@ type $Unit$Fn<$in, $prov: $Providers$Base, $out>
 
 ;
 
+type $Unit$Options<$in, $prov: $Providers$Base, $out> =
+{
+	unit: $Unit$Fn<$in, $prov, $out>,
+	family?: string,
+}
+
+;
+
 type $Unit<$in, $prov: $Providers$Base, $out> =
 {
 	(context: $Context<$in, $prov>): $Outcome<$out>,

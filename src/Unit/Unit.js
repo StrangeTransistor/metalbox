@@ -14,25 +14,19 @@ import random_family from './_/random-family'
 
 /* ::
 
-type $Options<$in, $prov: $Providers$Base, $out> =
-{
-	unit: $Unit$Fn<$in, $prov, $out>,
-	family?: string,
-}
-
 declare function Unit <$in, $prov: $Providers$Base, $out>
 (fn: $Unit$Fn<$in, $prov, $out>)
 : $Unit<$in, $prov, $out>
 
 declare function Unit <$in, $prov: $Providers$Base, $out>
-(options: $Options<$in, $prov, $out>)
+(options: $Unit$Options<$in, $prov, $out>)
 : $Unit<$in, $prov, $out>
 
 */
 
 export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 (
-	options /* :$Unit$Fn<$in, $prov, $out> | $Options<$in, $prov, $out> */
+	options /* :$Unit$Fn<$in, $prov, $out> | $Unit$Options<$in, $prov, $out> */
 )
 	/* :$Unit<$in, $prov, $out> */
 {
