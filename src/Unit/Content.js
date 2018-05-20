@@ -15,16 +15,21 @@ export default function Content /* ::<$prov: $Providers$Base> */
 )
 	/* :$Unit<$Entry<$Entry$File>, $prov, $Entry<$Entry$File>> */
 {
-	return Unit(async (entry, context) =>
+	return Unit(
 	{
-		var content = entry.content.content
+		family: 'Content',
 
-		content = await fn(content, context)
-
-		return Entry(entry.filename,
+		async unit (entry, context)
 		{
-			content,
-			sourcemap: entry.content.sourcemap,
-		})
+			var content = entry.content.content
+
+			content = await fn(content, context)
+
+			return Entry(entry.filename,
+			{
+				content,
+				sourcemap: entry.content.sourcemap,
+			})
+		}
 	})
 }
