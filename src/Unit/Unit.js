@@ -94,13 +94,3 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 
 	return unit
 }
-
-export var Make = Unit.Make = function Make
-	/* ::<$in, $prov: $Providers$Base, $out> */
-(
-	fn /* :$Unit$Fn<$in, $prov, $out> */
-)
-		/* :$Unit<$in, $prov, $out> */
-{
-	return Unit(fn)
-}

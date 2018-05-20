@@ -6,7 +6,7 @@ type $Content$Fn<$prov: $Providers$Base>
 
 */
 
-import { Make } from '../Unit'
+import Unit from '../Unit'
 import Entry from '../Entry'
 
 export default function Content /* ::<$prov: $Providers$Base> */
@@ -15,7 +15,7 @@ export default function Content /* ::<$prov: $Providers$Base> */
 )
 	/* :$Unit<$Entry<$Entry$File>, $prov, $Entry<$Entry$File>> */
 {
-	return Make(async (entry, context) =>
+	return Unit(async (entry, context) =>
 	{
 		var content = entry.content.content
 
