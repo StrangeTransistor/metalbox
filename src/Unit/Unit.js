@@ -2,7 +2,9 @@
 
 import { inspect } from 'util'
 
-import invoke from '../Outcome/invoke'
+import tcomb from 'tcomb'
+
+import invoke from './_/invoke'
 
 import Pipe from './compose/Pipe'
 import Precursor from './compose/Precursor'
@@ -47,7 +49,7 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 	/* main */
 	var unit = function (context)
 	{
-		return invoke(fn, context)
+		return invoke(fn, context, tcomb.Any)
 	}
 
 	if (options.family)
