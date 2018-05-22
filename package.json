@@ -35,7 +35,7 @@
   "dependencies":
   {
     "esm":
-      "3",
+      "3.0.34",
 
     "@streetstrider/rootpath":
       "2",
