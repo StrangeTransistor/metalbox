@@ -16,12 +16,16 @@ import random_family from './_/random-family'
 
 /* ::
 
+type $Options<$in, $prov: $Providers$Base, $out>
+= $Unit$Fn<$in, $prov, $out>
+| $Unit$Options$Maybe<$in, $prov, $out>
+
 declare function Unit <$in, $prov: $Providers$Base, $out>
 (fn: $Unit$Fn<$in, $prov, $out>)
 : $Unit<$in, $prov, $out>
 
 declare function Unit <$in, $prov: $Providers$Base, $out>
-(options: $Unit$Options<$in, $prov, $out>)
+(options: $Unit$Options$Maybe<$in, $prov, $out>)
 : $Unit<$in, $prov, $out>
 
 */
@@ -33,7 +37,7 @@ var defaults =
 
 export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 (
-	options /* :$Unit$Fn<$in, $prov, $out> | $Unit$Options<$in, $prov, $out> */
+	options /* :$Options<$in, $prov, $out> */
 )
 	/* :$Unit<$in, $prov, $out> */
 {
@@ -47,7 +51,6 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 	/* main */
 	var unit = function (context)
 	{
-		/* @flow-off */
 		return invoke(options.unit, context, options.input)
 	}
 

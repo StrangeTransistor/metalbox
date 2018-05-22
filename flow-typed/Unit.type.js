@@ -8,7 +8,16 @@ type $Unit$Options<$in, $prov: $Providers$Base, $out> =
 {
 	unit: $Unit$Fn<$in, $prov, $out>,
 	family?: string,
-	input?: Function,
+	input: Function,
+}
+
+;
+
+type $Unit$Options$Maybe<$in, $prov: $Providers$Base, $out>
+= $Shape<$Unit$Options<$in, $prov, $out>>
+&
+{
+	unit: $Unit$Fn<$in, $prov, $out>,
 }
 
 ;
