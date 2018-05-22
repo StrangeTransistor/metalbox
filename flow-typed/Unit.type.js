@@ -8,6 +8,7 @@ type $Unit$Options<$in, $prov: $Providers$Base, $out> =
 {
 	unit: $Unit$Fn<$in, $prov, $out>,
 	family?: string,
+	input?: Function,
 }
 
 ;

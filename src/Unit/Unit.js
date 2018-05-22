@@ -1,5 +1,7 @@
 /* @flow */
 
+var assign = Object.assign
+
 import { inspect } from 'util'
 
 import tcomb from 'tcomb'
@@ -24,6 +26,11 @@ declare function Unit <$in, $prov: $Providers$Base, $out>
 
 */
 
+var defaults =
+{
+	input: tcomb.Any,
+}
+
 export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 (
 	options /* :$Unit$Fn<$in, $prov, $out> | $Unit$Options<$in, $prov, $out> */
@@ -32,18 +39,16 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 {
 	if (typeof options === 'function')
 	{
-		options =
-		{
-			unit: options
-		}
+		options = { unit: options }
 	}
 
-	var fn = options.unit
+	options = assign({}, defaults, options)
 
 	/* main */
 	var unit = function (context)
 	{
-		return invoke(fn, context, tcomb.Any)
+		/* @flow-off */
+		return invoke(options.unit, context, options.input)
 	}
 
 	if (options.family)

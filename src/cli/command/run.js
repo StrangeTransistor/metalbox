@@ -39,7 +39,7 @@ export default function (mini /* :minimistOutput */)
 
 	var unit = Unit(17)
 
-	unit(Context(28))
+	unit(Context('28'))
 	.output
 	.then(console.log, console.error)
 }
