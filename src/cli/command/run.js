@@ -19,8 +19,7 @@ var basic_resolver = compose(
 
 export default function (mini /* :minimistOutput */)
 {
-	console.log(mini)
-	return
+	console.log('mini', mini)
 
 	var name = String(mini._[0] || '')
 

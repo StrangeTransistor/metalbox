@@ -1,5 +1,6 @@
 /* @flow */
 /* :: import type { minimistOutput } from 'minimist' */
+/* :: import type { minimistOptions } from 'minimist' */
 /* ::
 
 export type Options =
@@ -8,11 +9,15 @@ export type Options =
 	variants:{ [string]: Function },
 	default_variant: Function,
 	missing_variant: Function,
+	minimist_opts?: minimistOptions,
 }
 
 */
 
 var noop = () => {}
+var assign = Object.assign
+
+import minimist from 'minimist'
 
 import slice from './slice'
 
@@ -23,12 +28,17 @@ export default function runner
 	variants = {},
 	default_variant = noop,
 	missing_variant = noop,
+	minimist_opts,
 }
 /* :Options */
 )
 {
-	return (mini /* :minimistOutput */) =>
+	minimist_opts = assign({}, minimist_opts, { 'stopEarly': true, '--': true, })
+
+	return (args /* :string[] */) =>
 	{
+		var mini /* :minimistOutput */ = minimist(args, minimist_opts)
+
 		if (mini._.length)
 		{
 			var cmd = mini._[0]

@@ -1,14 +1,8 @@
 /* @flow */
 
-import minimist from 'minimist'
-import runner   from './cli'
+import runner from './cli'
 
-var options =
+export default async function (args /* :string[] */)
 {
-	'--': true,
-}
-
-export default async function (args /*: string[] */)
-{
-	return runner(minimist(args, options))
+	return runner(args)
 }
