@@ -21,7 +21,8 @@ export default async function (mini /* :minimistOutput */)
 {
 	console.log('mini', mini)
 
-	// TODO: attach runner here if required (to parse opts in corresponding section of cli)
+	// TODO: attach runner here if required
+	// (to parse opts in corresponding section of cli)
 	var name = String(mini._[0] || '')
 
 	var resolved = basic_resolver(name)
