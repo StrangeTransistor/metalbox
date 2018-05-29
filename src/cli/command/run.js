@@ -17,7 +17,7 @@ var basic_resolver = compose(
 	base(__dirname + '/../../..'),   /* metalbox/     */
 ])
 
-export default function (mini /* :minimistOutput */)
+export default async function (mini /* :minimistOutput */)
 {
 	console.log('mini', mini)
 
@@ -37,12 +37,34 @@ export default function (mini /* :minimistOutput */)
 
 	var Unit = resolved[2].default
 
-	console.log(resolved.slice(0, 2))
-	console.log(Unit)
+	var unit_make_args = mini._.slice(1)
 
-	var unit = Unit(17)
+	try
+	{
+		var unit = Unit(...unit_make_args)
+	}
+	catch (e)
+	{
+		console.log('catch static:')
+		console.log(e)
+		return
+	}
 
-	unit(Context('28'))
-	.output
-	.then(console.log, console.error)
+	var unit_input = mini['--'][0]
+
+	try
+	{
+		var outcome = unit(Context(unit_input))
+
+		var output = await outcome.output
+	}
+	catch (e)
+	{
+		console.log('catch:')
+		console.log(e)
+		return
+	}
+
+	console.log('OK')
+	console.log(output)
 }

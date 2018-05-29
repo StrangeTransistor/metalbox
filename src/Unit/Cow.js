@@ -9,12 +9,14 @@ export default function Cow (level /* :number */)
 	return Unit(
 	{
 		family: 'Cow',
-		input: tcomb.Number,
+		input: tcomb.String,
 		unit (input /* :number */)
 		{
 			console.log('there is no cow level')
-			console.log(level)
-			console.log(input)
+
+			console.log('make', level)
+			console.log('input', input)
+
 			return String(level) + String(input)
 		},
 	})
