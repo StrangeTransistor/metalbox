@@ -50,6 +50,7 @@ export default async function (mini /* :minimistOutput */)
 		return
 	}
 
+	/* @flow-off */
 	var unit_input = mini['--'][0]
 
 	try
