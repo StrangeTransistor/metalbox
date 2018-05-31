@@ -6,18 +6,18 @@ import Unit from './Unit'
 
 export default function Cow (level /* :number */)
 {
+	tcomb.Number(level)
+
 	return Unit(
 	{
 		family: 'Cow',
-		input: tcomb.String,
+		input: tcomb.Number,
 		unit (input /* :number */)
 		{
-			console.log('there is no cow level')
+			console.log(`make  ${typeof level} ${level}`)
+			console.log(`input ${typeof input} ${input}`)
 
-			console.log('make', level)
-			console.log('input', input)
-
-			return String(level) + String(input)
+			return (level + input)
 		},
 	})
 }

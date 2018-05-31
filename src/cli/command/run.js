@@ -9,6 +9,8 @@ import { Nothing } from '../resolver/resolver'
 
 import Context from '../../Context'
 
+import arg_eval from '../arg-eval'
+
 var basic_resolver = compose(
 [
 	cwd(),
@@ -19,8 +21,6 @@ var basic_resolver = compose(
 
 export default async function (mini /* :minimistOutput */)
 {
-	console.log('mini', mini)
-
 	// TODO: attach runner here if required
 	// (to parse opts in corresponding section of cli)
 	var name = String(mini._[0] || '')
@@ -38,7 +38,9 @@ export default async function (mini /* :minimistOutput */)
 
 	var Unit = resolved[2].default
 
-	var unit_make_args = mini._.slice(1)
+	var unit_make_args = mini._
+	.slice(1)
+	.map(arg_eval)
 
 	try
 	{
@@ -53,6 +55,7 @@ export default async function (mini /* :minimistOutput */)
 
 	/* @flow-off */
 	var unit_input = mini['--'][0]
+	unit_input = arg_eval(unit_input)
 
 	try
 	{
