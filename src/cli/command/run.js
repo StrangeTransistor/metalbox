@@ -40,6 +40,9 @@ export default async function (mini /* :minimistOutput */)
 	/* @flow-off */
 	/* :: resolved = (resolved :[string, string, any]) */
 
+	// TODO: tildify
+	console.info(`${ bold('Unit resolved') }: ${ resolved[1] }.`)
+
 	var Unit = resolved[2].default
 
 	var unit_make_args = mini._
