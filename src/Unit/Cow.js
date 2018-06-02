@@ -1,6 +1,6 @@
 /* @flow */
 
-import tcomb from 'tcomb'
+import tcomb from '../tcomb'
 
 import Unit from './Unit'
 

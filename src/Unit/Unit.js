@@ -4,7 +4,7 @@ var assign = Object.assign
 
 import { inspect } from 'util'
 
-import tcomb from 'tcomb'
+import tcomb from '../tcomb'
 
 import invoke from './_/invoke'
 

@@ -29,8 +29,8 @@ export default async function (mini /* :minimistOutput */)
 
 	if (resolved === Nothing)
 	{
-		console.log(resolved)
-		return
+		console.error(`Unit '${ name }' not found.`)
+		return process.exit(1)
 	}
 
 	/* @flow-off */
@@ -48,9 +48,9 @@ export default async function (mini /* :minimistOutput */)
 	}
 	catch (e)
 	{
-		console.log('catch static:')
-		console.log(e)
-		return
+		console.error(`Error constructing Unit:`)
+		console.log(`${ e.name }: ${ e.message }.`)
+		return process.exit(1)
 	}
 
 	/* @flow-off */
@@ -65,9 +65,9 @@ export default async function (mini /* :minimistOutput */)
 	}
 	catch (e)
 	{
-		console.log('catch:')
-		console.log(e)
-		return
+		console.error(`Error processing Unit:`)
+		console.log(`${ e.name }: ${ e.message }.`)
+		return process.exit(1)
 	}
 
 	console.log('OK')

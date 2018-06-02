@@ -3,7 +3,7 @@
 import { inspect } from 'util'
 
 import { expect } from 'chai'
-import tcomb from 'tcomb'
+import tcomb from 'src/tcomb'
 
 import Context from 'src/Context'
 
@@ -87,6 +87,6 @@ describe('Unit', () =>
 		(e) => e)
 
 		expect(r instanceof Error).true
-		expect(r.message).eq('[tcomb] Invalid value 17 supplied to String')
+		expect(r.message).eq('Invalid value 17 supplied to String')
 	})
 })
