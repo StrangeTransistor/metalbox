@@ -1,6 +1,10 @@
 /* @flow */
 /* :: import type { minimistOutput } from 'minimist' */
 
+import clc from 'cli-color'
+var bold = clc.bold
+var f_error = clc.bold.red
+
 import compose from '../resolver/compose'
 import cwd  from '../resolver/cwd'
 import base from '../resolver/base'
@@ -29,7 +33,7 @@ export default async function (mini /* :minimistOutput */)
 
 	if (resolved === Nothing)
 	{
-		console.error(`Unit '${ name }' not found.`)
+		console.error(f_error(`Unit '${ name }' not found.`))
 		return process.exit(1)
 	}
 
@@ -48,8 +52,8 @@ export default async function (mini /* :minimistOutput */)
 	}
 	catch (e)
 	{
-		console.error(`Error constructing Unit:`)
-		console.log(`${ e.name }: ${ e.message }.`)
+		console.error(f_error(`Error constructing Unit:`))
+		console.log(`${ bold(e.name) }: ${ e.message }.`)
 		return process.exit(1)
 	}
 
@@ -65,11 +69,11 @@ export default async function (mini /* :minimistOutput */)
 	}
 	catch (e)
 	{
-		console.error(`Error processing Unit:`)
-		console.log(`${ e.name }: ${ e.message }.`)
+		console.error(f_error(`Error processing Unit:`))
+		console.log(`${ bold(e.name) }: ${ e.message }.`)
 		return process.exit(1)
 	}
 
-	console.log('OK')
-	console.log(output)
+	console.log(`${ bold('OK') }: ${ output }.`)
+	// console.log(outcome) // TODO: time
 }
