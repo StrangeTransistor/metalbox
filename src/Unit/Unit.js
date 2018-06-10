@@ -63,6 +63,9 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 		unit.family = random_family()
 	}
 
+	/* @flow-off */
+	unit[kind] = null
+
 	unit[inspect.custom] = function inspect ()
 	{
 		return { family: unit.family }
@@ -98,3 +101,11 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 
 	return unit
 }
+
+Unit.is = (unit /* :any */) =>
+{
+	/* @flow-off */
+	return (kind in unit)
+}
+
+var kind = Symbol('Unit')

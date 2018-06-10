@@ -3,7 +3,10 @@
 
 import clc from 'cli-color'
 var bold = clc.bold
+var red = clc.red
 var f_error = clc.bold.red
+
+import Unit from '../../Unit'
 
 import compose from '../resolver/compose'
 import cwd  from '../resolver/cwd'
@@ -40,10 +43,18 @@ export default async function (mini /* :minimistOutput */)
 	/* @flow-off */
 	/* :: resolved = (resolved :[string, string, any]) */
 
+	var Resolved = resolved[2].default
+
+	if (typeof Resolved !== 'function')
+	{
+		console.error(red(`${ bold('Does not contain a function to create Unit') }: ${ resolved[1] }.`))
+
+		return process.exit(1)
+	}
+
 	// TODO: tildify
 	console.info(`${ bold('Unit resolved') }: ${ resolved[1] }.`)
 
-	var Unit = resolved[2].default
 
 	var unit_make_args = mini._
 	.slice(1)
@@ -51,12 +62,20 @@ export default async function (mini /* :minimistOutput */)
 
 	try
 	{
-		var unit = Unit(...unit_make_args)
+		var unit = Resolved(...unit_make_args)
 	}
 	catch (e)
 	{
 		console.error(f_error(`Error constructing Unit:`))
 		console.log(`${ bold(e.name) }: ${ e.message }.`)
+		return process.exit(1)
+	}
+
+	if (! Unit.is(unit))
+	{
+		console.error(f_error(`Constructed is not a Unit`))
+		console.log(unit)
+
 		return process.exit(1)
 	}
 
