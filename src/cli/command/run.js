@@ -57,7 +57,9 @@ function resolve (mini /* :minimistOutput */)
 
 	if (typeof Resolved !== 'function')
 	{
-		console.error(red(`${ bold('Does not contain a function to create Unit') }: ${ resolved[1] }.`))
+		console.error(red(
+			`${ bold('Does not contain a function to create Unit') }: ` +
+			`${ resolved[1] }.`))
 
 		/* @flow-off */
 		return process.exit(1)
@@ -101,7 +103,10 @@ function make (mini /* :minimistOutput */, Resolved /* :Function */)
 	return unit
 }
 
-async function invoke (mini /* :minimistOutput */, unit /* :Unit<any, any, any> */)
+async function invoke (
+	mini /* :minimistOutput */,
+	unit /* :Unit<any, any, any> */
+)
 {
 	/* @flow-off */
 	var unit_input = mini['--'][0]
