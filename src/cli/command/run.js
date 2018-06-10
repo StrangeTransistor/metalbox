@@ -28,6 +28,14 @@ var basic_resolver = compose(
 
 export default async function (mini /* :minimistOutput */)
 {
+	var Resolved = resolve(mini)
+	var unit = make(mini, Resolved)
+	return await invoke(mini, unit)
+}
+
+function resolve (mini /* :minimistOutput */)
+	/* :Function */
+{
 	// TODO: attach runner here if required
 	// (to parse opts in corresponding section of cli)
 	var name = String(mini._[0] || '')
@@ -37,6 +45,8 @@ export default async function (mini /* :minimistOutput */)
 	if (resolved === Nothing)
 	{
 		console.error(f_error(`Unit '${ name }' not found.`))
+
+		/* @flow-off */
 		return process.exit(1)
 	}
 
@@ -49,13 +59,19 @@ export default async function (mini /* :minimistOutput */)
 	{
 		console.error(red(`${ bold('Does not contain a function to create Unit') }: ${ resolved[1] }.`))
 
+		/* @flow-off */
 		return process.exit(1)
 	}
 
 	// TODO: tildify
 	console.info(`${ bold('Unit resolved') }: ${ resolved[1] }.`)
 
+	return Resolved
+}
 
+function make (mini /* :minimistOutput */, Resolved /* :Function */)
+	/* :$Unit<any, any, any> */
+{
 	var unit_make_args = mini._
 	.slice(1)
 	.map(arg_eval)
@@ -68,6 +84,8 @@ export default async function (mini /* :minimistOutput */)
 	{
 		console.error(f_error(`Error constructing Unit:`))
 		console.log(`${ bold(e.name) }: ${ e.message }.`)
+
+		/* @flow-off */
 		return process.exit(1)
 	}
 
@@ -76,9 +94,15 @@ export default async function (mini /* :minimistOutput */)
 		console.error(f_error(`Constructed is not a Unit`))
 		console.log(unit)
 
+		/* @flow-off */
 		return process.exit(1)
 	}
 
+	return unit
+}
+
+async function invoke (mini /* :minimistOutput */, unit /* :Unit<any, any, any> */)
+{
 	/* @flow-off */
 	var unit_input = mini['--'][0]
 	unit_input = arg_eval(unit_input)
