@@ -3,7 +3,7 @@
 # 0.0.0
 
 [ignore]
-<PROJECT_ROOT>/node_modules/
+# <PROJECT_ROOT>/node_modules/
 
 [options]
 module.name_mapper='^src/' -> '<PROJECT_ROOT>/\0'
