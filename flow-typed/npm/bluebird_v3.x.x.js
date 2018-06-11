@@ -244,7 +244,7 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
   timeout(ms: number, message?: string): Bluebird$Promise<R>;
   cancel(): void;
 
-  // bind(ctx: any): Bluebird$Promise<R>; // FIX
+  bind(ctx: any): Bluebird$Promise<R>;
   call(propertyName: string, ...args: Array<any>): Bluebird$Promise<any>;
   throw(reason: Error): Bluebird$Promise<R>;
   thenThrow(reason: Error): Bluebird$Promise<R>;
