@@ -1,11 +1,10 @@
 /* @flow */
 
-import sucrase from 'rollup-plugin-sucrase'
-
 import Rollup from '../Unit/Rollup/Entry'
 import Cjs from '../Unit/Rollup/target/Cjs'
 
 import deflow from './deflow'
+import dets from './dets'
 
 import TsExt from './TsExt'
 import Outlander from './Outlander'
@@ -18,7 +17,7 @@ export default function Es5 ()
 	var plugins =
 	[
 		deflow(),
-		sucrase({ transforms: [ 'typescript' ] }),
+		dets(),
 	]
 
 	return Rollup(
