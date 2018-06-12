@@ -22,9 +22,7 @@ import FlowDecl from 'src/metal/FlowDecl'
 describe('Es5', () =>
 {
 	var es6_org = origin('es6')
-
-	var es5_cl = collate('es5')
-	var es5_flow_cl = collate('es5-flow')
+	var es5_cl  = collate('es5')
 
 	var Identity = Unit(x => x)
 
@@ -80,6 +78,7 @@ describe('Es5', () =>
 
 	it('Rollup(flow + flow files)', async () =>
 	{
+		var es5_cl = collate('es5-flow')
 		var tm = tmp()
 
 		var js   = Gen(Es5(), es6_org, tm)
@@ -91,6 +90,18 @@ describe('Es5', () =>
 
 		await glob(Context(null)).output
 
-		compare(es5_flow_cl(), tm())
+		compare(es5_cl(), tm())
+	})
+
+	it('Rollup(ts)', async () =>
+	{
+		var es6_org = origin('es6-ts')
+		var tm = tmp()
+
+		var glob = Glob(es6_org('**/*.ts'), Gen(Es5(), es6_org, tm))
+
+		await glob(Context(null)).output
+
+		compare(es5_cl(), tm())
 	})
 })

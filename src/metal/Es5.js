@@ -1,5 +1,10 @@
 /* @flow */
 
+import sucrase from 'rollup-plugin-sucrase'
+
+import Unit from '../Unit'
+import Entry from '../Entry'
+
 import Rollup from '../Unit/Rollup/Entry'
 import Cjs from '../Unit/Rollup/target/Cjs'
 
@@ -14,6 +19,7 @@ export default function Es5 ()
 	var plugins =
 	[
 		deflow(),
+		sucrase({ transforms: [ 'typescript' ] }),
 	]
 
 	return Rollup(
@@ -22,7 +28,19 @@ export default function Es5 ()
 		plugins,
 	})
 	.pipe(Cjs())
+	.pipe(Mvts())
 	.pipe(Outlander())
 	.pipe(Emptish())
 	.pipe(Iop())
+}
+
+function Mvts /* ::<T> */ ()
+	/* :$Unit<$Entry<T>, any, $Entry<T>> */
+{
+	return Unit(entry =>
+	{
+		var filename = entry.filename.replace(/\.ts$/, '.js')
+
+		return Entry(filename, entry.content)
+	})
 }
