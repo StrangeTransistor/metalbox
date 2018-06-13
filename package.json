@@ -84,7 +84,11 @@
       "1",
 
     "eslint":
-      "4"
+      "4",
+
+
+    "less":
+      "3"
   },
 
   "devDependencies":
