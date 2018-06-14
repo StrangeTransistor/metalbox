@@ -14,11 +14,11 @@ import { ensureDir as mkdirp } from 'fs-extra'
 import bluebird from 'bluebird'
 var join = bluebird.join
 
-import Unit from './Unit'
+import Unit from '../Unit'
 
-import Entry from '../Entry'
+import Entry from '../../Entry'
 
-import unroll from '../unroll'
+import unroll from '../../unroll'
 
 /* ::
 
