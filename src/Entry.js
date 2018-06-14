@@ -13,4 +13,5 @@ export default function Entry /* ::<$content> */
 	}
 }
 
+/* @flow-off */
 Entry.Remove = (Symbol('Remove') /* :$Remove */)

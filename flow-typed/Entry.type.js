@@ -15,7 +15,7 @@ type $File =
 
 ;
 
-type $Remove = Symbol
+opaque type $Remove = Symbol
 
 ;
 
