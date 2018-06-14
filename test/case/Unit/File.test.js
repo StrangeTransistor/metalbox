@@ -15,6 +15,8 @@ import Entry from 'src/Entry'
 import File from 'src/Unit/File'
 import Remove from 'src/Unit/File/Remove'
 
+import RemoveEntry from 'src/Unit/Entry/Remove'
+
 var typical_content = 'content\n'
 
 describe('File', () =>
@@ -168,7 +170,7 @@ describe('File.Move', () =>
 	})
 })
 
-describe('File/Remove', () =>
+describe('Remove', () =>
 {
 	var cl1 = collate('file/1')
 	var context_null = Context(null)
@@ -187,7 +189,7 @@ describe('File/Remove', () =>
 		compare(cl1(), tm())
 	})
 
-	it('File/Remove.Entry()', async () =>
+	it('Entry/Remove()', async () =>
 	{
 		var tm = tmp()
 
@@ -197,7 +199,7 @@ describe('File/Remove', () =>
 
 		await pre(context_null).output
 
-		var unit = Remove.Entry()
+		var unit = RemoveEntry()
 
 		await unit(Context(Entry(
 			tm('def'),
