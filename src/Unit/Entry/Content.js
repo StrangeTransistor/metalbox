@@ -7,13 +7,13 @@ type $Content$Fn<$prov: $Providers$Base>
 */
 
 import Unit from '../Unit'
-import Entry from '../Entry'
+import Entry from '../../Entry'
 
 export default function Content /* ::<$prov: $Providers$Base> */
 (
 	fn /* :$Content$Fn<$prov> */
 )
-	/* :$Unit<$Entry<$Entry$File>, $prov, $Entry<$Entry$File>> */
+	/* :$Unit$Entry$Transform<$Entry$File, $prov, $Entry$File> */
 {
 	return Unit(
 	{
