@@ -1,8 +1,15 @@
 
+@import './mixin';
+
 @x: 1;
 
 a
 {
 	x: @x;
 	y: 2;
+}
+
+b
+{
+	.mixin(@x);
 }

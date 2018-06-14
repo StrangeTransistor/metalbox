@@ -12,9 +12,13 @@ export default function Less
 {
 	return Unit(async (entry) =>
 	{
-		var content = entry.content.content
+		var filename = entry.filename
+		var content  = entry.content.content
 
-		var bundle = await less.render(content)
+		var bundle = await less.render(content,
+		{
+			filename,
+		})
 
 		return Entry(entry.filename,
 		{
