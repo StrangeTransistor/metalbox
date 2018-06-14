@@ -1,15 +1,8 @@
 /* @flow */
 
-import Unit from '../Unit'
-import Entry from '../Entry'
+import Rename from '../Unit/Entry/Rename'
 
-export default function TsExt /* ::<T> */ ()
-	/* :$Unit<$Entry<T>, any, $Entry<T>> */
+export default function TsExt ()
 {
-	return Unit(entry =>
-	{
-		var filename = entry.filename.replace(/\.ts$/, '.js')
-
-		return Entry(filename, entry.content)
-	})
+	return Rename(filename => filename.replace(/\.ts$/, '.js'))
 }

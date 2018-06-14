@@ -1,17 +1,8 @@
 /* @flow */
 
-import Unit  from '../Unit'
-import Entry from '../Entry'
+import Rename from '../Unit/Entry/Rename'
 
-export default function FlowDecl /* ::<$content, $prov: $Providers$Base> */ ()
-	/* :$Unit<$Entry<$content>, $prov, $Entry<$content>> */
+export default function FlowDecl ()
 {
-	return Unit(entry =>
-	{
-		var filename = entry.filename
-
-		filename = filename + '.flow'
-
-		return Entry(filename, entry.content)
-	})
+	return Rename(filename => filename + '.flow')
 }
