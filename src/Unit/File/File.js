@@ -2,13 +2,11 @@
 
 var assign = Object.assign
 
-import { isAbsolute as is_abs } from 'path'
 import { dirname } from 'path'
 
 import { writeFile as write } from 'fs-extra'
 import { copy } from 'fs-extra'
 import { move } from 'fs-extra'
-import { unlink } from 'fs-extra'
 import { ensureDir as mkdirp } from 'fs-extra'
 
 import bluebird from 'bluebird'
@@ -16,9 +14,9 @@ var join = bluebird.join
 
 import Unit from '../Unit'
 
-import Entry from '../../Entry'
-
 import unroll from '../../unroll'
+
+import ensure_abs from './ensure-abs'
 
 /* ::
 
@@ -136,48 +134,4 @@ async function prep_path /* ::<$in, $prov: $Providers$Base> */
 	}
 
 	return Σfilename
-}
-
-
-File.Remove = function /* ::<$in, $prov: $Providers$Base> */
-(
-	filename /* :$Computable<$in, $prov, string> */
-)
-	/* :$Unit<$in, $prov, void> */
-{
-	return Unit(async (_, context) =>
-	{
-		var Σfilename = await unroll(context, filename)
-
-		ensure_abs(Σfilename)
-
-		return unlink(Σfilename)
-	})
-}
-
-File.Remove.Entry = function ()
-{
-	return File.Remove((entry /* :$Entry<$Remove> */) =>
-	{
-		ensure_remove(entry)
-
-		return entry.filename
-	})
-}
-
-function ensure_remove (entry /* :$Entry<$Remove> */)
-{
-	if (entry.content !== Entry.Remove)
-	{
-		throw new Error('must_be_entry_remove')
-	}
-}
-
-function ensure_abs (filename)
-{
-	if (! is_abs(filename))
-	{
-		/* TODO error infrastructure */
-		throw new TypeError('filename_must_be_absolute_path')
-	}
 }

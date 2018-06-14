@@ -13,6 +13,7 @@ import compare from 'src/compare'
 import Context from 'src/Context'
 import Entry from 'src/Entry'
 import File from 'src/Unit/File'
+import Remove from 'src/Unit/File/Remove'
 
 var typical_content = 'content\n'
 
@@ -167,26 +168,26 @@ describe('File.Move', () =>
 	})
 })
 
-describe('File.Remove', () =>
+describe('File/Remove', () =>
 {
 	var cl1 = collate('file/1')
 	var context_null = Context(null)
 
-	it('File.Remove()', async () =>
+	it('File/Remove()', async () =>
 	{
 		var tm = tmp()
 
 		var unit =
 		File(tm('def'), '')
 		.pipe(File(tm('abc'), typical_content))
-		.pipe(File.Remove(tm('def')))
+		.pipe(Remove(tm('def')))
 
 		await unit(context_null).output
 
 		compare(cl1(), tm())
 	})
 
-	it('File.Remove.Entry()', async () =>
+	it('File/Remove.Entry()', async () =>
 	{
 		var tm = tmp()
 
@@ -196,7 +197,7 @@ describe('File.Remove', () =>
 
 		await pre(context_null).output
 
-		var unit = File.Remove.Entry()
+		var unit = Remove.Entry()
 
 		await unit(Context(Entry(
 			tm('def'),
