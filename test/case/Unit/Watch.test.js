@@ -7,7 +7,7 @@ import origin from 'src/rootpath/origin'
 import Context from 'src/Context'
 
 import Unit from 'src/Unit'
-import Rebase from 'src/Unit/Rebase'
+import Rebase from 'src/Unit/Entry/Rebase'
 import Watch from 'src/Unit/Watch'
 
 describe('Watch', () =>

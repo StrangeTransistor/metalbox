@@ -16,7 +16,7 @@ import Cjs  from 'src/Unit/Rollup/target/Cjs'
 import Es6  from 'src/Unit/Rollup/target/Es6'
 import Iife from 'src/Unit/Rollup/target/Iife'
 
-import Rebase from 'src/Unit/Rebase'
+import Rebase from 'src/Unit/Entry/Rebase'
 import File   from 'src/Unit/File'
 
 describe('Rollup', () =>

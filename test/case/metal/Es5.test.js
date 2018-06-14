@@ -12,7 +12,7 @@ import Glob from 'src/Unit/Glob/Each'
 import Watch from 'src/Unit/Watch'
 
 import Unit from 'src/Unit'
-import Rebase from 'src/Unit/Rebase'
+import Rebase from 'src/Unit/Entry/Rebase'
 import Load   from 'src/Unit/Entry/Load'
 import File from 'src/Unit/File'
 

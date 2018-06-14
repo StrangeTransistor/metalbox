@@ -10,7 +10,7 @@ import Entry from 'src/Entry'
 import Context from 'src/Context'
 
 import Load   from 'src/Unit/Entry/Load'
-import Rebase from 'src/Unit/Rebase'
+import Rebase from 'src/Unit/Entry/Rebase'
 import File from 'src/Unit/File'
 
 import Less from 'src/Unit/Less'

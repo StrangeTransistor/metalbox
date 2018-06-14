@@ -6,17 +6,17 @@ import { join as absolute } from 'path'
 import bluebird from 'bluebird'
 var join = bluebird.join
 
-import unroll from '../unroll'
+import unroll from '../../unroll'
 
-import Entry from '../Entry'
-import Unit from './Unit'
+import Entry from '../../Entry'
+import Unit  from '../Unit'
 
 export default function Rebase /* ::<$content, $prov: $Providers$Base> */
 (
 	from /* :$Computable<$Entry<$content>, $prov, string> */,
 	to   /* :$Computable<$Entry<$content>, $prov, string> */
 )
-	/* :$Unit<$Entry<$content>, $prov, $Entry<$content>> */
+	/* :$Unit$Entry$Transform<$content, $prov, $content> */
 {
 	return Unit(async (entry, context) =>
 	{

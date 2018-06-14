@@ -4,7 +4,8 @@ import { expect } from 'chai'
 
 import Context from 'src/Context'
 import Entry from 'src/Entry'
-import Rebase from 'src/Unit/Rebase'
+
+import Rebase from 'src/Unit/Entry/Rebase'
 
 describe('Rebase', () =>
 {
