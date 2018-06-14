@@ -7,7 +7,7 @@ import origin from 'src/rootpath/origin'
 import Context from 'src/Context'
 import Entry   from 'src/Entry'
 
-import Load from 'src/Unit/Load'
+import Load from 'src/Unit/Entry/Load'
 
 describe('Load', () =>
 {

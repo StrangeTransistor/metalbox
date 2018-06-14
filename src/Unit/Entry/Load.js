@@ -2,11 +2,11 @@
 
 import { readFile as read } from 'fs-extra'
 
-import Unit from './Unit'
-import Entry from '../Entry'
+import Unit  from '../Unit'
+import Entry from '../../Entry'
 
 export default function Load /* ::<$in, $prov: $Providers$Base> */ ()
-	/* :$Unit<$Entry<$in>, $prov, $Entry<$Entry$File>> */
+	/* :$Unit$Entry$Transform<$in, $prov, $Entry$File> */
 {
 	return Unit(async (entry) =>
 	{

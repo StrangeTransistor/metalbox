@@ -13,7 +13,7 @@ import Watch from 'src/Unit/Watch'
 
 import Unit from 'src/Unit'
 import Rebase from 'src/Unit/Rebase'
-import Load from 'src/Unit/Load'
+import Load   from 'src/Unit/Entry/Load'
 import File from 'src/Unit/File'
 
 import Es5 from 'src/metal/Es5'

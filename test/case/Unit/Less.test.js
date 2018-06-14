@@ -9,7 +9,7 @@ import compare from 'src/compare'
 import Entry from 'src/Entry'
 import Context from 'src/Context'
 
-import Load from 'src/Unit/Load'
+import Load   from 'src/Unit/Entry/Load'
 import Rebase from 'src/Unit/Rebase'
 import File from 'src/Unit/File'
 
