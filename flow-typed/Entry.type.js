@@ -15,7 +15,7 @@ type $File =
 
 ;
 
-type $Entry$Remove = Symbol
+type $Remove = Symbol
 
 ;
 

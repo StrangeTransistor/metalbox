@@ -157,7 +157,7 @@ File.Remove = function /* ::<$in, $prov: $Providers$Base> */
 
 File.Remove.Entry = function ()
 {
-	return File.Remove((entry /* :$Entry<$Entry$Remove> */) =>
+	return File.Remove((entry /* :$Entry<$Remove> */) =>
 	{
 		ensure_remove(entry)
 
@@ -165,7 +165,7 @@ File.Remove.Entry = function ()
 	})
 }
 
-function ensure_remove (entry /* :$Entry<$Entry$Remove> */)
+function ensure_remove (entry /* :$Entry<$Remove> */)
 {
 	if (entry.content !== Entry.Remove)
 	{
