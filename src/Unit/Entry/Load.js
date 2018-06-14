@@ -6,7 +6,7 @@ import Unit  from '../Unit'
 import Entry from '../../Entry'
 
 export default function Load /* ::<$in, $prov: $Providers$Base> */ ()
-	/* :$Unit$Entry$Transform<$in, $prov, $Entry$File> */
+	/* :$Unit$Entry$Transform<$in, $prov, $File> */
 {
 	return Unit(async (entry) =>
 	{

@@ -60,8 +60,8 @@ File.Name = function (filename /* :$Computable<string, any, string> */)
 File.Entry = function ()
 {
 	return File(
-		(entry /* :$Entry<$Entry$File> */) => entry.filename,
-		(entry /* :$Entry<$Entry$File> */) => entry.content.content
+		(entry /* :$Entry<$File> */) => entry.filename,
+		(entry /* :$Entry<$File> */) => entry.content.content
 	)
 }
 

@@ -7,7 +7,7 @@ type $Entry<$content> =
 
 ;
 
-type $Entry$File =
+type $File =
 {
 	content:     string,
 	sourcemap?: ?Object,

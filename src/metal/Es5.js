@@ -12,7 +12,7 @@ import Emptish from './Emptish'
 import Iop from './Iop'
 
 export default function Es5 ()
-	/* :$Unit<$Entry<any>, any, $Entry<$Entry$File>> */
+	/* :$Unit<$Entry<any>, any, $Entry<$File>> */
 {
 	var plugins =
 	[

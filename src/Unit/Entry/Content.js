@@ -2,7 +2,7 @@
 /* ::
 
 type $Content$Fn<$prov: $Providers$Base>
-= $Producer<[ string, $Context<$Entry<$Entry$File>, $prov> ], string>
+= $Producer<[ string, $Context<$Entry<$File>, $prov> ], string>
 
 */
 
@@ -13,7 +13,7 @@ export default function Content /* ::<$prov: $Providers$Base> */
 (
 	fn /* :$Content$Fn<$prov> */
 )
-	/* :$Unit$Entry$Transform<$Entry$File, $prov, $Entry$File> */
+	/* :$Unit$Entry$Transform<$File, $prov, $File> */
 {
 	return Unit(
 	{
