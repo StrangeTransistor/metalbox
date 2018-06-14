@@ -55,15 +55,6 @@ File.Name = function (filename /* :$Computable<string, any, string> */)
 	return File(filename, (input /* :string */) => input)
 }
 
-File.Entry = function ()
-{
-	return File(
-		(entry /* :$Entry<$File> */) => entry.filename,
-		(entry /* :$Entry<$File> */) => entry.content.content
-	)
-}
-
-
 File.Copy = function /* ::<$in, $prov: $Providers$Base> */
 (
 	src /* :$Computable<$in, $prov, string> */,

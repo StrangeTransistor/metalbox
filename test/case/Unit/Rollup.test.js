@@ -17,7 +17,7 @@ import Es6  from 'src/Unit/Rollup/target/Es6'
 import Iife from 'src/Unit/Rollup/target/Iife'
 
 import Rebase from 'src/Unit/Entry/Rebase'
-import File   from 'src/Unit/File'
+import File   from 'src/Unit/Entry/File'
 
 describe('Rollup', () =>
 {
@@ -33,7 +33,7 @@ describe('Rollup', () =>
 		var unit = Rollup(org('index.js'), { silent: true })
 		.pipe(Cjs())
 		.pipe(Rebase(org(), tm()))
-		.pipe(File.Entry())
+		.pipe(File())
 
 		await unit(context_null).output
 
@@ -49,7 +49,7 @@ describe('Rollup', () =>
 		var unit = RollupEntry({ silent: true })
 		.pipe(Cjs())
 		.pipe(Rebase(org(), tm()))
-		.pipe(File.Entry())
+		.pipe(File())
 
 		await unit(context).output
 
@@ -63,7 +63,7 @@ describe('Rollup', () =>
 		var unit = Rollup(org('index.js'), { silent: true })
 		.pipe(Es6())
 		.pipe(Rebase(org(), tm()))
-		.pipe(File.Entry())
+		.pipe(File())
 
 		await unit(context_null).output
 
@@ -77,7 +77,7 @@ describe('Rollup', () =>
 		var unit = Rollup(org('iife.js'), { silent: true })
 		.pipe(Iife())
 		.pipe(Rebase(org(), tm()))
-		.pipe(File.Entry())
+		.pipe(File())
 
 		await unit(context_null).output
 
@@ -91,7 +91,7 @@ describe('Rollup', () =>
 		var unit = Rollup(org('index.js'), { external: true })
 		.pipe(Cjs())
 		.pipe(Rebase(org(), tm()))
-		.pipe(File.Entry())
+		.pipe(File())
 
 		await unit(context_null).output
 

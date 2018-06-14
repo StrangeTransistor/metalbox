@@ -12,9 +12,11 @@ import compare from 'src/compare'
 
 import Context from 'src/Context'
 import Entry from 'src/Entry'
+
 import File from 'src/Unit/File'
 import Remove from 'src/Unit/File/Remove'
 
+import FileEntry from 'src/Unit/Entry/File'
 import RemoveEntry from 'src/Unit/Entry/Remove'
 
 var typical_content = 'content\n'
@@ -108,26 +110,6 @@ describe('File.Name', () =>
 	})
 })
 
-describe('File.Entry', () =>
-{
-	var cl1 = collate('file/1')
-
-	it('File.Entry()', async () =>
-	{
-		var tm = tmp()
-		var context_entry = Context(Entry(
-			tm('abc'),
-			{ content: typical_content }
-		))
-
-		var unit = File.Entry()
-
-		await unit(context_entry).output
-
-		compare(cl1(), tm())
-	})
-})
-
 describe('File.Copy', () =>
 {
 	var cl1 = collate('file/2')
@@ -165,6 +147,26 @@ describe('File.Move', () =>
 		))
 
 		await unit(context_null).output
+
+		compare(cl1(), tm())
+	})
+})
+
+describe('Entry/File', () =>
+{
+	var cl1 = collate('file/1')
+
+	it('Entry/File()', async () =>
+	{
+		var tm = tmp()
+		var context_entry = Context(Entry(
+			tm('abc'),
+			{ content: typical_content }
+		))
+
+		var unit = FileEntry()
+
+		await unit(context_entry).output
 
 		compare(cl1(), tm())
 	})

@@ -9,6 +9,7 @@ import Context from 'src/Context'
 import Entry from 'src/Entry'
 
 import File from 'src/Unit/File'
+import FileEntry from 'src/Unit/Entry/File'
 
 import Dir from 'src/Unit/Dir'
 import Ensure from 'src/Unit/Dir/Ensure'
@@ -56,7 +57,7 @@ describe('Dir/Ensure', () =>
 			{ content: '' }
 		))
 
-		var unit = Ensure(File.Entry())
+		var unit = Ensure(FileEntry())
 
 		await unit(context).output
 
