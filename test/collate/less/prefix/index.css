@@ -6,5 +6,7 @@ b {
   x: 1;
 }
 c {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
