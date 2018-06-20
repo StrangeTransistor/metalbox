@@ -19,7 +19,7 @@ import Less from 'src/Unit/Less'
 describe('Less', () =>
 {
 	var less_org = origin('less')
-	var es5_cl  = collate('less')
+	var es5_cl  = collate('less/simple')
 
 	it('Entry', async () =>
 	{
