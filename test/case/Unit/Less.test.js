@@ -11,6 +11,7 @@ import Context from 'src/Context'
 
 import Load   from 'src/Unit/Entry/Load'
 import Rebase from 'src/Unit/Entry/Rebase'
+import Ext    from 'src/Unit/Entry/Ext'
 import File   from 'src/Unit/Entry/File'
 
 import Less from 'src/Unit/Less'
@@ -30,6 +31,7 @@ describe('Less', () =>
 		var u = Load()
 		.pipe(Less())
 		.pipe(Rebase(less_org(), tm()))
+		.pipe(Ext('less', 'css'))
 		.pipe(File())
 
 		await u(context).output
