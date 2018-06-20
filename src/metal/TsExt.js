@@ -1,8 +1,8 @@
 /* @flow */
 
-import Rename from '../Unit/Entry/Rename'
+import Ext from '../Unit/Entry/Ext'
 
 export default function TsExt ()
 {
-	return Rename(filename => filename.replace(/\.ts$/, '.js'))
+	return Ext('ts', 'js')
 }
