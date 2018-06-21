@@ -29,6 +29,7 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base>*/ ()
 		}
 		else
 		{
+			write(bold('Debug:'), NL)
 			write(inspect(it, defaults), '\n')
 		}
 
