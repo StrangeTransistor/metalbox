@@ -7,7 +7,7 @@ import Unit from './Unit'
 var defaults =
 {
 	colors: true,
-	depth: 3,
+	depth: 2,
 }
 
 export default function Debug /* ::<$thru, $prov: $Providers$Base>*/ ()
