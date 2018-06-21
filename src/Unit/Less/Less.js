@@ -1,9 +1,9 @@
 /* @flow */
 
-import less from 'less'
+import less  from 'less'
 
+import Entry from '../../Entry'
 import Unit  from '../Unit'
-import Entry from '../Entry'
 
 export default function Less
 	/* ::<$in: $Entry<$File>, $prov: $Providers$Base> */
