@@ -6,10 +6,10 @@ import pad from 'lodash/padStart'
 var opts =
 {
 	length: 3,
-	capitalization: 'uppercase'
+	capitalization: 'uppercase',
 }
 
-/* STATE */
+/* STATE GLOBAL */
 var n = 1
 
 export default function ()
