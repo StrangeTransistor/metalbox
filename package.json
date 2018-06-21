@@ -94,7 +94,11 @@
       "6",
 
     "autoprefixer":
-      "8"
+      "8",
+
+
+    "pug":
+      "2"
   },
 
   "devDependencies":
