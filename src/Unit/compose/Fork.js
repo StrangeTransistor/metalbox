@@ -2,16 +2,17 @@
 
 var noop = () => {}
 
-import bluebird from 'bluebird'
-var join = bluebird.join
-
 import { combine } from 'flyd'
+
+import bluebird from 'bluebird'
+var { join } = bluebird
 
 import Unit from '../Unit'
 
+import alive    from '../../Outcome/alive'
+
 import finalize from '../../flyd/finalize'
-import alive from '../../Outcome/alive'
-import turnoff from '../../flyd/turnoff'
+import turnoff  from '../../flyd/turnoff'
 
 export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
 (

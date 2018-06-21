@@ -18,14 +18,14 @@ export default function Pipe
 
 		if (out1.stream)
 		{
-			return proceed(out1, u2, (value) => context.derive(value))
+			return proceed(out1, u2, context.derive)
 		}
 		else
 		{
-			return out1.output.then(output =>
-			{
-				return u2(context.derive(output)).output
-			})
+			return out1.output
+			.then(context.derive)
+			.then(u2)
+			.then(outcome => outcome.output)
 		}
 	})
 }
