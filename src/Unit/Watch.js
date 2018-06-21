@@ -41,10 +41,7 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 		{
 			if (! handler) return
 
-			/* @flow-off */
 			handler.unwatch()
-
-			/* @flow-off */
 			handler.close()
 		}
 

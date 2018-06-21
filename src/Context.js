@@ -42,7 +42,6 @@ export default function Context /* :: <$in, $prov: $Providers$Base> */
 			}
 			else
 			{
-				/* @flow-off */
 				derived.providers = context.providers.derive({})
 				return (derived /* :$Context<$d_in, $prov & $prov_add> */)
 			}
