@@ -7,28 +7,46 @@ import origin from 'src/rootpath/origin'
 import Context from 'src/Context'
 import Entry   from 'src/Entry'
 
-import Load from 'src/Unit/Entry/Load'
+import Load from 'src/Unit/Load'
+import LoadEntry from 'src/Unit/Entry/Load'
 
 describe('Load', () =>
 {
 	var org = origin('plain')
 
-	it('works', async () =>
+	it('Load', async () =>
+	{
+		var unit = Load(org('source.txt'))
+
+		var outcome = unit(Context(null))
+		var output = await outcome.output
+
+		expect_entry(output, 'source.txt', 'source of content\n')
+	})
+
+	it('Load/Entry', async () =>
 	{
 		var filename = org('source.txt')
 		var entry = Entry(filename)
 		var context = Context(entry)
 
-		var unit = Load()
+		var unit = LoadEntry()
 
 		var outcome = unit(context)
 		var output = await outcome.output
 
-		expect(output).property('filename')
-		expect(output.filename).eq(filename)
-
-		expect(output).property('content')
-		expect(output.content).property('content')
-		expect(output.content.content).eq('source of content\n')
+		expect_entry(output, 'source.txt', 'source of content\n')
 	})
 })
+
+function expect_entry (entry, filename, content)
+{
+	expect(entry).property('filename')
+	expect(entry.filename).a('string')
+	expect(entry.filename).eq(filename)
+
+	expect(entry).property('content')
+	expect(entry.content).property('content')
+	expect(entry.content).an('object')
+	expect(entry.content.content).eq(content)
+}
