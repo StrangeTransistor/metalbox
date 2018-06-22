@@ -101,7 +101,11 @@
 
 
     "pug":
-      "2"
+      "2",
+
+
+    "estraverse":
+      "4"
   },
 
   "devDependencies":
