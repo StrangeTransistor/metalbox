@@ -21,7 +21,7 @@ describe('Load', () =>
 		var outcome = unit(Context(null))
 		var output = await outcome.output
 
-		expect_entry(output, 'source.txt', 'source of content\n')
+		expect_entry(output, org('source.txt'), 'source of content\n')
 	})
 
 	it('Load/Entry', async () =>
@@ -35,7 +35,7 @@ describe('Load', () =>
 		var outcome = unit(context)
 		var output = await outcome.output
 
-		expect_entry(output, 'source.txt', 'source of content\n')
+		expect_entry(output, org('source.txt'), 'source of content\n')
 	})
 })
 

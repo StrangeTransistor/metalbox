@@ -27,7 +27,7 @@
   {
       "st": "eslint run/ src/ test/",
        "t": "glow || flow",
-    "unit": "mocha -r test/patch -r esm -R dot test/case/**",
+    "unit": "mocha -r test/patch -r esm -R dot --recursive test/case/**",
 
     "test": "npm run st && npm run t && npm run unit"
   },
