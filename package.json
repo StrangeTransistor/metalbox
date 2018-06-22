@@ -102,6 +102,9 @@
     "autoprefixer":
       "8",
 
+    "cssnano":
+      "3",
+
 
     "pug":
       "2",
