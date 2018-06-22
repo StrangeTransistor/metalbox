@@ -5,10 +5,8 @@ import less  from 'less'
 import Entry from '../../Entry'
 import Unit  from '../Unit'
 
-export default function Less
-	/* ::<$in: $Entry<$File>, $prov: $Providers$Base> */
-()
-	/* :$Unit<$in, $prov, $Entry<$File>> */
+export default function Less ()
+	/* :$Unit<$Entry<$File>, any, $Entry<$File>> */
 {
 	return Unit(async (entry) =>
 	{
