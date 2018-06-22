@@ -23,6 +23,7 @@ export default function Content /* ::<$prov: $Providers$Base> */
 		{
 			var content = entry.content.content
 
+			// TODO: sourcemaps
 			content = await fn(content, context)
 
 			return Entry(entry.filename,

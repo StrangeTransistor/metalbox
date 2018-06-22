@@ -86,6 +86,9 @@
     "eslint":
       "4",
 
+    "babel-core":
+      "6",
+
 
     "less":
       "3",
