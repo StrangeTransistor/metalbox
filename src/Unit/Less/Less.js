@@ -6,7 +6,7 @@ import Entry from '../../Entry'
 import Unit  from '../Unit'
 
 export default function Less ()
-	/* :$Unit<$Entry<$File>, any, $Entry<$File>> */
+	/* :$Thru<$File, any, $File> */
 {
 	return Unit(async (entry) =>
 	{

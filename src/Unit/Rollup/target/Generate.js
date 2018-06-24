@@ -21,7 +21,7 @@ export default function Generate
 	exports /* :$Rollup$Exports */,
 	options /* :: ?:$Shape<$Rollup$OutputOptions> */
 )
-	/* :$Unit<$Entry<$Rollup$Bundle>, any, $Entry<$File>> */
+	/* :$Thru<$Rollup$Bundle, any, $File> */
 {
 	return Unit(async (entry) =>
 	{
