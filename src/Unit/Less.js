@@ -2,8 +2,8 @@
 
 import less  from 'less'
 
-import Entry from '../../Entry'
-import Unit  from '../Unit'
+import Entry from '../Entry'
+import Unit  from './Unit'
 
 export default function Less ()
 	/* :$Thru<$File, any, $File> */
