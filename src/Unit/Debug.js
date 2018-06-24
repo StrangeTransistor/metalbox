@@ -17,7 +17,7 @@ var defaults =
 	depth: 2,
 }
 
-export default function Debug /* ::<$thru, $prov: $Providers$Base>*/
+export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 (
 	label /* ::?:string */
 )
