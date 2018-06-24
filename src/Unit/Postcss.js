@@ -6,7 +6,7 @@ import Entry from '../Entry'
 import Unit from './Unit'
 
 export default function Postcss (transforms /* :any[] */)
-	/* :$Unit$Entry$Transform<$File, any, $File> */
+	/* :$Thru<$File, any, $File> */
 {
 	var tr = postcss(transforms)
 

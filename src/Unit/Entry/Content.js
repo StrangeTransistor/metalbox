@@ -13,7 +13,7 @@ export default function Content /* ::<$prov: $Providers$Base> */
 (
 	fn /* :$Content$Fn<$prov> */
 )
-	/* :$Unit$Entry$Transform<$File, $prov, $File> */
+	/* :$Thru<$File, $prov, $File> */
 {
 	return Unit(
 	{

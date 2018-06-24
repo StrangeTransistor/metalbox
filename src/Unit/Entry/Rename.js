@@ -13,7 +13,7 @@ export default function Rename /* ::<$content, $prov: $Providers$Base> */
 (
 	fn /* :$Rename$Fn<$content, $prov> */
 )
-	/* :$Unit$Entry$Transform<$content, $prov, $content> */
+	/* :$Thru<$content, $prov, $content> */
 {
 	return Unit(
 	{

@@ -6,7 +6,7 @@ import Entry from '../Entry'
 import Unit  from './Unit'
 
 export default function Babel (options /* ::?:Object */)
-	/* :$Unit$Entry$Transform<$File, any, $File> */
+	/* :$Thru<$File, any, $File> */
 {
 	return Unit(entry =>
 	{

@@ -16,7 +16,7 @@ export default function Rebase /* ::<$content, $prov: $Providers$Base> */
 	from /* :$Computable<$Entry<$content>, $prov, string> */,
 	to   /* :$Computable<$Entry<$content>, $prov, string> */
 )
-	/* :$Unit$Entry$Transform<$content, $prov, $content> */
+	/* :$Thru<$content, $prov, $content> */
 {
 	return Unit(async (entry, context) =>
 	{
