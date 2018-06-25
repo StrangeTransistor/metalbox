@@ -32,7 +32,8 @@ declare function Unit <$in, $prov: $Providers$Base, $out>
 
 var defaults =
 {
-	input: tcomb.Any,
+	input:  tcomb.Any,
+	family: null,
 }
 
 export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
@@ -46,17 +47,18 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 		options = { unit: options }
 	}
 
-	options = assign({}, defaults, options)
+	var Σoptions /* :$Unit$Options<$in, $prov, $out> */
+	= assign({}, defaults, options)
 
 	/* main */
 	var unit = function (context)
 	{
-		return invoke(options.unit, context, options.input)
+		return invoke(Σoptions.unit, context, Σoptions.input)
 	}
 
-	if (options.family)
+	if (Σoptions.family)
 	{
-		unit.family = options.family
+		unit.family = Σoptions.family
 	}
 	else
 	{
