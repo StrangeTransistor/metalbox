@@ -9,22 +9,28 @@ import Outcome from '../../Outcome'
 
 declare function invoke <$in, $prov: $Providers$Base, $out>
 (
-	fn: $Unit$Fn<$in, $prov, $out>,
-	context: $Context<$in, $prov>,
-	input: Function
+	options: $Unit$Options<$in, $prov, $out>,
+	context: $Context<$in, $prov>
 )
 : $Outcome<$out>
 
 */
 
-export default function invoke (fn, context, input)
+export default function invoke (options, context)
 {
+	var unit = options.unit
+	var val_input = options.input
+
 	try
 	{
-		input(context.input)
-		// TODO: validate providers(context.providers) as well
+		var input = context.input
+		// providers = context.providers
 
-		return Outcome(fn(context.input, context))
+		val_input(input)
+		// TODO: validate providers(context.providers) as well
+		// val_providers(providers)
+
+		return Outcome(unit(input, context))
 	}
 	catch (e)
 	{

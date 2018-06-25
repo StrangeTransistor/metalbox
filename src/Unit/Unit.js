@@ -53,7 +53,7 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 	/* main */
 	var unit = function (context)
 	{
-		return invoke(Σoptions.unit, context, Σoptions.input)
+		return invoke(Σoptions, context)
 	}
 
 	if (Σoptions.family)

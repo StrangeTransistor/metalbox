@@ -48,7 +48,14 @@ describe('Unit', () =>
 
 	it('Unit/invoke', async () =>
 	{
-		var outcome = invoke(input => input, Context(17), tcomb.Any)
+		var options =
+		{
+			unit: (input) => input,
+			input: tcomb.Any,
+			family: null,
+		}
+
+		var outcome = invoke(options, Context(17))
 
 		expect(outcome).property('stream')
 		expect(outcome).property('output')
@@ -61,8 +68,14 @@ describe('Unit', () =>
 	it('Unit/invoke captures throw', async () =>
 	{
 		var error = new Error('e')
+		var options =
+		{
+			unit: () => { throw error },
+			input: tcomb.Any,
+			family: null,
+		}
 
-		var outcome = invoke(() => { throw error }, Context(null), tcomb.Any)
+		var outcome = invoke(options, Context(null))
 
 		var r = await outcome.output.then(
 		()  => expect(false).true,
@@ -73,14 +86,26 @@ describe('Unit', () =>
 
 	it('Unit/invoke validates', async () =>
 	{
-		var outcome = invoke(input => input, Context(17), tcomb.Number)
+		var options =
+		{
+			unit: (input) => input,
+			input: tcomb.Number,
+			family: null,
+		}
+		var outcome = invoke(options, Context(17))
 
 		await outcome.output
 	})
 
 	it('Unit/invoke validates throw', async () =>
 	{
-		var outcome = invoke(input => input, Context(17), tcomb.String)
+		var options =
+		{
+			unit: (input) => input,
+			input: tcomb.String,
+			family: null,
+		}
+		var outcome = invoke(options, Context(17))
 
 		var r = await outcome.output.then(
 		()  => expect(false).true,
