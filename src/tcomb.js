@@ -13,4 +13,6 @@ tcomb.fail = (message) =>
 	throw error
 }
 
+tcomb.Never = tcomb.irreducible('Never', () => false)
+
 export default tcomb

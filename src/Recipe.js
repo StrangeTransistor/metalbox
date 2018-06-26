@@ -60,7 +60,7 @@ function val_args (vals, args)
 
 	for (let i = 0; i < L; i++)
 	{
-		let val = (Σvals[i] || tcomb.Nil)
+		let val = (Σvals[i] || tcomb.Never)
 		let arg =  Σargs[i]
 
 		console.log(val, arg)
