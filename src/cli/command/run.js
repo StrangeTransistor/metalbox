@@ -28,8 +28,8 @@ var basic_resolver = compose(
 
 export default async function (mini /* :minimistOutput */)
 {
-	var Resolved = resolve(mini)
-	var unit = make(mini, Resolved)
+	var recipe = resolve(mini)
+	var unit = await make(mini, recipe)
 	return await invoke(mini, unit)
 }
 
@@ -53,12 +53,12 @@ function resolve (mini /* :minimistOutput */)
 	/* @flow-off */
 	/* :: resolved = (resolved :[string, string, any]) */
 
-	var Resolved = resolved[2].default
+	var recipe = resolved[2].default
 
-	if (typeof Resolved !== 'function')
+	if (typeof recipe !== 'function')
 	{
 		console.error(red(
-			`${ bold('Does not contain a function to create Unit') }: ` +
+			`${ bold('Does not contain a Recipe to create Unit') }: ` +
 			`${ resolved[1] }.`))
 
 		/* @flow-off */
@@ -68,11 +68,11 @@ function resolve (mini /* :minimistOutput */)
 	// TODO: tildify
 	console.info(`${ bold('Unit resolved') }: ${ resolved[1] }.`)
 
-	return Resolved
+	return recipe
 }
 
-function make (mini /* :minimistOutput */, Resolved /* :Function */)
-	/* :$Unit<any, any, any> */
+function make (mini /* :minimistOutput */, recipe /* :Function */)
+	/* :Promise<$Unit<any, any, any>> */
 {
 	var unit_make_args = mini._
 	.slice(1)
@@ -80,11 +80,11 @@ function make (mini /* :minimistOutput */, Resolved /* :Function */)
 
 	try
 	{
-		var unit = Resolved(...unit_make_args)
+		var unit = recipe(...unit_make_args)
 	}
 	catch (e)
 	{
-		console.error(f_error(`Error constructing Unit:`))
+		console.error(f_error(`Error constructing Recipe:`))
 		console.log(`${ bold(e.name) }: ${ e.message }.`)
 
 		/* @flow-off */
@@ -93,6 +93,8 @@ function make (mini /* :minimistOutput */, Resolved /* :Function */)
 
 	if (! Unit.is(unit))
 	{
+		// TODO:
+		// will catch if recipe is not an Recipe, but a simple function
 		console.error(f_error(`Constructed is not a Unit`))
 		console.log(unit)
 
