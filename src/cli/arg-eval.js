@@ -4,7 +4,7 @@ export default function (string /* :string */) /* :any */
 {
 	try
 	{
-		return eval(string)
+		return eval(`(${ string })`)
 	}
 	catch (e)
 	{
