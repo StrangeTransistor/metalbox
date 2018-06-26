@@ -2,10 +2,12 @@
 /* :: import type { minimistOutput } from 'minimist' */
 
 import clc from 'cli-color'
-var bold = clc.bold
-var red = clc.red
+var bold    = clc.bold
+var red     = clc.red
+var magenta = clc.magenta
 var f_error = clc.bold.red
 
+import Recipe from '../../Recipe'
 import Unit from '../../Unit'
 
 import compose from '../resolver/compose'
@@ -58,11 +60,16 @@ function resolve (mini /* :minimistOutput */)
 	if (typeof recipe !== 'function')
 	{
 		console.error(red(
-			`${ bold('Does not contain a Recipe to create Unit') }: ` +
-			`${ resolved[1] }.`))
+			`${
+bold('Does not contain a Recipe or a simple function to create Unit')
+			}: ${ resolved[1] }.`))
 
 		/* @flow-off */
 		return process.exit(1)
+	}
+	if (! Recipe.is(recipe))
+	{
+		console.error(magenta(`Working with simple function as a Recipe.`))
 	}
 
 	// TODO: tildify
@@ -95,7 +102,7 @@ function make (mini /* :minimistOutput */, recipe /* :Function */)
 	{
 		// TODO:
 		// will catch if recipe is not an Recipe, but a simple function
-		console.error(f_error(`Constructed is not a Unit`))
+		console.error(f_error(`Constructed is not a Unit.`))
 		console.log(unit)
 
 		/* @flow-off */

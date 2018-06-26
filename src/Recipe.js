@@ -32,11 +32,22 @@ export default function Recipe
 
 		if (! Unit.is(unit))
 		{
-			throw new TypeError('Recipe must construct Unit')
+			throw new TypeError('Recipe must construct Unit.')
 		}
 
 		return unit
 	}
 
+	/* @flow-off */
+	recipe[kind] = null
+
 	return recipe
 }
+
+Recipe.is = (recipe /* :any */) =>
+{
+	/* @flow-off */
+	return (kind in recipe)
+}
+
+var kind = Symbol('Recipe')
