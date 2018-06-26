@@ -10,7 +10,7 @@ import { either as drain } from '../flyd/drain'
 
 export default function capture /* ::<$out> */
 (
-	value /* :$Outcome$Value<$out> */
+	value /* :$Streaming<$out> */
 )
 	/* :[ Promise<$out>, flyd$Stream<$out> | null ] */
 {

@@ -6,7 +6,7 @@ import capture from './capture'
 
 export default function Outcome /* ::<$out> */
 (
-	output /* :$Outcome$Value<$out> */
+	output /* :$Streaming<$out> */
 )
 	/* :$Outcome<$out> */
 {

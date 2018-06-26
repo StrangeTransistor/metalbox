@@ -6,11 +6,11 @@ type $Producer
 >
  = (...args: $in) => $Promisable<$out>
 
-;
+type $Streaming<$out> = flyd$Stream<$out> | $Promisable<$out>
 
 type $Producer$Streaming
 <
 	$in: $Iterable<*, *, *>,
 	$out
 >
- = (...args: $in) => $Outcome$Value<$out>
+ = (...args: $in) => $Streaming<$out>

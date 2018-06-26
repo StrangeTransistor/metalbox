@@ -10,7 +10,7 @@ import stream_to from './stream-to'
 
 export default function /* ::<$value> */
 (
-	value /* :$Outcome$Value<$value> */
+	value /* :$Streaming<$value> */
 )
 	/* :flyd$Stream<$value> */
 {

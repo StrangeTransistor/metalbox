@@ -1,11 +1,5 @@
 
-type $Outcome$Value<$out> = flyd$Stream<$out> | $Promisable<$out>
-
-;
-
 type $Hrtime = [ number, number ]
-
-;
 
 type $Outcome<$out> =
 {
