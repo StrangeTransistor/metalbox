@@ -7,6 +7,8 @@ var red     = clc.red
 var magenta = clc.magenta
 var f_error = clc.bold.red
 
+import inspect from '../../inspect'
+
 import Recipe from '../../Recipe'
 import Unit from '../../Unit'
 
@@ -134,6 +136,15 @@ async function invoke (
 		return process.exit(1)
 	}
 
-	console.log(`${ bold('OK') }: ${ output }.`)
+	if (typeof output === 'object')
+	{
+		var inspected = `\n${ inspect(output) }`
+	}
+	else
+	{
+		var inspected = `${ output }.`
+	}
+
+	console.log(`${ bold('OK') }: ${ inspected }`)
 	// console.log(outcome) // TODO: time
 }

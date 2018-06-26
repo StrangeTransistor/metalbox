@@ -2,20 +2,14 @@
 
 var NL = '\n'
 
-import { inspect } from 'util'
-
 import clc from 'cli-color'
 var { bold } = clc
 var { green } = clc
 var file = clc.blue.italic
 
-import Unit from './Unit'
+import inspect from '../inspect'
 
-var defaults =
-{
-	colors: true,
-	depth: 2,
-}
+import Unit from './Unit'
 
 export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 (
@@ -57,7 +51,7 @@ function debug_entry (label, entry /* :$Entry<any> */)
 	else
 	{
 		write(...preplabel(label), bold('Entry<?>:'), ' ', entry.filename, NL)
-		write(inspect(entry.content, defaults), NL)
+		write(inspect(entry.content), NL)
 	}
 	hr()
 }
@@ -65,7 +59,7 @@ function debug_entry (label, entry /* :$Entry<any> */)
 function debug_any (label, it)
 {
 	write(...preplabel(label), bold('Debug:'), NL)
-	write(inspect(it, defaults), '\n')
+	write(inspect(it), '\n')
 }
 
 function preplabel (label)
