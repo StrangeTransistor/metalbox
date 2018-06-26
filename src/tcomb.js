@@ -1,6 +1,6 @@
 /* @flow */
 
-import tcomb from 'tcomb'
+import tcomb from 'tcomb-validation'
 
 tcomb.fail = (message) =>
 {

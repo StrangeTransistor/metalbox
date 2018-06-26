@@ -52,7 +52,7 @@
     "flyd":
       "0.2",
 
-    "tcomb":
+    "tcomb-validation":
       "3",
 
     "randomstring":

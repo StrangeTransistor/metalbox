@@ -63,8 +63,6 @@ function val_args (vals, args)
 		let val = (Σvals[i] || tcomb.Never)
 		let arg =  Σargs[i]
 
-		console.log(val, arg)
-
 		val(arg)
 	}
 }
