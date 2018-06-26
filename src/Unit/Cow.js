@@ -2,22 +2,26 @@
 
 import tcomb from '../tcomb'
 
-import Unit from './Unit'
+import Recipe from '../Recipe'
+import Unit   from './Unit'
 
-export default function Cow (level /* :number */)
+export default Recipe(
 {
-	tcomb.Number(level)
+	args: [ tcomb.Number ],
 
-	return Unit(
+	recipe (level /* :number */)
 	{
-		family: 'Cow',
-		input: tcomb.Number,
-		unit (input /* :number */)
+		return Unit(
 		{
-			console.log(`make  ${typeof level} ${level}`)
-			console.log(`input ${typeof input} ${input}`)
+			family: 'Cow',
+			input: tcomb.Number,
+			unit (input /* :number */)
+			{
+				console.log(`make  ${typeof level} ${level}`)
+				console.log(`input ${typeof input} ${input}`)
 
-			return (level + input)
-		},
-	})
-}
+				return (level + input)
+			},
+		})
+	},
+})

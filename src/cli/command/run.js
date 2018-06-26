@@ -80,7 +80,7 @@ bold('Does not contain a Recipe or a simple function to create Unit')
 	return recipe
 }
 
-function make (mini /* :minimistOutput */, recipe /* :Function */)
+async function make (mini /* :minimistOutput */, recipe /* :Function */)
 	/* :Promise<$Unit<any, any, any>> */
 {
 	var unit_make_args = mini._
@@ -89,7 +89,7 @@ function make (mini /* :minimistOutput */, recipe /* :Function */)
 
 	try
 	{
-		var unit = recipe(...unit_make_args)
+		var unit = await recipe(...unit_make_args)
 	}
 	catch (e)
 	{

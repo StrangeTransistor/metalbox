@@ -9,6 +9,7 @@ type $Producer$Unit<$in: $In, $unit_in, $prov: $Providers$Base, $unit_out>
 type $Options<$in: $In, $unit_in, $prov: $Providers$Base, $unit_out> =
 {
 	recipe: $Producer$Unit<$in, $unit_in, $prov, $unit_out>,
+	args?: Function[],
 }
 
 type $Recipe<$in: $In, $unit_in, $prov: $Providers$Base, $unit_out> =
@@ -18,7 +19,10 @@ type $Recipe<$in: $In, $unit_in, $prov: $Providers$Base, $unit_out> =
 
 */
 
-import Unit from './Unit'
+var max = Math.max
+
+import tcomb from './tcomb'
+import Unit  from './Unit'
 
 export default function Recipe
 	/* :: <$in: $In, $unit_in, $prov: $Providers$Base, $unit_out> */
@@ -28,6 +32,8 @@ export default function Recipe
 	var recipe = async function (...args /* :$in */)
 		/* :Promise<$Unit<$unit_in, $prov, $unit_out>> */
 	{
+		val_args(options.args, args)
+
 		var unit = await options.recipe(...args)
 
 		if (! Unit.is(unit))
@@ -42,6 +48,25 @@ export default function Recipe
 	recipe[kind] = null
 
 	return recipe
+}
+
+function val_args (vals, args)
+{
+	var Σvals = (vals || [])
+	/* @flow-off */
+	var Σargs = (args /* :any[] */)
+
+	var L = max(Σvals.length, Σargs.length)
+
+	for (let i = 0; i < L; i++)
+	{
+		let val = (Σvals[i] || tcomb.Nil)
+		let arg =  Σargs[i]
+
+		console.log(val, arg)
+
+		val(arg)
+	}
 }
 
 Recipe.is = (recipe /* :any */) =>
