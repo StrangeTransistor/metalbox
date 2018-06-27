@@ -9,7 +9,7 @@ type $Producer$Unit<$in: $In, $unit_in, $prov: $Providers$Base, $unit_out>
 type $Options<$in: $In, $unit_in, $prov: $Providers$Base, $unit_out> =
 {
 	recipe: $Producer$Unit<$in, $unit_in, $prov, $unit_out>,
-	args?: Function[],
+	args?: Function | Function[],
 }
 
 type $Recipe<$in: $In, $unit_in, $prov: $Providers$Base, $unit_out> =
@@ -32,7 +32,7 @@ export default function Recipe
 	var recipe = async function (...args /* :$in */)
 		/* :Promise<$Unit<$unit_in, $prov, $unit_out>> */
 	{
-		val_args(options.args, args)
+		val_args(options.args || tcomb.Any, args)
 
 		var unit = await options.recipe(...args)
 
@@ -50,7 +50,25 @@ export default function Recipe
 	return recipe
 }
 
+
 function val_args (vals, args)
+{
+	if (Array.isArray(vals))
+	{
+		val_args_seq(vals, args)
+	}
+	else
+	{
+		val_args_tcomb(vals, args)
+	}
+}
+
+function val_args_tcomb (val, args)
+{
+	val(args)
+}
+
+function val_args_seq (vals, args)
 {
 	var Σvals = (vals || [])
 	/* @flow-off */
@@ -66,6 +84,7 @@ function val_args (vals, args)
 		val(arg)
 	}
 }
+
 
 Recipe.is = (recipe /* :any */) =>
 {

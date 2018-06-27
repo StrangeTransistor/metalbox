@@ -7,7 +7,7 @@ import Unit   from './Unit'
 
 export default Recipe(
 {
-	args: [ tcomb.Number ],
+	args: tcomb.tuple([ tcomb.Number ]),
 
 	recipe (level /* :number */)
 	{
