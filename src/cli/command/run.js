@@ -62,9 +62,9 @@ function resolve (mini /* :minimistOutput */)
 	if (typeof recipe !== 'function')
 	{
 		console.error(red(
-			`${
-bold('Does not contain a Recipe or a simple function to create Unit')
-			}: ${ resolved[1] }.`))
+		`${
+			bold('Does not contain a Recipe or a simple function to create Unit')
+		}: ${ resolved[1] }.`))
 
 		/* @flow-off */
 		return process.exit(1)
