@@ -10,6 +10,7 @@ import fs from 'fs-extra'
 import tmp from 'src/rootpath/tmp'
 import origin from 'src/rootpath/origin'
 
+import Entry from 'src/Entry'
 import Context from 'src/Context'
 
 import Unit from 'src/Unit'
@@ -98,7 +99,7 @@ describe('Watch', () =>
 
 		var unit = Unit(input =>
 		{
-			b.push(input.filename)
+			b.push(input)
 		})
 		unit = Rebase(tm(), '').pipe(unit)
 
@@ -121,7 +122,14 @@ describe('Watch', () =>
 		await outcome.output
 		.then(() =>
 		{
-			expect(b).deep.eq([ '1.ext', '2.ext', '3.ext', '2.ext', '1.ext' ])
+			expect(b).deep.eq(
+			[
+				{ filename: '1.ext', content: void 0 },
+				{ filename: '2.ext', content: void 0 },
+				{ filename: '3.ext', content: void 0 },
+				{ filename: '2.ext', content: void 0 },
+				{ filename: '1.ext', content: Entry.Remove },
+			])
 		})
 	})
 })

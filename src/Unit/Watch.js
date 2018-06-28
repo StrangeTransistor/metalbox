@@ -67,6 +67,11 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 				var context_entry = context.derive(entry)
 				context_entry.live = true
 
+				if (event === 'unlink')
+				{
+					entry.content = Entry.Remove
+				}
+
 				// TODO: stream in stream
 				var output = await unit(context_entry).output
 
