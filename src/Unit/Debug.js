@@ -2,6 +2,10 @@
 
 var NL = '\n'
 
+var now = () => +new Date
+
+import ms from 'pretty-ms'
+
 import clc from 'cli-color'
 var { bold } = clc
 var { green } = clc
@@ -17,17 +21,24 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 )
 	/* :$Unit<$thru, $prov, $thru> */
 {
+	var init_ts = now()
+	var prev_ts = init_ts
+
 	return Unit(it =>
 	{
+		var ts = now()
+		var timemark = `• ${ green(ms(ts - prev_ts)) } (${ green(ms(ts - init_ts)) })`
+		prev_ts = ts
+
 		if (it && it.filename && ('content' in it))
 		{
 			/* @flow-off */
 			var entry = (it /* :$Entry<any> */)
-			debug_entry(label, entry)
+			debug_entry(label, timemark, entry)
 		}
 		else
 		{
-			debug_any(label, it)
+			debug_any(label, timemark, it)
 		}
 
 		return it
@@ -35,11 +46,14 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 }
 
 
-function debug_entry (label, entry /* :$Entry<any> */)
+function debug_entry (label, timemark, entry /* :$Entry<any> */)
 {
 	if (entry.content && entry.content.content)
 	{
-		write(...preplabel(label), bold('Entry<File>:'), ' ', entry.filename, NL)
+		write(...preplabel(label), timemark, ' ',
+			bold('Entry<File>:'), ' ', entry.filename, NL
+		)
+
 		write(file(entry.content.content), NL)
 		if (entry.content.sourcemap)
 		{
@@ -50,15 +64,17 @@ function debug_entry (label, entry /* :$Entry<any> */)
 	}
 	else
 	{
-		write(...preplabel(label), bold('Entry<?>:'), ' ', entry.filename, NL)
+		write(...preplabel(label), timemark, ' ',
+			bold('Entry<?>:'), ' ', entry.filename, NL
+		)
 		write(inspect(entry.content), NL)
 	}
 	hr()
 }
 
-function debug_any (label, it)
+function debug_any (label, timemark, it)
 {
-	write(...preplabel(label), bold('Debug:'), NL)
+	write(...preplabel(label), timemark, ' ', bold('Debug:'), NL)
 	write(inspect(it), '\n')
 }
 

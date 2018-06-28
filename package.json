@@ -73,6 +73,9 @@
     "def-prop":
       "1",
 
+    "pretty-ms":
+      "3",
+
 
     "rollup":
       "0.59",
