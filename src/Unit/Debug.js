@@ -27,10 +27,10 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 	return Unit(it =>
 	{
 		var ts = now()
-		var timemark = `• ${ green(ms(ts - prev_ts)) } (${ green(ms(ts - init_ts)) })`
+		var timemark = mark(ts, prev_ts, init_ts)
 		prev_ts = ts
 
-		if (it && it.filename && ('content' in it))
+		if (is_entry(it))
 		{
 			/* @flow-off */
 			var entry = (it /* :$Entry<any> */)
@@ -45,6 +45,19 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 	})
 }
 
+function mark (ts, prev_ts, init_ts)
+{
+	return `• ${ green(ms(ts - prev_ts)) } (${ green(ms(ts - init_ts)) })`
+}
+
+function is_entry (it)
+{
+	if (! it) { return false }
+	if (typeof it !== 'object') { return false }
+	if (typeof it.filename !== 'string') { return false }
+
+	return ('content' in it)
+}
 
 function debug_entry (label, timemark, entry /* :$Entry<any> */)
 {
