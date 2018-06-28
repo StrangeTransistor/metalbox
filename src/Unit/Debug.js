@@ -19,7 +19,7 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 {
 	return Unit(it =>
 	{
-		if (it && it.filename && it.content)
+		if (it && it.filename && ('content' in it))
 		{
 			/* @flow-off */
 			var entry = (it /* :$Entry<any> */)
