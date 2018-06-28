@@ -2,6 +2,12 @@
 
 import { expect } from 'chai'
 
+import Promise from 'bluebird'
+var { delay } = Promise
+
+import fs from 'fs-extra'
+
+import tmp from 'src/rootpath/tmp'
 import origin from 'src/rootpath/origin'
 
 import Context from 'src/Context'
@@ -81,6 +87,41 @@ describe('Watch', () =>
 		{
 			expect(b1.sort()).deep.eq(expected)
 			expect(b2.sort()).deep.eq([ 1, 2, 3 ].sort())
+		})
+	})
+
+	it('works with event types', async () =>
+	{
+		var b = []
+
+		var tm = tmp()
+
+		var unit = Unit(input =>
+		{
+			b.push(input.filename)
+		})
+		unit = Rebase(tm(), '').pipe(unit)
+
+		var watch = Watch(tm('*'), unit)
+
+		var outcome = watch(Context(null))
+
+		await fs.writeFile(tm('1.ext'), 'foo')
+		await delay(100)
+		await fs.writeFile(tm('2.ext'), 'foo')
+		await delay(100)
+		await fs.writeFile(tm('3.ext'), 'foo')
+		await delay(100)
+		await fs.writeFile(tm('2.ext'), 'bar')
+		await delay(100)
+		await fs.unlink(tm('1.ext'))
+
+		end(outcome)
+
+		await outcome.output
+		.then(() =>
+		{
+			expect(b).deep.eq([ '1.ext', '2.ext', '3.ext', '2.ext', '1.ext' ])
 		})
 	})
 })
