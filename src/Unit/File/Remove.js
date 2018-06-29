@@ -7,6 +7,7 @@ import unroll from '../../unroll'
 import Unit from '../Unit'
 
 import ensure_abs from './ensure-abs'
+import ensure_tmp from './ensure-tmp'
 
 export default function Remove /* ::<$in, $prov: $Providers$Base> */
 (
@@ -19,6 +20,7 @@ export default function Remove /* ::<$in, $prov: $Providers$Base> */
 		var Σfilename = await unroll(context, filename)
 
 		ensure_abs(Σfilename)
+		ensure_tmp(Σfilename)
 
 		return unlink(Σfilename)
 	})

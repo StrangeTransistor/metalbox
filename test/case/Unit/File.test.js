@@ -211,4 +211,15 @@ describe('Remove', () =>
 
 		compare(cl1(), tm())
 	})
+
+	it('Remove() works only under /tmp', async () =>
+	{
+		var r = Remove('/foo/bar/baz')
+
+		await r(Context(null)).output
+		.then(
+			() => expect(true).eq(false),
+			(error) => expect(error.message).eq('filename_must_under_tmpdir')
+		)
+	})
 })
