@@ -3,6 +3,8 @@
 
 type $Watch$Options = Object
 
+type $Watch$Emit = $Entry<$Mutable<void>>
+
 */
 
 var assign = Object.assign
@@ -21,7 +23,7 @@ import Unit from './Unit'
 export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 (
 	glob /* :$Computable<$in, $prov, $Glob> */,
-	unit /* :$Unit<$Entry<void>, $prov, $out> */,
+	unit /* :$Unit<$Watch$Emit, $prov, $out> */,
 	options /* :: ?:$Shape<$Watch$Options> */
 )
 	/* :$Unit<$in, $prov, $out> */
