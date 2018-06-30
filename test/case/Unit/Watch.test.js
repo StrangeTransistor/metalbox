@@ -23,7 +23,7 @@ import Mutable from 'src/Unit/Entry/Mutable'
 import Rebase  from 'src/Unit/Entry/Rebase'
 import Content from 'src/Unit/Entry/Content'
 import Load    from 'src/Unit/Entry/Load'
-import File    from 'src/Unit/Entry/File'
+import File    from 'src/Unit/Entry/Volatile'
 
 import Watch from 'src/Unit/Watch'
 
