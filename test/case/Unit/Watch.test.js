@@ -10,12 +10,20 @@ import fs from 'fs-extra'
 
 import tmp from 'src/rootpath/tmp'
 import origin from 'src/rootpath/origin'
+import collate from 'src/rootpath/collate'
 
-import Entry from 'src/Entry'
+import compare from 'src/compare'
+
+import Entry   from 'src/Entry'
 import Context from 'src/Context'
 
 import Unit from 'src/Unit'
-import Rebase from 'src/Unit/Entry/Rebase'
+
+import Rebase  from 'src/Unit/Entry/Rebase'
+import Content from 'src/Unit/Entry/Content'
+import Load    from 'src/Unit/Entry/Load'
+import File    from 'src/Unit/Entry/File'
+
 import Watch from 'src/Unit/Watch'
 
 describe('Watch', () =>
@@ -125,6 +133,34 @@ describe('Watch', () =>
 			])
 		})
 	})
+
+	it.only('works with real pipe', async () =>
+	{
+		var tm = tmp()
+		var tm_to = tmp()
+		var cl = collate('watch/1')
+
+		var same  = Unit(_ => _)
+		var watch = Watch(tm('*'), same)
+		var tr    = Content(content => content + '_baz')
+
+		var unit = watch
+		.pipe(Load())
+		.pipe(tr)
+		.pipe(Rebase(tm(), tm_to()))
+		.pipe(File())
+
+		var outcome = unit(Context(null))
+
+		await replay_mut(tm)
+
+		end(outcome)
+
+		await outcome.output
+
+		compare(cl(), tm_to())
+	})
+
 
 	async function replay_mut (tm /* :$Rootpath */)
 	{
