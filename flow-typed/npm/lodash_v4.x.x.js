@@ -1,5 +1,5 @@
-// flow-typed signature: 190d9906d7da0b64940f05a1ac1340d3
-// flow-typed version: 8f269777c5/lodash_v4.x.x/flow_>=v0.63.x
+// flow-typed signature: 39dba3e38d83a5eb7f2960a897db09d8
+// flow-typed version: a653f6871b/lodash_v4.x.x/flow_>=v0.63.x
 
 declare module "lodash" {
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
@@ -305,7 +305,7 @@ declare module "lodash" {
     ): Array<T>;
     join<T>(array: Array<T>, separator?: ?string): string;
     join<T>(array: void | null, separator?: ?string): '';
-    last<T>(array: ?Array<T>): T;
+    last<T>(array: ?$ReadOnlyArray<T>): T;
     lastIndexOf<T>(array: Array<T>, value?: ?T, fromIndex?: ?number): number;
     lastIndexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
     nth<T>(array: T[], n?: ?number): T;
