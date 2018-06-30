@@ -13,4 +13,6 @@ type $File =
 
 opaque type $Remove = Symbol
 
+type $Mutable<$content> = ($content | $Remove)
+
 type $Entries<$content> = $Entry<$content>[]
