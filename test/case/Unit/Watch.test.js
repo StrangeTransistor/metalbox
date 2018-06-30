@@ -1,4 +1,5 @@
 /* @flow */
+/* :: import { $Rootpath } from '@streetstrider/rootpath' */
 
 import { expect } from 'chai'
 
@@ -107,15 +108,7 @@ describe('Watch', () =>
 
 		var outcome = watch(Context(null))
 
-		await fs.writeFile(tm('1.ext'), 'foo')
-		await delay(100)
-		await fs.writeFile(tm('2.ext'), 'foo')
-		await delay(100)
-		await fs.writeFile(tm('3.ext'), 'foo')
-		await delay(100)
-		await fs.writeFile(tm('2.ext'), 'bar')
-		await delay(100)
-		await fs.unlink(tm('1.ext'))
+		await replay_mut(tm)
 
 		end(outcome)
 
@@ -132,4 +125,17 @@ describe('Watch', () =>
 			])
 		})
 	})
+
+	async function replay_mut (tm /* :$Rootpath */)
+	{
+		await fs.writeFile(tm('1.ext'), 'foo')
+		await delay(100)
+		await fs.writeFile(tm('2.ext'), 'foo')
+		await delay(100)
+		await fs.writeFile(tm('3.ext'), 'foo')
+		await delay(100)
+		await fs.writeFile(tm('2.ext'), 'bar')
+		await delay(100)
+		await fs.unlink(tm('1.ext'))
+	}
 })
