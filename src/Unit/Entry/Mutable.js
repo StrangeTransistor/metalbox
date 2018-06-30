@@ -17,22 +17,18 @@ export default function Mutable
 			/* @flow-off */
 			var remove = (entry /* :$Entry<$Remove> */)
 
-			console.log('PASS THRU Remove')
-
 			return remove
 		}
 		else
 		{
 			/* @flow-off */
-			var context_clean = (context /* :$Context<$Entry<$in>, $prov> */)
+			var context_clean /* :$Context<$Entry<$in>, $prov> */ = context
 
 			/* TODO: compose outcome */
 			var outcome = unit(context_clean)
 
 			/* @flow-off */
 			var output /* :$Entry<$Mutable<$out>> */ = await outcome.output
-
-			console.log('PASS output', output)
 
 			return output
 		}

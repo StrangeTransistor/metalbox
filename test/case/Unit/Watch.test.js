@@ -135,7 +135,7 @@ describe('Watch', () =>
 		})
 	})
 
-	it.only('works with real pipe', async () =>
+	it('works with real pipe', async () =>
 	{
 		var tm = tmp()
 		var tm_to = tmp()
