@@ -19,6 +19,7 @@ import Context from 'src/Context'
 
 import Unit from 'src/Unit'
 
+import Mutable from 'src/Unit/Entry/Mutable'
 import Rebase  from 'src/Unit/Entry/Rebase'
 import Content from 'src/Unit/Entry/Content'
 import Load    from 'src/Unit/Entry/Load'
@@ -144,9 +145,10 @@ describe('Watch', () =>
 		var watch = Watch(tm('*'), same)
 		var tr    = Content(content => content + '_baz')
 
+		var payload = Load().pipe(tr)
+
 		var unit = watch
-		.pipe(Load())
-		.pipe(tr)
+		.pipe(Mutable(payload))
 		.pipe(Rebase(tm(), tm_to()))
 		.pipe(File())
 
