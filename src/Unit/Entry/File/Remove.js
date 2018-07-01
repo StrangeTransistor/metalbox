@@ -2,11 +2,11 @@
 
 import Entry  from '../../../Entry'
 
-import FileRemove from '../../File/Remove'
+import Remove from '../../File/Remove'
 
-export default function Remove ()
+export default function ()
 {
-	return FileRemove((entry /* :$Entry<$Remove> */) =>
+	return Remove((entry /* :$Entry<$Remove> */) =>
 	{
 		ensure_remove(entry)
 
