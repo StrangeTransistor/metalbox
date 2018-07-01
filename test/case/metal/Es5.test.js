@@ -13,8 +13,9 @@ import Watch from 'src/Unit/Watch'
 
 import Unit from 'src/Unit'
 import Rebase from 'src/Unit/Entry/Rebase'
+import Mutable from 'src/Unit/Entry/Mutable'
 import Load   from 'src/Unit/Entry/Load'
-import File   from 'src/Unit/Entry/File'
+import File   from 'src/Unit/Entry/Volatile'
 
 import Es5 from 'src/metal/Es5'
 import FlowDecl from 'src/metal/FlowDecl'
@@ -26,9 +27,9 @@ describe('Es5', () =>
 
 	var Identity = Unit(x => x)
 
-	function Gen (target /* :$Thru<any, any, $File> */, src, dst)
+	function Gen (target /* :$Thru<void, any, $File> */, src, dst)
 	{
-		return target
+		return Mutable(target)
 		.pipe(Rebase(src(), dst()))
 		.pipe(File())
 	}
