@@ -19,7 +19,7 @@ import Glob from './Glob'
 export default function /* ::<$in, $prov: $Providers$Base, $out> */
 (
 	glob /* :$Computable<$in, $prov, $Glob> */,
-	unit /* :$Unit<$Entry<void>, $prov, $out> */,
+	unit /* :$Unit<$Entry<$Supertype<void>>, $prov, $out> */,
 	options /* :: ?:$Shape<$Glob$Options> */
 )
 	/* :$Unit<$in, $prov, $out> */
