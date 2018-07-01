@@ -1,8 +1,8 @@
 /* @flow */
 
-import Entry  from '../../Entry'
+import Entry  from '../../../Entry'
 
-import FileRemove from '../File/Remove'
+import FileRemove from '../../File/Remove'
 
 export default function Remove ()
 {

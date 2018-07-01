@@ -15,7 +15,7 @@ import Unit from 'src/Unit'
 import Rebase from 'src/Unit/Entry/Rebase'
 import Mutable from 'src/Unit/Entry/Mutable'
 import Load   from 'src/Unit/Entry/Load'
-import File   from 'src/Unit/Entry/Volatile'
+import File   from 'src/Unit/Entry/File/Volatile'
 
 import Es5 from 'src/metal/Es5'
 import FlowDecl from 'src/metal/FlowDecl'

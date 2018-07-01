@@ -1,6 +1,6 @@
 /* @flow */
 
-import File from '../File'
+import File from '../../File'
 
 export default function ()
 {

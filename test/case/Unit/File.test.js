@@ -17,7 +17,7 @@ import File from 'src/Unit/File'
 import Remove from 'src/Unit/File/Remove'
 
 import FileEntry from 'src/Unit/Entry/File'
-import RemoveEntry from 'src/Unit/Entry/Remove'
+import RemoveEntry from 'src/Unit/Entry/File/Remove'
 
 var typical_content = 'content\n'
 

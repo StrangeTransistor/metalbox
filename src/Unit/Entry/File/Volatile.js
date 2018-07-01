@@ -1,7 +1,7 @@
 /* @flow */
 
-import Entry from '../../Entry'
-import Unit from '../Unit'
+import Entry from '../../../Entry'
+import Unit from '../../Unit'
 
 import File from './File'
 import Remove from './Remove'
