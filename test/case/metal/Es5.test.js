@@ -26,7 +26,7 @@ describe('Es5', () =>
 
 	var Identity = Unit(x => x)
 
-	function Gen (target, src, dst)
+	function Gen (target /* :$Thru<any, any, $File> */, src, dst)
 	{
 		return target
 		.pipe(Rebase(src(), dst()))
