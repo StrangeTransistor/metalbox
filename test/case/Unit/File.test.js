@@ -93,23 +93,6 @@ describe('File', () =>
 	})
 })
 
-describe('File.Name', () =>
-{
-	var cl1 = collate('file/1')
-	var context_string = Context(typical_content)
-
-	it('File.Name(str)', async () =>
-	{
-		var tm = tmp()
-
-		var unit = File.Name(tm('abc'))
-
-		await unit(context_string).output
-
-		compare(cl1(), tm())
-	})
-})
-
 describe('File.Copy', () =>
 {
 	var cl1 = collate('file/2')

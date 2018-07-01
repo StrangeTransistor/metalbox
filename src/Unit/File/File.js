@@ -50,11 +50,6 @@ export default function File /* ::<$in, $prov: $Providers$Base> */
 	})
 }
 
-File.Name = function (filename /* :$Computable<string, any, string> */)
-{
-	return File(filename, (input /* :string */) => input)
-}
-
 File.Copy = function /* ::<$in, $prov: $Providers$Base> */
 (
 	src /* :$Computable<$in, $prov, string> */,
