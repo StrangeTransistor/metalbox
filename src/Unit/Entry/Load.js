@@ -2,7 +2,7 @@
 
 import Load from '../Load'
 
-export default function Entry ()
+export default function ()
 {
-	return Load(entry => entry.filename)
+	return Load((entry /* :$Entry<any> */) => entry.filename)
 }
