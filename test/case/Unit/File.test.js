@@ -14,6 +14,8 @@ import Context from 'src/Context'
 import Entry from 'src/Entry'
 
 import File from 'src/Unit/File'
+import Move from 'src/Unit/File/Move'
+import Copy from 'src/Unit/File/Copy'
 import Remove from 'src/Unit/File/Remove'
 
 import FileEntry from 'src/Unit/Entry/File'
@@ -93,17 +95,17 @@ describe('File', () =>
 	})
 })
 
-describe('File.Copy', () =>
+describe('File/Copy', () =>
 {
 	var cl1 = collate('file/2')
 	var context_null = Context(null)
 
-	it('File.Copy()', async () =>
+	it('File/Copy()', async () =>
 	{
 		var tm = tmp()
 
 		var unit = File(tm('def'), typical_content)
-		.pipe(File.Copy(
+		.pipe(Copy(
 			      () => delay(50, tm('def')),
 			async () => delay(25, tm('abc'))
 		))
@@ -114,17 +116,17 @@ describe('File.Copy', () =>
 	})
 })
 
-describe('File.Move', () =>
+describe('File/Move', () =>
 {
 	var cl1 = collate('file/1')
 	var context_null = Context(null)
 
-	it('File.Move()', async () =>
+	it('File/Move()', async () =>
 	{
 		var tm = tmp()
 
 		var unit = File(tm('def'), typical_content)
-		.pipe(File.Move(
+		.pipe(Move(
 			      () => delay(50, tm('def')),
 			async () => delay(25, tm('abc'))
 		))
