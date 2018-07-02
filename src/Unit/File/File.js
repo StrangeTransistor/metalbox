@@ -2,12 +2,9 @@
 
 var assign = Object.assign
 
-import { dirname } from 'path'
-
 import { writeFile as write } from 'fs-extra'
 import { copy } from 'fs-extra'
 import { move } from 'fs-extra'
-import { ensureDir as mkdirp } from 'fs-extra'
 
 import bluebird from 'bluebird'
 var join = bluebird.join
@@ -16,6 +13,7 @@ import Unit from '../Unit'
 
 import unroll from '../../unroll'
 
+import prep_path from './prep-path'
 import ensure_abs from './ensure-abs'
 
 export default function File /* ::<$in, $prov: $Providers$Base> */
@@ -96,19 +94,3 @@ async function prep_binary_op /* ::<$in, $prov: $Providers$Base> */
 	return [ src, dst ]
 }
 
-async function prep_path /* ::<$in, $prov: $Providers$Base> */
-(
-	context  /* :$Context<$in, $prov> */,
-	filename /* :$Computable<$in, $prov, string> */,
-	options  /* :$File$Options */
-)
-{
-	var Σfilename = await unroll(context, filename)
-
-	if (options.mkdirp)
-	{
-		await mkdirp(dirname(Σfilename))
-	}
-
-	return Σfilename
-}
