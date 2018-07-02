@@ -18,15 +18,6 @@ import unroll from '../../unroll'
 
 import ensure_abs from './ensure-abs'
 
-/* ::
-
-type $File$Options =
-{
-	mkdirp: boolean,
-}
-
-*/
-
 export default function File /* ::<$in, $prov: $Providers$Base> */
 (
 	filename /* :$Computable<$in, $prov, string> */,
