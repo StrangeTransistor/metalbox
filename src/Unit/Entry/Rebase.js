@@ -4,12 +4,11 @@ import { relative } from 'path'
 import { join as absolute } from 'path'
 
 import bluebird from 'bluebird'
-var join = bluebird.join
+var { join } = bluebird
 
 import unroll from '../../unroll'
 
-import Entry from '../../Entry'
-import Unit  from '../Unit'
+import Rename  from './Rename'
 
 export default function Rebase /* ::<$content, $prov: $Providers$Base> */
 (
@@ -18,18 +17,14 @@ export default function Rebase /* ::<$content, $prov: $Providers$Base> */
 )
 	/* :$Thru<$content, $prov, $content> */
 {
-	return Unit(async (entry, context) =>
+	return Rename(async (filename, context) =>
 	{
 		var [ Σfrom, Σto ] = await join(
 			unroll(context, from),
 			unroll(context, to)
 		)
 
-		var filename = entry.filename
-
-		filename = rebase(filename, Σfrom, Σto)
-
-		return Entry(filename, entry.content)
+		return rebase(filename, Σfrom, Σto)
 	})
 }
 
