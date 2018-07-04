@@ -7,6 +7,8 @@ var red     = clc.red
 var magenta = clc.magenta
 var f_error = clc.bold.red
 
+import tildify from 'tildify'
+
 import inspect from '../../inspect'
 
 import Recipe from '../../Recipe'
@@ -57,6 +59,7 @@ function resolve (mini /* :minimistOutput */)
 	/* @flow-off */
 	/* :: resolved = (resolved :[string, string, any]) */
 
+	var resolved_filename_tilde = tildify(resolved[1])
 	var recipe = resolved[2].default
 
 	if (typeof recipe !== 'function')
@@ -64,7 +67,7 @@ function resolve (mini /* :minimistOutput */)
 		console.error(red(
 		`${
 			bold('Does not contain a Recipe or a simple function to create Unit')
-		}: ${ resolved[1] }.`))
+		}: ${ resolved_filename_tilde }.`))
 
 		/* @flow-off */
 		return process.exit(1)
@@ -74,8 +77,7 @@ function resolve (mini /* :minimistOutput */)
 		console.error(magenta(`Working with simple function as a Recipe.`))
 	}
 
-	// TODO: tildify
-	console.info(`${ bold('Unit resolved') }: ${ resolved[1] }.`)
+	console.info(`${ bold('Unit resolved') }: ${ resolved_filename_tilde }.`)
 
 	return recipe
 }
