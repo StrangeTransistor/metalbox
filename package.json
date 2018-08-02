@@ -38,7 +38,7 @@
       "3",
 
     "@streetstrider/rootpath":
-      "2",
+      "^2.0.4",
 
     "minimist":
       "1",
@@ -146,7 +146,7 @@
 
 
     "flow-bin":
-      "0.74",
+      "0.77",
 
     "flow-typed":
       "2.4",
