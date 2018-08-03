@@ -1,6 +1,6 @@
 /* @flow */
 
-var time = (...v) => process.hrtime(...v)
+import time from '../time'
 
 import capture from './capture'
 
