@@ -45,8 +45,6 @@ export default async function (mini /* :minimistOutput */)
 function resolve (mini /* :minimistOutput */)
 	/* :Function */
 {
-	// TODO: attach runner here if required
-	// (to parse opts in corresponding section of cli)
 	var name = String(mini._[0] || '')
 
 	var resolved = basic_resolver(name)
@@ -107,8 +105,6 @@ async function make (mini /* :minimistOutput */, recipe /* :Function */)
 
 	if (! Unit.is(unit))
 	{
-		// TODO:
-		// will catch if recipe is not an Recipe, but a simple function
 		console.error(f_error(`Constructed is not a Unit.`))
 		console.log(unit)
 
