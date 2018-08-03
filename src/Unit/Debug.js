@@ -70,7 +70,7 @@ function debug_entry (label, timemark, entry /* :$Entry<any> */)
 		write(file(entry.content.content), NL)
 		if (entry.content.sourcemap)
 		{
-			hr()
+			line()
 			write(bold('sourcemap present:'), NL)
 			write(file(entry.content.sourcemap), NL)
 		}
@@ -82,7 +82,7 @@ function debug_entry (label, timemark, entry /* :$Entry<any> */)
 		)
 		write(inspect(entry.content), NL)
 	}
-	hr()
+	line()
 }
 
 function debug_any (label, timemark, it)
@@ -102,7 +102,7 @@ function preplabel (label)
 }
 
 
-function hr ()
+function line ()
 {
 	write('--- --- ---', NL)
 }
