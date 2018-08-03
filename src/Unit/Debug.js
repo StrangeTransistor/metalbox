@@ -2,9 +2,9 @@
 
 var NL = '\n'
 
-var now = () => +new Date
+import time from '../time'
 
-import ms from 'pretty-ms'
+import hr from 'pretty-hrtime'
 
 import clc from 'cli-color'
 var { bold } = clc
@@ -21,14 +21,13 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 )
 	/* :$Unit<$thru, $prov, $thru> */
 {
-	var init_ts = now()
+	var init_ts = time()
 	var prev_ts = init_ts
 
 	return Unit(it =>
 	{
-		var ts = now()
-		var timemark = mark(ts, prev_ts, init_ts)
-		prev_ts = ts
+		var timemark
+		[ prev_ts, timemark ] = mark(prev_ts, init_ts)
 
 		if (is_entry(it))
 		{
@@ -45,9 +44,15 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 	})
 }
 
-function mark (ts, prev_ts, init_ts)
+function mark (prev_ts, init_ts)
 {
-	return `• ${ green(ms(ts - prev_ts)) } (${ green(ms(ts - init_ts)) })`
+	var delta_prev = time(prev_ts)
+	var delta_init = time(init_ts)
+	var ts         = time()
+
+	var msg = `• ${ green(hr(delta_prev)) } (${ green(hr(delta_init)) })`
+
+	return [ ts, msg ]
 }
 
 function is_entry (it)
