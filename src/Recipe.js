@@ -1,7 +1,7 @@
 /* @flow */
 /* ::
 
-type $In = $Iterable<*, *, *>
+type $In = Iterable<*>
 
 type $Producer$Unit<$in: $In, $unit_in, $prov: $Providers$Base, $unit_out>
  = $Producer<$in, $Unit<$unit_in, $prov, $unit_out>>
