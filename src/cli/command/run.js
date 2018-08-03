@@ -4,10 +4,13 @@
 import clc from 'cli-color'
 var bold    = clc.bold
 var red     = clc.red
+var green   = clc.green
 var magenta = clc.magenta
 var f_error = clc.bold.red
 
 import tildify from 'tildify'
+
+import hr from 'pretty-hrtime'
 
 import inspect from '../../inspect'
 
@@ -147,6 +150,6 @@ async function invoke (
 		var inspected = `${ output }.`
 	}
 
-	console.log(`${ bold('OK') }: ${ inspected }`)
-	// console.log(outcome) // TODO: time
+	console.log(`${ bold('OK') } (${ green(hr(outcome.time.taken)) }):` +
+		` ${ inspected }`)
 }

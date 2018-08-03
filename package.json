@@ -79,6 +79,9 @@
     "pretty-ms":
       "3",
 
+    "pretty-hrtime":
+      "1",
+
     "tildify":
       "1",
 
