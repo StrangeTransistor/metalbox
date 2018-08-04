@@ -23,13 +23,13 @@ export default Recipe(
 			{
 				var Σnum = (num || 1)
 
-				console.log(`animal ${typeof Σanimal} ${Σanimal}`)
-				console.log(`num ${typeof Σnum} ${Σnum}`)
+				// console.log(`animal ${typeof Σanimal} ${Σanimal}`)
+				// console.log(`num ${typeof Σnum} ${Σnum}`)
 
 				var line = times(Σnum, () => Σanimal).join(' ')
-				console.log(line)
+				// console.log(line)
 
-				return true
+				return { line }
 			},
 		})
 	},
