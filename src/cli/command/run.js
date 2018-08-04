@@ -10,6 +10,8 @@ var f_error = clc.bold.red
 
 import tildify from 'tildify'
 
+import { on }  from 'flyd'
+
 import hr from 'pretty-hrtime'
 
 import inspect from '../../inspect'
@@ -124,28 +126,56 @@ async function invoke (
 	var unit_input = mini['--'][0]
 	unit_input = arg_eval(unit_input)
 
+	var outcome = unit(Context(unit_input))
+
+	if (outcome.stream)
+	{
+		console.log('Streaming mode.')
+
+		on(proceed, outcome.stream)
+
+		function proceed (value)
+		{
+			if (value instanceof Error)
+			{
+				fatal(value)
+			}
+			else
+			{
+				console.log(investigate(value))
+			}
+		}
+	}
+
 	try
 	{
-		var outcome = unit(Context(unit_input))
-
 		var output = await outcome.output
 	}
-	catch (e)
+	catch (error)
 	{
-		console.error(f_error(`Error processing Unit:`))
-		console.log(`${ bold(e.name) }: ${ e.message }.`)
-		return process.exit(1)
-	}
-
-	if (typeof output === 'object')
-	{
-		var inspected = `\n${ inspect(output) }`
-	}
-	else
-	{
-		var inspected = `${ output }.`
+		// if (! outcome.stream) // shortcutted
+		return fatal(error)
 	}
 
 	console.log(`${ bold('OK') } (${ green(hr(outcome.time.taken)) }):` +
-		` ${ inspected }`)
+		` ${ investigate(output) }`)
+}
+
+function investigate (output)
+{
+	if (typeof output === 'object')
+	{
+		return `\n${ inspect(output) }`
+	}
+	else
+	{
+		return `${ output }.`
+	}
+}
+
+function fatal (error)
+{
+	console.error(f_error(`Error processing Unit:`))
+	console.log(`${ bold(error.name) }: ${ error.message }.`)
+	return process.exit(1)
 }

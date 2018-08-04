@@ -33,6 +33,8 @@ export default function runner
 /* :Options */
 )
 {
+	// TODO: support async variants
+
 	minimist_opts = assign({}, minimist_opts, { 'stopEarly': true, '--': true, })
 
 	return (args /* :string[] */) =>

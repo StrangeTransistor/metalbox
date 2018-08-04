@@ -2,6 +2,8 @@
 
 import times from 'lodash/times'
 
+import { stream } from 'flyd'
+
 import tcomb from '../tcomb'
 
 import Recipe from '../Recipe'
@@ -19,17 +21,25 @@ export default Recipe(
 		{
 			family: 'Cow',
 			input: tcomb.maybe(tcomb.Number),
-			unit (num /* :?number */)
+			unit (num /* :?number */) /* :$Streaming<string> */
 			{
 				var Σnum = (num || 1)
 
-				// console.log(`animal ${typeof Σanimal} ${Σanimal}`)
-				// console.log(`num ${typeof Σnum} ${Σnum}`)
+				if (false)
+				{
+					return times(Σnum, () => Σanimal).join(' ')
+				}
+				else
+				{
+					/* @flow-off */
+					var s = stream()
 
-				var line = times(Σnum, () => Σanimal).join(' ')
-				// console.log(line)
+					times(Σnum, () => setTimeout(() => s(Σanimal), 0))
 
-				return { line }
+					setTimeout(() => s.end(true), 0)
+
+					return s
+				}
 			},
 		})
 	},
