@@ -86,11 +86,8 @@
     "rollup":
       "0.59",
 
-    "rollup-plugin-flow":
-      "^1.1",
-
     "rollup-plugin-sucrase":
-      "1",
+      "2",
 
     "eslint":
       "4",

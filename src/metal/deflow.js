@@ -1,11 +1,11 @@
 /* @flow */
 
-import flow from 'rollup-plugin-flow'
+import flow from 'rollup-plugin-sucrase'
 
 export default function deflow ()
 {
 	return flow(
 	{
-		pretty: true,
+		transforms: [ 'flow' ],
 	})
 }
