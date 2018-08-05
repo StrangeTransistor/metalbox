@@ -4,6 +4,18 @@ import { expect } from 'chai'
 
 import Context from 'src/Context'
 
+export function expect_context (context /* :any */)
+{
+	expect(context).property('input')
+
+	expect(context).property('once')
+	expect(context).property('live')
+
+	expect(context).property('engine')
+
+	expect(context).property('providers')
+}
+
 describe('Context', () =>
 {
 	it('Context(input)', () =>
@@ -60,16 +72,4 @@ describe('Context', () =>
 
 		expect(context.providers).not.property('z')
 	})
-
-	function expect_context (context)
-	{
-		expect(context).property('input')
-
-		expect(context).property('once')
-		expect(context).property('live')
-
-		expect(context).property('engine')
-
-		expect(context).property('providers')
-	}
 })
