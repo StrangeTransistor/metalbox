@@ -75,12 +75,16 @@ function resolve (mini /* :minimistOutput */)
 		/* @flow-off */
 		return process.exit(1)
 	}
+
+	var kind = 'Recipe'
+
 	if (! Recipe.is(recipe))
 	{
 		console.error(magenta(`Working with simple function as a Recipe.`))
+		kind = 'Unit'
 	}
 
-	console.info(`${ bold('Unit resolved') }: ${ resolved_filename_tilde }.`)
+	console.info(`${ bold(kind + ' resolved') }: ${ resolved_filename_tilde }.`)
 
 	return recipe
 }
