@@ -111,7 +111,7 @@ async function make (mini /* :minimistOutput */, recipe /* :Function */)
 
 	if (! Unit.is(unit))
 	{
-		console.error(f_error(`Constructed is not a Unit.`))
+		console.error(f_error(`Constructed value is not a Unit.`))
 		console.log(unit)
 
 		/* @flow-off */
