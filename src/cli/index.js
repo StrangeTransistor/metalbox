@@ -10,7 +10,7 @@ import manifest from '../../package.json'
 
 import runner from './runner'
 
-import run from './command/run'
+import unit from './command/unit'
 
 export default runner(
 {
@@ -20,13 +20,13 @@ export default runner(
 		'?': 'help',
 		'v': 'version',
 
-		'r': 'run',
+		'u': 'unit',
 	},
 	variants:
 	{
 		help,
 		version,
-		run,
+		unit,
 	},
 	default_variant: describe,
 	missing_variant: describe,
