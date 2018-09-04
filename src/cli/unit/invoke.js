@@ -12,22 +12,14 @@ import { on }  from 'flyd'
 
 import inspect from '../../inspect'
 
-import Context from '../../Context'
-
-import arg_eval from '../arg-eval'
-
 export default async function invoke (
-	mini /* :minimistOutput */,
-	unit /* :$Unit<any, any, any> */
+	unit    /* :$Unit<any, any, any> */,
+	context /* :$Context<any, any> */
 )
 {
-	/* @flow-off */
-	var unit_input = mini['--'][0]
-	unit_input = arg_eval(unit_input)
+	// TODO: context engine
 
-	var outcome = unit(Context(unit_input))
-
-	// TODO: engine
+	var outcome = unit(context)
 
 	if (outcome.stream)
 	{

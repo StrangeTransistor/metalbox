@@ -11,6 +11,7 @@ import manifest from '../../package.json'
 import runner from './runner'
 
 import unit from './command/unit'
+import release from './command/release'
 
 export default runner(
 {
@@ -21,12 +22,14 @@ export default runner(
 		'v': 'version',
 
 		'u': 'unit',
+		'r': 'release',
 	},
 	variants:
 	{
 		help,
 		version,
 		unit,
+		release,
 	},
 	default_variant: describe,
 	missing_variant: describe,

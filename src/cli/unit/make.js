@@ -7,21 +7,15 @@ var f_error = clc.bold.red
 
 import Unit from '../../Unit'
 
-import arg_eval from '../arg-eval'
-
 export default async function make (
-	mini /* :minimistOutput */,
-	recipe /* :Function */
+	recipe /* :Function */,
+	args /* :any[] */
 )
 	/* :Promise<$Unit<any, any, any>> */
 {
-	var unit_make_args = mini._
-	.slice(1)
-	.map(arg_eval)
-
 	try
 	{
-		var unit = await recipe(...unit_make_args)
+		var unit = await recipe(...args)
 	}
 	catch (e)
 	{
