@@ -74,7 +74,7 @@ function debug_entry (
 	if (entry.content && entry.content.content)
 	{
 		write(...preplabel(label), timemark, ' ',
-			bold('Entry<File>:'), ' ', entry.filename, NL
+			bold('Entry<File>'), ': ', entry.filename, NL
 		)
 
 		write(file(entry.content.content), NL)
@@ -98,14 +98,14 @@ function debug_entry (
 
 function debug_any (label, timemark, it, providers)
 {
-	write(...preplabel(label), timemark, ' ', bold('Debug:'), NL)
+	write(...preplabel(label), timemark, ':', NL)
 	write(inspect(it), NL)
 	debug_providers(providers)
 }
 
 function debug_providers (providers /* :$Providers<any> */)
 {
-	write(bold('Providers:'), ' ', inspect(providers), NL)
+	write(bold('Providers'), ': ', inspect(providers), NL)
 }
 
 
