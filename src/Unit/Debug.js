@@ -24,7 +24,7 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 	var init_ts = time()
 	var prev_ts = init_ts
 
-	return Unit(it =>
+	return Unit((it, context) =>
 	{
 		var timemark
 		[ prev_ts, timemark ] = mark(prev_ts, init_ts)
@@ -33,11 +33,11 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 		{
 			/* @flow-off */
 			var entry = (it /* :$Entry<any> */)
-			debug_entry(label, timemark, entry)
+			debug_entry(label, timemark, entry, context.providers)
 		}
 		else
 		{
-			debug_any(label, timemark, it)
+			debug_any(label, timemark, it, context.providers)
 		}
 
 		return it
@@ -64,7 +64,12 @@ function is_entry (it)
 	return ('content' in it)
 }
 
-function debug_entry (label, timemark, entry /* :$Entry<any> */)
+function debug_entry (
+	label,
+	timemark,
+	entry /* :$Entry<any> */,
+	providers /* :$Providers<any> */
+)
 {
 	if (entry.content && entry.content.content)
 	{
@@ -88,13 +93,21 @@ function debug_entry (label, timemark, entry /* :$Entry<any> */)
 		write(inspect(entry.content), NL)
 	}
 	line()
+	debug_providers(providers)
 }
 
-function debug_any (label, timemark, it)
+function debug_any (label, timemark, it, providers)
 {
 	write(...preplabel(label), timemark, ' ', bold('Debug:'), NL)
 	write(inspect(it), NL)
+	debug_providers(providers)
 }
+
+function debug_providers (providers /* :$Providers<any> */)
+{
+	write(bold('Providers:'), ' ', inspect(providers), NL)
+}
+
 
 function preplabel (label)
 {
