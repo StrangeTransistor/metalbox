@@ -1,6 +1,7 @@
 /* @flow */
 
 var assign = Object.assign
+var keys   = Object.keys
 
 import def from 'def-prop'
 import { val } from 'def-prop'
@@ -15,6 +16,7 @@ export default function Providers /* ::<$base: $Providers$Base> */
 	base = assign({}, base)
 
 	def(base, 'derive', val(derive))
+	def(base, 'is_empty', val(is_empty))
 
 	function derive /* ::<$derive: $Providers$Base> */
 	(
@@ -23,6 +25,11 @@ export default function Providers /* ::<$base: $Providers$Base> */
 		/* :Providers<$base & $derive> */
 	{
 		return Providers(assign({}, base, providers))
+	}
+
+	function is_empty ()
+	{
+		return (keys(base).length === 0)
 	}
 
 	return base

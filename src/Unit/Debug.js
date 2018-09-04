@@ -105,7 +105,10 @@ function debug_any (label, timemark, it, providers)
 
 function debug_providers (providers /* :$Providers<any> */)
 {
-	write(bold('Providers'), ': ', inspect(providers), NL)
+	if (! providers.is_empty())
+	{
+		write(bold('Providers'), ': ', inspect(providers), NL)
+	}
 }
 
 
