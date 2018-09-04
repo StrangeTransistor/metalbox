@@ -93,7 +93,7 @@ function debug_entry (label, timemark, entry /* :$Entry<any> */)
 function debug_any (label, timemark, it)
 {
 	write(...preplabel(label), timemark, ' ', bold('Debug:'), NL)
-	write(inspect(it), '\n')
+	write(inspect(it), NL)
 }
 
 function preplabel (label)
