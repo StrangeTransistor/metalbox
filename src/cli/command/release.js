@@ -1,6 +1,8 @@
 /* @flow */
 /* :: import type { minimistOutput } from 'minimist' */
 
+import rootpath from '@streetstrider/rootpath'
+
 import Context  from '../../Context'
 import arg_eval from '../arg-eval'
 
@@ -19,11 +21,12 @@ export default async function (mini /* :minimistOutput */)
 	var unit = await make(recipe, recipe_args)
 
 	/* @flow-off */
-	var unit_input = mini['--'][0]
-	unit_input = arg_eval(unit_input)
-	var context = Context(unit_input)
+	var name = (mini['--'][0] || 'dev')
 
-	// rootpath src, dst
+	var src = rootpath(process.cwd())
+	var dst = src.partial('release', name)
+
+	var context = Context(null, { src, dst })
 
 	return await invoke(unit, context)
 }
