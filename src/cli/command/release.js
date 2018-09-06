@@ -21,7 +21,7 @@ export default async function (mini /* :minimistOutput */)
 	var src = rootpath(process.cwd())
 	var dst = src.partial('release', name)
 
-	var context = Context(null, { src, dst })
+	var context = Context(void 0, { src, dst })
 
 	return await invoke(unit, context)
 }
