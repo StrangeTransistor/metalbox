@@ -1,6 +1,8 @@
 /* @flow */
 /* :: import type { minimistOutput } from 'minimist' */
 
+import { basename } from 'path'
+
 import rootpath from '@streetstrider/rootpath'
 
 import Context  from '../../Context'
@@ -15,10 +17,11 @@ export default async function (mini /* :minimistOutput */)
 	var recipe = resolve(mini)
 	var unit   = await make(recipe, recipe_args(mini))
 
+	var cwd = process.cwd()
 	/* @flow-off */
-	var name = (mini['--'][0] || 'dev')
+	var name = (mini['--'][0] || basename(cwd))
 
-	var src = rootpath(process.cwd())
+	var src = rootpath(cwd)
 	var dst = src.partial('release', name)
 
 	var context = Context(void 0, { src, dst })
