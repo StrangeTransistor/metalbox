@@ -19,10 +19,12 @@ import base from '../resolver/base'
 
 var basic_resolver = compose(
 [
+	// TODO: package-root/@metalbox (?)
 	cwd(),
 	base(__dirname + '/../../Unit'), /* metalbox/src/Unit/ */
 	base(__dirname + '/../..'),      /* metalbox/src/ */
 	base(__dirname + '/../../..'),   /* metalbox/     */
+	// TODO: package-root/ (?)
 ])
 
 export default function resolve (mini /* :minimistOutput */)
