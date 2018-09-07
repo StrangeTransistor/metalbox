@@ -12,6 +12,7 @@ import runner from './runner'
 
 import unit from './command/unit'
 import release from './command/release'
+import target from './command/target'
 
 export default runner(
 {
@@ -23,6 +24,7 @@ export default runner(
 
 		'u': 'unit',
 		'r': 'release',
+		't': 'target',
 	},
 	variants:
 	{
@@ -30,6 +32,7 @@ export default runner(
 		version,
 		unit,
 		release,
+		target,
 	},
 	default_variant: describe,
 	missing_variant: describe,

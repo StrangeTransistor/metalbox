@@ -64,6 +64,9 @@
     "node-path-extras":
       "0.4.1",
 
+    "find-root":
+      "1",
+
     "globule":
       "1",
 
