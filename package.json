@@ -23,6 +23,11 @@
   [
   ],
 
+  "metalbox":
+  {
+    "T": "T2"
+  },
+
   "scripts":
   {
       "st": "eslint run/ src/ test/",

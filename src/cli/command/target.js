@@ -2,26 +2,50 @@
 /* :: import type { minimistOutput } from 'minimist' */
 
 import findroot from 'find-root'
-
 import rootpath from '@streetstrider/rootpath'
+import tildify from 'tildify'
 
 import clc from 'cli-color'
-// var bold    = clc.bold
-// var green   = clc.green
+var bold    = clc.bold
 var f_error = clc.bold.red
 
 export default async function (mini /* :minimistOutput */)
 {
+	var cwd = process.cwd()
+
 	try
 	{
-		var cwd = process.cwd()
 		var root_found = findroot(cwd)
-		var root = rootpath(root_found)
-
-		console.log('rootpath:', root())
 	}
 	catch (e)
 	{
-		console.error(f_error(`package.json not found anywhere from '${ cwd }'`))
+		fatal(`package.json not found anywhere from '${ cwd }'`)
 	}
+
+	var root_found_tilde = tildify(root_found)
+	/* @flow-off */
+	var root = rootpath(root_found)
+
+	console.info(`${ bold('Resolved package') }: ${ root_found_tilde }`)
+
+	/* @flow-off */
+	var pkg = require(root('package.json'))
+
+	var pkg_metalbox = pkg.metalbox
+	var name = (mini._[0] || pkg.name || 'dev')
+
+	if (! (name in Object(pkg_metalbox)))
+	{
+		fatal(`Target '${ name }' not found in 'package.metalbox'`)
+	}
+
+	var target = pkg_metalbox[name]
+
+	console.log('target', target)
+}
+
+function fatal (msg)
+{
+	console.error(f_error(msg))
+	process.exit(1)
 }
