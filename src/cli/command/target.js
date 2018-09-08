@@ -7,7 +7,8 @@ import tildify from 'tildify'
 
 import clc from 'cli-color'
 var bold    = clc.bold
-var f_error = clc.bold.red
+
+import fatal from '../fatal'
 
 export default async function (mini /* :minimistOutput */)
 {
@@ -44,8 +45,3 @@ export default async function (mini /* :minimistOutput */)
 	console.log('target', target)
 }
 
-function fatal (msg)
-{
-	console.error(f_error(msg))
-	process.exit(1)
-}
