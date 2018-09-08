@@ -6,7 +6,13 @@ import rootpath from '@streetstrider/rootpath'
 import tildify from 'tildify'
 
 import clc from 'cli-color'
-var bold    = clc.bold
+var bold = clc.bold
+
+import Context  from '../../Context'
+
+import resolve from '../unit/resolve'
+import make    from '../unit/make'
+import invoke  from '../unit/invoke'
 
 import fatal from '../fatal'
 
@@ -42,6 +48,23 @@ export default async function (mini /* :minimistOutput */)
 
 	var target = pkg_metalbox[name]
 
-	console.log('target', target)
-}
+	if (! Array.isArray(target))
+	{
+		fatal('Target must be a tuple [ path to recipe, ...recipe options ]')
+	}
 
+	var [ recipe_name, ...recipe_args ] = target
+
+	var recipe = resolve(recipe_name)
+	var unit   = await make(recipe, recipe_args)
+
+	/* @flow-off */
+	var unit_arg = mini['--'][0]
+
+	var src = root
+	var dst = src.partial('release', name)
+
+	var context = Context(unit_arg, { src, dst })
+
+	return await invoke(unit, context)
+}

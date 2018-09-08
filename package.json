@@ -25,7 +25,16 @@
 
   "metalbox":
   {
-    "T": "T2"
+    "debug":
+    [
+      "Debug",
+      { "x": 1 }
+    ],
+    "cow":
+    [
+      "Cow",
+      "Cat"
+    ]
   },
 
   "scripts":
