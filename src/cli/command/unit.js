@@ -11,7 +11,7 @@ import invoke  from '../unit/invoke'
 
 export default async function (mini /* :minimistOutput */)
 {
-	var recipe = resolve(mini)
+	var recipe = resolve(mini._[0])
 	var unit   = await make(recipe, recipe_args(mini))
 
 	/* @flow-off */

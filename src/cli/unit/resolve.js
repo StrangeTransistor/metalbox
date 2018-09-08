@@ -1,5 +1,4 @@
 /* @flow */
-/* :: import type { minimistOutput } from 'minimist' */
 
 import tildify from 'tildify'
 
@@ -27,11 +26,9 @@ var basic_resolver = compose(
 	// TODO: package-root/ (?)
 ])
 
-export default function resolve (mini /* :minimistOutput */)
+export default function resolve (name /* :string */)
 	/* :Function */
 {
-	var name = String(mini._[0] || '')
-
 	var resolved = basic_resolver(name)
 
 	if (resolved === Nothing)
