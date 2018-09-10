@@ -35,11 +35,35 @@ export default async function (mini /* :minimistOutput */)
 
 	console.info(`${ bold('Resolved package') }: ${ root_found_tilde }`)
 
+	var name = (mini._[0] || pkg.name || 'dev')
 	/* @flow-off */
 	var pkg = require(root('package.json'))
 
+	var [ recipe_name, recipe_args ] = decide_target(name, pkg)
+
+	var recipe = resolve(recipe_name)
+	var unit   = await make(recipe, recipe_args)
+
+	/* @flow-off */
+	var unit_arg = mini['--'][0]
+
+	var src = root
+	var dst = src.partial('release', name)
+
+	var context = Context(unit_arg, { src, dst })
+
+	return await invoke(unit, context)
+}
+
+
+function decide_target (
+	name /* :string */,
+	pkg  /* :Object */
+)
+{
+	name || (name = pkg.name || 'dev')
+
 	var pkg_metalbox = pkg.metalbox
-	var name = (mini._[0] || pkg.name || 'dev')
 
 	if (! (name in Object(pkg_metalbox)))
 	{
@@ -55,16 +79,5 @@ export default async function (mini /* :minimistOutput */)
 
 	var [ recipe_name, ...recipe_args ] = target
 
-	var recipe = resolve(recipe_name)
-	var unit   = await make(recipe, recipe_args)
-
-	/* @flow-off */
-	var unit_arg = mini['--'][0]
-
-	var src = root
-	var dst = src.partial('release', name)
-
-	var context = Context(unit_arg, { src, dst })
-
-	return await invoke(unit, context)
+	return [ recipe_name, recipe_args ]
 }
