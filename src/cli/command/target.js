@@ -10,6 +10,8 @@ var bold = clc.bold
 
 import Context  from '../../Context'
 
+import arg_eval from '../arg-eval'
+
 import resolve from '../unit/resolve'
 import make    from '../unit/make'
 import invoke  from '../unit/invoke'
@@ -45,7 +47,7 @@ export default async function (mini /* :minimistOutput */)
 	var unit   = await make(recipe, recipe_args)
 
 	/* @flow-off */
-	var unit_arg = mini['--'][0]
+	var unit_arg = arg_eval(mini['--'][0])
 
 	var src = root
 	var dst = src.partial('release', name)

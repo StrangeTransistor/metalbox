@@ -1,8 +1,9 @@
 /* @flow */
 /* :: import type { minimistOutput } from 'minimist' */
 
-import Context  from '../../Context'
-import arg_eval from '../arg-eval'
+import Context from '../../Context'
+
+import arg_eval    from '../arg-eval'
 import recipe_args from '../recipe-args'
 
 import resolve from '../unit/resolve'
