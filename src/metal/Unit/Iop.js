@@ -1,6 +1,6 @@
 /* @flow */
 
-import Content from '../Unit/Entry/Content'
+import Content from '../../Unit/Entry/Content'
 
 export default function Emptish ()
 {

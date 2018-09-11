@@ -1,10 +1,10 @@
 /* @flow */
 
-import Rollup from '../Unit/Rollup/Entry'
-import Cjs from '../Unit/Rollup/target/Cjs'
+import Rollup from '../../Unit/Rollup/Entry'
+import Cjs    from '../../Unit/Rollup/target/Cjs'
 
-import deflow from './deflow'
-import dets from './dets'
+import deflow from '../rollup/deflow'
+import dets   from '../rollup/dets'
 
 import TsExt from './TsExt'
 import Outlander from './Outlander'

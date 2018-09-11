@@ -17,8 +17,8 @@ import Mutable from 'src/Unit/Entry/Mutable'
 import Load   from 'src/Unit/Entry/Load'
 import File   from 'src/Unit/Entry/File/Volatile'
 
-import Es5 from 'src/metal/Es5'
-import FlowDecl from 'src/metal/FlowDecl'
+import Es5 from 'src/metal/Unit/Es5'
+import FlowDecl from 'src/metal/Unit/FlowDecl'
 
 describe('Es5', () =>
 {

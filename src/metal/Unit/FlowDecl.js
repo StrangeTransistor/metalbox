@@ -1,6 +1,6 @@
 /* @flow */
 
-import Rename from '../Unit/Entry/Rename'
+import Rename from '../../Unit/Entry/Rename'
 
 export default function FlowDecl ()
 {

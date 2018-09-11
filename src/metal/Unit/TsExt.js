@@ -1,6 +1,6 @@
 /* @flow */
 
-import Ext from '../Unit/Entry/Ext'
+import Ext from '../../Unit/Entry/Ext'
 
 export default function TsExt ()
 {
