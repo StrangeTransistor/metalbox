@@ -12,8 +12,8 @@ import { concat } from 'src/flyd/drain'
 import Context from 'src/Context'
 
 import Unit from 'src/Unit'
+import GlobTo from 'src/Unit/Glob/GlobTo'
 import Glob from 'src/Unit/Glob'
-import Each from 'src/Unit/Glob/Each'
 
 describe('Glob', () =>
 {
@@ -22,7 +22,7 @@ describe('Glob', () =>
 	var globexpr = org('*.ext')
 	var expected = [ '1.ext', '2.ext', '3.ext' ]
 
-	it('Glob', async () =>
+	it('GlobTo', async () =>
 	{
 		/* eslint-disable max-nested-callbacks */
 		var unit = Unit(_ =>
@@ -43,12 +43,12 @@ describe('Glob', () =>
 		})
 		/* eslint-enable max-nested-callbacks */
 
-		var glob = Glob(globexpr, unit)
+		var glob = GlobTo(globexpr, unit)
 
 		await glob(Context(null)).output
 	})
 
-	it('Glob/Each', async () =>
+	it('Glob', async () =>
 	{
 		var unit = Unit(_ =>
 		{
@@ -58,33 +58,33 @@ describe('Glob', () =>
 			return org.relative(_.filename)
 		})
 
-		var glob = Each(globexpr, unit)
+		var glob = Glob(globexpr, unit)
 
 		var output = await glob(Context(null)).output
 
 		expect(output).eq('3.ext')
 	})
 
-	it('Glob/Each async', async () =>
+	it('Glob async', async () =>
 	{
 		var unit = Unit(_ =>
 		{
 			return delay(25, org.relative(_.filename))
 		})
 
-		var glob = Each(globexpr, unit)
+		var glob = Glob(globexpr, unit)
 
 		var output = await glob(Context(null)).output
 
 		expect(output).eq('3.ext')
 	})
 
-	it('Glob/Each streaming', async () =>
+	it('Glob streaming', async () =>
 	{
 		var b1 = []
 		var b2 = []
 
-		var glob = Each(globexpr, Unit(input =>
+		var glob = Glob(globexpr, Unit(input =>
 		{
 			return b1.push(org.relative(input.filename))
 		}))
@@ -103,14 +103,14 @@ describe('Glob', () =>
 		expect(b2.sort()).deep.eq([ 1, 2, 3 ].sort())
 	})
 
-	it('Glob/Each streaming Error', async () =>
+	it('Glob streaming Error', async () =>
 	{
 		var error = new Error('e')
 
 		var b1 = []
 		var b2 = []
 
-		var glob = Each(globexpr, Unit(async (input) =>
+		var glob = Glob(globexpr, Unit(async (input) =>
 		{
 			await delay(25)
 

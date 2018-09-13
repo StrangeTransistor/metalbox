@@ -8,7 +8,7 @@ import compare from 'src/compare'
 
 import Context from 'src/Context'
 
-import Glob from 'src/Unit/Glob/Each'
+import Glob from 'src/Unit/Glob'
 import Watch from 'src/Unit/Watch'
 
 import Unit from 'src/Unit'

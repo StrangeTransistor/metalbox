@@ -5,54 +5,46 @@ type $Glob$Options = Object
 
 */
 
-var assign = Object.assign
-
-import { find } from 'globule'
+import Promise from 'bluebird'
+var map = Promise.mapSeries
 
 import { stream } from 'flyd'
-import { on } from 'flyd'
 
-import alive   from '../../Outcome/alive'
-import turnoff from '../../flyd/turnoff'
-
-import unroll from '../../unroll'
-import Entry  from '../../Entry'
+import stream_to from '../../flyd/stream-to'
 
 import Unit from '../Unit'
 
-export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
+import GlobTo from './GlobTo'
+
+export default function /* ::<$in, $prov: $Providers$Base, $out> */
 (
 	glob /* :$Computable<$in, $prov, $Glob> */,
-	unit /* :$Unit<$Entries<void>, $prov, $out> */,
+	unit /* :$Unit<$Entry<$Supertype<void>>, $prov, $out> */,
 	options /* :: ?:$Shape<$Glob$Options> */
 )
 	/* :$Unit<$in, $prov, $out> */
 {
-	options = assign({}, options)
-
-	return Unit((_, context) =>
+	var each = Unit((entries, context) =>
 	{
 		/* @flow-off */
 		var s /* :flyd$Stream<$out> */ = stream()
 
-		unroll(context, glob)
-		.then(glob =>
+		map(entries, entry =>
 		{
-			glob = [].concat(glob)
+			if (s.end())
+			{
+				return
+			}
 
-			var found = find(glob, options)
-			var entries = found.map(filename => Entry(filename))
+			// TODO: stream in stream
+			var output = unit(context.derive(entry)).output
 
-			/* TODO: compose outcome */
-			var outcome = unit(context.derive(entries))
-
-			var a = alive(outcome)
-			on(s, a)
-
-			turnoff(a, s)
-			turnoff(s, a)
+			return stream_to(output, s)
 		})
+		.then(() => s.end(true))
 
 		return s
 	})
+
+	return GlobTo(glob, each, options)
 }

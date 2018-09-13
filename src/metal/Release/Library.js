@@ -2,7 +2,7 @@
 
 import Recipe from '../../Recipe'
 
-import Glob from '../../Unit/Glob/Each'
+import Glob from '../../Unit/Glob'
 import Debug from '../../Unit/Debug'
 
 // import Mutable from '../../Unit/Entry/Mutable'
