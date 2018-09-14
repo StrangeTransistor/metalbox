@@ -48,6 +48,37 @@ describe('Glob', () =>
 		await glob(Context(null)).output
 	})
 
+	it('GlobTo streaming', async () =>
+	{
+		var b1 = []
+		var b2 = []
+
+		var glob = GlobTo(globexpr, Unit(input =>
+		{
+			// eslint-disable-next-line
+			var $input = input.map(entry => org.relative(entry.filename))
+
+			return (b1.push($input), $input)
+		}))
+
+		var unit = glob.pipe(Unit(input =>
+		{
+			return (b2.push(input), input)
+		}))
+
+		var outcome = unit(Context(null))
+
+		var output = await outcome.output
+
+		expect(output.sort()).deep.eq(expected)
+
+		expect(b1.length).eq(1)
+		expect(b2.length).eq(1)
+
+		expect(b1[0].sort()).deep.eq(expected)
+		expect(b2[0].sort()).deep.eq(expected)
+	})
+
 	it('Glob', async () =>
 	{
 		var unit = Unit(_ =>
