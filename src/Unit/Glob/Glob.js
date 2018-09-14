@@ -19,11 +19,20 @@ import GlobTo from './GlobTo'
 export default function /* ::<$in, $prov: $Providers$Base, $out> */
 (
 	glob /* :$Computable<$in, $prov, $Glob> */,
-	unit /* :$Unit<$Entry<$Supertype<void>>, $prov, $out> */,
+	unit /* :: ?:?$Unit<$Entry<$Supertype<void>>, $prov, $out> */,
 	options /* :: ?:$Shape<$Glob$Options> */
 )
 	/* :$Unit<$in, $prov, $out> */
 {
+	if (unit)
+	{
+		var Σunit = unit
+	}
+	else
+	{
+		var Σunit = Unit(it => it)
+	}
+
 	var each = Unit((entries, context) =>
 	{
 		/* @flow-off */
@@ -37,7 +46,7 @@ export default function /* ::<$in, $prov: $Providers$Base, $out> */
 			}
 
 			// TODO: stream in stream
-			var output = unit(context.derive(entry)).output
+			var output = Σunit(context.derive(entry)).output
 
 			return stream_to(output, s)
 		})
