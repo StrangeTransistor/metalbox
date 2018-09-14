@@ -11,7 +11,7 @@ import Context from 'src/Context'
 import Glob from 'src/Unit/Glob'
 import Watch from 'src/Unit/Watch'
 
-import Unit from 'src/Unit'
+import Identity from 'src/Unit/Identity'
 import Rebase from 'src/Unit/Entry/Rebase'
 import Mutable from 'src/Unit/Entry/Mutable'
 import Load   from 'src/Unit/Entry/Load'
@@ -24,8 +24,6 @@ describe('Es5', () =>
 {
 	var es6_org = origin('es6')
 	var es5_cl  = collate('es5')
-
-	var Identity = Unit(x => x)
 
 	function Gen (target /* :$Thru<void, any, $File> */, src, dst)
 	{
@@ -49,7 +47,7 @@ describe('Es5', () =>
 	{
 		var tm = tmp()
 
-		var glob = Glob(es6_org('**/*.js'), Identity)
+		var glob = Glob(es6_org('**/*.js'), Identity())
 		var unit = glob.pipe(Gen(Es5(), es6_org, tm))
 
 		await unit(Context(null)).output
