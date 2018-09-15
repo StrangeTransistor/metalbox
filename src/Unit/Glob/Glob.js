@@ -13,7 +13,7 @@ import { stream } from 'flyd'
 import stream_to from '../../flyd/stream-to'
 
 import Unit from '../Unit'
-import Identity from '../Identity'
+import cast from '../_/cast'
 
 import GlobTo from './GlobTo'
 
@@ -25,14 +25,7 @@ export default function /* ::<$in, $prov: $Providers$Base, $out> */
 )
 	/* :$Unit<$in, $prov, $out> */
 {
-	if (unit)
-	{
-		var Σunit = unit
-	}
-	else
-	{
-		var Σunit = Identity()
-	}
+	var Σunit = cast(unit)
 
 	var each = Unit((entries, context) =>
 	{
