@@ -96,6 +96,24 @@ describe('Glob', () =>
 		expect(output).eq('3.ext')
 	})
 
+	it('Glob (no unit)', async () =>
+	{
+		var unit = Unit(_ =>
+		{
+			expect(_).property('filename')
+			expect(_).property('content')
+
+			return org.relative(_.filename)
+		})
+
+		var glob = Glob(globexpr)
+		.pipe(unit)
+
+		var output = await glob(Context(null)).output
+
+		expect(output).eq('3.ext')
+	})
+
 	it('Glob async', async () =>
 	{
 		var unit = Unit(_ =>
