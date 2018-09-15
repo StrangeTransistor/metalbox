@@ -79,6 +79,29 @@ describe('Glob', () =>
 		expect(b2[0].sort()).deep.eq(expected)
 	})
 
+	it('GlobTo (no unit)', async () =>
+	{
+		var b1 = []
+
+		var unit = Unit(input =>
+		{
+			// eslint-disable-next-line
+			var $input = input.map(entry => org.relative(entry.filename))
+
+			return (b1.push($input), $input)
+		})
+
+		var glob = GlobTo(globexpr)
+		.pipe(unit)
+
+		var output = await glob(Context(null)).output
+
+		expect(output.sort()).deep.eq(expected)
+
+		expect(b1.length).eq(1)
+		expect(b1[0].sort()).deep.eq(expected)
+	})
+
 	it('Glob', async () =>
 	{
 		var unit = Unit(_ =>
