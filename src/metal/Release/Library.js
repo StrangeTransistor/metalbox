@@ -16,9 +16,7 @@ export default Recipe(
 {
 	recipe ()
 	{
-		return Glob(
-			Src('test/origin/es6/**/*.js'),
-			Es5()
-		)
+		return Glob(Src('test/origin/es6/**/*.js'))
+		.pipe(Es5())
 	},
 })
