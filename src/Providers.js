@@ -6,12 +6,14 @@ var keys   = Object.keys
 import def from 'def-prop'
 import { val } from 'def-prop'
 
-export default function Providers /* ::<$base: $Providers$Base> */
-(
-	/* @flow-off */
-	base /* :$base */ = ({} /* :$Providers$Base */)
-)
-	/* :$Providers<$base> */
+/* ::
+
+declare function Providers<$base: $Providers$Base> ($base): $Providers<$base>
+declare function Providers (): $Providers<{||}>
+
+*/
+
+export default function Providers (base)
 {
 	base = assign({}, base)
 
@@ -22,7 +24,7 @@ export default function Providers /* ::<$base: $Providers$Base> */
 	(
 		providers /* :$derive */
 	)
-		/* :Providers<$base & $derive> */
+		/* :Providers<typeof base & $derive> */
 	{
 		return Providers(assign({}, base, providers))
 	}
