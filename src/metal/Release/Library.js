@@ -3,6 +3,9 @@
 import Recipe from '../../Recipe'
 
 import Glob from '../../Unit/Glob'
+
+import { Src } from '../focus'
+
 // import Debug from '../../Unit/Debug'
 
 // import Mutable from '../../Unit/Entry/Mutable'
@@ -14,7 +17,7 @@ export default Recipe(
 	recipe ()
 	{
 		return Glob(
-			(_, { providers: { src }}) => src('test/origin/es6/**/*.js'),
+			Src('test/origin/es6/**/*.js'),
 			Es5()
 		)
 	},
