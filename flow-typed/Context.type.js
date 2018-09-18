@@ -9,12 +9,8 @@ interface $Context<$in, $prov: $Providers$Base>
 	engine: Object,
 	providers: $Providers<$prov>,
 
-	derive <$d_in, $prov_add: $prov> (input: $d_in): $Context<$d_in, $prov>,
-
-	derive <$d_in, $prov_add: $Providers$Base>
-	(
-		input: $d_in,
-		providers: $prov_add
-	)
+	derive <$d_in, $prov_add: $Providers$Base> ($d_in, $prov_add)
 	: $Context<$d_in, $prov & $prov_add>,
+
+	derive <$d_in> ($d_in): $Context<$d_in, $prov>,
 }
