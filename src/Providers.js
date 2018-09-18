@@ -20,11 +20,7 @@ export default function Providers (base)
 	def(base, 'derive', val(derive))
 	def(base, 'is_empty', val(is_empty))
 
-	function derive /* ::<$derive: $Providers$Base> */
-	(
-		providers /* :$derive */
-	)
-		/* :Providers<typeof base & $derive> */
+	function derive (providers)
 	{
 		return Providers(assign({}, base, providers))
 	}
