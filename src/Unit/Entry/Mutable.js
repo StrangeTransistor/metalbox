@@ -1,4 +1,7 @@
 /* @flow */
+/*
+ * Invoke `unit` if Entry != Remove, else ignore Remove Entry.
+ */
 
 import Entry from '../../Entry'
 import Unit from '../Unit'
