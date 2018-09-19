@@ -135,14 +135,13 @@ describe('Watch', () =>
 		})
 	})
 
-	it('works with real pipe', async () =>
+	it('streaming', async () =>
 	{
 		var tm = tmp()
 		var tm_to = tmp()
 		var cl = collate('watch/1')
 
-		var same  = Unit(_ => _)
-		var watch = Watch(tm('*'), same)
+		var watch = Watch(tm('*'))
 		var tr    = Content(content => content + '_baz')
 
 		var payload = Load().pipe(tr)

@@ -19,15 +19,17 @@ import unroll from '../unroll'
 import Entry from '../Entry'
 
 import Unit from './Unit'
+import cast from './_/cast'
 
 export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 (
 	glob /* :$Computable<$in, $prov, $Glob> */,
-	unit /* :$Unit<$Watch$Emit, $prov, $out> */,
+	unit /* :: ?:?$Unit<$Watch$Emit, $prov, $out> */,
 	options /* :: ?:$Shape<$Watch$Options> */
 )
 	/* :$Unit<$in, $prov, $out> */
 {
+	var Σunit = cast(unit)
 	var Σoptions = assign({}, options)
 
 	return Unit((_, context) =>
@@ -75,7 +77,7 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 				}
 
 				// TODO: stream in stream
-				var output = await unit(context_entry).output
+				var output = await Σunit(context_entry).output
 
 				live(output)
 			})
