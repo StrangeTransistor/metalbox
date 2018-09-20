@@ -25,20 +25,9 @@
 
   "metalbox":
   {
-    "debug":
-    [
-      "Debug",
-      { "x": 1 }
-    ],
-    "cow":
-    [
-      "Cow",
-      "Cat"
-    ],
-    "library":
-    [
-      "metal/Release/Library"
-    ]
+    "debug":   [ "Debug", "label" ],
+    "cow":     [ "Cow", "Cat" ],
+    "library": [ "metal/Release/Library" ]
   },
 
   "scripts":
