@@ -20,6 +20,7 @@ import Remove from 'src/Unit/File/Remove'
 
 import FileEntry from 'src/Unit/Entry/File'
 import RemoveEntry from 'src/Unit/Entry/File/Remove'
+import Volatile from 'src/Unit/Entry/File/Volatile'
 
 var typical_content = 'content\n'
 
@@ -139,22 +140,48 @@ describe('File/Move', () =>
 
 describe('Entry/File', () =>
 {
-	var cl1 = collate('file/1')
-
 	it('Entry/File()', async () =>
 	{
 		var tm = tmp()
-		var context_entry = Context(Entry(
-			tm('abc'),
-			{ content: typical_content }
-		))
+		var cl = collate('file/1')
 
 		var unit = FileEntry()
 
-		await unit(context_entry).output
+		await unit(Add(tm('abc'))).output
 
-		compare(cl1(), tm())
+		compare(cl(), tm())
 	})
+
+	it('Entry/Volatile', async () =>
+	{
+		var tm = tmp()
+		var cl = collate('file/2')
+
+		var unit = Volatile()
+
+		await unit(Add(tm('abc'))).output
+		await unit(Add(tm('def'))).output
+		await unit(Add(tm('zxc'))).output
+		await unit(Rm(tm('zxc'))).output
+
+		compare(cl(), tm())
+	})
+
+	function Add (name)
+	{
+		return Context(Entry(
+			name,
+			{ content: typical_content }
+		))
+	}
+
+	function Rm (name)
+	{
+		return Context(Entry(
+			name,
+			Entry.Remove
+		))
+	}
 })
 
 describe('Remove', () =>
