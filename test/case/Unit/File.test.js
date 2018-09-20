@@ -18,9 +18,9 @@ import Move from 'src/Unit/File/Move'
 import Copy from 'src/Unit/File/Copy'
 import Remove from 'src/Unit/File/Remove'
 
-import FileEntry from 'src/Unit/Entry/File'
+import AddEntry from 'src/Unit/Entry/File/Add'
 import RemoveEntry from 'src/Unit/Entry/File/Remove'
-import Volatile from 'src/Unit/Entry/File/Volatile'
+import FileEntry from 'src/Unit/Entry/File'
 
 var typical_content = 'content\n'
 
@@ -140,24 +140,24 @@ describe('File/Move', () =>
 
 describe('Entry/File', () =>
 {
-	it('Entry/File()', async () =>
+	it('Entry/File/Add', async () =>
 	{
 		var tm = tmp()
 		var cl = collate('file/1')
 
-		var unit = FileEntry()
+		var unit = AddEntry()
 
 		await unit(Add(tm('abc'))).output
 
 		compare(cl(), tm())
 	})
 
-	it('Entry/Volatile', async () =>
+	it('Entry/File (Volatile)', async () =>
 	{
 		var tm = tmp()
 		var cl = collate('file/2')
 
-		var unit = Volatile()
+		var unit = FileEntry()
 
 		await unit(Add(tm('abc'))).output
 		await unit(Add(tm('def'))).output
