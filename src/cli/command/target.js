@@ -37,9 +37,10 @@ export default async function (mini /* :minimistOutput */)
 
 	console.info(`${ bold('Resolved package') }: ${ root_found_tilde }`)
 
-	var name = (mini._[0] || pkg.name || 'dev')
 	/* @flow-off */
 	var pkg = require(root('package.json'))
+
+	var name = (mini._[0] || pkg.name || 'dev')
 
 	var [ recipe_name, recipe_args ] = decide_target(name, pkg)
 
