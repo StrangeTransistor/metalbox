@@ -44,7 +44,7 @@
   "scripts":
   {
       "st": "eslint run/ src/ test/",
-       "t": "glow || flow",
+       "t": "glow",
     "unit": "mocha -r test/patch -r esm -R dot --recursive test/case/**",
 
     "test": "npm run st && npm run t && npm run unit"
@@ -168,6 +168,9 @@
 
     "flow-typed":
       "2.4",
+
+    "glow":
+      "1",
 
 
     "dir-compare":
