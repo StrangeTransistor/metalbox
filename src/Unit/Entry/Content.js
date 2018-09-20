@@ -1,4 +1,5 @@
 /* @flow */
+// TODO: sourcemaps
 /* ::
 
 type $Content$Fn<$prov: $Providers$Base>
@@ -6,8 +7,7 @@ type $Content$Fn<$prov: $Providers$Base>
 
 */
 
-import Unit from '../Unit'
-import Entry from '../../Entry'
+import Thru from './Thru'
 
 export default function Content /* ::<$prov: $Providers$Base> */
 (
@@ -15,22 +15,10 @@ export default function Content /* ::<$prov: $Providers$Base> */
 )
 	/* :$Thru<$File, $prov, $File> */
 {
-	return Unit(
+	return Thru(async ({ content, sourcemap }, context) =>
 	{
-		family: 'Content',
+		content = await fn(content, context)
 
-		async unit (entry, context)
-		{
-			var content = entry.content.content
-
-			// TODO: sourcemaps
-			content = await fn(content, context)
-
-			return Entry(entry.filename,
-			{
-				content,
-				sourcemap: entry.content.sourcemap,
-			})
-		}
+		return { content, sourcemap }
 	})
 }
