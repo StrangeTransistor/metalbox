@@ -152,7 +152,7 @@ describe('Entry/File', () =>
 		compare(cl(), tm())
 	})
 
-	it('Entry/File (Volatile)', async () =>
+	it('Entry/File', async () =>
 	{
 		var tm = tmp()
 		var cl = collate('file/2')
