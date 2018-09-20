@@ -7,7 +7,7 @@ import File from './File'
 import Remove from './Remove'
 
 export default function ()
-	/* :$Unit<$Entry<$Mutable<$File>>, any, void> */
+	/* :$Unit<$Entry<$Subtype<$Mutable<$File>>>, any, void> */
 {
 	var file   = File()
 	var remove = Remove()
