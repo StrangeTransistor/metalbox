@@ -42,10 +42,10 @@ export default async function (mini /* :minimistOutput */)
 
 	var name = (mini._[0] || pkg.name || 'dev')
 
-	var [ recipe_name, recipe_args ] = decide_target(name, pkg)
+	var [ recipe_name, recipe_arg ] = decide_target(name, pkg)
 
 	var recipe = resolve(recipe_name)
-	var unit   = await make(recipe, recipe_args)
+	var unit   = await make(recipe, [ recipe_arg ])
 
 	/* @flow-off */
 	var unit_arg = arg_eval(mini['--'][0])
@@ -75,12 +75,25 @@ function decide_target (
 
 	var target = pkg_metalbox[name]
 
-	if (! Array.isArray(target))
+	if (! is_tuple(target))
 	{
-		fatal('Target must be a tuple [ path to recipe, ...recipe options ]')
+		fatal(
+			'Target must be a tuple' +
+			' [ path to recipe, ?recipe arg, ?engine options ]'
+		)
 	}
 
-	var [ recipe_name, ...recipe_args ] = target
+	var [ recipe_name, recipe_arg, engine_options ] = target
+	console.log(recipe_name, recipe_arg, engine_options)
 
-	return [ recipe_name, recipe_args ]
+	return [ recipe_name, recipe_arg, engine_options ]
+}
+
+function is_tuple (target)
+{
+	if (! Array.isArray(target)) { return false }
+	if (target.length < 1) { return false }
+	if (target.length > 3) { return false }
+
+	return true
 }
