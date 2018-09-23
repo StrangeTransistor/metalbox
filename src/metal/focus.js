@@ -11,7 +11,7 @@ type $SrcDst = $Demands<{ src: $Rootpath, dst: $Rootpath }>
 
 export function Src /* ::<$Src: $Demands<{ src: $Rootpath }>> */
 (
-	...args /* : Rootpath$Path[] */
+	...args /* :Rootpath$Path[] */
 )
 {
 	return function (_ /* :any */, { providers: { src }} /* :$Src */)
@@ -35,7 +35,7 @@ Src.Globs = function /* ::<$Src: $Demands<{ src: $Rootpath }>> */
 
 export function Dst /* ::<$Dst: $Demands<{ dst: $Rootpath }>> */
 (
-	...args /* : Rootpath$Path[] */
+	...args /* :Rootpath$Path[] */
 )
 {
 	return function (_ /* :any */, { providers: { dst }} /* :$Dst */)
