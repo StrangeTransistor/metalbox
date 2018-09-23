@@ -1,9 +1,4 @@
 /* @flow */
-/* ::
-
-import type { Rootpath$Path } from '@streetstrider/rootpath'
-
-*/
 
 import Glob from '../../Unit/Glob'
 import Copy from '../../Unit/File/Copy'
