@@ -9,6 +9,7 @@
 // ignore: coverage, test, tests, release, node_modules
 
 import Recipe from '../../Recipe'
+
 // import Debug from '../../Unit/Debug'
 // import Mutable from '../../Unit/Entry/Mutable'
 
@@ -20,6 +21,7 @@ export default Recipe(
 	recipe ()
 	{
 		return MirrorCopy('**/*.md')
+		.fork(MirrorCopy('**/*.txt'))
 
 		// return Glob(Src('test/origin/es6/**/*.js'))
 		// .pipe(Es5())
