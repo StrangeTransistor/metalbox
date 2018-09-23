@@ -5,6 +5,7 @@ import type { $Rootpath } from '@streetstrider/rootpath'
 import type { Rootpath$Path } from '@streetstrider/rootpath'
 
 type $Demands<T> = { providers: $Providers<$Subtype<T>> }
+type $SrcDst = $Demands<{ src: $Rootpath, dst: $Rootpath }>
 
 */
 
@@ -30,4 +31,17 @@ export function Dst /* ::<$Dst: $Demands<{ dst: $Rootpath }>> */
 	{
 		return dst(...args)
 	}
+}
+
+export function Filename (entry /* :$Entry<any> */)
+{
+	return entry.filename
+}
+
+export function Rebased (
+	{ filename }               /* :$Entry<any> */,
+	{ providers: { src, dst }} /* :$SrcDst */
+)
+{
+	return dst(src.relative(filename))
 }

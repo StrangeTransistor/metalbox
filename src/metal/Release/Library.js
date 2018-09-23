@@ -15,6 +15,8 @@ import Glob from '../../Unit/Glob'
 import Copy from '../../Unit/File/Copy'
 
 import { Src } from '../focus'
+import { Filename } from '../focus'
+import { Rebased } from '../focus'
 // import { Dst } from '../focus'
 
 // import Debug from '../../Unit/Debug'
@@ -29,11 +31,7 @@ export default Recipe(
 	{
 		return Glob(Src('**/*.md'))
 		// .pipe(Rebase(Src(), Dst()))
-		.pipe(Copy(
-			entry => entry.filename,
-			(entry, { providers: { src, dst }})
-			 => dst(src.relative(entry.filename))
-		))
+		.pipe(Copy(Filename, Rebased))
 		// .pipe(Debug('MD'))
 
 		// return Glob(Src('test/origin/es6/**/*.js'))
