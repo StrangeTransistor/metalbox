@@ -10,11 +10,16 @@
 
 import Recipe from '../../Recipe'
 
+import Glob from '../../Unit/Glob'
 // import Debug from '../../Unit/Debug'
-// import Mutable from '../../Unit/Entry/Mutable'
+import Rebase from '../../Unit/Entry/Rebase'
+import File from '../../Unit/Entry/File'
 
-// import Es5 from '../Unit/Es5'
+import Es5 from '../Unit/Es5'
 import MirrorCopy from '../Unit/MirrorCopy'
+
+import { Src } from '../focus'
+import { Dst } from '../focus'
 
 var other =
 [
@@ -30,9 +35,16 @@ export default Recipe(
 {
 	recipe ()
 	{
-		return MirrorCopy(other)
-
-		// return Glob(Src('test/origin/es6/**/*.js'))
-		// .pipe(Es5())
+		return JavaScript()
+		.fork(MirrorCopy(other))
 	},
 })
+
+function JavaScript ()
+{
+	return Glob(Src('**/*.js'))
+	.pipe(Es5())
+	.pipe(Rebase(Src(), Dst()))
+	// .pipe(Debug())
+	.pipe(File())
+}
