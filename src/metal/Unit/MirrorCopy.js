@@ -14,9 +14,9 @@ import { Rebased } from '../focus'
 
 export default function MirrorCopy
 (
-	...args /* : Rootpath$Path[] */
+	globs /* :$Glob */
 )
 {
-	return Glob(Src(...args))
+	return Glob(Src.Globs([].concat(globs)))
 	.pipe(Copy(Filename, Rebased))
 }

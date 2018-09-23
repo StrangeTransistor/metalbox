@@ -16,12 +16,17 @@ import Recipe from '../../Recipe'
 // import Es5 from '../Unit/Es5'
 import MirrorCopy from '../Unit/MirrorCopy'
 
+var other =
+[
+	'**/*.md',
+	'**/*.txt'
+]
+
 export default Recipe(
 {
 	recipe ()
 	{
-		return MirrorCopy('**/*.md')
-		.fork(MirrorCopy('**/*.txt'))
+		return MirrorCopy(other)
 
 		// return Glob(Src('test/origin/es6/**/*.js'))
 		// .pipe(Es5())

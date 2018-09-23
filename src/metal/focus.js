@@ -21,6 +21,18 @@ export function Src /* ::<$Src: $Demands<{ src: $Rootpath }>> */
 	}
 }
 
+Src.Globs = function /* ::<$Src: $Demands<{ src: $Rootpath }>> */
+(
+	globs /* :string[] */
+)
+{
+	return function (_ /* :any */, { providers: { src }} /* :$Src */)
+		/* :string[] */
+	{
+		return globs.map(glob => src(glob))
+	}
+}
+
 export function Dst /* ::<$Dst: $Demands<{ dst: $Rootpath }>> */
 (
 	...args /* : Rootpath$Path[] */
