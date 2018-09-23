@@ -19,7 +19,11 @@ import MirrorCopy from '../Unit/MirrorCopy'
 var other =
 [
 	'**/*.md',
-	'**/*.txt'
+	'**/*.txt',
+
+	'readme',
+	'Readme',
+	'README'
 ]
 
 export default Recipe(
