@@ -35,16 +35,30 @@ export default Recipe(
 {
 	recipe ()
 	{
-		return JavaScript()
+		return Code()
 		.fork(MirrorCopy(other))
 	},
 })
+
+function Code ()
+{
+	return TypeScript()
+	.pre(JavaScript())
+}
+
 
 function JavaScript ()
 {
 	return Glob(Src('**/*.js'))
 	.pipe(Es5())
 	.pipe(Rebase(Src(), Dst()))
-	// .pipe(Debug())
+	.pipe(File())
+}
+
+function TypeScript ()
+{
+	return Glob(Src('**/*.ts'))
+	.pipe(Es5())
+	.pipe(Rebase(Src(), Dst()))
 	.pipe(File())
 }
