@@ -8,11 +8,9 @@ import compare from 'src/compare'
 
 import Context from 'src/Context'
 
-// import Load   from 'src/Unit/Load'
-
 import Library from 'src/metal/Release/Library'
 
-describe.only('Library', () =>
+describe('Library', () =>
 {
 	it('works', async () =>
 	{
@@ -20,7 +18,7 @@ describe.only('Library', () =>
 		var org = origin('library/1')
 		var cl  = collate('library/1')
 
-		var L = await Library()
+		var library = await Library()
 
 		var context = Context(null,
 		{
@@ -28,10 +26,7 @@ describe.only('Library', () =>
 			dst: tm,
 		})
 
-		var outcome = L(context)
-		var output  = await outcome.output
-
-		console.log('output', output)
+		await library(context).output
 
 		compare(cl(), tm())
 	})
