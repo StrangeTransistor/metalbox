@@ -1,12 +1,16 @@
 /* @flow */
-// package.json
+// TODO: transform package.json
 // +manifest?
-// transform js
-// flow, ts types
-// run
-// other:
-// copy json, hjson, md, license
-// ignore: coverage, test, tests, release, node_modules
+// TODO: transform hjson?
+
+// TODO: mode: es6
+// TODO: mode: origin
+// TODO: mode: combine (+obfuscate)
+
+// TODO: copy flow, extract ts types
+// TODO: copy run
+
+// TODO: ignore coverage, test, tests, release, node_modules
 
 import Recipe from '../../Recipe'
 
