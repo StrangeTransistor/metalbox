@@ -28,7 +28,11 @@ var other =
 
 	'readme',
 	'Readme',
-	'README'
+	'README',
+
+	'license',
+	'License',
+	'LICENSE',
 ]
 
 export default Recipe(
