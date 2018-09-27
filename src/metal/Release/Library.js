@@ -33,12 +33,19 @@ var other =
 	'license',
 ]
 
+var types =
+[
+	'**/*.js.flow',
+	'**/*.d.ts',
+]
+
 export default Recipe(
 {
 	recipe ()
 	{
 		return Code()
-		.fork(MirrorCopy(other, { nocase: true }))
+		.fork(Types())
+		.fork(Other())
 	},
 })
 
@@ -59,8 +66,18 @@ function JavaScript ()
 
 function TypeScript ()
 {
-	return Glob(Src('**/*.ts'))
+	return Glob(Src('**/*.ts'), void 0, { ignore: '**/*.d.ts' })
 	.pipe(Es5())
 	.pipe(Rebase(Src(), Dst()))
 	.pipe(File())
+}
+
+function Types ()
+{
+	return MirrorCopy(types)
+}
+
+function Other ()
+{
+	return MirrorCopy(other, { nocase: true })
 }
