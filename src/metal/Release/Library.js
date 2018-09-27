@@ -60,17 +60,22 @@ function JavaScript ()
 {
 	return Glob(Src('**/*.js'))
 	.pipe(Es5())
-	.pipe(Rebase(Src(), Dst()))
-	.pipe(File())
+	.pipe(Write())
 }
 
 function TypeScript ()
 {
 	return Glob(Src('**/*.ts'), void 0, { ignore: '**/*.d.ts' })
 	.pipe(Es5())
-	.pipe(Rebase(Src(), Dst()))
+	.pipe(Write())
+}
+
+function Write ()
+{
+	return Rebase(Src(), Dst())
 	.pipe(File())
 }
+
 
 function Types ()
 {
