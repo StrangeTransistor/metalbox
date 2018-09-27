@@ -9,9 +9,10 @@ import { Rebased } from '../focus'
 
 export default function MirrorCopy
 (
-	globs /* :$Glob */
+	globs /* :$Glob */,
+	options /* :: ?:$Shape<$Glob$Options> */
 )
 {
-	return Glob(Src.Globs([].concat(globs)))
+	return Glob(Src.Globs([].concat(globs)), void 0, options)
 	.pipe(Copy(Filename, Rebased))
 }

@@ -30,12 +30,7 @@ var other =
 	'**/*.txt',
 
 	'readme',
-	'Readme',
-	'README',
-
 	'license',
-	'License',
-	'LICENSE',
 ]
 
 export default Recipe(
@@ -43,7 +38,7 @@ export default Recipe(
 	recipe ()
 	{
 		return Code()
-		.fork(MirrorCopy(other))
+		.fork(MirrorCopy(other, { nocase: true }))
 	},
 })
 

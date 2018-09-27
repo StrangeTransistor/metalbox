@@ -1,9 +1,4 @@
 /* @flow */
-/* ::
-
-type $Glob$Options = Object
-
-*/
 
 var assign = Object.assign
 

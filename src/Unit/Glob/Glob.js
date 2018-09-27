@@ -1,9 +1,4 @@
 /* @flow */
-/* ::
-
-type $Glob$Options = Object
-
-*/
 
 import Promise from 'bluebird'
 var map = Promise.mapSeries
