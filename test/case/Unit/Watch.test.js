@@ -25,6 +25,8 @@ import Content from 'src/Unit/Entry/Content'
 import Load    from 'src/Unit/Entry/Load'
 import File    from 'src/Unit/Entry/File'
 
+import end from 'test/end'
+
 import Watch from 'src/Unit/Watch'
 
 describe('Watch', () =>
@@ -33,16 +35,6 @@ describe('Watch', () =>
 
 	var globexpr = org('*.ext')
 	var expected = [ '1.ext', '2.ext', '3.ext' ].sort()
-
-	function end (outcome /* :$Outcome<*> */)
-	{
-		setTimeout(() =>
-		{
-			/* @flow-off */
-			outcome.stream.end(true)
-		}
-		, 200)
-	}
 
 	it('works', async () =>
 	{
