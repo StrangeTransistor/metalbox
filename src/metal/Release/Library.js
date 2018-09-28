@@ -14,11 +14,15 @@
 
 import Recipe from '../../Recipe'
 
-import Glob from '../../Unit/Glob'
+import Fork   from '../../Unit/compose/Fork'
+
+import Glob   from '../../Unit/Glob'
+import Load   from '../../Unit/Entry/Load'
 import Rebase from '../../Unit/Entry/Rebase'
-import File from '../../Unit/Entry/File'
+import File   from '../../Unit/Entry/File'
 
 import Es5 from '../Unit/Es5'
+import FlowDecl from '../Unit/FlowDecl'
 import MirrorCopy from '../Unit/MirrorCopy'
 
 import { Src } from '../focus'
@@ -59,8 +63,10 @@ function Code ()
 function JavaScript ()
 {
 	return Glob(Src('**/*.js'))
-	.pipe(Es5())
-	.pipe(Write())
+	.pipe(Fork(
+		 Es5().pipe(Write()),
+		Load().pipe(FlowDecl()).pipe(Write())
+	))
 }
 
 function TypeScript ()
