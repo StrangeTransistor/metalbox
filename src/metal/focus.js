@@ -23,7 +23,7 @@ export function Src /* ::<$Src: $Demands<{ src: $Rootpath }>> */
 
 Src.Globs = function /* ::<$Src: $Demands<{ src: $Rootpath }>> */
 (
-	globs /* :string[] */
+	globs /* :$Glob[] */
 )
 {
 	return function (_ /* :any */, { providers: { src }} /* :$Src */)
