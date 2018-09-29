@@ -24,7 +24,7 @@ declare function Feed<$in, $prov: $Providers$Base, $out>
 export default function Feed (glob, unit, options)
 {
 	var glob  =  Glob(glob, unit, options)
-	var watch = Watch(glob, unit, options)
+	var watch = Watch(glob, unit, ignored(options))
 
 	return Unit((_, context) =>
 	{
@@ -47,3 +47,11 @@ export default function Feed (glob, unit, options)
 }
 
 /* $Unit<$Entry<$Subtype<$Mutable<$File>>>, any, void> */
+
+function ignored (options)
+{
+	options = { ...options }
+	options.ignore && (options.ignored = options.ignore)
+	delete options.ignore
+	return options
+}
