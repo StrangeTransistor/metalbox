@@ -23,8 +23,8 @@ declare function Feed<$in, $prov: $Providers$Base, $out>
 
 export default function Feed (glob, unit, options)
 {
-	var glob  =  Glob(glob, unit, options)
-	var watch = Watch(glob, unit, ignored(options))
+	var G =  Glob(glob, unit, options)
+	var W = Watch(glob, unit, ignored(options))
 
 	return Unit((_, context) =>
 	{
@@ -33,13 +33,13 @@ export default function Feed (glob, unit, options)
 
 		if (so_watch)
 		{
-			var outcome = watch(context)
+			var outcome = W(context)
 
 			return (outcome.stream || outcome.output)
 		}
 		else
 		{
-			var outcome = glob(context)
+			var outcome = G(context)
 
 			return (outcome.stream || outcome.output)
 		}
