@@ -80,6 +80,12 @@
     "chokidar":
       "^1.7",
 
+    "micromatch":
+      "3",
+
+    "glob-parent":
+      "3",
+
     "cli-color":
       "1",
 

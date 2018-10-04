@@ -13,6 +13,8 @@ import { stream } from 'flyd'
 import { on } from 'flyd'
 
 import { watch } from 'chokidar'
+import glob_base from 'glob-parent'
+import match from 'micromatch'
 
 import unroll from '../unroll'
 
@@ -53,20 +55,26 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 		.then(glob =>
 		{
 			glob = [].concat(glob)
+			var base = glob.map(glob_base)
 
-			var ignored = []
+			// var ignored = []
 
-			if (! Σoptions.dot)
-			{
-				ignored.push(/(^|[/\\])\../)
-			}
+			// if (! Σoptions.dot)
+			// {
+			// 	ignored.push(/(^|[/\\])\../)
+			// }
 
-			var options_w = { ignored }
+			// var options_w = { ignored }
 
-			handler = watch(glob, options_w)
+			handler = watch(base /* , options_w */)
 
 			handler.on('all', async (event, path) =>
 			{
+				if (! match([ path ], glob, Σoptions).length)
+				{
+					return
+				}
+
 				var entry = Entry(path)
 				var context_entry = context.derive(entry)
 				context_entry.live = true
