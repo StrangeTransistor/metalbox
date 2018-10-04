@@ -1,7 +1,8 @@
 /* @flow */
 
-import Glob from '../../Unit/Glob'
 import Copy from '../../Unit/File/Copy'
+
+import Feed from '../Unit/Feed'
 
 import { Src } from '../focus'
 import { Filename } from '../focus'
@@ -13,6 +14,6 @@ export default function MirrorCopy
 	options /* :: ?:$Shape<$Glob$Options> */
 )
 {
-	return Glob(Src.Globs([].concat(globs)), void 0, options)
+	return Feed(Src.Globs([].concat(globs)), void 0, options)
 	.pipe(Copy(Filename, Rebased))
 }

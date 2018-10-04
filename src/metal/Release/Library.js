@@ -16,11 +16,13 @@ import Recipe from '../../Recipe'
 
 import Fork   from '../../Unit/compose/Fork'
 
-import Glob   from '../../Unit/Glob'
+// import Debug   from '../../Unit/Debug'
+// import Glob   from '../../Unit/Glob'
 import Load   from '../../Unit/Entry/Load'
 import Rebase from '../../Unit/Entry/Rebase'
 import File   from '../../Unit/Entry/File'
 
+import Feed from '../Unit/Feed'
 import Es5 from '../Unit/Es5'
 import FlowDecl from '../Unit/FlowDecl'
 import MirrorCopy from '../Unit/MirrorCopy'
@@ -62,7 +64,7 @@ function Code ()
 
 function JavaScript ()
 {
-	return Glob(Src('**/*.js'))
+	return Feed(Src('**/*.js'))
 	.pipe(Fork(
 		 Es5().pipe(Write()),
 		Load().pipe(FlowDecl()).pipe(Write())
@@ -71,7 +73,7 @@ function JavaScript ()
 
 function TypeScript ()
 {
-	return Glob(Src('**/*.ts'), void 0, { ignore: '**/*.d.ts' })
+	return Feed(Src.Globs([ '**/*.ts', '!*.d.ts' ]))
 	.pipe(Es5())
 	.pipe(Write())
 }

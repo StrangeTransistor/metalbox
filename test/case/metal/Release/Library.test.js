@@ -10,7 +10,9 @@ import Context from 'src/Context'
 
 import Library from 'src/metal/Release/Library'
 
-describe('Library', () =>
+import end from 'test/end'
+
+describe.only('Library', () =>
 {
 	it('works', async () =>
 	{
@@ -29,5 +31,30 @@ describe('Library', () =>
 		await library(context).output
 
 		compare(cl(), tm())
+	})
+
+	xit('works live', async () =>
+	{
+		var tm  = tmp()
+		var org = origin('library/1')
+		var cl  = collate('library/1')
+
+		var library = await Library()
+
+		var context = Context(null,
+		{
+			src: org,
+			dst: tm,
+			live: true,
+		})
+
+		var outcome = library(context)
+
+		end(outcome)
+
+		await outcome.output
+
+		compare(cl(), tm())
+		// console.log(cl)
 	})
 })
