@@ -62,6 +62,30 @@ describe('Watch', () =>
 		})
 	})
 
+	it('single file', async () =>
+	{
+		var buffer = []
+
+		var unit = Unit(({ filename }) =>
+		{
+			buffer.push(filename)
+		})
+
+		unit = Rebase(org(), '').pipe(unit)
+
+		var watch = Watch(org('1.ext'), unit)
+
+		var outcome = watch(Context(null))
+
+		end(outcome)
+
+		await outcome.output
+		.then(() =>
+		{
+			expect(buffer.sort()).deep.eq([ '1.ext' ])
+		})
+	})
+
 	it('works inside composition', async () =>
 	{
 		var b1 = []
