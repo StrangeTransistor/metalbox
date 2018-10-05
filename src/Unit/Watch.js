@@ -9,6 +9,8 @@ type $Watch$Emit = $Entry<$Mutable<void>>
 
 var assign = Object.assign
 
+import { isAbsolute as is_abs } from 'path'
+
 import { stream } from 'flyd'
 import { on } from 'flyd'
 
@@ -69,6 +71,7 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 			// var options_w = { ignored }
 
 			base = uniq(base)
+			base = base.filter(path => is_abs(path))
 
 			handler = watch(base /* , options_w */)
 
