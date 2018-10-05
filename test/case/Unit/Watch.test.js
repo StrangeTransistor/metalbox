@@ -105,7 +105,7 @@ describe('Watch', () =>
 		})
 		unit = Rebase(tm(), '').pipe(unit)
 
-		var watch = Watch(tm('*'), unit)
+		var watch = Watch(tm('*.ext'), unit)
 
 		var outcome = watch(Context(null))
 
@@ -133,7 +133,7 @@ describe('Watch', () =>
 		var tm_to = tmp()
 		var cl = collate('watch/1')
 
-		var watch = Watch(tm('*'))
+		var watch = Watch(tm('*.ext'))
 		var tr    = Content(content => content + '_baz')
 
 		var payload = Load().pipe(tr)
@@ -162,6 +162,8 @@ describe('Watch', () =>
 		await fs.writeFile(tm('2.ext'), 'foo')
 		await delay(100)
 		await fs.writeFile(tm('3.ext'), 'foo')
+		await delay(100)
+		await fs.writeFile(tm('3.ext.another'), 'another')
 		await delay(100)
 		await fs.writeFile(tm('2.ext'), 'bar')
 		await delay(100)
