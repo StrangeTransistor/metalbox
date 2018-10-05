@@ -12,6 +12,8 @@ var assign = Object.assign
 import { stream } from 'flyd'
 import { on } from 'flyd'
 
+import uniq from 'lodash/uniq'
+
 import { watch } from 'chokidar'
 import glob_base from 'glob-parent'
 import match from 'micromatch'
@@ -52,9 +54,9 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 		}
 
 		unroll(context, glob)
-		.then(glob =>
+		.then(raw_glob =>
 		{
-			glob = [].concat(glob)
+			var glob = [].concat(raw_glob)
 			var base = glob.map(glob_base)
 
 			// var ignored = []
@@ -65,6 +67,8 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 			// }
 
 			// var options_w = { ignored }
+
+			base = uniq(base)
 
 			handler = watch(base /* , options_w */)
 
