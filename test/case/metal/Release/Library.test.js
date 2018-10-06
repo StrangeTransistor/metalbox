@@ -12,7 +12,7 @@ import Library from 'src/metal/Release/Library'
 
 import end from 'test/end'
 
-describe.only('Library', () =>
+describe('Library', () =>
 {
 	it('works', async () =>
 	{
@@ -33,7 +33,7 @@ describe.only('Library', () =>
 		compare(cl(), tm())
 	})
 
-	xit('works live', async () =>
+	it('works live', async () =>
 	{
 		var tm  = tmp()
 		var org = origin('library/1')

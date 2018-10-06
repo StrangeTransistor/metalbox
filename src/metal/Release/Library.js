@@ -58,7 +58,7 @@ export default Recipe(
 function Code ()
 {
 	return TypeScript()
-	.pre(JavaScript())
+	.fork(JavaScript())
 }
 
 
