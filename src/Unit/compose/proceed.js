@@ -34,11 +34,10 @@ export default function proceed
 		}
 		else
 		{
-			var context_live = fn(value)
-			context_live.live = true
+			var context = fn(value)
 
 			/* TODO: stream in stream */
-			var output = next(context_live).output
+			var output = next(context).output
 
 			stream_to(output, self).then(prev.continue)
 			// out2.stream +

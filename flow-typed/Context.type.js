@@ -3,9 +3,6 @@ interface $Context<$in, $prov: $Providers$Base>
 {
 	input: $in,
 
-	once:  boolean, /* TODO: consider removing */
-	live:  boolean,
-
 	engine: Object,
 	providers: $Providers<$prov>,
 

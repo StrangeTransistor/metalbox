@@ -83,8 +83,6 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 				}
 
 				var entry = Entry(path)
-				var context_entry = context.derive(entry)
-				context_entry.live = true
 
 				if (event === 'unlink')
 				{
@@ -92,7 +90,7 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 				}
 
 				// TODO: stream in stream
-				var output = await Σunit(context_entry).output
+				var output = await Σunit(context.derive(entry)).output
 
 				live(output)
 			})

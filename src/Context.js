@@ -17,18 +17,12 @@ export default function Context (input, providers)
 	{
 		input,
 
-		once: false,
-		live: false,
-
 		engine: {},
 		providers: Providers(providers),
 
 		derive (input, providers)
 		{
 			var derived = Context(input)
-
-			derived.once  = context.once
-			derived.live  = context.live
 
 			derived.engine = context.engine
 

@@ -8,9 +8,6 @@ export function expect_context (context /* :any */)
 {
 	expect(context).property('input')
 
-	expect(context).property('once')
-	expect(context).property('live')
-
 	expect(context).property('engine')
 
 	expect(context).property('providers')
