@@ -22,6 +22,7 @@ export default function Outcome /* ::<$out> */
 	{
 		stream,
 		output: promise,
+		return: (stream || promise),
 
 		time:
 		{

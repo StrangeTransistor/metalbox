@@ -8,5 +8,5 @@ export default function /* ::<$value> */
 )
 	/* :flyd$Stream<$value> */
 {
-	return alive(outcome.stream || outcome.output)
+	return alive(outcome.return)
 }

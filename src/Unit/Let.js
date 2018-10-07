@@ -35,6 +35,6 @@ export default function Let (transform, target)
 
 		var outcome = target(context)
 		// @compose
-		return (outcome.stream || outcome.output)
+		return outcome.return
 	})
 }
