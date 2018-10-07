@@ -43,9 +43,9 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 		var handler
 
 		/* @flow-off */
-		var live /* :flyd$Stream<$out> */ = stream()
+		var s /* :flyd$Stream<$out> */ = stream()
 
-		on(release, live.end)
+		on(release, s.end)
 
 		function release ()
 		{
@@ -92,10 +92,10 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 				// TODO: stream in stream
 				var output = await Σunit(context.derive(entry)).output
 
-				live(output)
+				s(output)
 			})
 		})
 
-		return live
+		return s
 	})
 }
