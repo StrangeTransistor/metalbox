@@ -7,17 +7,15 @@ import Watch from '../../Unit/Watch'
 
 /* ::
 
-type $Demands<T> = { providers: $Providers<$Subtype<T>> }
+type $Mode = { live?: boolean, once?: boolean }
 
-type $Mode = $Demands<{ live?: boolean, once?: boolean }>
-
-declare function Feed<$in, $prov: $Providers$Base, $out>
+declare function Feed<$in, $prov: $Mode, $out>
 (
 	glob:      $Computable<$in, $prov, $Glob>,
 	unit?:    ?$Unit<$Entry<$Mutable<void>>, $prov, $out>,
 	options?:  $Shape<$Glob$Options>
 )
-:$Unit<$in, $prov & $Mode, $out>
+:$Unit<$in, $prov, $out>
 
 */
 

@@ -11,3 +11,5 @@ interface $Context<$in, $prov: $Providers$Base>
 
 	derive <$d_in> ($d_in): $Context<$d_in, $prov>,
 }
+
+type $Demands<T> = { providers: $Providers<$Subtype<T>> }

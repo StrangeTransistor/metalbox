@@ -4,7 +4,6 @@
 import type { $Rootpath } from '@streetstrider/rootpath'
 import type { Rootpath$Path } from '@streetstrider/rootpath'
 
-type $Demands<T> = { providers: $Providers<$Subtype<T>> }
 type $SrcDst = $Demands<{ src: $Rootpath, dst: $Rootpath }>
 
 */
