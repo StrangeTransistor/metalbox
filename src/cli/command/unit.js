@@ -3,7 +3,9 @@
 
 import Context from '../../Context'
 
-import arg_eval    from '../arg-eval'
+import write  from '../write'
+import { NL } from '../write'
+import arg_eval from '../arg-eval'
 import recipe_args from '../recipe-args'
 
 import resolve from '../unit/resolve'
@@ -12,6 +14,12 @@ import invoke  from '../unit/invoke'
 
 export default async function (mini /* :minimistOutput */)
 {
+	if (! mini._.length)
+	{
+		write('metalbox u|unit <Unit|Recipe> [<...args>] -- [<input>]', NL)
+		return
+	}
+
 	var recipe = resolve(mini._[0])
 	var unit   = await make(recipe, recipe_args(mini))
 

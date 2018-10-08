@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable complexity */
 /* :: import type { minimistOutput } from 'minimist' */
 
 import findroot from 'find-root'
@@ -10,6 +11,8 @@ var bold = clc.bold
 
 import Context  from '../../Context'
 
+import write  from '../write'
+import { NL } from '../write'
 import arg_eval from '../arg-eval'
 
 import resolve from '../unit/resolve'
@@ -40,9 +43,7 @@ export default async function (mini /* :minimistOutput */)
 	/* @flow-off */
 	var pkg = require(root('package.json'))
 
-	var name = (mini._[0] || pkg.name || 'dev')
-
-	var [ recipe_name, recipe_arg ] = decide_target(name, pkg)
+	var [ name, recipe_name, recipe_arg ] = decide_target(mini, pkg)
 
 	var recipe = resolve(recipe_name)
 	var unit   = await make(recipe, [ recipe_arg ])
@@ -60,16 +61,21 @@ export default async function (mini /* :minimistOutput */)
 
 
 function decide_target (
-	name /* :string */,
+	mini /* :minimistOutput */,
 	pkg  /* :Object */
 )
 {
-	name || (name = pkg.name || 'dev')
+	var name = (mini._[0] || pkg.name || 'dev')
 
 	var pkg_metalbox = pkg.metalbox
 
 	if (! (name in Object(pkg_metalbox)))
 	{
+		if (! mini._.length)
+		{
+			write('metalbox t|target [<target>] -- [<input>]', NL)
+		}
+
 		fatal(`Target '${ name }' not found in 'package.metalbox'`)
 	}
 
@@ -86,7 +92,7 @@ function decide_target (
 	var [ recipe_name, recipe_arg, engine_options ] = target
 	console.log(recipe_name, recipe_arg, engine_options)
 
-	return [ recipe_name, recipe_arg, engine_options ]
+	return [ name, recipe_name, recipe_arg, engine_options ]
 }
 
 function is_tuple (target)
