@@ -10,6 +10,7 @@ import Context  from '../../Context'
 import write  from '../write'
 import { NL } from '../write'
 import recipe_args from '../recipe-args'
+import arg_eval from '../arg-eval'
 
 import resolve from '../unit/resolve'
 import make    from '../unit/make'
@@ -21,7 +22,7 @@ export default async function (mini /* :minimistOutput */)
 	{
 		write(
 			'metalbox r|release <Unit|Recipe>',
-			'[<...args>] -- [<release dir> = dirname]',
+			' [<...args>] -- [<release dir> = dirname] [<input>]',
 			NL
 		)
 		return
@@ -37,7 +38,9 @@ export default async function (mini /* :minimistOutput */)
 	var src = rootpath(cwd)
 	var dst = src.partial('release', name)
 
-	var context = Context(void 0, { src, dst })
+	var unit_input = mini['--'][1]
+	unit_input = arg_eval(unit_input)
+	var context = Context(unit_input, { src, dst })
 
 	return await invoke(unit, context)
 }

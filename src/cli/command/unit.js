@@ -5,8 +5,8 @@ import Context from '../../Context'
 
 import write  from '../write'
 import { NL } from '../write'
-import arg_eval from '../arg-eval'
 import recipe_args from '../recipe-args'
+import arg_eval from '../arg-eval'
 
 import resolve from '../unit/resolve'
 import make    from '../unit/make'
