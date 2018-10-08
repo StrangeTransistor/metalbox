@@ -22,7 +22,7 @@ export default async function (mini /* :minimistOutput */)
 	{
 		write(
 			'metalbox r|release <Unit|Recipe>',
-			' [<...args>] -- [<release dir> = dirname] [<input>]',
+			' [<...args>] -- [<release dir> = cwd] [<input>]',
 			NL
 		)
 		return
@@ -31,16 +31,16 @@ export default async function (mini /* :minimistOutput */)
 	var recipe = resolve(mini._[0])
 	var unit   = await make(recipe, recipe_args(mini))
 
-	var cwd = process.cwd()
+	var cwd  = process.cwd()
 	/* @flow-off */
 	var name = (mini['--'][0] || basename(cwd))
 
 	var src = rootpath(cwd)
 	var dst = src.partial('release', name)
 
-	var unit_input = mini['--'][1]
-	unit_input = arg_eval(unit_input)
-	var context = Context(unit_input, { src, dst })
+	/* @flow-off */
+	var input   = arg_eval(mini['--'][1])
+	var context = Context(input, { src, dst })
 
 	return await invoke(unit, context)
 }

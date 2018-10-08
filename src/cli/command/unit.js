@@ -24,9 +24,8 @@ export default async function (mini /* :minimistOutput */)
 	var unit   = await make(recipe, recipe_args(mini))
 
 	/* @flow-off */
-	var unit_input = mini['--'][0]
-	unit_input = arg_eval(unit_input)
-	var context = Context(unit_input)
+	var input   = arg_eval(mini['--'][0])
+	var context = Context(input)
 
 	return await invoke(unit, context)
 }

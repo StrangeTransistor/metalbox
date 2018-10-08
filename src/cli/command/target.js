@@ -48,13 +48,12 @@ export default async function (mini /* :minimistOutput */)
 	var recipe = resolve(recipe_name)
 	var unit   = await make(recipe, [ recipe_arg ])
 
-	/* @flow-off */
-	var unit_arg = arg_eval(mini['--'][0])
-
 	var src = root
 	var dst = src.partial('release', name)
 
-	var context = Context(unit_arg, { src, dst })
+	/* @flow-off */
+	var input   = arg_eval(mini['--'][0])
+	var context = Context(input, { src, dst })
 
 	return await invoke(unit, context)
 }
