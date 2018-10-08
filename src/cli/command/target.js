@@ -52,7 +52,8 @@ export default async function (mini /* :minimistOutputStrict */)
 	var dst = src.partial('release', name)
 
 	var input   = arg_eval(mini['--'][0])
-	var context = Context(input, { src, dst })
+	var prov    = { src, dst, pkg }
+	var context = Context(input, prov)
 
 	return await invoke(unit, context)
 }
