@@ -73,7 +73,7 @@ function decide_target (
 	{
 		if (! mini._.length)
 		{
-			write('metalbox t|target [<target>] -- [<input>]', NL)
+			write('metalbox t|target [<target> = pkg.name or dev] -- [<input>]', NL)
 		}
 
 		fatal(`Target '${ name }' not found in 'package.metalbox'`)

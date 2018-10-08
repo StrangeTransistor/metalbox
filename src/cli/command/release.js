@@ -21,7 +21,7 @@ export default async function (mini /* :minimistOutput */)
 	{
 		write(
 			'metalbox r|release <Unit|Recipe>',
-			'[<...args>] -- [<release dir>]',
+			'[<...args>] -- [<release dir> = dirname]',
 			NL
 		)
 		return
