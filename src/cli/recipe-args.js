@@ -1,9 +1,9 @@
 /* @flow */
-/* :: import type { minimistOutput } from 'minimist' */
+/* :: import type { minimistOutputStrict } from 'minimist' */
 
 import arg_eval from './arg-eval'
 
-export default function (mini /* :minimistOutput */)
+export default function (mini /* :minimistOutputStrict */)
 {
 	return mini._
 	.slice(1)

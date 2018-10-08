@@ -1,5 +1,5 @@
 /* @flow */
-/* :: import type { minimistOutput } from 'minimist' */
+/* :: import type { minimistOutputStrict } from 'minimist' */
 /* :: import type { minimistOptions } from 'minimist' */
 /* ::
 
@@ -39,7 +39,8 @@ export default function runner
 
 	return (args /* :string[] */) =>
 	{
-		var mini /* :minimistOutput */ = minimist(args, minimist_opts)
+		/* @flow-off */
+		var mini /* :minimistOutputStrict */ = minimist(args, minimist_opts)
 
 		if (mini._.length)
 		{

@@ -18,5 +18,12 @@ declare module 'minimist' {
     [flag: string]: string | boolean,
   };
 
+  declare type minimistOutputStrict =
+  {
+    _: Array<string>,
+    '--': Array<string>,
+    [flag: string]: string | boolean,
+  };
+
   declare module.exports: (argv: Array<string>, opts?: minimistOptions) => minimistOutput;
 }

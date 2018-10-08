@@ -1,5 +1,5 @@
 /* @flow */
-/* :: import type { minimistOutput } from 'minimist' */
+/* :: import type { minimistOutputStrict } from 'minimist' */
 
 import { basename } from 'path'
 
@@ -16,7 +16,7 @@ import resolve from '../unit/resolve'
 import make    from '../unit/make'
 import invoke  from '../unit/invoke'
 
-export default async function (mini /* :minimistOutput */)
+export default async function (mini /* :minimistOutputStrict */)
 {
 	if (! mini._.length)
 	{
@@ -32,13 +32,11 @@ export default async function (mini /* :minimistOutput */)
 	var unit   = await make(recipe, recipe_args(mini))
 
 	var cwd  = process.cwd()
-	/* @flow-off */
 	var name = (mini['--'][0] || basename(cwd))
 
 	var src = rootpath(cwd)
 	var dst = src.partial('release', name)
 
-	/* @flow-off */
 	var input   = arg_eval(mini['--'][1])
 	var context = Context(input, { src, dst })
 

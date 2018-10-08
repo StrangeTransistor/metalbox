@@ -1,9 +1,9 @@
 /* @flow */
-/* :: import type { minimistOutput } from 'minimist' */
+/* :: import type { minimistOutputStrict } from 'minimist' */
 
 import clone from 'lodash/clone'
 
-export default function slice (mini /* :minimistOutput */)
+export default function slice (mini /* :minimistOutputStrict */)
 {
 	mini = clone(mini)
 

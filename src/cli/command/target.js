@@ -1,6 +1,6 @@
 /* @flow */
 /* eslint-disable complexity */
-/* :: import type { minimistOutput } from 'minimist' */
+/* :: import type { minimistOutputStrict } from 'minimist' */
 
 import findroot from 'find-root'
 import rootpath from '@streetstrider/rootpath'
@@ -21,7 +21,7 @@ import invoke  from '../unit/invoke'
 
 import fatal from '../fatal'
 
-export default async function (mini /* :minimistOutput */)
+export default async function (mini /* :minimistOutputStrict */)
 {
 	var cwd = process.cwd()
 
@@ -51,7 +51,6 @@ export default async function (mini /* :minimistOutput */)
 	var src = root
 	var dst = src.partial('release', name)
 
-	/* @flow-off */
 	var input   = arg_eval(mini['--'][0])
 	var context = Context(input, { src, dst })
 
@@ -60,7 +59,7 @@ export default async function (mini /* :minimistOutput */)
 
 
 function decide_target (
-	mini /* :minimistOutput */,
+	mini /* :minimistOutputStrict */,
 	pkg  /* :Object */
 )
 {

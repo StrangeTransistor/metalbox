@@ -1,5 +1,5 @@
 /* @flow */
-/* :: import type { minimistOutput } from 'minimist' */
+/* :: import type { minimistOutputStrict } from 'minimist' */
 
 import Context from '../../Context'
 
@@ -12,7 +12,7 @@ import resolve from '../unit/resolve'
 import make    from '../unit/make'
 import invoke  from '../unit/invoke'
 
-export default async function (mini /* :minimistOutput */)
+export default async function (mini /* :minimistOutputStrict */)
 {
 	if (! mini._.length)
 	{
@@ -23,7 +23,6 @@ export default async function (mini /* :minimistOutput */)
 	var recipe = resolve(mini._[0])
 	var unit   = await make(recipe, recipe_args(mini))
 
-	/* @flow-off */
 	var input   = arg_eval(mini['--'][0])
 	var context = Context(input)
 
