@@ -1,5 +1,4 @@
 /* @flow */
-/* eslint-disable complexity */
 /* :: import type { minimistOutputStrict } from 'minimist' */
 
 import findroot from 'find-root'
@@ -23,6 +22,35 @@ import fatal from '../fatal'
 
 export default async function (mini /* :minimistOutputStrict */)
 {
+	var root = decide_root()
+
+	/* @flow-off */
+	var pkg = require(root('package.json'))
+
+	var
+	[
+		name,
+		recipe_name,
+		recipe_arg,
+		// engine_options
+	]
+	 = decide_target(mini, pkg)
+
+	var recipe = resolve(recipe_name)
+	var unit   = await make(recipe, [ recipe_arg ])
+
+	var src = root
+	var dst = src.partial('release', name)
+
+	var input   = arg_eval(mini['--'][0])
+	var prov    = { src, dst, pkg }
+	var context = Context(input, prov)
+
+	return await invoke(unit, context)
+}
+
+function decide_root ()
+{
 	var cwd = process.cwd()
 
 	try
@@ -40,39 +68,36 @@ export default async function (mini /* :minimistOutputStrict */)
 
 	console.info(`${ bold('Resolved package') }: ${ root_found_tilde }`)
 
-	/* @flow-off */
-	var pkg = require(root('package.json'))
-
-	var [ name, recipe_name, recipe_arg ] = decide_target(mini, pkg)
-
-	var recipe = resolve(recipe_name)
-	var unit   = await make(recipe, [ recipe_arg ])
-
-	var src = root
-	var dst = src.partial('release', name)
-
-	var input   = arg_eval(mini['--'][0])
-	var prov    = { src, dst, pkg }
-	var context = Context(input, prov)
-
-	return await invoke(unit, context)
+	return root
 }
-
 
 function decide_target (
 	mini /* :minimistOutputStrict */,
 	pkg  /* :Object */
 )
 {
-	var name = (mini._[0] || pkg.name || 'dev')
+	var name   = (mini._[0] || pkg.name || 'dev')
+	var target = pick_target(name, mini, pkg.metalbox)
 
-	var pkg_metalbox = pkg.metalbox
+	var [ recipe_name, recipe_arg, engine_options ] = target
 
+	return [ name, recipe_name, recipe_arg, engine_options ]
+}
+
+function pick_target (
+	name /* :string */,
+	mini /* :minimistOutputStrict */,
+	pkg_metalbox /* :Object */
+)
+{
 	if (! (name in Object(pkg_metalbox)))
 	{
 		if (! mini._.length)
 		{
-			write('metalbox t|target [<target> = pkg.name or dev] -- [<input>]', NL)
+			write(
+				'metalbox t|target [<target> = pkg.name or dev] -- [<input>]',
+				NL
+			)
 		}
 
 		fatal(`Target '${ name }' not found in 'package.metalbox'`)
@@ -88,10 +113,7 @@ function decide_target (
 		)
 	}
 
-	var [ recipe_name, recipe_arg, engine_options ] = target
-	console.log(recipe_name, recipe_arg, engine_options)
-
-	return [ name, recipe_name, recipe_arg, engine_options ]
+	return target
 }
 
 function is_tuple (target)
