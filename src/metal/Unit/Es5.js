@@ -27,7 +27,7 @@ export default function Es5 ()
 	})
 	.pipe(Cjs())
 	.pipe(TsExt())
-	.pipe(Outlander())
 	.pipe(Emptish())
 	.pipe(Iop())
+	.pipe(Outlander())
 }
