@@ -29,9 +29,9 @@ import Unit from './Unit'
 
 export default function Let (transform, target)
 {
-	return Unit(async (input, context) =>
+	return Unit((input, context) =>
 	{
-		var context = await transform(input, context)
+		var context = transform(input, context)
 
 		var outcome = target(context)
 		// @compose

@@ -1,5 +1,7 @@
 /* @flow */
 
+import { stream } from 'flyd'
+
 import { expect } from 'chai'
 
 import Context from 'src/Context'
@@ -88,4 +90,28 @@ describe('Let', () =>
 
 		await u(c1)
 	})
+
+	/* eslint-disable max-nested-callbacks */
+	it('can work with streaming', async () =>
+	{
+		var t = Unit(input =>
+		{
+			expect(input).eq(7)
+
+			var s = stream(1)
+
+			setTimeout(() => s(2), 0)
+			setTimeout(() => s(3), 0)
+			setTimeout(() => s.end(true), 0)
+
+			return s
+		})
+
+		var u = Let(() => Context(7), t)
+
+		var r = await u(Context(0)).output
+
+		expect(r).eq(3)
+	})
+	/* eslint-enable max-nested-callbacks */
 })
