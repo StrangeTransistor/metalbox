@@ -7,8 +7,10 @@ type $Let$Fn<
 	$prov: $Providers$Base,
 	$prov_target: $Providers$Base
 >
-= ($in, $Context<$in, $prov>)
-=> $Promisable<$Context<$in_target, $prov_target>>;
+= $Producer<
+	[ $in, $Context<$in, $prov> ],
+	$Context<$in_target, $prov_target>
+>
 
 declare function Let<
 	$in,
