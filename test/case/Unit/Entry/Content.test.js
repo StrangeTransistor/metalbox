@@ -13,7 +13,7 @@ describe('Content', () =>
 	{
 		var entry = Entry('foo', { content: 'abc' })
 
-		var content = Content(content => content + '_def')
+		var content = Content(async (content) => content + '_def')
 
 		var outcome = content(Context(entry))
 		var output  = await outcome.output

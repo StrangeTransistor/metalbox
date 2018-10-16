@@ -22,6 +22,22 @@ describe('Rebase', () =>
 		expect(output.content.content).eq('content')
 	})
 
+	it('async Rebase(from, to)', async () =>
+	{
+		var entry = Entry('/src/foo/bar.js', { content: 'content' })
+		var context = Context(entry)
+
+		var unit = Rebase(
+			async () => '/src',
+			async () => '/dst'
+		)
+
+		var output = await unit(context).output
+
+		expect(output.filename).eq('/dst/foo/bar.js')
+		expect(output.content.content).eq('content')
+	})
+
 	it('Rebase(from, <empty>)', async () =>
 	{
 		var entry = Entry('/src/foo/bar.js', { content: 'content' })
