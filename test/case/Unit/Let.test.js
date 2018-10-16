@@ -107,7 +107,7 @@ describe('Let', () =>
 			return s
 		})
 
-		var u = Let(() => Context(7), t)
+		var u = Let(async () => Context(7), t)
 
 		var r = await u(Context(0)).output
 
