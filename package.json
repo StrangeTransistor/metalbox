@@ -106,7 +106,7 @@
       "2",
 
     "eslint":
-      "4",
+      "5",
 
     "babel-core":
       "6",
@@ -142,7 +142,7 @@
   "devDependencies":
   {
     "eslint":
-      "4",
+      "5",
 
     "js-outlander":
       "StrangeTransistor/js-outlander#2.3.0",
