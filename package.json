@@ -32,7 +32,7 @@
 
   "scripts":
   {
-      "st": "eslint run/ src/ test/",
+      "st": "eslint run/* src/ test/",
        "t": "glow",
     "unit": "mocha -r test/patch -r esm -R dot --recursive test/case/**",
 
