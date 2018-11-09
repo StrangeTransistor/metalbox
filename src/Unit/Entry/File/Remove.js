@@ -6,7 +6,7 @@ import Remove from '../../File/Remove'
 
 export default function ()
 {
-	return Remove((entry /* :$Entry<$Remove> */) =>
+	return Remove/* :: <*, any> */((entry /* :$Entry<$Remove> */) =>
 	{
 		ensure_remove(entry)
 

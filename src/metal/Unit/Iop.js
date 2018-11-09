@@ -7,7 +7,7 @@ export default function Emptish ()
 	var iop = /\biop\b/
 	var iop_invoke = /\b_interopDefault\(/g
 
-	return Content(content =>
+	return Content/* :: <any> */(content =>
 	{
 		if (! content.match(iop))
 		{

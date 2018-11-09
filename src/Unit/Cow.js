@@ -9,7 +9,7 @@ import tcomb from '../tcomb'
 import Recipe from '../Recipe'
 import Unit   from './Unit'
 
-export default Recipe(
+export default Recipe/* :: <[ ?string ], ?number, any, string> */(
 {
 	args: [ tcomb.maybe(tcomb.String) ],
 

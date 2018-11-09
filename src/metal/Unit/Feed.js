@@ -7,7 +7,7 @@ import Watch from '../../Unit/Watch'
 
 /* ::
 
-type $Mode = { live?: boolean, once?: boolean }
+export type $Mode = { live?: boolean, once?: boolean }
 
 declare function Feed<$in, $prov: $Mode, $out>
 (
@@ -43,8 +43,6 @@ export default function Feed (glob, unit, options)
 		}
 	})
 }
-
-/* $Unit<$Entry<$Subtype<$Mutable<$File>>>, any, void> */
 
 function ignored (options)
 {

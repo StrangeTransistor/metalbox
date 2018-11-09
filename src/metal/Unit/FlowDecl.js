@@ -4,5 +4,5 @@ import Rename from '../../Unit/Entry/Rename'
 
 export default function FlowDecl ()
 {
-	return Rename(filename => filename + '.flow')
+	return Rename/* :: <any, any> */(filename => filename + '.flow')
 }

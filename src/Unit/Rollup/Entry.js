@@ -9,7 +9,7 @@ import Rollup from './Rollup'
 
 export default function (options /* :: ?:$Shape<$Rollup$Options> */)
 {
-	return Rollup(
+	return Rollup/* :: <*, any> */(
 		(entry /* :$Entry<void> */) => entry.filename,
 		options
 	)

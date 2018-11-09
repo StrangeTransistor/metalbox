@@ -9,7 +9,7 @@ export default function Emptish ()
 
 	var multinw = /\n\n+/g
 
-	return Content(content =>
+	return Content/* :: <any> */(content =>
 	{
 		content = content.replace(block, '')
 		content = content.replace(line, '\n')

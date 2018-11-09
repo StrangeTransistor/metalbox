@@ -4,11 +4,13 @@
 import type { $Rootpath } from '@streetstrider/rootpath'
 import type { Rootpath$Path } from '@streetstrider/rootpath'
 
+type $Src = $Demands<{ src: $Rootpath }>
+type $Dst = $Demands<{ dst: $Rootpath }>
 type $SrcDst = $Demands<{ src: $Rootpath, dst: $Rootpath }>
 
 */
 
-export function Src /* ::<$Src: $Demands<{ src: $Rootpath }>> */
+export function Src
 (
 	...args /* :Rootpath$Path[] */
 )
@@ -20,7 +22,7 @@ export function Src /* ::<$Src: $Demands<{ src: $Rootpath }>> */
 	}
 }
 
-Src.Globs = function /* ::<$Src: $Demands<{ src: $Rootpath }>> */
+Src.Globs = function
 (
 	globs /* :$Glob[] */
 )
@@ -32,7 +34,7 @@ Src.Globs = function /* ::<$Src: $Demands<{ src: $Rootpath }>> */
 	}
 }
 
-export function Dst /* ::<$Dst: $Demands<{ dst: $Rootpath }>> */
+export function Dst
 (
 	...args /* :Rootpath$Path[] */
 )
@@ -53,6 +55,7 @@ export function Rebased (
 	{ filename }               /* :$Entry<any> */,
 	{ providers: { src, dst }} /* :$SrcDst */
 )
+	/* :string */
 {
 	return dst(src.relative(filename))
 }

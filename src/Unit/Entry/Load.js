@@ -4,7 +4,7 @@ import Load from '../Load'
 
 export default function ()
 {
-	return Load((entry /* :$Entry<void> */) =>
+	return Load/* :: <*, any> */((entry /* :$Entry<void> */) =>
 	{
 		ensure_void(entry)
 

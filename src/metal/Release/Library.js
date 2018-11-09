@@ -12,6 +12,12 @@
 
 // TODO: ignore coverage, test, tests, release, node_modules
 
+/* ::
+
+import type { $Mode } from '../Unit/Feed'
+
+*/
+
 import Recipe from '../../Recipe'
 
 import Fork   from '../../Unit/compose/Fork'
@@ -45,7 +51,7 @@ var types =
 	'**/*.d.ts',
 ]
 
-export default Recipe(
+export default Recipe/* :: <[], null, $Mode, any> */( // TODO: out void
 {
 	recipe ()
 	{
@@ -64,7 +70,7 @@ function Code ()
 
 function JavaScript ()
 {
-	return Feed(Src('**/*.js'))
+	return Feed/* :: <*, *, *> */(Src('**/*.js'))
 	.pipe(Fork(
 		 Es5().pipe(Write()),
 		Load().pipe(FlowDecl()).pipe(Write())

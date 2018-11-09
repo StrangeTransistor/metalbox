@@ -9,7 +9,7 @@ export default function Outlander ()
 {
 	var linter = new Linter
 
-	return Content(content =>
+	return Content/* :: <any> */(content =>
 	{
 		var verf = linter.verifyAndFix(content, outlander)
 
