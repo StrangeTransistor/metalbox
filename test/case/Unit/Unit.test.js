@@ -7,8 +7,9 @@ import tcomb from 'src/tcomb'
 
 import Context from 'src/Context'
 
+import Result from 'src/Context'
+
 import Unit   from 'src/Unit'
-import invoke from 'src/Unit/_/invoke'
 
 describe('Unit', () =>
 {
@@ -46,7 +47,7 @@ describe('Unit', () =>
 		expect(i.family).eq(family)
 	})
 
-	it('Unit/invoke', async () =>
+	it('Unit/Result', async () =>
 	{
 		var options =
 		{
@@ -55,17 +56,17 @@ describe('Unit', () =>
 			family: null,
 		}
 
-		var outcome = invoke(options, Context(17))
+		var result = Result(options.unit, Context(17), options)
 
-		expect(outcome).property('stream')
-		expect(outcome).property('output')
+		expect(result).property('stream')
+		expect(result).property('promise')
 
-		var output = await outcome.output
+		var output = await result.promise
 
 		expect(output).eq(17)
 	})
 
-	it('Unit/invoke captures throw', async () =>
+	it('Unit/Result captures throw', async () =>
 	{
 		var error = new Error('e')
 		var options =
@@ -75,16 +76,16 @@ describe('Unit', () =>
 			family: null,
 		}
 
-		var outcome = invoke(options, Context(null))
+		var result = Result(options.unit, Context(null), options)
 
-		var r = await outcome.output.then(
+		var r = await result.promise.then(
 		()  => expect(false).true,
 		(e) => e)
 
 		expect(r).eq(error)
 	})
 
-	it('Unit/invoke validates', async () =>
+	it('Unit/Result validates', async () =>
 	{
 		var options =
 		{
@@ -92,12 +93,12 @@ describe('Unit', () =>
 			input: tcomb.Number,
 			family: null,
 		}
-		var outcome = invoke(options, Context(17))
+		var result = Result(options.unit, Context(17), options)
 
-		await outcome.output
+		await result.promise
 	})
 
-	it('Unit/invoke validates throw', async () =>
+	it('Unit/Result validates throw', async () =>
 	{
 		var options =
 		{
@@ -105,9 +106,9 @@ describe('Unit', () =>
 			input: tcomb.String,
 			family: null,
 		}
-		var outcome = invoke(options, Context(17))
+		var result = Result(options.unit, Context(17), options)
 
-		var r = await outcome.output.then(
+		var r = await result.promise.then(
 		()  => expect(false).true,
 		(e) => e)
 

@@ -24,7 +24,7 @@ type $Unit$Options$Maybe<$in, $prov: $Providers$Base, $out>
 
 type $Unit<$in, $prov: $Providers$Base, $out> =
 {
-	(context: $Context<$in, $prov>): $Outcome<$out>,
+	(context: $Context<$in, $prov>): $Result<$out>,
 
 	family: string,
 

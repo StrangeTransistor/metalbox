@@ -1,11 +1,11 @@
 /* @flow */
 
-export default function end (outcome /* :$Outcome<*> */)
+export default function end (result /* :$Result<any> */)
 {
 	setTimeout(() =>
 	{
 		/* @flow-off */
-		outcome.stream.end(true)
+		result.stream.end(true)
 	}
 	, 200)
 }
