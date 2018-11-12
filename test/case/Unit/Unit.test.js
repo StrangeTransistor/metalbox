@@ -7,7 +7,7 @@ import tcomb from 'src/tcomb'
 
 import Context from 'src/Context'
 
-import Result from 'src/Context'
+import Result from 'src/Result'
 
 import Unit   from 'src/Unit'
 
