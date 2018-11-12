@@ -3,6 +3,7 @@
 var noop = () => {}
 
 import { combine } from 'flyd'
+import { on } from 'flyd'
 
 import stream_to from '../../flyd/stream-to'
 import backpressure from '../../flyd/backpressure'
@@ -11,13 +12,13 @@ import turnoff from '../../flyd/turnoff'
 export default function proceed
 	/* ::<$prov: $Providers$Base, $medium, $medium_in, $out> */
 (
-	prev_out /* :$Outcome<$medium> */,
-	next     /* :$Unit<$medium_in, $prov, $out> */,
-	fn       /* :($medium) => $Context<$medium_in, $prov> */
+	prev_r /* :$Result<$medium> */,
+	next   /* :$Unit<$medium_in, $prov, $out> */,
+	fn     /* :($medium) => $Context<$medium_in, $prov> */
 )
 {
 	/* @flow-off */
-	var prev_stream /* :flyd$Stream<$medium> */ = prev_out.stream
+	var prev_stream /* :flyd$Stream<$medium> */ = prev_r.stream
 	var prev = backpressure(prev_stream)
 
 	var stream = combine(handle, [ prev ])
@@ -37,17 +38,19 @@ export default function proceed
 			var context = fn(value)
 
 			/* TODO: stream in stream */
-			var output = next(context).output
-
-			stream_to(output, self).then(prev.continue)
 			// out2.stream +
+			var r2 = next(context)
+
+			stream_to(r2.promise, self)
+			// .then(() => r2.stream.end(true))
+			.then(prev.continue)
 		}
 	}
 
 	turnoff(stream, prev)
 	// out2.stream +
 
-	prev_out.output.catch(noop)
+	prev_r.promise.catch(noop)
 
 	return stream
 }

@@ -76,6 +76,7 @@ function invoke /* ::<$in, $prov: $Providers$Base, $out> */
 
 			turnoff(stream, raw)
 			on(stream, raw)
+			on(stream.end, raw.end)
 		}
 		else
 		{
