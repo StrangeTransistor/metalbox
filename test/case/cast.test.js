@@ -22,9 +22,9 @@ describe('cast', () =>
 		var u = cast(x => x + 17)
 		expect(Unit.is(u)).ok
 
-		var outcome = u(Context(0))
+		var result = u(Context(0))
 
-		expect(await outcome.output).eq(17)
+		expect(await result.promise).eq(17)
 	})
 
 	it('cast(unit)', () =>
