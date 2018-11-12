@@ -80,6 +80,7 @@ function invoke /* ::<$in, $prov: $Providers$Base, $out> */
 		else
 		{
 			stream(raw)
+			stream.end(true)
 		}
 	}
 	, raw_stream)
