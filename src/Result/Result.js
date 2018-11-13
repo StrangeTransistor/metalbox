@@ -59,33 +59,31 @@ function invoke /* ::<$in, $prov: $Providers$Base, $out> */
 {
 	var raw_promise = capture(unit, context, options)
 
-	var raw_stream = Stream()
+	raw_promise.catch(error =>
+	{
+		if (! (error instanceof Error)) { error = Error(error) }
 
-	stream_to(raw_promise, raw_stream)
+		return error
+	})
+	.then(value =>
+	{
+		if (! is_stream(value))
+		{
+			raw_stream(value)
+			raw_stream.end(true)
+			return
+		}
+
+		value.map(raw_stream)
+		value.end.map(raw_stream.end)
+
+		turnoff(raw_stream, value)
+	})
 
 	/* @flow-off */
-	var stream /* :flyd$Stream<$out> */ = Stream()
+	var raw_stream /* :flyd$Stream<$out> */ = Stream()
 
-	on(raw =>
-	{
-		if (is_stream(raw))
-		{
-			// if (s_mode === 'true')
-
-			raw = finalize(raw)
-
-			turnoff(stream, raw)
-			on(stream, raw)
-			on(stream.end, raw.end)
-		}
-		else
-		{
-			stream(raw)
-			stream.end(true)
-		}
-	}
-	, raw_stream)
-
+	var stream  = finalize(raw_stream)
 	var promise = drain(stream)
 
 	return { promise, stream }

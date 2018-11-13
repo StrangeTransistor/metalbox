@@ -14,7 +14,7 @@ import Precursor from 'src/Unit/compose/Precursor'
 
 import Context from 'src/Context'
 
-describe('Precursor', () =>
+describe.only('Precursor', () =>
 {
 	it('Precursor(u1, u2)', async () =>
 	{
@@ -35,9 +35,9 @@ describe('Precursor', () =>
 
 		var context = Context({ x: 5 })
 
-		var output = await u(context).output
+		var promise = await u(context).promise
 
-		expect(output).deep.eq({ y: 7 })
+		expect(promise).deep.eq({ y: 7 })
 	})
 
 	it('Precursor(u1, u2) throw', async () =>
@@ -58,7 +58,7 @@ describe('Precursor', () =>
 
 		var context = Context({ x: 5 })
 
-		await expect(u(context).output)
+		await expect(u(context).promise)
 		.rejectedWith('no_pass')
 	})
 
@@ -82,9 +82,9 @@ describe('Precursor', () =>
 
 		var context = Context({ x: '5' })
 
-		var output = await u(context).output
+		var promise = await u(context).promise
 
-		expect(output).deep.eq({ y: '5a' })
+		expect(promise).deep.eq({ y: '5a' })
 	})
 
 	it('(stream u1).pre(u2)', async () =>
@@ -120,13 +120,12 @@ describe('Precursor', () =>
 
 		var u = u1.pre(u2)
 		var context = Context({ x: '5' })
-		var outcome = u(context)
+		var result = u(context)
 
-		/* @flow-off */
-		var buffer = concat(outcome.stream)
-		var output = outcome.output
+		var promise = result.promise
+		var buffer = concat(result.stream)
 
-		expect(await output).eq('5a')
+		expect(await promise).eq('5a')
 		expect(await buffer).deep.eq([ '5a', '5a', '5a' ])
 	})
 
@@ -170,13 +169,12 @@ describe('Precursor', () =>
 
 		var u = u1.pre(u2)
 		var context = Context({ x: '5' })
-		var outcome = u(context)
+		var result = u(context)
 
-		/* @flow-off */
-		var buffer = concat(outcome.stream)
-		var r = outcome.output.then(
+		var r = result.promise.then(
 		()  => expect(false).true,
 		(e) => e)
+		var buffer = concat(result.stream)
 
 		expect(await r).eq(error)
 		expect(await buffer).deep.eq([ '5a', '5a', error ])

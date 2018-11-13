@@ -14,20 +14,10 @@ export default function Precursor
 {
 	return Unit((_, context) =>
 	{
-		var out1 = u1(context)
+		var r1 = u1(context)
 
-		if (out1.stream)
-		{
-			var context_live = context.derive(context.input)
+		var context_live = context.derive(context.input)
 
-			return proceed(out1, u2, () => context_live)
-		}
-		else
-		{
-			return out1.output.then(() =>
-			{
-				return u2(context).output
-			})
-		}
+		return proceed(r1, u2, () => context_live)
 	})
 }

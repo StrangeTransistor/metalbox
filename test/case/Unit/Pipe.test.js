@@ -14,7 +14,7 @@ import Pipe from 'src/Unit/compose/Pipe'
 
 import Context from 'src/Context'
 
-describe('Pipe / Unit.pipe', () =>
+describe.only('Pipe / Unit.pipe', () =>
 {
 	it('Pipe(u1, u2)', async () =>
 	{
