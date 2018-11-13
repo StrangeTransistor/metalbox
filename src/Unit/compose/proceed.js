@@ -12,13 +12,13 @@ import turnoff from '../../flyd/turnoff'
 export default function proceed
 	/* ::<$prov: $Providers$Base, $medium, $medium_in, $out> */
 (
-	prev_r /* :$Result<$medium> */,
-	next   /* :$Unit<$medium_in, $prov, $out> */,
-	fn     /* :($medium) => $Context<$medium_in, $prov> */
+	r    /* :$Result<$medium> */,
+	next /* :$Unit<$medium_in, $prov, $out> */,
+	fn   /* :($medium) => $Context<$medium_in, $prov> */
 )
 {
 	/* @flow-off */
-	var prev_stream /* :flyd$Stream<$medium> */ = prev_r.stream
+	var prev_stream /* :flyd$Stream<$medium> */ = r.stream
 	var prev = backpressure(prev_stream)
 
 	var stream = combine(handle, [ prev ])
@@ -42,7 +42,6 @@ export default function proceed
 			var r2 = next(context)
 
 			stream_to(r2.promise, self)
-			// .then(() => r2.stream.end(true))
 			.then(prev.continue)
 		}
 	}
@@ -50,7 +49,7 @@ export default function proceed
 	turnoff(stream, prev)
 	// out2.stream +
 
-	prev_r.promise.catch(noop)
+	r.promise.catch(noop)
 
 	return stream
 }

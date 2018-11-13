@@ -14,7 +14,7 @@ import Fork from 'src/Unit/compose/Fork'
 
 import Context from 'src/Context'
 
-describe('Fork', () =>
+describe.only('Fork', () =>
 {
 	it('Fork(u1, u2)', async () =>
 	{
@@ -35,9 +35,9 @@ describe('Fork', () =>
 
 		var context = Context({ x: 5 })
 
-		var output = await u(context).output
+		var promise = await u(context).promise
 
-		expect(output).deep.eq([ { x: 7 }, { y: 17 } ])
+		expect(promise).deep.eq([ { x: 7 }, { y: 17 } ])
 	})
 
 	it('Fork(u1, u2) throw', async () =>
@@ -58,7 +58,7 @@ describe('Fork', () =>
 
 		var context = Context({ x: 5 })
 
-		await expect(u(context).output)
+		await expect(u(context).promise)
 		.rejectedWith('no_pass')
 	})
 
@@ -82,9 +82,9 @@ describe('Fork', () =>
 
 		var context = Context({ x: '5' })
 
-		var output = await u(context).output
+		var promise = await u(context).promise
 
-		expect(output).deep.eq([ { x: '55' }, { y: '5a' } ])
+		expect(promise).deep.eq([ { x: '55' }, { y: '5a' } ])
 	})
 
 	it('(stream u1).fork(u2)', async () =>
@@ -118,13 +118,12 @@ describe('Fork', () =>
 
 		var u = u1.fork(u2)
 		var context = Context({ x: 17 })
-		var outcome = u(context)
+		var result = u(context)
 
-		/* @flow-off */
-		var buffer = concat(outcome.stream)
-		var output = outcome.output
+		var promise = result.promise
+		var buffer  = concat(result.stream)
 
-		expect(await output).deep.eq([ 3, 17 ])
+		expect(await promise).deep.eq([ 3, 17 ])
 		expect(await buffer).deep.eq([[ 1, 17 ], [ 2, 17 ], [ 3, 17 ]])
 	})
 
@@ -163,13 +162,12 @@ describe('Fork', () =>
 
 		var u = u1.fork(u2)
 		var context = Context(null)
-		var outcome = u(context)
+		var result = u(context)
 
-		/* @flow-off */
-		var buffer = concat(outcome.stream)
-		var output = outcome.output
+		var promise = result.promise
+		var buffer  = concat(result.stream)
 
-		expect(await output).deep.eq([ 5, 6 ])
+		expect(await promise).deep.eq([ 5, 6 ])
 		expect(await buffer).deep.eq([
 			[ 1, 2 ],
 			[ 3, 2 ],
@@ -216,13 +214,12 @@ describe('Fork', () =>
 
 		var u = u1.fork(u2)
 		var context = Context(null)
-		var outcome = u(context)
+		var result = u(context)
 
-		/* @flow-off */
-		var buffer = concat(outcome.stream)
-		var r = outcome.output.then(
+		var r = result.promise.then(
 		()  => expect(false).true,
 		(e) => e)
+		var buffer = concat(result.stream)
 
 		expect(await r).eq(error)
 		expect(await buffer).deep.eq([
@@ -243,13 +240,12 @@ describe('Fork', () =>
 
 		var u = u1.fork(u2)
 		var context = Context(null)
-		var outcome = u(context)
+		var result = u(context)
 
-		/* @flow-off */
-		var buffer = concat(outcome.stream)
-		var r = outcome.output.then(
+		var r = result.promise.then(
 		()  => expect(false).true,
 		(e) => e)
+		var buffer = concat(result.stream)
 
 		expect(await r).eq(error)
 		expect(await buffer).deep.eq([
@@ -284,13 +280,12 @@ describe('Fork', () =>
 		})
 
 		var u = p.pipe(u1.fork(u2))
-		var outcome = u(Context(null))
+		var result = u(Context(null))
 
-		/* @flow-off */
-		var buffer = concat(outcome.stream)
-		var output = outcome.output
+		var promise = result.promise
+		var buffer  = concat(result.stream)
 
-		expect(await output).deep.eq([ 5, 8 ])
+		expect(await promise).deep.eq([ 5, 8 ])
 		expect(await buffer).deep.eq([
 			[ 2, 2 ],
 			[ 3, 4 ],
