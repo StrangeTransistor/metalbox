@@ -9,10 +9,12 @@ import { stream } from 'flyd'
 
 import { concat } from 'src/flyd/drain'
 
+import Context from 'src/Context'
+
 import Unit from 'src/Unit'
 import Fork from 'src/Unit/compose/Fork'
 
-import Context from 'src/Context'
+import replay from 'test/replay'
 
 describe.only('Fork', () =>
 {
@@ -93,22 +95,7 @@ describe.only('Fork', () =>
 		{
 			expect(input).deep.eq({ x: 17 })
 
-			var s = stream(1)
-
-			// eslint-disable-next-line max-nested-callbacks
-			delay(25).then(() =>
-			{
-				s(2)
-				s(3)
-			})
-			.delay(25)
-			// eslint-disable-next-line max-nested-callbacks
-			.then(() =>
-			{
-				s.end(true)
-			})
-
-			return s
+			return replay([ 1, 2, 3 ])
 		})
 
 		var u2 = Unit(input =>

@@ -9,10 +9,12 @@ import { stream } from 'flyd'
 
 import { concat } from 'src/flyd/drain'
 
+import Context from 'src/Context'
+
 import Unit from 'src/Unit'
 import Pipe from 'src/Unit/compose/Pipe'
 
-import Context from 'src/Context'
+import replay from 'test/replay'
 
 describe.only('Pipe / Unit.pipe', () =>
 {
@@ -70,22 +72,12 @@ describe.only('Pipe / Unit.pipe', () =>
 		{
 			expect(initial).eq(17)
 
-			var s = stream({ x: 1 })
-
-			// eslint-disable-next-line max-nested-callbacks
-			delay(25).then(() =>
-			{
-				s({ x: 2 })
-				s({ x: 3 })
-			})
-			.delay(25)
-			// eslint-disable-next-line max-nested-callbacks
-			.then(() =>
-			{
-				s.end(true)
-			})
-
-			return s
+			return replay(
+			[
+				{ x: 1 },
+				{ x: 2 },
+				{ x: 3 },
+			])
 		})
 
 		var u2 = Unit((input) =>
@@ -115,25 +107,13 @@ describe.only('Pipe / Unit.pipe', () =>
 		{
 			expect(initial).eq(17)
 
-			var s = stream({ x: 1 })
-
-			delay(25).then(() =>
-			{
-				s({ x: 2 })
-			})
-			.delay(25)
-			.then(() =>
-			{
-				s(error)
-			})
-			.delay(25)
-			.then(() =>
-			{
-				/* check for dup */
-				s(error)
-			})
-
-			return s
+			return replay(
+			[
+				{ x: 1 },
+				{ x: 2 },
+				error,
+				error,
+			])
 		})
 		/* eslint-enable max-nested-callbacks */
 
@@ -165,13 +145,7 @@ describe.only('Pipe / Unit.pipe', () =>
 
 		var u1 = Unit(() =>
 		{
-			var s = stream(1)
-
-			/* eslint-disable max-nested-callbacks */
-			delay(25)
-			.then(() => s(2))
-			.delay(25)
-			.then(() => s(3))
+			var s = replay([ 1, 2, 3 ])
 
 			s.map(v => buffer_spy.push(v))
 			/* eslint-enable max-nested-callbacks */
@@ -212,18 +186,7 @@ describe.only('Pipe / Unit.pipe', () =>
 
 		var u1 = Unit(() =>
 		{
-			var s = stream(1)
-
-			/* eslint-disable max-nested-callbacks */
-			delay(25)
-			.then(() => s(2))
-			.delay(25)
-			.then(() => s(3))
-			.delay(25)
-			.then(() => s(4))
-			/* eslint-enable max-nested-callbacks */
-
-			return s
+			return replay([ 1, 2, 3, 4 ])
 		})
 
 		var u2 = Unit(async (input) =>

@@ -9,10 +9,12 @@ import { stream } from 'flyd'
 
 import { concat } from 'src/flyd/drain'
 
+import Context from 'src/Context'
+
 import Unit from 'src/Unit'
 import Precursor from 'src/Unit/compose/Precursor'
 
-import Context from 'src/Context'
+import replay from 'test/replay'
 
 describe.only('Precursor', () =>
 {
@@ -93,22 +95,12 @@ describe.only('Precursor', () =>
 		{
 			expect(input).deep.eq({ x: '5' })
 
-			var s = stream({ x: 1 })
-
-			// eslint-disable-next-line max-nested-callbacks
-			delay(25).then(() =>
-			{
-				s({ x: 2 })
-				s({ x: 3 })
-			})
-			.delay(25)
-			// eslint-disable-next-line max-nested-callbacks
-			.then(() =>
-			{
-				s.end(true)
-			})
-
-			return s
+			return replay(
+			[
+				{ x: 1 },
+				{ x: 2 },
+				{ x: 3 },
+			])
 		})
 
 		var u2 = Unit(input =>
@@ -138,23 +130,13 @@ describe.only('Precursor', () =>
 		{
 			expect(input).deep.eq({ x: '5' })
 
-			var s = stream({ x: 1 })
-
-			delay(25).then(() =>
-			{
-				s({ x: 2 })
-			})
-			.delay(25)
-			.then(() =>
-			{
-				s(error)
-			})
-			.delay(25)
-			.then(() =>
-			{
-				/* check for dup */
-				s(error)
-			})
+			return replay(
+			[
+				{ x: 1 },
+				{ x: 2 },
+				error,
+				error,
+			])
 
 			return s
 		})

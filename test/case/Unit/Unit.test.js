@@ -12,7 +12,7 @@ import { stream as Stream } from 'flyd'
 import Context from 'src/Context'
 import Unit from 'src/Unit'
 
-import replay from '../../replay'
+import replay from 'test/replay'
 
 describe.only('Unit', () =>
 {
