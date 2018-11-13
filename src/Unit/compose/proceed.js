@@ -1,9 +1,6 @@
 /* @flow */
 
-var noop = () => {}
-
 import { combine } from 'flyd'
-import { on } from 'flyd'
 
 import stream_to from '../../flyd/stream-to'
 import backpressure from '../../flyd/backpressure'

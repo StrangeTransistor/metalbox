@@ -2,11 +2,6 @@
 
 import { expect } from 'chai'
 
-import Promise from 'bluebird'
-var delay = Promise.delay
-
-import { stream } from 'flyd'
-
 import { concat } from 'src/flyd/drain'
 
 import Context from 'src/Context'
@@ -241,11 +236,13 @@ describe.only('Pipe / Unit.pipe', () =>
 		{
 			var s = replay([ 1, 2, 3 ])
 
+			// eslint-disable-next-line max-nested-callbacks
 			s.map(v => buffer_spy.push(v))
 
 			return s
 		})
 
+		/* eslint-disable max-nested-callbacks */
 		var u2 = Unit(async (input) =>
 		{
 			if (input === 2)
@@ -255,6 +252,7 @@ describe.only('Pipe / Unit.pipe', () =>
 
 			return input
 		})
+		/* eslint-enable max-nested-callbacks */
 
 		var u = u1.pipe(u2)
 		var result = u(Context(null))

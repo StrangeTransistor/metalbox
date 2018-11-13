@@ -3,11 +3,10 @@
 import { inspect } from 'util'
 
 import { expect } from 'chai'
+
 import tcomb from 'src/tcomb'
 
 import { concat } from 'src/flyd/drain'
-
-import { stream as Stream } from 'flyd'
 
 import Context from 'src/Context'
 import Unit from 'src/Unit'

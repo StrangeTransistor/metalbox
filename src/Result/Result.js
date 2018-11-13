@@ -51,9 +51,7 @@ export default function Result /* ::<$in, $prov: $Providers$Base, $out> */
 
 import { isStream as is_stream } from 'flyd'
 import { stream as Stream } from 'flyd'
-import { on } from 'flyd'
 
-import stream_to from '../flyd/stream-to'
 import turnoff from '../flyd/turnoff'
 import finalize from '../flyd/finalize'
 import { either as drain } from '../flyd/drain'

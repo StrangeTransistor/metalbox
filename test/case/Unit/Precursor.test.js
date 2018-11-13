@@ -2,11 +2,6 @@
 
 import { expect } from 'chai'
 
-import Promise from 'bluebird'
-var delay = Promise.delay
-
-import { stream } from 'flyd'
-
 import { concat } from 'src/flyd/drain'
 
 import Context from 'src/Context'
@@ -129,8 +124,6 @@ describe.only('Precursor', () =>
 				error,
 				error,
 			])
-
-			return s
 		})
 
 		var u2 = Unit(input =>

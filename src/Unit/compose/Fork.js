@@ -1,18 +1,10 @@
 /* @flow */
 
-var noop = () => {}
-
 import { combine } from 'flyd'
 
-import bluebird from 'bluebird'
-var { join } = bluebird
+import turnoff  from '../../flyd/turnoff'
 
 import Unit from '../Unit'
-
-import alive    from '../../Outcome/alive'
-
-import finalize from '../../flyd/finalize'
-import turnoff  from '../../flyd/turnoff'
 
 export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
 (
