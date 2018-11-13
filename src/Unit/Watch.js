@@ -90,7 +90,7 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 				}
 
 				// TODO: stream in stream
-				var output = await Σunit(context.derive(entry)).output
+				var output = await Σunit(context.derive(entry)).promise
 
 				s(output)
 			})

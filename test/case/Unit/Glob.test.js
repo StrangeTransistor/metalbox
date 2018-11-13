@@ -45,7 +45,7 @@ describe('Glob', () =>
 
 		var glob = GlobTo(globexpr, unit)
 
-		await glob(Context(null)).output
+		await glob(Context(null)).promise
 	})
 
 	it('GlobTo streaming', async () =>
@@ -68,7 +68,7 @@ describe('Glob', () =>
 
 		var outcome = unit(Context(null))
 
-		var output = await outcome.output
+		var output = await outcome.promise
 
 		expect(output.sort()).deep.eq(expected)
 
@@ -94,7 +94,7 @@ describe('Glob', () =>
 		var glob = GlobTo(globexpr)
 		.pipe(unit)
 
-		var output = await glob(Context(null)).output
+		var output = await glob(Context(null)).promise
 
 		expect(output.sort()).deep.eq(expected)
 
@@ -114,7 +114,7 @@ describe('Glob', () =>
 
 		var glob = Glob(globexpr, unit)
 
-		var output = await glob(Context(null)).output
+		var output = await glob(Context(null)).promise
 
 		expect(output).eq('3.ext')
 	})
@@ -132,7 +132,7 @@ describe('Glob', () =>
 		var glob = Glob(globexpr)
 		.pipe(unit)
 
-		var output = await glob(Context(null)).output
+		var output = await glob(Context(null)).promise
 
 		expect(output).eq('3.ext')
 	})
@@ -146,7 +146,7 @@ describe('Glob', () =>
 
 		var glob = Glob(globexpr, unit)
 
-		var output = await glob(Context(null)).output
+		var output = await glob(Context(null)).promise
 
 		expect(output).eq('3.ext')
 	})
@@ -168,7 +168,7 @@ describe('Glob', () =>
 
 		var outcome = unit(Context(null))
 
-		var output = await outcome.output
+		var output = await outcome.promise
 
 		expect(output).eq(3)
 		expect(b1.sort()).deep.eq(expected)
@@ -203,7 +203,7 @@ describe('Glob', () =>
 
 		/* @flow-off */
 		var buffer = concat(outcome.stream)
-		var r = outcome.output.then(
+		var r = outcome.promise.then(
 		()  => expect(false).true,
 		(e) => e)
 

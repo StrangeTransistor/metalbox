@@ -35,7 +35,7 @@ describe('Less', () =>
 		.pipe(Ext('less', 'css'))
 		.pipe(File())
 
-		await u(context_null).output
+		await u(context_null).promise
 
 		compare(es5_cl(), tm())
 	})
@@ -52,7 +52,7 @@ describe('Less', () =>
 		.pipe(Ext('less', 'css'))
 		.pipe(File())
 
-		await u(context_null).output
+		await u(context_null).promise
 
 		compare(es5_cl(), tm())
 	})

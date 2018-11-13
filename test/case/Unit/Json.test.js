@@ -17,7 +17,7 @@ describe('Json', () =>
 
 			var parse = Parse()
 
-			var output = await parse(Context(entry)).output
+			var output = await parse(Context(entry)).promise
 
 			expect(output).deep.eq(
 			{

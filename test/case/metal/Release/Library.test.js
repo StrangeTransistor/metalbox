@@ -28,7 +28,7 @@ describe('Library', () =>
 			dst: tm,
 		})
 
-		await library(context).output
+		await library(context).promise
 
 		compare(cl(), tm())
 	})
@@ -52,7 +52,7 @@ describe('Library', () =>
 
 		end(outcome)
 
-		await outcome.output
+		await outcome.promise
 
 		compare(cl(), tm())
 		// console.log(cl)

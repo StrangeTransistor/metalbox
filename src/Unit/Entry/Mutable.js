@@ -31,7 +31,7 @@ export default function Mutable
 			var outcome = unit(context_clean)
 
 			/* @flow-off */
-			var output /* :$Entry<$Mutable<$out>> */ = await outcome.output
+			var output /* :$Entry<$Mutable<$out>> */ = await outcome.promise
 
 			return output
 		}

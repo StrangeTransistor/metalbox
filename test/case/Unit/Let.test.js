@@ -109,7 +109,7 @@ describe('Let', () =>
 
 		var u = Let(async () => Context(7), t)
 
-		var r = await u(Context(0)).output
+		var r = await u(Context(0)).promise
 
 		expect(r).eq(3)
 	})

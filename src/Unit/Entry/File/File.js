@@ -19,14 +19,14 @@ export default function ()
 			/* @flow-off */
 			var context_clean /* :$Context<$Entry<$File>, any> */ = context
 
-			return await add(context_clean).output
+			return add(context_clean).promise
 		}
 		else
 		{
 			/* @flow-off */
 			var context_remove /* :$Context<$Entry<$Remove>, any> */ = context
 
-			return await remove(context_remove).output
+			return remove(context_remove).promise
 		}
 	})
 }

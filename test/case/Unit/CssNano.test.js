@@ -17,7 +17,7 @@ describe('CssNano', () =>
 		var m = CssNano()
 
 		var outcome = m(context)
-		var output = await outcome.output
+		var output = await outcome.promise
 
 		expect(output.content.content).eq('.foo{bar:1}')
 	})

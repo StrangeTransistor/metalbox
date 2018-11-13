@@ -53,7 +53,7 @@ describe('Watch', () =>
 
 		end(outcome)
 
-		await outcome.output
+		await outcome.promise
 		.then(() =>
 		{
 			expect(buffer.sort()).deep.eq(expected)
@@ -77,7 +77,7 @@ describe('Watch', () =>
 
 		end(outcome)
 
-		await outcome.output
+		await outcome.promise
 		.then(() =>
 		{
 			expect(buffer.sort()).deep.eq([ '1.ext' ])
@@ -103,7 +103,7 @@ describe('Watch', () =>
 
 		end(outcome)
 
-		await outcome.output
+		await outcome.promise
 		.then(() =>
 		{
 			expect(b1.sort()).deep.eq(expected)
@@ -131,7 +131,7 @@ describe('Watch', () =>
 
 		end(outcome)
 
-		await outcome.output
+		await outcome.promise
 		.then(() =>
 		{
 			expect(b).deep.eq(
@@ -167,7 +167,7 @@ describe('Watch', () =>
 
 		end(outcome)
 
-		await outcome.output
+		await outcome.promise
 
 		compare(cl(), tm_to())
 	})

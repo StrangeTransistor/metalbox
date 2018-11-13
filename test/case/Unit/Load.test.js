@@ -19,7 +19,7 @@ describe('Load', () =>
 		var unit = Load(org('source.txt'))
 
 		var outcome = unit(Context(null))
-		var output = await outcome.output
+		var output = await outcome.promise
 
 		expect_entry(output, org('source.txt'), 'source of content\n')
 	})
@@ -33,7 +33,7 @@ describe('Load', () =>
 		var unit = LoadEntry()
 
 		var outcome = unit(context)
-		var output = await outcome.output
+		var output = await outcome.promise
 
 		expect_entry(output, org('source.txt'), 'source of content\n')
 	})

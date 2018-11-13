@@ -38,7 +38,7 @@ describe('Es5', () =>
 
 		var glob = Glob(es6_org('**/*.js'), Gen(Es5(), es6_org, tm))
 
-		await glob(Context(null)).output
+		await glob(Context(null)).promise
 
 		compare(es5_cl(), tm())
 	})
@@ -50,7 +50,7 @@ describe('Es5', () =>
 		var glob = Glob(es6_org('**/*.js'), Identity())
 		var unit = glob.pipe(Gen(Es5(), es6_org, tm))
 
-		await unit(Context(null)).output
+		await unit(Context(null)).promise
 
 		compare(es5_cl(), tm())
 	})
@@ -70,7 +70,7 @@ describe('Es5', () =>
 		}
 		, 200)
 
-		await outcome.output
+		await outcome.promise
 
 		compare(es5_cl(), tm())
 	})
@@ -87,7 +87,7 @@ describe('Es5', () =>
 
 		var glob = Glob(es6_org('**/*.js'), unit)
 
-		await glob(Context(null)).output
+		await glob(Context(null)).promise
 
 		compare(es5_cl(), tm())
 	})
@@ -99,7 +99,7 @@ describe('Es5', () =>
 
 		var glob = Glob(es6_org('**/*.ts'), Gen(Es5(), es6_org, tm))
 
-		await glob(Context(null)).output
+		await glob(Context(null)).promise
 
 		compare(es5_cl(), tm())
 	})

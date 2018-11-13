@@ -17,7 +17,7 @@ describe('Babel', () =>
 		var b = Babel({ minified: true })
 
 		var outcome = b(context)
-		var output = await outcome.output
+		var output = await outcome.promise
 
 		expect(output.content.content).eq('var foo=1;')
 	})
@@ -31,7 +31,7 @@ describe('Babel', () =>
 		var b = Babel({ presets: [ 'babel-preset-minify' ] })
 
 		var outcome = b(context)
-		var output = await outcome.output
+		var output = await outcome.promise
 
 		expect(output.content.content).eq('var foo=1,bar=2;')
 	})

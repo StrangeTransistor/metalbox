@@ -37,6 +37,6 @@ export default function Let (transform, target)
 
 		var outcome = target(context)
 		// @compose
-		return outcome.output
+		return outcome.promise
 	})
 }

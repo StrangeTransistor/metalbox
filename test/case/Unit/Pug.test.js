@@ -32,7 +32,7 @@ describe('Pug', () =>
 		.pipe(Rebase(org(), tm()))
 		.pipe(File())
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(cl(), tm())
 	})
@@ -48,7 +48,7 @@ describe('Pug', () =>
 		.pipe(Rebase(org(), tm()))
 		.pipe(File())
 
-		await unit(context).output
+		await unit(context).promise
 
 		compare(cl(), tm())
 	})

@@ -35,7 +35,7 @@ export default function /* ::<$in, $prov: $Providers$Base, $out> */
 			}
 
 			// TODO: stream in stream
-			var output = Σunit(context.derive(entry)).output
+			var output = Σunit(context.derive(entry)).promise
 
 			return stream_to(output, s)
 		})

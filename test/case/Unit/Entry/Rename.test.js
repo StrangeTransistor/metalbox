@@ -16,7 +16,7 @@ describe('Rename', () =>
 		var rename = Rename(async (filename) => filename + '_bar')
 
 		var outcome = rename(Context(entry))
-		var output  = await outcome.output
+		var output  = await outcome.promise
 
 		expect(output.filename).eq('foo_bar')
 		expect(output.content.content).eq('abc')

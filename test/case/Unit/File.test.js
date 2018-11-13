@@ -35,7 +35,7 @@ describe('File', () =>
 
 		var unit = File(tm('abc'), typical_content)
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(cl1(), tm())
 	})
@@ -46,7 +46,7 @@ describe('File', () =>
 
 		var unit = File(tm('abc'), async () => typical_content)
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(cl1(), tm())
 	})
@@ -57,7 +57,7 @@ describe('File', () =>
 
 		var unit = File(() => tm('abc'), typical_content)
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(cl1(), tm())
 	})
@@ -68,7 +68,7 @@ describe('File', () =>
 
 		var unit = File(() => tm('abc'), async () => typical_content)
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(cl1(), tm())
 	})
@@ -82,7 +82,7 @@ describe('File', () =>
 			async () => delay(50, typical_content)
 		)
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(cl1(), tm())
 	})
@@ -91,7 +91,7 @@ describe('File', () =>
 	{
 		var unit = File('abc', '')
 
-		await expect(unit(context_null).output)
+		await expect(unit(context_null).promise)
 		.rejectedWith('filename_must_be_absolute_path')
 	})
 })
@@ -111,7 +111,7 @@ describe('File/Copy', () =>
 			async () => delay(25, tm('abc'))
 		))
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(cl1(), tm())
 	})
@@ -132,7 +132,7 @@ describe('File/Move', () =>
 			async () => delay(25, tm('abc'))
 		))
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(cl1(), tm())
 	})
@@ -147,7 +147,7 @@ describe('Entry/File', () =>
 
 		var unit = AddEntry()
 
-		await unit(Add(tm('abc'))).output
+		await unit(Add(tm('abc'))).promise
 
 		compare(cl(), tm())
 	})
@@ -159,10 +159,10 @@ describe('Entry/File', () =>
 
 		var unit = FileEntry()
 
-		await unit(Add(tm('abc'))).output
-		await unit(Add(tm('def'))).output
-		await unit(Add(tm('zxc'))).output
-		await unit(Rm(tm('zxc'))).output
+		await unit(Add(tm('abc'))).promise
+		await unit(Add(tm('def'))).promise
+		await unit(Add(tm('zxc'))).promise
+		await unit(Rm(tm('zxc'))).promise
 
 		compare(cl(), tm())
 	})
@@ -198,7 +198,7 @@ describe('Remove', () =>
 		.pipe(File(tm('abc'), typical_content))
 		.pipe(Remove(tm('def')))
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(cl1(), tm())
 	})
@@ -211,7 +211,7 @@ describe('Remove', () =>
 		File(tm('def'), '')
 		.pipe(File(tm('abc'), typical_content))
 
-		await pre(context_null).output
+		await pre(context_null).promise
 
 		var unit = RemoveEntry()
 
@@ -219,7 +219,7 @@ describe('Remove', () =>
 			tm('def'),
 			Entry.Remove
 		)))
-		.output
+		.promise
 
 		compare(cl1(), tm())
 	})
@@ -228,7 +228,7 @@ describe('Remove', () =>
 	{
 		var r = Remove('/foo/bar/baz')
 
-		await r(Context(null)).output
+		await r(Context(null)).promise
 		.then(
 			() => expect(true).eq(false),
 			(error) => expect(error.message).eq('filename_must_under_tmpdir')

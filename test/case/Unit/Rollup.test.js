@@ -35,7 +35,7 @@ describe('Rollup', () =>
 		.pipe(Rebase(org(), tm()))
 		.pipe(File())
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(cl_cjs(), tm())
 	})
@@ -51,7 +51,7 @@ describe('Rollup', () =>
 		.pipe(Rebase(org(), tm()))
 		.pipe(File())
 
-		await unit(context).output
+		await unit(context).promise
 
 		compare(cl_cjs(), tm())
 	})
@@ -65,7 +65,7 @@ describe('Rollup', () =>
 		.pipe(Rebase(org(), tm()))
 		.pipe(File())
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(collate('rollup/es6')(), tm())
 	})
@@ -79,7 +79,7 @@ describe('Rollup', () =>
 		.pipe(Rebase(org(), tm()))
 		.pipe(File())
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(collate('rollup/iife')(), tm())
 	})
@@ -93,7 +93,7 @@ describe('Rollup', () =>
 		.pipe(Rebase(org(), tm()))
 		.pipe(File())
 
-		await unit(context_null).output
+		await unit(context_null).promise
 
 		compare(collate('rollup/cjs-external')(), tm())
 	})

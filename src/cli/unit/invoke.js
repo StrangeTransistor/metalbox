@@ -42,7 +42,7 @@ export default async function invoke (
 
 	try
 	{
-		var output = await outcome.output
+		var output = await outcome.promise
 	}
 	catch (error)
 	{
