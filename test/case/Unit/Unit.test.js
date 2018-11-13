@@ -5,13 +5,14 @@ import { inspect } from 'util'
 import { expect } from 'chai'
 import tcomb from 'src/tcomb'
 
+import { concat } from 'src/flyd/drain'
+
+import { stream as Stream } from 'flyd'
+
 import Context from 'src/Context'
+import Unit from 'src/Unit'
 
-import Result from 'src/Result'
-
-import Unit   from 'src/Unit'
-
-describe('Unit', () =>
+describe.only('Unit', () =>
 {
 	it('inspect', () =>
 	{
@@ -49,68 +50,190 @@ describe('Unit', () =>
 
 	it('Unit/Result', async () =>
 	{
-		var options =
-		{
-			unit: (input) => input,
-			input: tcomb.Any,
-			family: null,
-		}
+		var u = Unit(() => ({ x: 1, y: true }))
 
-		var result = Result(options.unit, Context(17), options)
+		var result = u(Context(null))
 
 		expect(result).property('stream')
 		expect(result).property('promise')
 
+		var buffer = await concat(result.stream)
 		var output = await result.promise
 
-		expect(output).eq(17)
+		expect(output).deep.eq({ x: 1, y: true })
+		expect(buffer).deep.eq([ { x: 1, y: true } ])
 	})
 
-	it('Unit/Result captures throw', async () =>
+	it('Unit/Result sync throw', async () =>
 	{
 		var error = new Error('e')
-		var options =
+
+		var u = Unit(() => { throw error })
+
+		var result = u(Context(null))
+
+		expect(result).property('stream')
+		expect(result).property('promise')
+
+		var buffer = await concat(result.stream)
+		var output = await result.promise.then(
+			()  => expect(false).true,
+			(e) => e
+		)
+
+		expect(output).eq(error)
+		expect(buffer).deep.eq([ error ])
+	})
+
+	it('Unit/Result async', async () =>
+	{
+		var u = Unit(async () => ({ x: 1, y: true }))
+
+		var result = u(Context(null))
+
+		expect(result).property('stream')
+		expect(result).property('promise')
+
+		var buffer = await concat(result.stream)
+		var output = await result.promise
+
+		expect(output).deep.eq({ x: 1, y: true })
+		expect(buffer).deep.eq([ { x: 1, y: true } ])
+	})
+
+	it('Unit/Result async throw', async () =>
+	{
+		var error = new Error('e')
+
+		var u = Unit(async () => { throw error })
+
+		var result = u(Context(null))
+
+		expect(result).property('stream')
+		expect(result).property('promise')
+
+		var buffer = await concat(result.stream)
+		var output = await result.promise.then(
+			()  => expect(false).true,
+			(e) => e
+		)
+
+		expect(output).eq(error)
+		expect(buffer).deep.eq([ error ])
+	})
+
+	it('Unit/Result stream', async () =>
+	{
+		var u = Unit(() =>
 		{
-			unit: () => { throw error },
-			input: tcomb.Any,
-			family: null,
-		}
+			var s = Stream()
 
-		var result = Result(options.unit, Context(null), options)
+			setTimeout(() => s(1), 100)
+			setTimeout(() => s(2), 100)
+			setTimeout(() => s(3), 100)
+			setTimeout(() => s.end(true), 100)
 
+			return s
+		})
+
+		var result = u(Context(null))
+
+		expect(result).property('stream')
+		expect(result).property('promise')
+
+		var buffer = await concat(result.stream)
+		var output = await result.promise
+
+		expect(output).eq(3)
+		expect(buffer).deep.eq([ 1, 2, 3 ])
+	})
+
+	it('Unit/Result stream IN async', async () =>
+	{
+		var u = Unit(async () =>
+		{
+			var s = Stream()
+
+			setTimeout(() => s(1), 100)
+			setTimeout(() => s(2), 100)
+			setTimeout(() => s(3), 100)
+			setTimeout(() => s.end(true), 100)
+
+			return s
+		})
+
+		var result = u(Context(null))
+
+		expect(result).property('stream')
+		expect(result).property('promise')
+
+		var buffer = await concat(result.stream)
+		var output = await result.promise
+
+		expect(output).eq(3)
+		expect(buffer).deep.eq([ 1, 2, 3 ])
+	})
+
+	it('Unit/Result stream error', async () =>
+	{
+		var error = new Error('e')
+
+		var u = Unit(() =>
+		{
+			var s = Stream()
+
+			setTimeout(() => s(1), 100)
+			setTimeout(() => s(2), 100)
+			setTimeout(() => s(error), 100)
+			setTimeout(() => s.end(true), 100)
+
+			return s
+		})
+
+		var result = u(Context(null))
+
+		expect(result).property('stream')
+		expect(result).property('promise')
+
+		var buffer = await concat(result.stream)
 		var r = await result.promise.then(
-		()  => expect(false).true,
-		(e) => e)
+			()  => expect(false).true,
+			(e) => e
+		)
 
 		expect(r).eq(error)
+		expect(buffer).deep.eq([ 1, 2, error ])
 	})
 
 	it('Unit/Result validates', async () =>
 	{
-		var options =
+		var u = Unit(
 		{
 			unit: (input) => input,
 			input: tcomb.Number,
 			family: null,
-		}
-		var result = Result(options.unit, Context(17), options)
+		})
+
+		var result = u(Context(17))
 
 		await result.promise
 	})
 
 	it('Unit/Result validates throw', async () =>
 	{
-		var options =
+		var u = Unit(
 		{
 			unit: (input) => input,
 			input: tcomb.String,
 			family: null,
-		}
-		var result = Result(options.unit, Context(17), options)
+		})
+
+		var result = u(Context(17))
 
 		var r = await result.promise.then(
-		()  => expect(false).true,
-		(e) => e)
+			()  => expect(false).true,
+			(e) => e
+		)
 
 		expect(r instanceof Error).true
 		expect(r.message).eq('Invalid value 17 supplied to String')
