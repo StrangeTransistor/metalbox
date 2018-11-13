@@ -61,16 +61,16 @@ describe('Es5', () =>
 
 		var watch = Watch(es6_org('**/*.js'), Gen(Es5(), es6_org, tm))
 
-		var outcome = watch(Context(null))
+		var result = watch(Context(null))
 
 		setTimeout(() =>
 		{
 			/* @flow-off */
-			outcome.stream.end(true)
+			result.stream.end(true)
 		}
 		, 200)
 
-		await outcome.promise
+		await result.promise
 
 		compare(es5_cl(), tm())
 	})

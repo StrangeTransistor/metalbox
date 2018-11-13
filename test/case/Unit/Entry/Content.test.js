@@ -15,8 +15,8 @@ describe('Content', () =>
 
 		var content = Content(async (content) => content + '_def')
 
-		var outcome = content(Context(entry))
-		var output  = await outcome.promise
+		var result = content(Context(entry))
+		var output  = await result.promise
 
 		expect(output.filename).eq('foo')
 		expect(output.content.content).eq('abc_def')

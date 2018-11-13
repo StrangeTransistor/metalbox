@@ -49,11 +49,11 @@ describe('Watch', () =>
 
 		var watch = Watch(globexpr, unit)
 
-		var outcome = watch(Context(null))
+		var result = watch(Context(null))
 
-		end(outcome)
+		end(result)
 
-		await outcome.promise
+		await result.promise
 		.then(() =>
 		{
 			expect(buffer.sort()).deep.eq(expected)
@@ -73,11 +73,11 @@ describe('Watch', () =>
 
 		var watch = Watch(org('1.ext'), unit)
 
-		var outcome = watch(Context(null))
+		var result = watch(Context(null))
 
-		end(outcome)
+		end(result)
 
-		await outcome.promise
+		await result.promise
 		.then(() =>
 		{
 			expect(buffer.sort()).deep.eq([ '1.ext' ])
@@ -99,11 +99,11 @@ describe('Watch', () =>
 			return b2.push(input)
 		}))
 
-		var outcome = unit(Context(null))
+		var result = unit(Context(null))
 
-		end(outcome)
+		end(result)
 
-		await outcome.promise
+		await result.promise
 		.then(() =>
 		{
 			expect(b1.sort()).deep.eq(expected)
@@ -125,13 +125,13 @@ describe('Watch', () =>
 
 		var watch = Watch(tm('*.ext'), unit)
 
-		var outcome = watch(Context(null))
+		var result = watch(Context(null))
 
 		await replay_mut(tm)
 
-		end(outcome)
+		end(result)
 
-		await outcome.promise
+		await result.promise
 		.then(() =>
 		{
 			expect(b).deep.eq(
@@ -161,13 +161,13 @@ describe('Watch', () =>
 		.pipe(Rebase(tm(), tm_to()))
 		.pipe(File())
 
-		var outcome = unit(Context(null))
+		var result = unit(Context(null))
 
 		await replay_mut(tm)
 
-		end(outcome)
+		end(result)
 
-		await outcome.promise
+		await result.promise
 
 		compare(cl(), tm_to())
 	})

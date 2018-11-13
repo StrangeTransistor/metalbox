@@ -35,8 +35,8 @@ export default function Let (transform, target)
 	{
 		var context = await transform(input, context)
 
-		var outcome = target(context)
+		var result = target(context)
 		// @compose
-		return outcome.promise
+		return result.promise
 	})
 }

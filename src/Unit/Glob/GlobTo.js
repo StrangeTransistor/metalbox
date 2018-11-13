@@ -39,12 +39,12 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 			var found = find(glob, options)
 			var entries = found.map(filename => Entry(filename))
 
-			/* TODO: compose outcome */
+			/* TODO: compose result */
 			/* TODO: Identity mismatch */
 			/* @flow-off */
-			var outcome = Σunit(context.derive(entries))
+			var result = Σunit(context.derive(entries))
 
-			var a = outcome.alive()
+			var a = result.alive()
 			on(s, a)
 
 			turnoff(a, s)

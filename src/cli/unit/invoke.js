@@ -19,13 +19,13 @@ export default async function invoke (
 {
 	// TODO: context engine
 
-	var outcome = unit(context)
+	var result = unit(context)
 
-	if (outcome.stream)
+	if (result.stream)
 	{
 		console.log('Streaming mode.')
 
-		on(proceed, outcome.stream)
+		on(proceed, result.stream)
 
 		function proceed (value)
 		{
@@ -42,15 +42,15 @@ export default async function invoke (
 
 	try
 	{
-		var output = await outcome.promise
+		var output = await result.promise
 	}
 	catch (error)
 	{
-		// if (! outcome.stream) // shortcutted
+		// if (! result.stream) // shortcutted
 		return fatal(error)
 	}
 
-	console.log(`${ bold('OK') } (${ green(hr(outcome.time.taken)) }):` +
+	console.log(`${ bold('OK') } (${ green(hr(result.time.taken)) }):` +
 		` ${ investigate(output) }`)
 }
 

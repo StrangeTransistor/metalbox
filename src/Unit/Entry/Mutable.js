@@ -27,11 +27,11 @@ export default function Mutable
 			/* @flow-off */
 			var context_clean /* :$Context<$Entry<$in>, $prov> */ = context
 
-			/* TODO: compose outcome */
-			var outcome = unit(context_clean)
+			/* TODO: compose result */
+			var result = unit(context_clean)
 
 			/* @flow-off */
-			var output /* :$Entry<$Mutable<$out>> */ = await outcome.promise
+			var output /* :$Entry<$Mutable<$out>> */ = await result.promise
 
 			return output
 		}

@@ -31,15 +31,15 @@ export default function Feed (glob, unit, options)
 
 		if (so_watch)
 		{
-			var outcome = W(context)
+			var result = W(context)
 
-			return outcome.stream
+			return result.stream
 		}
 		else
 		{
-			var outcome = G(context)
+			var result = G(context)
 
-			return outcome.stream
+			return result.stream
 		}
 	})
 }

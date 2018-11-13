@@ -16,8 +16,8 @@ describe('Babel', () =>
 
 		var b = Babel({ minified: true })
 
-		var outcome = b(context)
-		var output = await outcome.promise
+		var result = b(context)
+		var output = await result.promise
 
 		expect(output.content.content).eq('var foo=1;')
 	})
@@ -30,8 +30,8 @@ describe('Babel', () =>
 		// TODO: fix transient `babel-helper-evaluate-path`
 		var b = Babel({ presets: [ 'babel-preset-minify' ] })
 
-		var outcome = b(context)
-		var output = await outcome.promise
+		var result = b(context)
+		var output = await result.promise
 
 		expect(output.content.content).eq('var foo=1,bar=2;')
 	})

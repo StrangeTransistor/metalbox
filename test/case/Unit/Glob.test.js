@@ -66,9 +66,9 @@ describe('Glob', () =>
 			return (b2.push(input), input)
 		}))
 
-		var outcome = unit(Context(null))
+		var result = unit(Context(null))
 
-		var output = await outcome.promise
+		var output = await result.promise
 
 		expect(output.sort()).deep.eq(expected)
 
@@ -166,9 +166,9 @@ describe('Glob', () =>
 			return (b2.push(input), input)
 		}))
 
-		var outcome = unit(Context(null))
+		var result = unit(Context(null))
 
-		var output = await outcome.promise
+		var output = await result.promise
 
 		expect(output).eq(3)
 		expect(b1.sort()).deep.eq(expected)
@@ -199,11 +199,11 @@ describe('Glob', () =>
 			return (b2.push(input), input)
 		}))
 
-		var outcome = unit(Context(null))
+		var result = unit(Context(null))
 
 		/* @flow-off */
-		var buffer = concat(outcome.stream)
-		var r = outcome.promise.then(
+		var buffer = concat(result.stream)
+		var r = result.promise.then(
 		()  => expect(false).true,
 		(e) => e)
 

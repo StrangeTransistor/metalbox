@@ -48,11 +48,11 @@ describe('Library', () =>
 			live: true,
 		})
 
-		var outcome = library(context)
+		var result = library(context)
 
-		end(outcome)
+		end(result)
 
-		await outcome.promise
+		await result.promise
 
 		compare(cl(), tm())
 		// console.log(cl)
