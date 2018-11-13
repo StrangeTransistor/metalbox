@@ -6,6 +6,8 @@ import { expect } from 'chai'
 
 import tcomb from 'src/tcomb'
 
+import { delay } from 'bluebird'
+
 import { concat } from 'src/flyd/drain'
 
 import Context from 'src/Context'
@@ -229,5 +231,42 @@ describe.only('Unit', () =>
 
 		expect(r instanceof Error).true
 		expect(r.message).eq('Invalid value 17 supplied to String')
+	})
+
+	it('Unit/result timing', async () =>
+	{
+		var never = Unit(() => new Promise(() => {}))
+
+		var r = never(Context(null))
+
+		expect_hrtime(r.time.start)
+		expect(r.time.stop).eq(null)
+		expect(r.time.taken).eq(null)
+
+		var u = Unit(() => delay(25))
+		var r2 = u(Context(null))
+
+		await r2.promise
+
+		expect_hrtime(r2.time.start)
+		/* @flow-off */
+		expect_hrtime((r2.time.stop  /* :$Hrtime */))
+		/* @flow-off */
+		expect_hrtime((r2.time.taken /* :$Hrtime */))
+
+		/* @flow-off */
+		expect(r2.time.taken[0]).eq(0)
+		/* @flow-off */
+		expect(r2.time.taken[1] > 10e6).true
+		/* @flow-off */
+		expect(r2.time.taken[1] < 30e6).true
+
+		function expect_hrtime (time /* :$Hrtime */)
+		{
+			expect(time).an('array')
+			expect(time.length).eq(2)
+			expect(time[0]).a('number')
+			expect(time[1]).a('number')
+		}
 	})
 })
