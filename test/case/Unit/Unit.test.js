@@ -6,7 +6,8 @@ import { expect } from 'chai'
 
 import tcomb from 'src/tcomb'
 
-import { delay } from 'bluebird'
+import Promise from 'bluebird'
+var { delay } = Promise
 
 import { concat } from 'src/flyd/drain'
 
