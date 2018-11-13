@@ -35,9 +35,7 @@ describe.only('Pipe / Unit.pipe', () =>
 
 		var u = Pipe(u1, u2)
 
-		var context = Context({ x: 5 })
-
-		var promise = await u(context).promise
+		var promise = await u(Context({ x: 5 })).promise
 
 		expect(promise).deep.eq({ y: 7 })
 	})
@@ -59,9 +57,7 @@ describe.only('Pipe / Unit.pipe', () =>
 
 		var u = u1.pipe(u2)
 
-		var context = Context({ x: 5 })
-
-		var promise = await u(context).promise
+		var promise = await u(Context({ x: 5 })).promise
 
 		expect(promise).deep.eq({ y: 7 })
 	})
@@ -121,8 +117,7 @@ describe.only('Pipe / Unit.pipe', () =>
 		})
 
 		var u = u1.pipe(u2)
-		var context = Context(17)
-		var result = u(context)
+		var result = u(Context(17))
 
 		var promise = result.promise
 		var buffer  = concat(result.stream)
@@ -153,8 +148,7 @@ describe.only('Pipe / Unit.pipe', () =>
 		})
 
 		var u = u1.pipe(u2)
-		var context = Context(17)
-		var result = u(context)
+		var result = u(Context(17))
 
 		var promise = result.promise
 		var buffer  = concat(result.stream)
@@ -167,7 +161,6 @@ describe.only('Pipe / Unit.pipe', () =>
 	{
 		var error = new Error('e')
 
-		/* eslint-disable max-nested-callbacks */
 		var u1 = Unit(async (initial) =>
 		{
 			expect(initial).eq(17)
@@ -180,7 +173,6 @@ describe.only('Pipe / Unit.pipe', () =>
 				error,
 			])
 		})
-		/* eslint-enable max-nested-callbacks */
 
 		var u2 = Unit((input) =>
 		{
@@ -190,8 +182,7 @@ describe.only('Pipe / Unit.pipe', () =>
 		})
 
 		var u = u1.pipe(u2)
-		var context = Context(17)
-		var result = u(context)
+		var result = u(Context(17))
 
 		var r = result.promise.then(
 			()  => expect(false).true,
@@ -207,7 +198,6 @@ describe.only('Pipe / Unit.pipe', () =>
 	{
 		var error = new Error('e')
 
-		/* eslint-disable max-nested-callbacks */
 		var u1 = Unit(async (initial) =>
 		{
 			expect(initial).eq(17)
@@ -220,7 +210,6 @@ describe.only('Pipe / Unit.pipe', () =>
 				error,
 			])
 		})
-		/* eslint-enable max-nested-callbacks */
 
 		var u2 = Unit((input) =>
 		{
@@ -230,8 +219,7 @@ describe.only('Pipe / Unit.pipe', () =>
 		})
 
 		var u = u1.pipe(u2)
-		var context = Context(17)
-		var result = u(context)
+		var result = u(Context(17))
 
 		var r = result.promise.then(
 			()  => expect(false).true,
@@ -254,7 +242,6 @@ describe.only('Pipe / Unit.pipe', () =>
 			var s = replay([ 1, 2, 3 ])
 
 			s.map(v => buffer_spy.push(v))
-			/* eslint-enable max-nested-callbacks */
 
 			return s
 		})
@@ -270,8 +257,7 @@ describe.only('Pipe / Unit.pipe', () =>
 		})
 
 		var u = u1.pipe(u2)
-		var context = Context(null)
-		var result = u(context)
+		var result = u(Context(null))
 
 		var r = result.promise.then(
 			()  => expect(false).true,

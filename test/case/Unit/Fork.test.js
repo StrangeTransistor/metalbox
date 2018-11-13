@@ -35,9 +35,7 @@ describe.only('Fork', () =>
 
 		var u = Fork(u1, u2)
 
-		var context = Context({ x: 5 })
-
-		var promise = await u(context).promise
+		var promise = await u(Context({ x: 5 })).promise
 
 		expect(promise).deep.eq([ { x: 7 }, { y: 17 } ])
 	})
@@ -58,15 +56,13 @@ describe.only('Fork', () =>
 
 		var u = Fork(u1, u2)
 
-		var context = Context({ x: 5 })
-
-		await expect(u(context).promise)
+		await expect(u(Context({ x: 5 })).promise)
 		.rejectedWith('no_pass')
 	})
 
 	it('u1.fork(u2)', async () =>
 	{
-		var u1 = Unit(() =>
+		var u1 = Unit((_, context) =>
 		{
 			var x /* :string */ = context.input.x
 
@@ -82,9 +78,7 @@ describe.only('Fork', () =>
 
 		var u = u1.fork(u2)
 
-		var context = Context({ x: '5' })
-
-		var promise = await u(context).promise
+		var promise = await u(Context({ x: '5' })).promise
 
 		expect(promise).deep.eq([ { x: '55' }, { y: '5a' } ])
 	})
@@ -104,8 +98,7 @@ describe.only('Fork', () =>
 		})
 
 		var u = u1.fork(u2)
-		var context = Context({ x: 17 })
-		var result = u(context)
+		var result = u(Context({ x: 17 }))
 
 		var promise = result.promise
 		var buffer  = concat(result.stream)
@@ -148,8 +141,7 @@ describe.only('Fork', () =>
 		var u2 = Unit(() => s2)
 
 		var u = u1.fork(u2)
-		var context = Context(null)
-		var result = u(context)
+		var result = u(Context(null))
 
 		var promise = result.promise
 		var buffer  = concat(result.stream)
@@ -200,8 +192,7 @@ describe.only('Fork', () =>
 		var u2 = Unit(() => s2)
 
 		var u = u1.fork(u2)
-		var context = Context(null)
-		var result = u(context)
+		var result = u(Context(null))
 
 		var r = result.promise.then(
 		()  => expect(false).true,
@@ -226,8 +217,7 @@ describe.only('Fork', () =>
 		var u2 = Unit(() => { throw error })
 
 		var u = u1.fork(u2)
-		var context = Context(null)
-		var result = u(context)
+		var result = u(Context(null))
 
 		var r = result.promise.then(
 		()  => expect(false).true,
