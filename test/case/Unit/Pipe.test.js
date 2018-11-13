@@ -96,6 +96,7 @@ describe('Pipe / Unit.pipe', () =>
 		{
 			expect(initial).eq(17)
 
+			/* @flow-off */
 			return replay(
 			[
 				{ x: 1 },

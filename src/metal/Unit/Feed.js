@@ -33,13 +33,13 @@ export default function Feed (glob, unit, options)
 		{
 			var outcome = W(context)
 
-			return outcome.return
+			return outcome.stream
 		}
 		else
 		{
 			var outcome = G(context)
 
-			return outcome.return
+			return outcome.stream
 		}
 	})
 }

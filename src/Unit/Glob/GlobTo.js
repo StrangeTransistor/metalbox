@@ -7,7 +7,6 @@ import { find } from 'globule'
 import { stream } from 'flyd'
 import { on } from 'flyd'
 
-import alive   from '../../Outcome/alive'
 import turnoff from '../../flyd/turnoff'
 
 import unroll from '../../unroll'
@@ -45,7 +44,7 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 			/* @flow-off */
 			var outcome = Σunit(context.derive(entries))
 
-			var a = alive(outcome)
+			var a = outcome.alive()
 			on(s, a)
 
 			turnoff(a, s)
