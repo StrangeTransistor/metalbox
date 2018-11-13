@@ -11,7 +11,7 @@ import Precursor from 'src/Unit/compose/Precursor'
 
 import replay from 'test/replay'
 
-describe.only('Precursor', () =>
+describe('Precursor', () =>
 {
 	it('Precursor(u1, u2)', async () =>
 	{

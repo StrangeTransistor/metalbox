@@ -15,7 +15,7 @@ import Unit from 'src/Unit'
 
 import replay from 'test/replay'
 
-describe.only('Unit', () =>
+describe('Unit', () =>
 {
 	it('inspect', () =>
 	{

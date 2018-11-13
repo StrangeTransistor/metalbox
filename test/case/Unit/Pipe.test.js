@@ -11,7 +11,7 @@ import Pipe from 'src/Unit/compose/Pipe'
 
 import replay from 'test/replay'
 
-describe.only('Pipe / Unit.pipe', () =>
+describe('Pipe / Unit.pipe', () =>
 {
 	it('Pipe(u1, u2)', async () =>
 	{

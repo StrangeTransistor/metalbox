@@ -16,7 +16,7 @@ import Fork from 'src/Unit/compose/Fork'
 
 import replay from 'test/replay'
 
-describe.only('Fork', () =>
+describe('Fork', () =>
 {
 	it('Fork(u1, u2)', async () =>
 	{
