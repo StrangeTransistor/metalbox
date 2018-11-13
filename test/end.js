@@ -1,11 +1,10 @@
 /* @flow */
 
+import Promise from 'bluebird'
+
+var { delay } = Promise
+
 export default function end (result /* :$Result<any> */)
 {
-	setTimeout(() =>
-	{
-		/* @flow-off */
-		result.stream.end(true)
-	}
-	, 200)
+	return delay(200).then(() => result.stream.end(true))
 }
