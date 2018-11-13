@@ -66,6 +66,39 @@ describe.only('Pipe / Unit.pipe', () =>
 		expect(promise).deep.eq({ y: 7 })
 	})
 
+	it('(async u1).pipe(u2)', async () =>
+	{
+		var u1 = Unit(async (x) => x + 11)
+		var u2 = Unit((x) => x + 5)
+
+		var u = u1.pipe(u2)
+
+		var r = await u(Context(1)).promise
+		expect(r).eq(17)
+	})
+
+	it('u1.pipe(async u2)', async () =>
+	{
+		var u1 = Unit((x) => x + 11)
+		var u2 = Unit(async (x) => x + 5)
+
+		var u = u1.pipe(u2)
+
+		var r = await u(Context(1)).promise
+		expect(r).eq(17)
+	})
+
+	it('(async u1).pipe(async u2)', async () =>
+	{
+		var u1 = Unit(async (x) => x + 11)
+		var u2 = Unit(async (x) => x + 5)
+
+		var u = u1.pipe(u2)
+
+		var r = await u(Context(1)).promise
+		expect(r).eq(17)
+	})
+
 	it('(stream u1).pipe(u2)', async () =>
 	{
 		var u1 = Unit(initial =>
@@ -94,8 +127,40 @@ describe.only('Pipe / Unit.pipe', () =>
 		var promise = result.promise
 		var buffer  = concat(result.stream)
 
-		expect(await promise).eq(5)
 		expect(await buffer).deep.eq([ 3, 4, 5 ])
+		expect(await promise).eq(5)
+	})
+
+	it('(async stream u1).pipe(u2)', async () =>
+	{
+		var u1 = Unit(async (initial) =>
+		{
+			expect(initial).eq(17)
+
+			return replay(
+			[
+				{ x: 1 },
+				{ x: 2 },
+				{ x: 3 },
+			])
+		})
+
+		var u2 = Unit((input) =>
+		{
+			var x /* :number */ = input.x
+
+			return x + 2
+		})
+
+		var u = u1.pipe(u2)
+		var context = Context(17)
+		var result = u(context)
+
+		var promise = result.promise
+		var buffer  = concat(result.stream)
+
+		expect(await buffer).deep.eq([ 3, 4, 5 ])
+		expect(await promise).eq(5)
 	})
 
 	it('(stream u1 Error).pipe(u2)', async () =>
@@ -103,7 +168,7 @@ describe.only('Pipe / Unit.pipe', () =>
 		var error = new Error('e')
 
 		/* eslint-disable max-nested-callbacks */
-		var u1 = Unit(initial =>
+		var u1 = Unit(async (initial) =>
 		{
 			expect(initial).eq(17)
 
@@ -129,21 +194,62 @@ describe.only('Pipe / Unit.pipe', () =>
 		var result = u(context)
 
 		var r = result.promise.then(
-		()  => expect(false).true,
-		(e) => e)
+			()  => expect(false).true,
+			(e) => e
+		)
 		var buffer = concat(result.stream)
 
-		expect(await r).eq(error)
 		expect(await buffer).deep.eq([ 3, 4, error ])
+		expect(await r).eq(error)
 	})
 
-	it('(stream u1).pipe(u2 Error)', async () =>
+	it('(async stream u1 Error).pipe(u2)', async () =>
+	{
+		var error = new Error('e')
+
+		/* eslint-disable max-nested-callbacks */
+		var u1 = Unit(async (initial) =>
+		{
+			expect(initial).eq(17)
+
+			return replay(
+			[
+				{ x: 1 },
+				{ x: 2 },
+				error,
+				error,
+			])
+		})
+		/* eslint-enable max-nested-callbacks */
+
+		var u2 = Unit((input) =>
+		{
+			var x /* :number */ = input.x
+
+			return x + 2
+		})
+
+		var u = u1.pipe(u2)
+		var context = Context(17)
+		var result = u(context)
+
+		var r = result.promise.then(
+			()  => expect(false).true,
+			(e) => e
+		)
+		var buffer = concat(result.stream)
+
+		expect(await buffer).deep.eq([ 3, 4, error ])
+		expect(await r).eq(error)
+	})
+
+	it('async (stream u1).pipe(u2 Error)', async () =>
 	{
 		var error = new Error('e')
 
 		var buffer_spy = []
 
-		var u1 = Unit(() =>
+		var u1 = Unit(async () =>
 		{
 			var s = replay([ 1, 2, 3 ])
 
@@ -153,7 +259,7 @@ describe.only('Pipe / Unit.pipe', () =>
 			return s
 		})
 
-		var u2 = Unit(input =>
+		var u2 = Unit(async (input) =>
 		{
 			if (input === 2)
 			{
@@ -168,23 +274,24 @@ describe.only('Pipe / Unit.pipe', () =>
 		var result = u(context)
 
 		var r = result.promise.then(
-		()  => expect(false).true,
-		(e) => e)
+			()  => expect(false).true,
+			(e) => e
+		)
 		var buffer = concat(result.stream)
 
-		expect(await r).eq(error)
 		expect(await buffer).deep.eq([ 1, error ])
+		expect(await r).eq(error)
 		expect(buffer_spy).deep.eq([ 1, 2 ])
 	})
 
-	it('(stream u1).pipe(u2 Error).pipe(effect)', async () =>
+	it('async (stream u1).pipe(u2 Error).pipe(effect)', async () =>
 	{
 		var error = new Error('e')
 
 		var b2 = []
 		var b3 = []
 
-		var u1 = Unit(() =>
+		var u1 = Unit(async () =>
 		{
 			return replay([ 1, 2, 3, 4 ])
 		})
@@ -209,17 +316,18 @@ describe.only('Pipe / Unit.pipe', () =>
 		})
 
 		var u = u1.pipe(u2).pipe(u3)
-		var context = Context(null)
 
-		var result = u(context)
+		var result = u(Context(null))
 
 		var r = result.promise.then(
-		()  => expect(false).true,
-		(e) => e)
+			()  => expect(false).true,
+			(e) => e
+		)
 		var b = concat(result.stream)
 
-		expect(await r).eq(error)
 		expect(await b).deep.eq([ 100, 200, error ])
+		expect(await r).eq(error)
+
 		expect(b2).deep.eq([ 1, 2, 3 ])
 		expect(b3).deep.eq([ 10, 20 ])
 	})
