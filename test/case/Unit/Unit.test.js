@@ -12,6 +12,8 @@ import { stream as Stream } from 'flyd'
 import Context from 'src/Context'
 import Unit from 'src/Unit'
 
+import replay from '../../replay'
+
 describe.only('Unit', () =>
 {
 	it('inspect', () =>
@@ -124,17 +126,7 @@ describe.only('Unit', () =>
 
 	it('Unit/Result stream', async () =>
 	{
-		var u = Unit(() =>
-		{
-			var s = Stream()
-
-			setTimeout(() => s(1), 100)
-			setTimeout(() => s(2), 100)
-			setTimeout(() => s(3), 100)
-			setTimeout(() => s.end(true), 100)
-
-			return s
-		})
+		var u = Unit(() => replay([ 1, 2, 3 ]))
 
 		var result = u(Context(null))
 
@@ -150,17 +142,7 @@ describe.only('Unit', () =>
 
 	it('Unit/Result stream IN async', async () =>
 	{
-		var u = Unit(async () =>
-		{
-			var s = Stream()
-
-			setTimeout(() => s(1), 100)
-			setTimeout(() => s(2), 100)
-			setTimeout(() => s(3), 100)
-			setTimeout(() => s.end(true), 100)
-
-			return s
-		})
+		var u = Unit(async () => replay([ 1, 2, 3 ]))
 
 		var result = u(Context(null))
 
@@ -178,17 +160,28 @@ describe.only('Unit', () =>
 	{
 		var error = new Error('e')
 
-		var u = Unit(() =>
-		{
-			var s = Stream()
+		var u = Unit(() => replay([ 1, 2, error ]))
 
-			setTimeout(() => s(1), 100)
-			setTimeout(() => s(2), 100)
-			setTimeout(() => s(error), 100)
-			setTimeout(() => s.end(true), 100)
+		var result = u(Context(null))
 
-			return s
-		})
+		expect(result).property('stream')
+		expect(result).property('promise')
+
+		var buffer = await concat(result.stream)
+		var r = await result.promise.then(
+			()  => expect(false).true,
+			(e) => e
+		)
+
+		expect(r).eq(error)
+		expect(buffer).deep.eq([ 1, 2, error ])
+	})
+
+	it('Unit/Result stream error IN async', async () =>
+	{
+		var error = new Error('e')
+
+		var u = Unit(async () => replay([ 1, 2, error ]))
 
 		var result = u(Context(null))
 
