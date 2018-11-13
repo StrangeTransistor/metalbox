@@ -2,10 +2,12 @@
 
 import { stream } from 'flyd'
 
-import { mapSeries as map } from 'bluebird'
-import { delay } from 'bluebird'
+import Promise from 'bluebird'
 
-export default function replay (seq)
+var { mapSeries: map } = Promise
+var { delay } = Promise
+
+export default function replay (seq /* :any[] */)
 {
 	var s = stream()
 
