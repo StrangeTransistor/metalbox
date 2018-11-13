@@ -2,6 +2,8 @@
 
 import time from '../time'
 
+import as_alive from './alive'
+
 export default function Result /* ::<$in, $prov: $Providers$Base, $out> */
 (
 	unit    /* :$Unit$Fn<$in, $prov, $out> */,
@@ -26,6 +28,8 @@ export default function Result /* ::<$in, $prov: $Providers$Base, $out> */
 		promise,
 		stream,
 
+		alive,
+
 		time:
 		{
 			start: time(),
@@ -33,7 +37,12 @@ export default function Result /* ::<$in, $prov: $Providers$Base, $out> */
 			stop:  (null /* :$Hrtime */),
 			/* @flow-off */
 			taken: (null /* :$Hrtime */),
-		}
+		},
+	}
+
+	function alive ()
+	{
+		return as_alive(result)
 	}
 
 	return result

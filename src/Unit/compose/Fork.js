@@ -23,11 +23,8 @@ export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
 {
 	return Unit((_, context) =>
 	{
-		var r1 = u1(context)
-		var r2 = u2(context)
-
-		var s1 = r1.stream
-		var s2 = r2.stream
+		var s1 = u1(context).alive()
+		var s2 = u2(context).alive()
 
 		var stream = combine(handle, [ s1, s2 ])
 
@@ -56,9 +53,6 @@ export default function Fork /* ::<$in, $prov: $Providers$Base, $out1, $out2> */
 
 		turnoff(stream, s1)
 		turnoff(stream, s2)
-
-		r1.promise.catch(noop)
-		r2.promise.catch(noop)
 
 		return stream
 	})

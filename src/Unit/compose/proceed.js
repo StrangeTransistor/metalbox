@@ -17,9 +17,7 @@ export default function proceed
 	fn   /* :($medium) => $Context<$medium_in, $prov> */
 )
 {
-	/* @flow-off */
-	var prev_stream /* :flyd$Stream<$medium> */ = r.stream
-	var prev = backpressure(prev_stream)
+	var prev = backpressure(r.alive())
 
 	var stream = combine(handle, [ prev ])
 
@@ -48,8 +46,6 @@ export default function proceed
 
 	turnoff(stream, prev)
 	// out2.stream +
-
-	r.promise.catch(noop)
 
 	return stream
 }

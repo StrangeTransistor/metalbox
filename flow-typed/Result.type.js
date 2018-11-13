@@ -12,6 +12,8 @@ type $Result<$out> =
 	promise: Promise<$out>,
 	stream: flyd$Stream<$out>,
 
+	alive (): flyd$Stream<$out>,
+
 	time:
 	{
 		start:  $Hrtime,
