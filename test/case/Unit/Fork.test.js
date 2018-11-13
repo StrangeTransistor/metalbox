@@ -137,8 +137,8 @@ describe.only('Fork', () =>
 			s2.end(true)
 		})
 
-		var u1 = Unit(() => s1)
-		var u2 = Unit(() => s2)
+		var u1 = Unit(async () => s1)
+		var u2 = Unit(async () => s2)
 
 		var u = u1.fork(u2)
 		var result = u(Context(null))
@@ -188,8 +188,8 @@ describe.only('Fork', () =>
 			s1(new Error('not'))
 		})
 
-		var u1 = Unit(() => s1)
-		var u2 = Unit(() => s2)
+		var u1 = Unit(async () => s1)
+		var u2 = Unit(async () => s2)
 
 		var u = u1.fork(u2)
 		var result = u(Context(null))
@@ -213,8 +213,8 @@ describe.only('Fork', () =>
 
 		var error = new Error('e')
 
-		var u1 = Unit(() => s1)
-		var u2 = Unit(() => { throw error })
+		var u1 = Unit(async () => s1)
+		var u2 = Unit(async () => { throw error })
 
 		var u = u1.fork(u2)
 		var result = u(Context(null))
@@ -236,8 +236,8 @@ describe.only('Fork', () =>
 
 		var p = Unit(() => s)
 
-		var u1 = Unit(n => n + 1)
-		var u2 = Unit(n => n * 2)
+		var u1 = Unit(async (n) => n + 1)
+		var u2 = Unit(async (n) => n * 2)
 
 		delay(25).then(() =>
 		{
