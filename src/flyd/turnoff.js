@@ -1,6 +1,6 @@
 /* @flow */
 
-import { on } from 'flyd'
+import onto from './onto'
 
 export default function turnoff
 (
@@ -8,12 +8,10 @@ export default function turnoff
 	dst /* :flyd$Stream<*> */
 )
 {
-	on(handle, src.end)
-
-	function handle (value)
+	onto(src.end, (value) =>
 	{
 		if (value !== true)     return
 		if (dst.end() === true) return
 		dst.end(true)
-	}
+	})
 }

@@ -12,13 +12,14 @@ var assign = Object.assign
 import { isAbsolute as is_abs } from 'path'
 
 import { stream } from 'flyd'
-import { on } from 'flyd'
 
 import uniq from 'lodash/uniq'
 
 import { watch } from 'chokidar'
 import glob_base from 'glob-parent'
 import match from 'micromatch'
+
+import onto from '../flyd/onto'
 
 import unroll from '../unroll'
 
@@ -45,15 +46,13 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 		/* @flow-off */
 		var s /* :flyd$Stream<$out> */ = stream()
 
-		on(release, s.end)
-
-		function release ()
+		onto(s.end, () =>
 		{
 			if (! handler) return
 
 			handler.unwatch()
 			handler.close()
-		}
+		})
 
 		unroll(context, glob)
 		.then(raw_glob =>

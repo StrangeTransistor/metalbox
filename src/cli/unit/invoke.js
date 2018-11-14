@@ -8,7 +8,7 @@ var f_error = clc.bold.red
 
 import hr from 'pretty-hrtime'
 
-import { on }  from 'flyd'
+import onto from '../../flyd/onto'
 
 import inspect from '../../inspect'
 
@@ -25,9 +25,7 @@ export default async function invoke (
 	{
 		console.log('Streaming mode.')
 
-		on(proceed, result.stream)
-
-		function proceed (value)
+		onto(result.stream, (value) =>
 		{
 			if (value instanceof Error)
 			{
@@ -37,7 +35,7 @@ export default async function invoke (
 			{
 				console.log(investigate(value))
 			}
-		}
+		})
 	}
 
 	try

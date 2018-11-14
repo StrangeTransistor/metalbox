@@ -2,7 +2,7 @@
 
 import Promise from 'bluebird'
 
-import { on }  from 'flyd'
+import onto from './onto'
 
 export default function drain /* ::<$value> */
 (
@@ -12,7 +12,7 @@ export default function drain /* ::<$value> */
 {
 	return new Promise(rs =>
 	{
-		on(() => rs(stream()), stream.end)
+		onto(stream.end, () => rs(stream()))
 	})
 }
 
@@ -42,12 +42,7 @@ export function concat /* ::<$value> */
 {
 	var buffer /* :$value[] */ = []
 
-	on(push, stream)
-
-	function push (value)
-	{
-		buffer.push(value)
-	}
+	onto(stream, (value) => buffer.push(value))
 
 	return drain(stream).then(() => buffer)
 }

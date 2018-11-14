@@ -1,9 +1,9 @@
 /* @flow */
 
 import { stream } from 'flyd'
-import { on } from 'flyd'
 
 import turnoff from './turnoff'
+import onto from './onto'
 
 export default function backpressure /* ::<$value> */
 (
@@ -20,10 +20,7 @@ export default function backpressure /* ::<$value> */
 
 	turnoff(backpressured, reactive)
 
-	on(handle_end, reactive.end)
-	on(handle, reactive)
-
-	function handle_end ()
+	onto(reactive.end, () =>
 	{
 		if (has_ended)
 		{
@@ -36,9 +33,9 @@ export default function backpressure /* ::<$value> */
 		{
 			finalize()
 		}
-	}
+	})
 
-	function handle (value)
+	onto(reactive, (value) =>
 	{
 		if (has_ended)
 		{
@@ -54,7 +51,7 @@ export default function backpressure /* ::<$value> */
 		{
 			buffer.push(value)
 		}
-	}
+	})
 
 	backpressured.continue = () =>
 	{
@@ -84,10 +81,8 @@ export default function backpressure /* ::<$value> */
 	function finalize ()
 	{
 		backpressured.end(true)
-		/* @flow-off */
-		backpressured = null
-		/* @flow-off */
-		reactive = null
+		backpressured = (null /* :any */)
+		reactive = (null /* :any */)
 	}
 
 	return backpressured

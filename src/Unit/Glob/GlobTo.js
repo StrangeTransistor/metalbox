@@ -5,8 +5,8 @@ var assign = Object.assign
 import { find } from 'globule'
 
 import { stream } from 'flyd'
-import { on } from 'flyd'
 
+import onto from '../../flyd/onto'
 import turnoff from '../../flyd/turnoff'
 
 import unroll from '../../unroll'
@@ -45,9 +45,10 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 			var result = Σunit(context.derive(entries))
 
 			var a = result.alive()
-			on(s, a)
 
+			onto(a, s)
 			turnoff(a, s)
+
 			turnoff(s, a)
 		})
 
