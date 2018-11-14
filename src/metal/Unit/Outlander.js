@@ -13,6 +13,6 @@ export default function Outlander ()
 	{
 		var verf = linter.verifyAndFix(content, outlander)
 
-		return verf.promise
+		return verf.output
 	})
 }
