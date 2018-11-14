@@ -1,16 +1,17 @@
 /* @flow */
 
-import { stream } from 'flyd'
-
 import { expect } from 'chai'
 
-import Context from 'src/Context'
+import { concat } from 'src/flyd/drain'
 
+import Context from 'src/Context'
 import Unit from 'src/Unit'
 
 import Let  from 'src/Unit/Let'
 
 import { expect_context } from '../Context.test'
+
+import replay from 'test/replay'
 
 describe('Let', () =>
 {
@@ -91,27 +92,29 @@ describe('Let', () =>
 		await u(c1)
 	})
 
-	/* eslint-disable max-nested-callbacks */
 	it('can work with streaming', async () =>
 	{
 		var t = Unit(input =>
 		{
-			expect(input).eq(7)
+			expect(input).eq(17)
 
-			var s = stream(1)
-
-			setTimeout(() => s(2), 0)
-			setTimeout(() => s(3), 0)
-			setTimeout(() => s.end(true), 0)
-
-			return s
+			return replay([ 1, 2, 3 ])
 		})
 
-		var u = Let(async () => Context(7), t)
+		var u = Let(async (input) =>
+		{
+			expect(input).eq(10)
 
-		var r = await u(Context(0)).promise
+			return Context(input + 7)
+		}
+		, t)
 
-		expect(r).eq(3)
+		var result = u(Context(10))
+
+		var buffer = await concat(result.stream)
+		var output = await result.promise
+
+		expect(output).eq(3)
+		expect(buffer).deep.eq([ 1, 2, 3 ])
 	})
-	/* eslint-enable max-nested-callbacks */
 })
