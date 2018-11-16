@@ -4,11 +4,6 @@ var assign = Object.assign
 
 import { find } from 'globule'
 
-import { stream } from 'flyd'
-
-import onto from '../../flyd/onto'
-import turnoff from '../../flyd/turnoff'
-
 import unroll from '../../unroll'
 import Entry  from '../../Entry'
 
@@ -26,32 +21,23 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 	var Σunit = cast(unit)
 	options = assign({}, options)
 
-	return Unit((_, context) =>
+	return Unit(async (_, context) =>
 	{
 		/* @flow-off */
-		var s /* :flyd$Stream<$out> */ = stream()
+		// var s /* :flyd$Stream<$out> */ = stream()
 
-		unroll(context, glob)
-		.then(glob =>
-		{
-			glob = [].concat(glob)
+		var Σglob = await unroll(context, glob)
 
-			var found = find(glob, options)
-			var entries = found.map(filename => Entry(filename))
+		Σglob = [].concat(Σglob)
 
-			/* TODO: compose result */
-			/* TODO: Identity mismatch */
-			/* @flow-off */
-			var result = Σunit(context.derive(entries))
+		var found = find(Σglob, options)
+		var entries = found.map(filename => Entry(filename))
 
-			var a = result.alive()
+		/* TODO: compose result */
+		/* TODO: Identity mismatch */
+		/* @flow-off */
+		var result = Σunit(context.derive(entries))
 
-			onto(a, s)
-			turnoff(a, s)
-
-			turnoff(s, a)
-		})
-
-		return s
+		return ((result.alive() /* :any */) /* :$out */)
 	})
 }
