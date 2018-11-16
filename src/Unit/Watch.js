@@ -60,6 +60,7 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 			var glob = [].concat(raw_glob)
 			var base = glob.map(glob_base)
 
+			// TODO: rm Watch opt
 			// var ignored = []
 
 			// if (! Σoptions.dot)
