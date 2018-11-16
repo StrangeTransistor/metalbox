@@ -65,7 +65,7 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 		unit.family = random_family()
 	}
 
-	/* @flow-off */
+	/* @flow-off SYMBOL */
 	unit[kind] = null
 
 	unit[inspect.custom] = function inspect ()
@@ -106,7 +106,7 @@ export default function Unit /* ::<$in, $prov: $Providers$Base, $out> */
 
 Unit.is = (unit /* :any */) =>
 {
-	/* @flow-off */
+	/* @flow-off SYMBOL */
 	return (kind in unit)
 }
 
