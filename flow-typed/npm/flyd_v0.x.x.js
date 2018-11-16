@@ -26,7 +26,7 @@ declare module 'flyd' {
   declare type Flyd$Stream<T> = flyd$Stream<T>;
 
   declare module.exports: {
-    stream<T>(v: T): flyd$Stream<T>,
+    stream<T>(v?: T): flyd$Stream<T>,
     immediate<T>(s: flyd$Stream<?T>): flyd$Stream<?T>,
     isStream(s: *): boolean,
     combine: CurriedFunction2<CombineFn, Array<flyd$Stream<*>>, Stream>,
