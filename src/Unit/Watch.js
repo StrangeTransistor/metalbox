@@ -39,11 +39,10 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 	var Σunit = cast(unit)
 	var Σoptions = assign({}, options)
 
-	return Unit((_, context) =>
+	return Unit(async (_, context) =>
 	{
 		var handler
 
-		/* @flow-off */
 		var s /* :flyd$Stream<$out> */ = stream()
 
 		onto(s.end, () =>
@@ -54,48 +53,45 @@ export default function Watch /* ::<$in, $prov: $Providers$Base, $out> */
 			handler.close()
 		})
 
-		unroll(context, glob)
-		.then(raw_glob =>
+		var Σglob = await unroll(context, glob)
+		Σglob = [].concat(Σglob)
+
+		var base = Σglob.map(glob_base)
+		base = uniq(base)
+		base = base.filter(path => is_abs(path))
+
+		// TODO: rm Watch opt
+		// var ignored = []
+
+		// if (! Σoptions.dot)
+		// {
+		// 	ignored.push(/(^|[/\\])\../)
+		// }
+
+		// var options_w = { ignored }
+
+		handler = watch(base /* , options_w */)
+
+		handler.on('all', async (event, path) =>
 		{
-			var glob = [].concat(raw_glob)
-			var base = glob.map(glob_base)
-
-			// TODO: rm Watch opt
-			// var ignored = []
-
-			// if (! Σoptions.dot)
-			// {
-			// 	ignored.push(/(^|[/\\])\../)
-			// }
-
-			// var options_w = { ignored }
-
-			base = uniq(base)
-			base = base.filter(path => is_abs(path))
-
-			handler = watch(base /* , options_w */)
-
-			handler.on('all', async (event, path) =>
+			if (! match([ path ], Σglob, Σoptions).length)
 			{
-				if (! match([ path ], glob, Σoptions).length)
-				{
-					return
-				}
+				return
+			}
 
-				var entry = Entry(path)
+			var entry = Entry(path)
 
-				if (event === 'unlink')
-				{
-					entry.content = Entry.Remove
-				}
+			if (event === 'unlink')
+			{
+				entry.content = Entry.Remove
+			}
 
-				// TODO: stream in stream
-				var output = await Σunit(context.derive(entry)).promise
+			// TODO: stream in stream
+			var output = await Σunit(context.derive(entry)).promise
 
-				s(output)
-			})
+			s(output)
 		})
 
-		return s
+		return ((s /* :any */) /* :$out */)
 	})
 }

@@ -199,6 +199,33 @@ describe('Watch', () =>
 		compare(cl(), tm_to())
 	})
 
+	it('computable', async () =>
+	{
+		var tm = tmp()
+		var tm_to = tmp()
+		var cl = collate('watch/1')
+
+		var watch = Watch(async () => tm('*.ext'))
+		var tr    = Content(content => content + '_baz')
+
+		var payload = Load().pipe(tr)
+
+		var unit = watch
+		.pipe(Mutable(payload))
+		.pipe(Rebase(tm(), tm_to()))
+		.pipe(File())
+
+		var result = unit(Context(null))
+
+		await replay_mut(tm)
+
+		end(result)
+
+		await result.promise
+
+		compare(cl(), tm_to())
+	})
+
 	async function replay_mut (tm /* :$Rootpath */)
 	{
 		await fs.writeFile(tm('1.ext'), 'foo')
