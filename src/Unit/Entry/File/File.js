@@ -22,7 +22,8 @@ export default function ()
 		}
 		else
 		{
-			var context_remove = ((context /* :any */) /* :$Context<$Entry<$Remove>, any> */)
+			var context_remove =
+			((context /* :any */) /* :$Context<$Entry<$Remove>, any> */)
 
 			return remove(context_remove).promise
 		}
