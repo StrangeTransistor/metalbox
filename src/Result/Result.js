@@ -33,10 +33,8 @@ export default function Result /* ::<$in, $prov: $Providers$Base, $out> */
 		time:
 		{
 			start: time(),
-			/* @flow-off */
-			stop:  (null /* :$Hrtime */),
-			/* @flow-off */
-			taken: (null /* :$Hrtime */),
+			stop:  ((null /* :any */) /* :$Hrtime */),
+			taken: ((null /* :any */) /* :$Hrtime */),
 		},
 	}
 
@@ -87,7 +85,6 @@ function invoke /* ::<$in, $prov: $Providers$Base, $out> */
 		turnoff(raw_stream, value)
 	})
 
-	/* @flow-off */
 	var raw_stream /* :flyd$Stream<$out> */ = Stream()
 
 	var stream  = finalize(raw_stream)

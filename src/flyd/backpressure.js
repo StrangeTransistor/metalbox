@@ -15,7 +15,7 @@ export default function backpressure /* ::<$value> */
 	var has_ended  = false
 	var got_demand = false
 
-	/* @flow-off */
+	/* @flow-off OK */
 	var backpressured /* :flyd$Stream$Backpressure<$value> */ = stream()
 
 	turnoff(backpressured, reactive)
