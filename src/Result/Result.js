@@ -52,6 +52,7 @@ export default function Result /* ::<$in, $prov: $Providers$Base, $out> */
 import { isStream as is_stream } from 'flyd'
 import { stream as Stream } from 'flyd'
 
+import onto from '../flyd/onto'
 import turnoff from '../flyd/turnoff'
 import finalize from '../flyd/finalize'
 import { either as drain } from '../flyd/drain'
@@ -81,9 +82,8 @@ function invoke /* ::<$in, $prov: $Providers$Base, $out> */
 			return
 		}
 
-		value.map(raw_stream)
-		value.end.map(raw_stream.end)
-
+		onto(value, raw_stream)
+		turnoff(value, raw_stream)
 		turnoff(raw_stream, value)
 	})
 
