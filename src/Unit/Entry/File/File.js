@@ -16,15 +16,13 @@ export default function ()
 	{
 		if (entry.content !== Entry.Remove)
 		{
-			/* @flow-off */
 			var context_clean /* :$Context<$Entry<$File>, any> */ = context
 
 			return add(context_clean).promise
 		}
 		else
 		{
-			/* @flow-off */
-			var context_remove /* :$Context<$Entry<$Remove>, any> */ = context
+			var context_remove = ((context /* :any */) /* :$Context<$Entry<$Remove>, any> */)
 
 			return remove(context_remove).promise
 		}

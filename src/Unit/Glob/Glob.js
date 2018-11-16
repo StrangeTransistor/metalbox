@@ -24,7 +24,6 @@ export default function /* ::<$in, $prov: $Providers$Base, $out> */
 
 	var each = Unit((entries, context) =>
 	{
-		/* @flow-off */
 		var s /* :flyd$Stream<$out> */ = stream()
 
 		map(entries, entry =>

@@ -23,9 +23,6 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 
 	return Unit(async (_, context) =>
 	{
-		/* @flow-off */
-		// var s /* :flyd$Stream<$out> */ = stream()
-
 		var Σglob = await unroll(context, glob)
 
 		Σglob = [].concat(Σglob)
