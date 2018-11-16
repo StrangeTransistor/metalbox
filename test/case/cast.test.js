@@ -40,7 +40,7 @@ describe('cast', () =>
 	{
 		expect(() =>
 		{
-			/* @flow-off */
+			/* @flow-off OK */
 			return cast(1)
 		})
 		.throw()

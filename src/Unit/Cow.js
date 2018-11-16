@@ -31,8 +31,7 @@ export default Recipe/* :: <[ ?string ], ?number, any, string> */(
 				}
 				else
 				{
-					/* @flow-off */
-					var s = stream()
+					var s = stream/* ::<string> */()
 
 					times(Σnum, () => setTimeout(() => s(Σanimal), 0))
 

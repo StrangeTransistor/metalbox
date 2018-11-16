@@ -7,7 +7,7 @@ tcomb.fail = (message) =>
 	var error = new TypeError(message)
 
 	error.name  = 'ValidationError'
-	/* @flow-off */
+	/* @flow-off OK */
 	error.tcomb = true
 
 	throw error

@@ -31,8 +31,7 @@ export default function Debug /* ::<$thru, $prov: $Providers$Base> */
 
 		if (is_entry(it))
 		{
-			/* @flow-off */
-			var entry = (it /* :$Entry<any> */)
+			var entry = ((it /* :any */) /* :$Entry<any> */)
 			debug_entry(label, timemark, entry, context.providers)
 		}
 		else

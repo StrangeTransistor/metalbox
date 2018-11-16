@@ -32,7 +32,7 @@ export default function Recipe
 	var recipe = async function (...args /* :$in */)
 		/* :Promise<$Unit<$unit_in, $prov, $unit_out>> */
 	{
-		val_args(options.args || tcomb.Any, args)
+		val_args(options.args || tcomb.Any, ((args /* :any */) /* :any[] */))
 
 		var unit = await options.recipe(...args)
 
@@ -44,7 +44,7 @@ export default function Recipe
 		return unit
 	}
 
-	/* @flow-off */
+	/* @flow-off SYMBOL */
 	recipe[kind] = null
 
 	return recipe
@@ -70,16 +70,14 @@ function val_args_tcomb (val, args)
 
 function val_args_seq (vals, args)
 {
-	var Σvals = (vals || [])
-	/* @flow-off */
-	var Σargs = (args /* :any[] */)
+	vals || (vals = [])
 
-	var L = max(Σvals.length, Σargs.length)
+	var L = max(vals.length, args.length)
 
 	for (let i = 0; i < L; i++)
 	{
-		let val = (Σvals[i] || tcomb.Never)
-		let arg =  Σargs[i]
+		let val = (vals[i] || tcomb.Never)
+		let arg =  args[i]
 
 		val(arg)
 	}
@@ -88,7 +86,7 @@ function val_args_seq (vals, args)
 
 Recipe.is = (recipe /* :any */) =>
 {
-	/* @flow-off */
+	/* @flow-off SYMBOL */
 	return (kind in recipe)
 }
 
