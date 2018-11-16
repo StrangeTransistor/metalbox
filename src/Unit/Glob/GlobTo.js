@@ -16,7 +16,7 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 	unit /* :: ?:?$Unit<$Entries<void>, $prov, $out> */,
 	options /* :: ?:$Shape<$Glob$Options> */
 )
-	/* :$Unit<$in, $prov, $out> */
+	/* :$Unit<$in, $prov, $Subtype<$out | $Entries<void>>> */
 {
 	var Σunit = cast(unit)
 	options = assign({}, options)
@@ -30,9 +30,7 @@ export default function Glob /* ::<$in, $prov: $Providers$Base, $out> */
 		var found = find(Σglob, options)
 		var entries = found.map(filename => Entry(filename))
 
-		/* TODO: compose result */
-		/* TODO: Identity mismatch */
-		/* @flow-off */
+		/* TODO: @compose */
 		var result = Σunit(context.derive(entries))
 
 		return ((result.alive() /* :any */) /* :$out */)

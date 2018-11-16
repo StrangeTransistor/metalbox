@@ -1,15 +1,13 @@
 /* @flow */
 /* ::
 
-declare function cast<T> (void | null): $Identity<T>
-
 declare function cast
-<$in, $prov: $Providers$Base, $out, $U: $Unit<$in, $prov, $out>>
-($U): $U
+<$in, $prov: $Providers$Base, $out>
+(?$Unit<$in, $prov, $out>): $Unit<$in, $prov, $out | $in>
 
 declare function cast
 <$in, $prov: $Providers$Base, $out, $Fn: $Unit$Fn<$in, $prov, $out>>
-($Fn): $Unit<$in, $prov, $out>
+(?$Fn): $Unit<$in, $prov, $out | $in>
 
 */
 
