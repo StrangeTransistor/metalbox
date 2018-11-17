@@ -21,22 +21,17 @@ export default async function invoke (
 
 	var result = unit(context)
 
-	if (result.stream)
+	onto(result.stream, (value) =>
 	{
-		console.log('Streaming mode.')
-
-		onto(result.stream, (value) =>
+		if (value instanceof Error)
 		{
-			if (value instanceof Error)
-			{
-				fatal(value)
-			}
-			else
-			{
-				console.log(investigate(value))
-			}
-		})
-	}
+			fatal(value)
+		}
+		else
+		{
+			console.log('~', investigate(value))
+		}
+	})
 
 	try
 	{
@@ -44,7 +39,6 @@ export default async function invoke (
 	}
 	catch (error)
 	{
-		// if (! result.stream) // shortcutted
 		return fatal(error)
 	}
 

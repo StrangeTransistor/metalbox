@@ -33,9 +33,13 @@ export default Recipe/* :: <[ ?string ], ?number, any, string> */(
 				{
 					var s = stream/* ::<string> */()
 
-					times(Σnum, () => setTimeout(() => s(Σanimal), 0))
+					setTimeout(() =>
+					{
+						times(Σnum, () => setTimeout(() => s(Σanimal), 0))
 
-					setTimeout(() => s.end(true), 0)
+						setTimeout(() => s.end(true), 0)
+					}
+					, 0)
 
 					return s
 				}
